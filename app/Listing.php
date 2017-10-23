@@ -75,7 +75,8 @@ class Listing extends Model
             if ($offset >= $results->getTotalResultsCount()) {
                 $maxRowsReached = true;
             }
-            echo '\nOffset for class ' . $class . ': ' . $offset . ' | Total Results Count:' . $results->getTotalResultsCount() . '\n';
+            echo '\nOffset for class ' . $class . ': ' . $offset .
+            ' | Total Results Count:' . $results->getTotalResultsCount() . '\n';
         }
     }
 
@@ -98,7 +99,11 @@ class Listing extends Model
     }
     public static function getColumn($columnName)
     {
-        $values  = DB::table('listings')->select($columnName)->where($columnName, '!=', '')->groupBy($columnName)->get();
+        $values  = DB::table('listings')
+            ->select($columnName)
+            ->where($columnName, '!=', '')
+            ->groupBy($columnName)
+            ->get();
 
         return $values->toArray();
     }
@@ -111,7 +116,9 @@ class Listing extends Model
 
         $classArray = ['A', 'C', 'E', 'F', 'G', 'J'];
 
-        $dateLastModified = Carbon::parse(Listing::where('association', 'bcar')->pluck('date_modified')->max())->toAtomString();
+        $dateLastModified = Carbon::parse(
+            Listing::where('association', 'bcar')->pluck('date_modified')->max()
+        )->toAtomString();
         foreach ($classArray as $class) {
             echo '<p>Updating listings for class ' . $class . ':';
             $results = $rets->Search(
@@ -160,7 +167,9 @@ class Listing extends Model
 
         $classArray  = ['A', 'B', 'C', 'E', 'F', 'G', 'H', 'I'];
 
-        $dateLastModified = Carbon::parse(Listing::where('association', 'ecar')->pluck('date_modified')->max())->toAtomString();
+        $dateLastModified = Carbon::parse(
+            Listing::where('association', 'ecar')->pluck('date_modified')->max()
+        )->toAtomString();
         foreach ($classArray as $class) {
             echo '<p>Updating listings for class ' . $class . ':';
             $results = $rets->Search(
@@ -199,5 +208,52 @@ class Listing extends Model
         (new Photo)->syncPreferredPhotos();
 
         echo '<p>SUCCESS!</p></pre></div>';
+    }
+
+    public function cleanBcar()
+    {
+        $mls            = new ApiCall();
+        $rets           = $mls->loginToBcar();
+        $bcarOptions    = BcarOptions::all();
+        $listings       = Listing::where('association', 'bcar')->pluck('mls_account');
+        $listingsArray  = [];
+        $listingCounter = 0;
+        $photoCounter   = 0;
+
+        $classArray = ['A', 'C', 'E', 'F', 'G', 'J'];
+
+        foreach ($classArray as $class) {
+            $results = $rets->Search(
+                'Property',
+                $class,
+                '*',
+                [
+                'Limit' => '99999',
+                'Offset' => 0,
+                'Select' => 'LIST_3'
+                ]
+            );
+            foreach ($results as $result) {
+                array_push($listingsArray, $result['LIST_3']);
+            }
+        }
+        foreach ($listings as $listing) {
+            if (! in_array($listing, $listingsArray)) {
+                $fullListing = Listing::where('mls_account', $listing)->first();
+                $listingId = $fullListing->id;
+                $fullListing->delete();
+                $listingCounter = $listingCounter + 1;
+                echo '.';
+
+                $photos = Photo::where('listing_id', $listingId)->get();
+                foreach ($photos as $photo) {
+                    $photo->delete();
+                    $photoCounter = $photoCounter +1;
+                    echo '*';
+                }
+            }
+        }
+        echo "Listings deleted: {$listingCounter}";
+        echo "Photos deleted: {$photoCounter}";
     }
 }

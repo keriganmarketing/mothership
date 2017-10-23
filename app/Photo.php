@@ -19,7 +19,8 @@ class Photo extends Model
     {
         $mls        = new ApiCall();
         $rets       = ($association == 'bcar') ? $mls->loginToBcar() : $mls->loginToEcar();
-        $classArray = ($association == 'bcar') ? ['A', 'C', 'E', 'F', 'G', 'J'] : ['A', 'B', 'C', 'E', 'F', 'G', 'H', 'I'];
+        $classArray = ($association == 'bcar') ?
+            ['A', 'C', 'E', 'F', 'G', 'J'] : ['A', 'B', 'C', 'E', 'F', 'G', 'H', 'I'];
 
         foreach ($classArray as $class) {
             $this->downloadPhotos($association, $class, $rets);
