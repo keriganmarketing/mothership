@@ -3,6 +3,13 @@ namespace App\Http\Helpers;
 
 class EcarOptions
 {
+    /**
+     * Return an array of all ECAR options needed for query
+     *
+     * @param int $offset The offset for a paginated query
+     *
+     * @return array $ecarOptions An array of options for each class
+     */
     public static function all($offset = 1)
     {
         $waterfront = 'GF20131203222329624962000000'; //mother of god

@@ -3,6 +3,11 @@ namespace App\Http\Helpers;
 
 class BcarOptions
 {
+    /**
+     * Return an array of all BCAR options needed for query
+     *
+     * @return array $bcarOptions An array of options for each class
+     */
     public static function all()
     {
         $waterfront = 'LIST_192';

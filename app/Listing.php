@@ -18,6 +18,7 @@ class Listing extends Model
 
     /**
      * A Listing has many photos
+     *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function photos()
@@ -27,6 +28,7 @@ class Listing extends Model
 
     /**
      * Get all BCAR MLS listings
+     *
      * @return void
      */
     public function freshBcarListings()
@@ -40,6 +42,7 @@ class Listing extends Model
 
     /**
      * Get all ECAR MLS listings
+     *
      * @return void
      */
     public function freshEcarListings()
@@ -51,6 +54,13 @@ class Listing extends Model
         }
     }
 
+    /**
+     * Insert the ECAR listings into the database
+     *
+     * @param string $class The class of the listing
+     *
+     * @return void
+     */
     public function insertEcarListingsIntoDatabase($class)
     {
         $mls            = new ApiCall();
@@ -82,7 +92,9 @@ class Listing extends Model
 
     /**
      * Persist the listings for the specified class into the database
-     * @param string $class
+     *
+     * @param string $class The class of the listing
+     *
      * @return void
      */
     public function insertBcarListingsIntoDatabase($class)
@@ -97,6 +109,14 @@ class Listing extends Model
             ListingsHelper::createBcarListing($result, $class);
         }
     }
+
+    /**
+     * Return a specific column from the listings database
+     *
+     * @param string $columnName The name of the column
+     *
+     * @return void
+     */
     public static function getColumn($columnName)
     {
         $values  = DB::table('listings')
@@ -108,6 +128,11 @@ class Listing extends Model
         return $values->toArray();
     }
 
+    /**
+     * Update the BCAR listings
+     *
+     * @return void
+     */
     public function updateBcarListings()
     {
         $mls = new ApiCall();
@@ -137,13 +162,15 @@ class Listing extends Model
                     $photos = $rets->GetObject('Property', 'HiRes', $mlsNumber, '*', 1);
 
                     foreach ($photos as $photo) {
-                        Photo::create([
+                        Photo::create(
+                            [
                             'mls_account'       => $mlsNumber,
                             'url'               => $photo->getLocation(),
                             'preferred'         => $photo->isPreferred(),
                             'listing_id'        => $listing->id,
                             'photo_description' => $photo->getContentDescription()
-                        ]);
+                            ]
+                        );
                     }
                 } else {
                     $record = Listing::where('mls_account', $result['LIST_3'])->first();
@@ -159,6 +186,11 @@ class Listing extends Model
         echo '<p>SUCCESS!</p></pre></div>';
     }
 
+    /**
+     * Update the ECAR listings
+     *
+     * @return void
+     */
     public function updateEcarListings()
     {
         $mls = new ApiCall();
@@ -188,13 +220,15 @@ class Listing extends Model
                     $photos = $rets->GetObject('Property', 'HiRes', $mlsNumber, '*', 1);
 
                     foreach ($photos as $photo) {
-                        Photo::create([
+                        Photo::create(
+                            [
                             'mls_account'       => $mlsNumber,
                             'url'               => $photo->getLocation(),
                             'preferred'         => $photo->isPreferred(),
                             'listing_id'        => $listing->id,
                             'photo_description' => $photo->getContentDescription()
-                        ]);
+                            ]
+                        );
                     }
                 } else {
                     $record = Listing::where('mls_account', $result['LIST_3'])->first();
@@ -210,6 +244,11 @@ class Listing extends Model
         echo '<p>SUCCESS!</p></pre></div>';
     }
 
+    /**
+     * Clean the BCAR listings table
+     *
+     * @return void
+     */
     public function cleanBcar()
     {
         $mls            = new ApiCall();
