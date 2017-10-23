@@ -35,7 +35,7 @@ class Photo extends Model
             ['A', 'C', 'E', 'F', 'G', 'J'] : ['A', 'B', 'C', 'E', 'F', 'G', 'H', 'I'];
 
         foreach ($classArray as $class) {
-            $this->_downloadPhotos($association, $class, $rets);
+            $this->downloadPhotos($association, $class, $rets);
         }
 
         echo 'Adding preferred images to listing database';
@@ -54,12 +54,12 @@ class Photo extends Model
      *
      * @return void
      */
-    private function _downloadPhotos($association, $class, $rets)
+    private function downloadPhotos($association, $class, $rets)
     {
         $listings = Listing::where('class', $class)->where('association', $association)->get();
 
         foreach ($listings as $listing) {
-            $this->_savePhotos($association, $listing, $rets);
+            $this->savePhotos($association, $listing, $rets);
         }
     }
 
@@ -72,7 +72,7 @@ class Photo extends Model
      *
      * @return void
      */
-    private function _savePhotos($association, $listing, $rets)
+    private function savePhotos($association, $listing, $rets)
     {
         $photos   = $rets->GetObject('Property', 'HiRes', $listing->mls_account, '*', 1);
 

@@ -11,6 +11,7 @@ class MapSearch extends Model
     {
         $listings = DB::table('listings')
             ->select('mls_account', 'latitude', 'longitude', 'status', 'class')
+            ->where('status', 'Active')
             ->get();
 
         return $listings;

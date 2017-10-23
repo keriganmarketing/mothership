@@ -14,7 +14,7 @@ class ApiCall extends Model
      *
      * @return string
      */
-    private function _ecarLoginUrl()
+    private function ecarLoginUrl()
     {
         return 'http://retsgw.flexmls.com/rets2_2/Login';
     }
@@ -24,7 +24,7 @@ class ApiCall extends Model
      *
      * @return string
      */
-    private function _ecarUserName()
+    private function ecarUserName()
     {
         return config('app.ecar_username');
     }
@@ -34,7 +34,7 @@ class ApiCall extends Model
      *
      * @return string
      */
-    private function _ecarPassword()
+    private function ecarPassword()
     {
         return config('app.ecar_password');
     }
@@ -44,7 +44,7 @@ class ApiCall extends Model
      *
      * @return string
      */
-    private function _bcarLoginUrl()
+    private function bcarLoginUrl()
     {
         return 'http://retsgw.flexmls.com:80/rets2_3/Login';
     }
@@ -54,7 +54,7 @@ class ApiCall extends Model
      *
      * @return string
      */
-    private function _bcarUserName()
+    private function bcarUserName()
     {
         return config('app.bcar_username');
     }
@@ -64,7 +64,7 @@ class ApiCall extends Model
      *
      * @return string
      */
-    private function _bcarPassword()
+    private function bcarPassword()
     {
         return config('app.bcar_password');
     }
@@ -77,9 +77,9 @@ class ApiCall extends Model
     public function loginToBcar()
     {
         $config = new Configuration();
-        $config->setLoginUrl($this->_bcarLoginUrl())
-            ->setUsername($this->_bcarUserName())
-            ->setPassword($this->_bcarPassword())
+        $config->setLoginUrl($this->bcarLoginUrl())
+            ->setUsername($this->bcarUserName())
+            ->setPassword($this->bcarPassword())
             ->setRetsVersion('1.7.2')
             ->setOption("compression_enabled", true)
             ->setOption("offset_support", true);
@@ -99,9 +99,9 @@ class ApiCall extends Model
     public function loginToEcar()
     {
         $config = new Configuration();
-        $config->setLoginUrl($this->_ecarLoginUrl())
-            ->setUsername($this->_ecarUserName())
-            ->setPassword($this->_ecarPassword())
+        $config->setLoginUrl($this->ecarLoginUrl())
+            ->setUsername($this->ecarUserName())
+            ->setPassword($this->ecarPassword())
             ->setRetsVersion('1.7.2')
             ->setOption("compression_enabled", true)
             ->setOption("offset_support", true);
