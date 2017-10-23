@@ -10,7 +10,7 @@ class MapSearch extends Model
     public static function getAllListings()
     {
         $listings = DB::table('listings')
-            ->select('mls_account', 'latitude', 'longitude', 'status', 'property_type')
+            ->select('mls_account', 'latitude', 'longitude', 'status', 'class')
             ->get();
 
         return $listings;
