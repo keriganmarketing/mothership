@@ -61,6 +61,7 @@ class Photo extends Model
             $listing                  = Listing::where('id', $photo->listing_id)->first();
             $listing->preferred_image = $photo->url;
             $listing->save();
+            echo '.';
         }
     }
 }

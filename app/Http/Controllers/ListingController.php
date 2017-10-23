@@ -64,7 +64,7 @@ class ListingController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the listings in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Listing  $listing
