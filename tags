@@ -30,6 +30,8 @@ Listing	app/Listing.php	/^class Listing extends Model$/;"	c
 ListingController	app/Http/Controllers/ListingController.php	/^class ListingController extends Controller$/;"	c
 ListingsHelper	app/Http/Helpers/ListingsHelper.php	/^class ListingsHelper$/;"	c
 LoginController	app/Http/Controllers/Auth/LoginController.php	/^class LoginController extends Controller$/;"	c
+MapSearch	app/MapSearch.php	/^class MapSearch extends Model$/;"	c
+MapSearchController	app/Http/Controllers/MapSearchController.php	/^class MapSearchController extends Controller$/;"	c
 Omnibar	app/Omnibar.php	/^class Omnibar extends Model$/;"	c
 OmnibarController	app/Http/Controllers/OmnibarController.php	/^class OmnibarController extends Controller$/;"	c
 Photo	app/Photo.php	/^class Photo extends Model$/;"	c
@@ -106,6 +108,7 @@ construction	app/Http/Helpers/ListingsHelper.php	/^        $construction        
 counter	app/Listing.php	/^        $counter        = 0;$/;"	v
 create	app/Http/Controllers/Auth/RegisterController.php	/^    protected function create(array $data)$/;"	f
 create	app/Http/Controllers/ListingController.php	/^    public function create()$/;"	f
+create	app/Http/Controllers/MapSearchController.php	/^    public function create()$/;"	f
 create	app/Http/Controllers/OmnibarController.php	/^    public function create()$/;"	f
 createApplication	tests/CreatesApplication.php	/^    public function createApplication()$/;"	f
 createBcarListing	app/Http/Helpers/ListingsHelper.php	/^    public static function createBcarListing($result, $class)$/;"	f
@@ -113,6 +116,7 @@ createEcarListing	app/Http/Helpers/ListingsHelper.php	/^    public static functi
 data	app/Omnibar.php	/^        $data     = [];$/;"	v
 dateLastModified	app/Listing.php	/^        $dateLastModified = Carbon::parse($/;"	v
 destroy	app/Http/Controllers/ListingController.php	/^    public function destroy(Listing $listing)$/;"	f
+destroy	app/Http/Controllers/MapSearchController.php	/^    public function destroy($id)$/;"	f
 dontFlash	app/Exceptions/Handler.php	/^    protected $dontFlash = [$/;"	v
 dontReport	app/Exceptions/Handler.php	/^    protected $dontReport = [$/;"	v
 down	database/migrations/2014_10_12_000000_create_users_table.php	/^    public function down()$/;"	f
@@ -123,6 +127,7 @@ ecarOptions	app/Http/Helpers/EcarOptions.php	/^        $ecarOptions = [$/;"	v
 ecarOptions	app/Listing.php	/^            $ecarOptions = EcarOptions::all($offset);$/;"	v
 ecarOptions	app/Listing.php	/^        $ecarOptions = EcarOptions::all();$/;"	v
 edit	app/Http/Controllers/ListingController.php	/^    public function edit(Listing $listing)$/;"	f
+edit	app/Http/Controllers/MapSearchController.php	/^    public function edit($id)$/;"	f
 energyFeatures	app/Http/Helpers/ListingsHelper.php	/^            $energyFeatures       = $result['GF20131203185526796706000000'];$/;"	v
 energyFeatures	app/Http/Helpers/ListingsHelper.php	/^            $energyFeatures       = $result['GF20131230164913550188000000'];$/;"	v
 energyFeatures	app/Http/Helpers/ListingsHelper.php	/^        $energyFeatures       = null;$/;"	v
@@ -139,6 +144,7 @@ freshBcarListings	app/Listing.php	/^    public function freshBcarListings()$/;"	
 freshEcarListings	app/Listing.php	/^    public function freshEcarListings()$/;"	f
 fullBaths	app/Http/Helpers/ListingsHelper.php	/^        $fullBaths            = isset($result['LIST_68']) ? $result['LIST_68'] : 0;$/;"	v
 fullListing	app/Listing.php	/^                $fullListing = Listing::where('mls_account', $listing)->first();$/;"	v
+getAllListings	app/MapSearch.php	/^    public static function getAllListings()$/;"	f
 getAllPhotos	app/Photo.php	/^    public function getAllPhotos($association)$/;"	f
 getColumn	app/Listing.php	/^    public static function getColumn($columnName)$/;"	f
 guard	app/Http/Middleware/RedirectIfAuthenticated.php	/^    public function handle($request, Closure $next, $guard = null)$/;"	v
@@ -152,6 +158,7 @@ handle	app/Jobs/UpdateEcar.php	/^    public function handle()$/;"	f
 headers	app/Http/Middleware/TrustProxies.php	/^    protected $headers = [$/;"	v
 hidden	app/User.php	/^    protected $hidden = [$/;"	v
 index	app/Http/Controllers/ListingController.php	/^    public function index()$/;"	f
+index	app/Http/Controllers/MapSearchController.php	/^    public function index()$/;"	f
 index	app/Http/Controllers/SearchController.php	/^    public function index(Request $request)$/;"	f
 insertBcarListingsIntoDatabase	app/Listing.php	/^    public function insertBcarListingsIntoDatabase($class)$/;"	f
 insertEcarListingsIntoDatabase	app/Listing.php	/^    public function insertEcarListingsIntoDatabase($class)$/;"	f
@@ -181,8 +188,10 @@ listing	app/Photo.php	/^    public function listing()$/;"	f
 listingCounter	app/Listing.php	/^                $listingCounter = $listingCounter + 1;$/;"	v
 listingCounter	app/Listing.php	/^        $listingCounter = 0;$/;"	v
 listingId	app/Listing.php	/^                $listingId = $fullListing->id;$/;"	v
+listings	app/Http/Controllers/MapSearchController.php	/^        $listings = MapSearch::getAllListings();$/;"	v
 listings	app/Http/Controllers/SearchController.php	/^        $listings = Listing:: when($city, function ($query) use ($city) {$/;"	v
 listings	app/Listing.php	/^        $listings       = Listing::where('association', 'bcar')->pluck('mls_account');$/;"	v
+listings	app/MapSearch.php	/^        $listings = DB::table('listings')$/;"	v
 listings	app/Photo.php	/^        $listings = Listing::where('class', $class)->where('association', $association)->get();$/;"	v
 listingsArray	app/Listing.php	/^        $listingsArray  = [];$/;"	v
 loader	public/index.php	/^| Composer provides a convenient, automatically generated class loader for$/;"	c
@@ -250,10 +259,12 @@ routeMiddleware	app/Http/Kernel.php	/^    protected $routeMiddleware = [$/;"	v
 run	database/seeds/DatabaseSeeder.php	/^    public function run()$/;"	f
 schedule	app/Console/Kernel.php	/^    protected function schedule(Schedule $schedule)$/;"	f
 show	app/Http/Controllers/ListingController.php	/^    public function show($mlsNumber)$/;"	f
+show	app/Http/Controllers/MapSearchController.php	/^    public function show($id)$/;"	f
 sqft	app/Http/Helpers/ListingsHelper.php	/^        $sqft                 = isset($result['LIST_48']) && is_numeric($result['LIST_48']) ? $result['LIST_48'] : 0;$/;"	v
 sqft	app/Http/Helpers/ListingsHelper.php	/^        $sqft                 = isset($result['LIST_48']) ? $result['LIST_48'] : 0;$/;"	v
 status	app/Http/Controllers/SearchController.php	/^        $status     = $request->status;$/;"	v
 store	app/Http/Controllers/ListingController.php	/^    public function store(Request $request)$/;"	f
+store	app/Http/Controllers/MapSearchController.php	/^    public function store(Request $request)$/;"	f
 stories	app/Http/Helpers/ListingsHelper.php	/^            $stories              = is_numeric($result['LIST_64']) ? $result['LIST_64'] : 0;$/;"	v
 stories	app/Http/Helpers/ListingsHelper.php	/^        $stories              = isset($result['LIST_64']) && is_numeric($result['LIST_64']) ? $result['LIST_64'] : 0;$/;"	v
 stories	app/Http/Helpers/ListingsHelper.php	/^        $stories              = isset($result['LIST_64']) && is_numeric($result['LIST_64']) ? $result['LIST_64'] : 1;$/;"	v
@@ -266,6 +277,7 @@ up	database/migrations/2014_10_12_100000_create_password_resets_table.php	/^    
 up	database/migrations/2017_10_18_204605_create_listings_table.php	/^    public function up()$/;"	f
 up	database/migrations/2017_10_19_181334_create_photos_table.php	/^    public function up()$/;"	f
 update	app/Http/Controllers/ListingController.php	/^    public function update(Request $request, Listing $listing)$/;"	f
+update	app/Http/Controllers/MapSearchController.php	/^    public function update(Request $request, $id)$/;"	f
 updateBcarListings	app/Http/Helpers/ListingsHelper.php	/^    public static function updateBcarListings($record, $result, $class)$/;"	f
 updateBcarListings	app/Listing.php	/^    public function updateBcarListings()$/;"	f
 updateEcarListings	app/Http/Helpers/ListingsHelper.php	/^    public static function updateEcarListings($record, $result, $class)$/;"	f
