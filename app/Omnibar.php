@@ -20,71 +20,61 @@ class Omnibar extends Model
 
         $data['results'] = [
             [
-                'text'     => 'City',
+                'text'     => count($cities) > 0 ? 'City' : '',
                 'children' => []
             ],
             [
-                'text'     => 'Area',
+                'text'     => count($areas) > 0 ? 'Area' : '',
                 'children' => []
             ],
             [
-                'text'     => 'Sub Area',
+                'text'     => count($subAreas) > 0 ? 'Sub Area' : '',
                 'children' => []
             ],
             [
-                'text'     => 'Subdivisions',
+                'text'     => count($subdivisions) > 0 ? 'Subdivisions' : '',
                 'children' => []
             ],
             [
-                'text'     => 'Zip Code',
+                'text'     => count($zips) > 0 ? 'Zip Code' : '',
                 'children' => []
             ]
         ];
 
-        if (count($cities) > 0) {
-            foreach ($cities as $city) {
-                $data['results'][0]['children'][] =
-                [
-                    'id' => ucwords($city->city),
-                    'text' => ucwords($city->city)
-                ];
-            }
+        foreach ($cities as $city) {
+            $data['results'][0]['children'][] =
+            [
+                'id' => ucwords($city->city),
+                'text' => ucwords($city->city)
+            ];
         }
-        if (count($areas) > 0) {
-            foreach ($areas as $area) {
-                $data['results'][1]['children'][] =
-                [
-                    'id' => ucwords($area->area),
-                    'text' => ucwords($area->area)
-                ];
-            }
+        foreach ($areas as $area) {
+            $data['results'][1]['children'][] =
+            [
+                'id' => ucwords($area->area),
+                'text' => ucwords($area->area)
+            ];
         }
-        if (count($subAreas) > 0) {
-            foreach ($subAreas as $subArea) {
-                $data['results'][2]['children'][] =
-                [
-                    'id'   => ucwords($subArea->sub_area),
-                    'text' => ucwords($subArea->sub_area)
-                ];
-            }
+        foreach ($subAreas as $subArea) {
+            $data['results'][2]['children'][] =
+            [
+                'id'   => ucwords($subArea->sub_area),
+                'text' => ucwords($subArea->sub_area)
+            ];
         }
-        if (count($subdivisions) > 0) {
-            foreach ($subdivisions as $subdivision) {
-                $data['results'][3]['children'][] =
-                [
-                    'id'   => ucwords($subdivision->subdivision),
-                    'text' => ucwords($subdivision->subdivision)
-                ];
-            }
+        foreach ($subdivisions as $subdivision) {
+            $data['results'][3]['children'][] =
+            [
+                'id'   => ucwords($subdivision->subdivision),
+                'text' => ucwords($subdivision->subdivision)
+            ];
         }
-        if (count($zips) > 0) {
-            foreach ($zips as $zip) {
-                $data['results'][3]['children'][] =
-                [
-                    'id' => $zip->zip,
-                    'text' => $zip->zip
-                ];
-            }
+        foreach ($zips as $zip) {
+            $data['results'][3]['children'][] =
+            [
+                'id' => $zip->zip,
+                'text' => $zip->zip
+            ];
         }
 
         return $data;
