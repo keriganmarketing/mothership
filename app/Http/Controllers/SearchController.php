@@ -29,6 +29,9 @@ class SearchController extends Controller
         if ($propertyType != '') {
             $propertyType = explode('|', $propertyType);
         }
+        if ($status != '') {
+            $status = explode('|', $status);
+        }
 
         $listings = Listing::when($city, function ($query) use ($city) {
             $query->where(function ($query) use ($city) {
@@ -43,7 +46,7 @@ class SearchController extends Controller
             return $query->whereIn('property_type', $propertyType);
         })
         ->when($status, function ($query) use ($status) {
-            return $query->where('status', $status);
+            return $query->whereIn('status', $status);
         })
         ->when($minPrice, function ($query) use ($minPrice) {
             return $query->where('price', '>=', $minPrice);
