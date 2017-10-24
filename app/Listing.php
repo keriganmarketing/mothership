@@ -200,7 +200,9 @@ class Listing extends Model
         $classArray  = ['A', 'B', 'C', 'E', 'F', 'G', 'H', 'I'];
 
         $dateLastModified = Carbon::parse(
-            Listing::where('association', 'ecar')->pluck('date_modified')->max()
+            Listing::where('association', 'ecar')
+            ->pluck('date_modified')
+            ->max()
         )->toAtomString();
         foreach ($classArray as $class) {
             echo '<p>Updating listings for class ' . $class . ':';
