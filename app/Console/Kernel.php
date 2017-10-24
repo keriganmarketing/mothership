@@ -2,6 +2,7 @@
 
 namespace App\Console;
 
+use App\Jobs\CleanBcar;
 use App\Jobs\UpdateBcar;
 use App\Jobs\UpdateEcar;
 use Illuminate\Console\Scheduling\Schedule;
@@ -31,7 +32,7 @@ class Kernel extends ConsoleKernel
                 new UpdateEcar,
                 new CleanBcar
             ])->dispatch();
-        })->hourly();
+        })->hourlyAt(2);
     }
 
     /**
