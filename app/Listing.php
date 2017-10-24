@@ -119,7 +119,6 @@ class Listing extends Model
      */
     public static function getColumn($searchTerm, $columnName)
     {
-        $searchTerm = urldecode($searchTerm);
         $values  = DB::table('listings')
             ->select($columnName)
             ->whereRaw("LOWER({$columnName}) LIKE LOWER('{$searchTerm}')")
