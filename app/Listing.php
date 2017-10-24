@@ -296,4 +296,13 @@ class Listing extends Model
         echo "Listings deleted: {$listingCounter}";
         echo "Photos deleted: {$photoCounter}";
     }
+
+    public static function forAgent($agentShortId)
+    {
+        $listings = Listing::where('listing_member_shortid', $agentShortId)
+            ->orWhere('colisting_member_shortid')
+            ->get();
+
+        return $listings;
+    }
 }
