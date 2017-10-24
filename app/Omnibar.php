@@ -64,6 +64,11 @@ class Omnibar extends Model
                 'text' => $zip->zip
             ];
         }
+        if (count($data['results']) == 0){
+            $data['results'][0] = 'No results for your query. Please try again';
+
+            return $data;
+        }
 
         return $data;
     }
