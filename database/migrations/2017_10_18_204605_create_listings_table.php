@@ -17,10 +17,10 @@ class CreateListingsTable extends Migration
             $table->increments('id');
             $table->string('mls_account')->nullable()->index();
             $table->integer('price')->nullable();
-            $table->string('area')->nullable();
-            $table->string('sub_area')->nullable();
-            $table->string('subdivision')->nullable();
-            $table->string('city')->nullable();
+            $table->string('area')->nullable()->index();
+            $table->string('sub_area')->nullable()->index();
+            $table->string('subdivision')->nullable()->index();
+            $table->string('city')->nullable()->index();
             $table->string('street_number')->nullable();
             $table->string('street_name')->nullable();
             $table->string('unit_number')->nullable();
