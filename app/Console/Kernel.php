@@ -32,7 +32,7 @@ class Kernel extends ConsoleKernel
                 new UpdateEcar,
                 new CleanBcar
             ])->dispatch();
-        })->hourlyAt(2);
+        })->hourlyAt(9);
     }
 
     /**
