@@ -19,7 +19,7 @@ class OmnibarController extends Controller
 
         return response()->json($omniBar)->withHeaders(
             [
-            'Access-Control-Allow-Origin' => '*'
+                'Access-Control-Allow-Origin' => '*'
             ]
         );
     }
