@@ -86,9 +86,7 @@ boot	app/Providers/EventServiceProvider.php	/^    public function boot()$/;"	f
 boot	app/Providers/RouteServiceProvider.php	/^    public function boot()$/;"	f
 build	app/Omnibar.php	/^    public static function build($searchTerm)$/;"	f
 cities	app/Omnibar.php	/^        $cities       = Listing::getColumn($searchTerm, 'city');$/;"	v
-city	app/Http/Controllers/SearchController.php	/^        $city       = $request->city;$/;"	v
-class	app/Http/Controllers/SearchController.php	/^            $class = $class->toArray();$/;"	v
-class	app/Http/Controllers/SearchController.php	/^        $class      = explode('|', $request->class);$/;"	v
+city	app/Http/Controllers/SearchController.php	/^        $city         = $request->city ?? '';$/;"	v
 classArray	app/Listing.php	/^        $classArray  = ['A', 'B', 'C', 'E', 'F', 'G', 'H', 'I'];$/;"	v
 classArray	app/Listing.php	/^        $classArray = ['A', 'C', 'E', 'F', 'G', 'J'];$/;"	v
 classArray	app/Photo.php	/^        $classArray = ($association == 'bcar') ?$/;"	v
@@ -188,7 +186,7 @@ listingCounter	app/Listing.php	/^                $listingCounter = $listingCount
 listingCounter	app/Listing.php	/^        $listingCounter = 0;$/;"	v
 listingId	app/Listing.php	/^                $listingId = $fullListing->id;$/;"	v
 listings	app/Http/Controllers/MapSearchController.php	/^        $listings = MapSearch::getAllListings();$/;"	v
-listings	app/Http/Controllers/SearchController.php	/^        $listings = Listing:: when($city, function ($query) use ($city) {$/;"	v
+listings	app/Http/Controllers/SearchController.php	/^        $listings = Listing::when($city, function ($query) use ($city) {$/;"	v
 listings	app/Listing.php	/^        $listings       = Listing::where('association', 'bcar')->pluck('mls_account');$/;"	v
 listings	app/MapSearch.php	/^        $listings = DB::table('listings')$/;"	v
 listings	app/Photo.php	/^        $listings = Listing::where('class', $class)->where('association', $association)->get();$/;"	v
@@ -202,12 +200,12 @@ loop	storage/framework/views/f4fa2ecd83b38afeefbb3ae148cd46e820b1c147.php	/^    
 map	app/Providers/RouteServiceProvider.php	/^    public function map()$/;"	f
 mapApiRoutes	app/Providers/RouteServiceProvider.php	/^    protected function mapApiRoutes()$/;"	f
 mapWebRoutes	app/Providers/RouteServiceProvider.php	/^    protected function mapWebRoutes()$/;"	f
-maxPrice	app/Http/Controllers/SearchController.php	/^        $maxPrice   = $request->maxPrice;$/;"	v
+maxPrice	app/Http/Controllers/SearchController.php	/^        $maxPrice     = $request->maxPrice ?? '';$/;"	v
 maxRowsReached	app/Listing.php	/^                $maxRowsReached = true;$/;"	v
 maxRowsReached	app/Listing.php	/^        $maxRowsReached = false;$/;"	v
 middleware	app/Http/Kernel.php	/^    protected $middleware = [$/;"	v
 middlewareGroups	app/Http/Kernel.php	/^    protected $middlewareGroups = [$/;"	v
-minPrice	app/Http/Controllers/SearchController.php	/^        $minPrice   = $request->minPrice;$/;"	v
+minPrice	app/Http/Controllers/SearchController.php	/^        $minPrice     = $request->minPrice ?? '';$/;"	v
 mls	app/Listing.php	/^        $mls            = new ApiCall();$/;"	v
 mls	app/Listing.php	/^        $mls         = new ApiCall();$/;"	v
 mls	app/Listing.php	/^        $mls = new ApiCall();$/;"	v
@@ -231,6 +229,8 @@ policies	app/Providers/AuthServiceProvider.php	/^    protected $policies = [$/;"
 pool	app/Http/Helpers/ListingsHelper.php	/^            $pool                 = ($result['LIST_147'] == 'Yes') ? 1 : 0;$/;"	v
 pool	app/Http/Helpers/ListingsHelper.php	/^        $pool                 = null;$/;"	v
 price	app/Http/Helpers/ListingsHelper.php	/^        $price                = is_numeric($result['LIST_22']) ? $result['LIST_22'] : 0;$/;"	v
+propertyType	app/Http/Controllers/SearchController.php	/^            $propertyType = explode('|', $propertyType);$/;"	v
+propertyType	app/Http/Controllers/SearchController.php	/^        $propertyType = $request->propertyType ?? '';$/;"	v
 proxies	app/Http/Middleware/TrustProxies.php	/^    protected $proxies;$/;"	v
 record	app/Listing.php	/^                    $record = Listing::where('mls_account', $result['LIST_3'])->first();$/;"	v
 redirectTo	app/Http/Controllers/Auth/LoginController.php	/^    protected $redirectTo = '\/home';$/;"	v
@@ -263,14 +263,13 @@ show	app/Http/Controllers/ListingController.php	/^    public function show($mlsN
 show	app/Http/Controllers/MapSearchController.php	/^    public function show($id)$/;"	f
 sqft	app/Http/Helpers/ListingsHelper.php	/^        $sqft                 = isset($result['LIST_48']) && is_numeric($result['LIST_48']) ? $result['LIST_48'] : 0;$/;"	v
 sqft	app/Http/Helpers/ListingsHelper.php	/^        $sqft                 = isset($result['LIST_48']) ? $result['LIST_48'] : 0;$/;"	v
-status	app/Http/Controllers/SearchController.php	/^        $status     = $request->status;$/;"	v
+status	app/Http/Controllers/SearchController.php	/^        $status       = $request->status ?? '';$/;"	v
 store	app/Http/Controllers/ListingController.php	/^    public function store(Request $request)$/;"	f
 store	app/Http/Controllers/MapSearchController.php	/^    public function store(Request $request)$/;"	f
 stories	app/Http/Helpers/ListingsHelper.php	/^            $stories              = is_numeric($result['LIST_64']) ? $result['LIST_64'] : 0;$/;"	v
 stories	app/Http/Helpers/ListingsHelper.php	/^        $stories              = isset($result['LIST_64']) && is_numeric($result['LIST_64']) ? $result['LIST_64'] : 0;$/;"	v
 stories	app/Http/Helpers/ListingsHelper.php	/^        $stories              = isset($result['LIST_64']) && is_numeric($result['LIST_64']) ? $result['LIST_64'] : 1;$/;"	v
 subAreas	app/Omnibar.php	/^        $subAreas     = Listing::getColumn($searchTerm, 'sub_area');$/;"	v
-subdivisions	app/Omnibar.php	/^        $subdivisions = Listing::getColumn($searchTerm, 'subdivision');$/;"	v
 syncPreferredPhotos	app/Photo.php	/^    public function syncPreferredPhotos()$/;"	f
 testBasicTest	tests/Feature/ExampleTest.php	/^    public function testBasicTest()$/;"	f
 testBasicTest	tests/Unit/ExampleTest.php	/^    public function testBasicTest()$/;"	f
