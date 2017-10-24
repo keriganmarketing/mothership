@@ -67,7 +67,7 @@ appliances	app/Http/Helpers/ListingsHelper.php	/^            $appliances        
 appliances	app/Http/Helpers/ListingsHelper.php	/^            $appliances           = $result['GF20131230164912692795000000'];$/;"	v
 appliances	app/Http/Helpers/ListingsHelper.php	/^            $appliances           = $result['GF20131230211343236208000000'];$/;"	v
 appliances	app/Http/Helpers/ListingsHelper.php	/^        $appliances           = null;$/;"	v
-areas	app/Omnibar.php	/^        $areas    = Listing::getColumn('area');$/;"	v
+areas	app/Omnibar.php	/^        $areas        = Listing::getColumn($searchTerm, 'area');$/;"	v
 as	config/mail.php	/^    | Laravel supports both SMTP and PHP's "mail" function as drivers for the$/;"	f
 bathrooms	app/Http/Helpers/ListingsHelper.php	/^        $bathrooms            = isset($result['LIST_67']) && is_numeric($result['LIST_67']) ? $result['LIST_67'] : 0;$/;"	v
 bathrooms	app/Http/Helpers/ListingsHelper.php	/^        $bathrooms            = isset($result['LIST_67']) ? $result['LIST_67'] : 0;$/;"	v
@@ -84,8 +84,8 @@ boot	app/Providers/AuthServiceProvider.php	/^    public function boot()$/;"	f
 boot	app/Providers/BroadcastServiceProvider.php	/^    public function boot()$/;"	f
 boot	app/Providers/EventServiceProvider.php	/^    public function boot()$/;"	f
 boot	app/Providers/RouteServiceProvider.php	/^    public function boot()$/;"	f
-build	app/Omnibar.php	/^    public static function build()$/;"	f
-cities	app/Omnibar.php	/^        $cities   = Listing::getColumn('city');$/;"	v
+build	app/Omnibar.php	/^    public static function build($searchTerm)$/;"	f
+cities	app/Omnibar.php	/^        $cities       = Listing::getColumn($searchTerm, 'city');$/;"	v
 city	app/Http/Controllers/SearchController.php	/^        $city       = $request->city;$/;"	v
 class	app/Http/Controllers/SearchController.php	/^            $class = $class->toArray();$/;"	v
 class	app/Http/Controllers/SearchController.php	/^        $class      = explode('|', $request->class);$/;"	v
@@ -104,11 +104,11 @@ counter	app/Listing.php	/^        $counter        = 0;$/;"	v
 create	app/Http/Controllers/Auth/RegisterController.php	/^    protected function create(array $data)$/;"	f
 create	app/Http/Controllers/ListingController.php	/^    public function create()$/;"	f
 create	app/Http/Controllers/MapSearchController.php	/^    public function create()$/;"	f
-create	app/Http/Controllers/OmnibarController.php	/^    public function create()$/;"	f
+create	app/Http/Controllers/OmnibarController.php	/^    public function create(Request $request)$/;"	f
 createApplication	tests/CreatesApplication.php	/^    public function createApplication()$/;"	f
 createBcarListing	app/Http/Helpers/ListingsHelper.php	/^    public static function createBcarListing($result, $class)$/;"	f
 createEcarListing	app/Http/Helpers/ListingsHelper.php	/^    public static function createEcarListing($result, $class)$/;"	f
-data	app/Omnibar.php	/^        $data     = [];$/;"	v
+data	app/Omnibar.php	/^        $data         = [];$/;"	v
 dateLastModified	app/Listing.php	/^        $dateLastModified = Carbon::parse($/;"	v
 destroy	app/Http/Controllers/ListingController.php	/^    public function destroy(Listing $listing)$/;"	f
 destroy	app/Http/Controllers/MapSearchController.php	/^    public function destroy($id)$/;"	f
@@ -145,7 +145,7 @@ fullBaths	app/Http/Helpers/ListingsHelper.php	/^        $fullBaths            = 
 fullListing	app/Listing.php	/^                $fullListing = Listing::where('mls_account', $listing)->first();$/;"	v
 getAllListings	app/MapSearch.php	/^    public static function getAllListings()$/;"	f
 getAllPhotos	app/Photo.php	/^    public function getAllPhotos($association)$/;"	f
-getColumn	app/Listing.php	/^    public static function getColumn($columnName)$/;"	f
+getColumn	app/Listing.php	/^    public static function getColumn($searchTerm, $columnName)$/;"	f
 guard	app/Http/Middleware/RedirectIfAuthenticated.php	/^    public function handle($request, Closure $next, $guard = null)$/;"	v
 guarded	app/Listing.php	/^    protected $guarded = [];$/;"	v
 guarded	app/Photo.php	/^    protected $guarded = [];$/;"	v
@@ -217,7 +217,7 @@ n	public/js/app.js	/^!function(t){function e(r){if(n[r])return n[r].exports;var 
 namespace	app/Providers/RouteServiceProvider.php	/^    protected $namespace = 'App\\Http\\Controllers';$/;"	v
 of	app/Listing.php	/^     * @param string $class The class of the listing$/;"	c
 offset	app/Listing.php	/^        $offset         = 0;$/;"	v
-omniBar	app/Http/Controllers/OmnibarController.php	/^        $omniBar = Omnibar::build();$/;"	v
+omniBar	app/Http/Controllers/OmnibarController.php	/^        $omniBar = Omnibar::build($searchTerm);$/;"	v
 password	database/factories/UserFactory.php	/^        'password' => $password ?: $password = bcrypt('secret'),$/;"	v
 password	database/factories/UserFactory.php	/^    static $password;$/;"	v
 photoCounter	app/Listing.php	/^                    $photoCounter = $photoCounter +1;$/;"	v
@@ -258,6 +258,7 @@ routeMiddleware	app/Http/Kernel.php	/^    protected $routeMiddleware = [$/;"	v
 run	database/seeds/DatabaseSeeder.php	/^    public function run()$/;"	f
 savePhotos	app/Photo.php	/^    private function savePhotos($association, $listing, $rets)$/;"	f
 schedule	app/Console/Kernel.php	/^    protected function schedule(Schedule $schedule)$/;"	f
+searchTerm	app/Http/Controllers/OmnibarController.php	/^        $searchTerm = urldecode(str_replace('%^%', '', $request->search));$/;"	v
 show	app/Http/Controllers/ListingController.php	/^    public function show($mlsNumber)$/;"	f
 show	app/Http/Controllers/MapSearchController.php	/^    public function show($id)$/;"	f
 sqft	app/Http/Helpers/ListingsHelper.php	/^        $sqft                 = isset($result['LIST_48']) && is_numeric($result['LIST_48']) ? $result['LIST_48'] : 0;$/;"	v
@@ -268,7 +269,8 @@ store	app/Http/Controllers/MapSearchController.php	/^    public function store(R
 stories	app/Http/Helpers/ListingsHelper.php	/^            $stories              = is_numeric($result['LIST_64']) ? $result['LIST_64'] : 0;$/;"	v
 stories	app/Http/Helpers/ListingsHelper.php	/^        $stories              = isset($result['LIST_64']) && is_numeric($result['LIST_64']) ? $result['LIST_64'] : 0;$/;"	v
 stories	app/Http/Helpers/ListingsHelper.php	/^        $stories              = isset($result['LIST_64']) && is_numeric($result['LIST_64']) ? $result['LIST_64'] : 1;$/;"	v
-subAreas	app/Omnibar.php	/^        $subAreas = Listing::getColumn('sub_area');$/;"	v
+subAreas	app/Omnibar.php	/^        $subAreas     = Listing::getColumn($searchTerm, 'sub_area');$/;"	v
+subdivisions	app/Omnibar.php	/^        $subdivisions = Listing::getColumn($searchTerm, 'subdivision');$/;"	v
 syncPreferredPhotos	app/Photo.php	/^    public function syncPreferredPhotos()$/;"	f
 testBasicTest	tests/Feature/ExampleTest.php	/^    public function testBasicTest()$/;"	f
 testBasicTest	tests/Unit/ExampleTest.php	/^    public function testBasicTest()$/;"	f
@@ -311,7 +313,7 @@ waterviewDescription	app/Http/Helpers/ListingsHelper.php	/^            $watervie
 waterviewDescription	app/Http/Helpers/ListingsHelper.php	/^        $waterviewDescription = null;$/;"	v
 yearBuilt	app/Http/Helpers/ListingsHelper.php	/^        $yearBuilt            = isset($result['LIST_53']) && is_numeric($result['LIST_53']) ? $result['LIST_53'] : 0;$/;"	v
 yearBuilt	app/Http/Helpers/ListingsHelper.php	/^        $yearBuilt            = isset($result['LIST_53']) ? $result['LIST_53'] : 0;$/;"	v
-zips	app/Omnibar.php	/^        $zips     = Listing::getColumn('zip');$/;"	v
+zips	app/Omnibar.php	/^        $zips         = Listing::getColumn($searchTerm, 'zip');$/;"	v
 zoning	app/Http/Helpers/ListingsHelper.php	/^            $zoning               = $result['GF20131203222306734642000000'];$/;"	v
 zoning	app/Http/Helpers/ListingsHelper.php	/^            $zoning               = $result['GF20131230164916157466000000'];$/;"	v
 zoning	app/Http/Helpers/ListingsHelper.php	/^            $zoning               = $result['GF20131230211345452659000000'];$/;"	v

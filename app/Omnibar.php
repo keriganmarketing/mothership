@@ -72,7 +72,7 @@ class Omnibar extends Model
             foreach ($subdivisions as $subdivision) {
                 $data['results'][3]['children'][] =
                 [
-                    'id'   => ucwords($subdivision->subdivision)
+                    'id'   => ucwords($subdivision->subdivision),
                     'text' => ucwords($subdivision->subdivision)
                 ]
             }
