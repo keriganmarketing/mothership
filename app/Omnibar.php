@@ -74,7 +74,7 @@ class Omnibar extends Model
                 [
                     'id'   => ucwords($subdivision->subdivision),
                     'text' => ucwords($subdivision->subdivision)
-                ]
+                ];
             }
         }
         if (count($zips) > 0) {
