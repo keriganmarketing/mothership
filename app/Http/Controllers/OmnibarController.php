@@ -14,7 +14,7 @@ class OmnibarController extends Controller
      */
     public function create(Request $request)
     {
-        $searchTerm = urldecode($request->search);
+        $searchTerm = urldecode(preg_replace('^', '', $request->search));
         $omniBar = Omnibar::build($searchTerm);
 
         return response()->json($omniBar)->withHeaders(
