@@ -12,9 +12,10 @@ class OmnibarController extends Controller
      *
      * @return Http\Illuminate\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        $omniBar = Omnibar::build();
+        $searchTerm = $request->search;
+        $omniBar = Omnibar::build($searchTerm);
 
         return response()->json($omniBar)->withHeaders(
             [

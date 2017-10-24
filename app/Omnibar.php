@@ -7,13 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Omnibar extends Model
 {
-    public static function build()
+    public static function build($searchTerm)
     {
         $data     = [];
-        $cities   = Listing::getColumn('city');
-        $areas    = Listing::getColumn('area');
-        $subAreas = Listing::getColumn('sub_area');
-        $zips     = Listing::getColumn('zip');
+        $cities   = Listing::getColumn($searchTerm, 'city');
+        $areas    = Listing::getColumn($searchTerm, 'area');
+        $subAreas = Listing::getColumn($searchTerm, 'sub_area');
+        $zips     = Listing::getColumn($searchTerm, 'zip');
 
         //format the array so that it returns the proper JSON response
 
