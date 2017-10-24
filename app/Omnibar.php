@@ -38,20 +38,20 @@ class Omnibar extends Model
 
         foreach ($cities as $city) {
             $data['results'][0]['children'][] = [
-                    'id' => $city->city,
-                    'text' => $city->city
+                    'id' => ucfirst($city->city),
+                    'text' => ucfirst($city->city)
                 ];
         }
         foreach ($areas as $area) {
             $data['results'][1]['children'][] = [
-                    'id' => $area->area,
-                    'text' => $area->area
+                    'id' => ucfirst($area->area),
+                    'text' => ucfirst($area->area)
                 ];
         }
         foreach ($subAreas as $subArea) {
             $data['results'][2]['children'][] = [
-                    'id' => $subArea->sub_area,
-                    'text' => $subArea->sub_area
+                    'id' => ucfirst($subArea->sub_area),
+                    'text' => ucfirst($subArea->sub_area)
                 ];
         }
         foreach ($zips as $zip) {
