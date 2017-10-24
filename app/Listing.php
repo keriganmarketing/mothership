@@ -119,10 +119,10 @@ class Listing extends Model
      */
     public static function getColumn($searchTerm, $columnName)
     {
+        $searchTerm = urldecode($searchTerm);
         $values  = DB::table('listings')
             ->select($columnName)
-            ->where($columnName, '!=', '')
-            ->whereRaw("LOWER({$columnName}) LIKE LOWER({$searchTerm})")
+            ->whereRaw("LOWER({$columnName}) LIKE LOWER('{$searchTerm}')")
             ->groupBy($columnName)
             ->get();
 
