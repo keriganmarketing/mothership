@@ -57,6 +57,7 @@ __construct	app/Jobs/UpdateBcar.php	/^    public function __construct()$/;"	f
 __construct	app/Jobs/UpdateEcar.php	/^    public function __construct()$/;"	f
 __currentLoopData	storage/framework/views/f4fa2ecd83b38afeefbb3ae148cd46e820b1c147.php	/^                <?php $__currentLoopData = $element; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $page => $url): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>$/;"	v
 __currentLoopData	storage/framework/views/f4fa2ecd83b38afeefbb3ae148cd46e820b1c147.php	/^        <?php $__currentLoopData = $elements; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $element): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>$/;"	v
+acreage	app/Http/Controllers/SearchController.php	/^        $acreage      = $request->acreage ?? '';$/;"	v
 acreage	app/Http/Helpers/ListingsHelper.php	/^        $acreage              = $result['LIST_57'] > 0 ? $result['LIST_57'] : 0;$/;"	v
 agentShortId	app/Http/Controllers/AgentListingsController.php	/^        $agentShortId = $request->agentId;$/;"	v
 aliases	config/app.php	/^    | This array of class aliases will be registered when this application$/;"	c
@@ -73,6 +74,7 @@ areas	app/Omnibar.php	/^        $areas        = Listing::getColumn($searchTerm, 
 as	config/mail.php	/^    | Laravel supports both SMTP and PHP's "mail" function as drivers for the$/;"	f
 bathrooms	app/Http/Helpers/ListingsHelper.php	/^        $bathrooms            = isset($result['LIST_67']) && is_numeric($result['LIST_67']) ? $result['LIST_67'] : 0;$/;"	v
 bathrooms	app/Http/Helpers/ListingsHelper.php	/^        $bathrooms            = isset($result['LIST_67']) ? $result['LIST_67'] : 0;$/;"	v
+baths	app/Http/Controllers/SearchController.php	/^        $baths        = $request->bathrooms ?? '';$/;"	v
 bcarLoginUrl	app/ApiCall.php	/^    private function bcarLoginUrl()$/;"	f
 bcarOptions	app/Http/Helpers/BcarOptions.php	/^        $bcarOptions = [$/;"	v
 bcarOptions	app/Listing.php	/^        $bcarOptions    = BcarOptions::all();$/;"	v
@@ -81,6 +83,7 @@ bcarPassword	app/ApiCall.php	/^    private function bcarPassword()$/;"	f
 bcarUserName	app/ApiCall.php	/^    private function bcarUserName()$/;"	f
 bedrooms	app/Http/Helpers/ListingsHelper.php	/^        $bedrooms             = isset($result['LIST_66']) && is_numeric($result['LIST_66']) ? $result['LIST_66'] : 0;$/;"	v
 bedrooms	app/Http/Helpers/ListingsHelper.php	/^        $bedrooms             = isset($result['LIST_66']) ? $result['LIST_66'] : 0;$/;"	v
+beds	app/Http/Controllers/SearchController.php	/^        $beds         = $request->bedrooms ?? '';$/;"	v
 boot	app/Providers/AppServiceProvider.php	/^    public function boot()$/;"	f
 boot	app/Providers/AuthServiceProvider.php	/^    public function boot()$/;"	f
 boot	app/Providers/BroadcastServiceProvider.php	/^    public function boot()$/;"	f
@@ -225,6 +228,7 @@ photos	app/Listing.php	/^    public function photos()$/;"	f
 photos	app/Photo.php	/^        $photos    = Photo::where('preferred', 1)->get();$/;"	v
 photos	app/Photo.php	/^        $photos   = $rets->GetObject('Property', 'HiRes', $listing->mls_account, '*', 1);$/;"	v
 policies	app/Providers/AuthServiceProvider.php	/^    protected $policies = [$/;"	v
+pool	app/Http/Controllers/SearchController.php	/^        $pool         = $request->pool ?? '';$/;"	v
 pool	app/Http/Helpers/ListingsHelper.php	/^            $pool                 = ($result['LIST_147'] == 'Yes') ? 1 : 0;$/;"	v
 pool	app/Http/Helpers/ListingsHelper.php	/^        $pool                 = null;$/;"	v
 price	app/Http/Helpers/ListingsHelper.php	/^        $price                = is_numeric($result['LIST_22']) ? $result['LIST_22'] : 0;$/;"	v
@@ -259,6 +263,7 @@ savePhotos	app/Photo.php	/^    private function savePhotos($association, $listin
 schedule	app/Console/Kernel.php	/^    protected function schedule(Schedule $schedule)$/;"	f
 searchTerm	app/Http/Controllers/OmnibarController.php	/^        $searchTerm = urldecode(str_replace('%^%', '', $request->search));$/;"	v
 show	app/Http/Controllers/ListingController.php	/^    public function show($mlsNumber)$/;"	f
+sqft	app/Http/Controllers/SearchController.php	/^        $sqft         = $request->sq_ft ?? '';$/;"	v
 sqft	app/Http/Helpers/ListingsHelper.php	/^        $sqft                 = isset($result['LIST_48']) && is_numeric($result['LIST_48']) ? $result['LIST_48'] : 0;$/;"	v
 sqft	app/Http/Helpers/ListingsHelper.php	/^        $sqft                 = isset($result['LIST_48']) ? $result['LIST_48'] : 0;$/;"	v
 status	app/Http/Controllers/SearchController.php	/^        $status       = $request->status ?? '';$/;"	v
@@ -289,6 +294,7 @@ utilities	app/Http/Helpers/ListingsHelper.php	/^            $utilities          
 utilities	app/Http/Helpers/ListingsHelper.php	/^        $utilities            = null;$/;"	v
 validator	app/Http/Controllers/Auth/RegisterController.php	/^    protected function validator(array $data)$/;"	f
 values	app/Listing.php	/^        $values  = DB::table('listings')$/;"	v
+waterfront	app/Http/Controllers/SearchController.php	/^        $waterfront   = $request->waterfront ?? '';$/;"	v
 waterfront	app/Http/Helpers/BcarOptions.php	/^        $waterfront = 'LIST_192';$/;"	v
 waterfront	app/Http/Helpers/EcarOptions.php	/^        $waterfront = 'GF20131203222329624962000000'; \/\/mother of god$/;"	v
 waterviewDescription	app/Http/Helpers/ListingsHelper.php	/^            $waterviewDescription = $result['GF20131203222538613490000000'];$/;"	v

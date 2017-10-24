@@ -19,6 +19,12 @@ class SearchController extends Controller
         $propertyType = $request->propertyType ?? '';
         $minPrice     = $request->minPrice ?? '';
         $maxPrice     = $request->maxPrice ?? '';
+        $beds         = $request->bedrooms ?? '';
+        $baths        = $request->bathrooms ?? '';
+        $sqft         = $request->sq_ft ?? '';
+        $acreage      = $request->acreage ?? '';
+        $waterfront   = $request->waterfront ?? '';
+        $pool         = $request->pool ?? '';
 
         if ($propertyType != '') {
             $propertyType = explode('|', $propertyType);
@@ -44,6 +50,24 @@ class SearchController extends Controller
         })
         ->when($maxPrice, function ($query) use ($maxPrice) {
             return $query->where('price', '<=', $maxPrice);
+        })
+        ->when($beds, function ($query) use ($beds) {
+            return $query->where('bedrooms', '>=', $beds);
+        })
+        ->when($baths, function ($query) use ($baths) {
+            return $query->where('bathrooms', '>=', $baths);
+        })
+        ->when($sqft, function ($query) use ($sqft) {
+            return $query->where('sq_ft', '>=', $sqft);
+        })
+        ->when($acreage, function ($query) use ($acreage) {
+            return $query->where('acreage', '>=', $acreage);
+        })
+        ->when($waterfront, function ($query) use ($waterfront) {
+            return $query->where('waterfront', true);
+        })
+        ->when($pool, function ($query) use ($pool) {
+            return $query->where('pool', true);
         })
         ->paginate(36);
 
