@@ -31,7 +31,7 @@ class Kernel extends ConsoleKernel
                 new UpdateEcar,
                 new CleanBcar
             ])->dispatch();
-        })->daily();
+        })->hourly();
     }
 
     /**
