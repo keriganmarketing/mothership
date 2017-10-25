@@ -121,6 +121,9 @@ class ListingsHelper
             ]
         );
 
+        $listing->full_address = $listing->buildFullAddress($listing);
+        $listing->save();
+
         return $listing;
     }
 
@@ -263,6 +266,9 @@ class ListingsHelper
             ]
         );
 
+        $listing->full_address = $listing->buildFullAddress($listing);
+        $listing->save();
+
         return $listing;
     }
     /**
@@ -382,6 +388,9 @@ class ListingsHelper
                 'directions'               => $result['LIST_82'],
             ]
         );
+        $listing = Listing::find($record->id);
+        $listing->full_address = $listing->buildFullAddress($listing);
+        $listing->save();
     }
 
     /**
@@ -521,5 +530,8 @@ class ListingsHelper
                 'directions'               => $result['LIST_82'],
             ]
         );
+        $listing = Listing::find($record->id);
+        $listing->full_address = $listing->buildFullAddress($listing);
+        $listing->save();
     }
 }

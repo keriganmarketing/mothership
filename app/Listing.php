@@ -305,4 +305,15 @@ class Listing extends Model
 
         return $listings;
     }
+
+    public function buildFullAddress(Listing $listing)
+    {
+        $streetNumber = $listing->street_number;
+        $streetName   = ucwords(strtolower($listing->street_name));
+        $unitNumber   = ($listing->unit_number != null) ? ' ' . ucwords(strtolower($listing->unit_number)) . ', ' :  ', ';
+        $city         = $listing->city;
+        $fullAddress  = $streetNumber . ' ' . $streetName . $unitNumber . $city;
+
+        return $fullAddress;
+    }
 }

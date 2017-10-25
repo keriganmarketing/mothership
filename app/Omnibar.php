@@ -14,6 +14,8 @@ class Omnibar extends Model
         $areas        = Listing::getColumn($searchTerm, 'area');
         $subAreas     = Listing::getColumn($searchTerm, 'sub_area');
         $zips         = Listing::getColumn($searchTerm, 'zip');
+        $addresses    = Listing::getColumn($searchTerm, 'full_address');
+        $mlsNumbers   = Listing::getColumn($searchTerm, 'mls_account');
 
         //format the array so that it returns the proper JSON response
 
@@ -32,6 +34,14 @@ class Omnibar extends Model
             ],
             [
                 'text'     => count($zips) > 0 ? 'Zip Code' : '',
+                'children' => []
+            ],
+            [
+                'text'     => count($addresses) > 0 ? 'Address' : '',
+                'children' => []
+            ],
+            [
+                'text'     => count($mlsNumbers) > 0 ? 'MLS ID' : '',
                 'children' => []
             ]
         ];
@@ -62,6 +72,20 @@ class Omnibar extends Model
             [
                 'id' => $zip->zip,
                 'text' => $zip->zip
+            ];
+        }
+        foreach ($addresses as $address) {
+            $data['results'][4]['children'][] =
+            [
+                'id' => $address->full_address,
+                'text' => $address->full_address
+            ];
+        }
+        foreach ($mlsNumbers as $mlsNumber) {
+            $data['results'][5]['children'][] =
+            [
+                'id' => $mlsNumber->mls_account,
+                'text' => $mlsNumber->mls_account
             ];
         }
 
