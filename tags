@@ -266,6 +266,7 @@ show	app/Http/Controllers/ListingController.php	/^    public function show($mlsN
 sqft	app/Http/Controllers/SearchController.php	/^        $sqft         = $request->sq_ft ?? '';$/;"	v
 sqft	app/Http/Helpers/ListingsHelper.php	/^        $sqft                 = isset($result['LIST_48']) && is_numeric($result['LIST_48']) ? $result['LIST_48'] : 0;$/;"	v
 sqft	app/Http/Helpers/ListingsHelper.php	/^        $sqft                 = isset($result['LIST_48']) ? $result['LIST_48'] : 0;$/;"	v
+status	app/Http/Controllers/SearchController.php	/^            $status = explode('|', $status);$/;"	v
 status	app/Http/Controllers/SearchController.php	/^        $status       = $request->status ?? '';$/;"	v
 stories	app/Http/Helpers/ListingsHelper.php	/^            $stories              = is_numeric($result['LIST_64']) ? $result['LIST_64'] : 0;$/;"	v
 stories	app/Http/Helpers/ListingsHelper.php	/^        $stories              = isset($result['LIST_64']) && is_numeric($result['LIST_64']) ? $result['LIST_64'] : 0;$/;"	v
