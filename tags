@@ -108,6 +108,8 @@ construction	app/Http/Helpers/ListingsHelper.php	/^            $construction    
 construction	app/Http/Helpers/ListingsHelper.php	/^            $construction         = $result['GF20131231201806058732000000'];$/;"	v
 construction	app/Http/Helpers/ListingsHelper.php	/^        $construction         = null;$/;"	v
 counter	app/Listing.php	/^        $counter        = 0;$/;"	v
+counter	app/Omnibar.php	/^            $counter = $counter +1;$/;"	v
+counter	app/Omnibar.php	/^        $counter      = 0;$/;"	v
 create	app/Http/Controllers/Auth/RegisterController.php	/^    protected function create(array $data)$/;"	f
 create	app/Http/Controllers/OmnibarController.php	/^    public function create(Request $request)$/;"	f
 createApplication	tests/CreatesApplication.php	/^    public function createApplication()$/;"	f
