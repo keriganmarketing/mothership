@@ -312,6 +312,9 @@ class Listing extends Model
         $streetName   = ucwords(strtolower($listing->street_name));
         $unitNumber   = ($listing->unit_number != null) ? ' ' . ucwords(strtolower($listing->unit_number)) . ', ' :  ', ';
         $city         = $listing->city;
+        if ($streetNumber == null && $streetName == null) {
+            return null;
+        }
         $fullAddress  = $streetNumber . ' ' . $streetName . $unitNumber . $city;
 
         return $fullAddress;

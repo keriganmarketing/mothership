@@ -282,6 +282,7 @@ stories	app/Http/Helpers/ListingsHelper.php	/^            $stories              
 stories	app/Http/Helpers/ListingsHelper.php	/^        $stories              = isset($result['LIST_64']) && is_numeric($result['LIST_64']) ? $result['LIST_64'] : 0;$/;"	v
 stories	app/Http/Helpers/ListingsHelper.php	/^        $stories              = isset($result['LIST_64']) && is_numeric($result['LIST_64']) ? $result['LIST_64'] : 1;$/;"	v
 streetName	app/Listing.php	/^        $streetName   = ucwords(strtolower($listing->street_name));$/;"	v
+streetName	app/Listing.php	/^        if ($streetNumber == null && $streetName == null) {$/;"	v
 streetNumber	app/Listing.php	/^        $streetNumber = $listing->street_number;$/;"	v
 subAreas	app/Omnibar.php	/^        $subAreas     = Listing::getColumn($searchTerm, 'sub_area');$/;"	v
 syncPreferredPhotos	app/Photo.php	/^    public function syncPreferredPhotos()$/;"	f
