@@ -310,13 +310,18 @@ class Listing extends Model
     {
         $streetNumber = $listing->street_number;
         $streetName   = ucwords(strtolower($listing->street_name));
-        $unitNumber   = ($listing->unit_number != null) ? ' ' . ucwords(strtolower($listing->unit_number)) . ', ' :  ', ';
-        $city         = $listing->city;
-        if ($streetNumber == null && $streetName == null) {
-            return null;
-        }
-        $fullAddress  = $streetNumber . ' ' . $streetName . $unitNumber . $city;
+        $city         = ', '. $listing->city;
+        $fullAddress  = $streetNumber . ' ' . $streetName . $city;
 
-        return $fullAddress;
+        if ($this->addressIsValid($fullAddress)) {
+            return $fullAddress;
+        }
+
+        return null;
+    }
+
+    public function addressIsValid($fullAddress)
+    {
+        return preg_match('/^[1-9]+([0-9]*)?\s(\d*?)([A-Z]+)?[a-z].+$/', $fullAddress);
     }
 }

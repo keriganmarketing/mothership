@@ -40,7 +40,7 @@ class SearchController extends Controller
                     ->orWhere('sub_area', $city)
                     ->orWhere('area', $city)
                     ->orWhere('subdivision', $city)
-                    ->orWhere('full_address', $city)
+                    ->orWhereRaw("full_address LIKE '%{$city}%'")
                     ->orWhere('mls_account', $city);
             });
         })
