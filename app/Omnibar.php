@@ -112,6 +112,13 @@ class Omnibar extends Model
             }
             $counter = $counter +1;
         }
+        if (count($data['results']) == 0) {
+            $data['results'][0] =
+                [
+                    'text' => 'No results for your search',
+                    'children' => []
+                ];
+        }
 
         return $data;
     }
