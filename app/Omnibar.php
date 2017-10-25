@@ -16,77 +16,101 @@ class Omnibar extends Model
         $zips         = Listing::getColumn($searchTerm, 'zip');
         $addresses    = Listing::getColumn($searchTerm, 'full_address');
         $mlsNumbers   = Listing::getColumn($searchTerm, 'mls_account');
+        $counter      = 0;
 
         //format the array so that it returns the proper JSON response
 
-        $data['results'] = [
-            [
-                'text'     => count($cities) > 0 ? 'City' : '',
-                'children' => []
-            ],
-            [
-                'text'     => count($areas) > 0 ? 'Area' : '',
-                'children' => []
-            ],
-            [
-                'text'     => count($subAreas) > 0 ? 'Sub Area' : '',
-                'children' => []
-            ],
-            [
-                'text'     => count($zips) > 0 ? 'Zip Code' : '',
-                'children' => []
-            ],
-            [
-                'text'     => count($addresses) > 0 ? 'Address' : '',
-                'children' => []
-            ],
-            [
-                'text'     => count($mlsNumbers) > 0 ? 'MLS ID' : '',
-                'children' => []
-            ]
-        ];
+        $data['results'] = [];
 
-        foreach ($cities as $city) {
-            $data['results'][0]['children'][] =
+        if (count($cities) > 0) {
+            $data['results'][$counter] =
             [
-                'id' => ucwords($city->city),
-                'text' => ucwords($city->city)
+                'text'     => 'City',
+                'children' => []
             ];
+            foreach ($cities as $city) {
+                $data['results'][$counter]['children'][] =
+                [
+                    'id' => ucwords($city->city),
+                    'text' => ucwords($city->city)
+                ];
+            }
+            $counter = $counter +1;
         }
-        foreach ($areas as $area) {
-            $data['results'][1]['children'][] =
+        if (count($areas) > 0) {
+            $data['results'][$counter] =
             [
-                'id' => ucwords($area->area),
-                'text' => ucwords($area->area)
+                'text'     => 'Area',
+                'children' => []
             ];
+            foreach ($areas as $area) {
+                $data['results'][$counter]['children'][] =
+                [
+                    'id' => ucwords($area->area),
+                    'text' => ucwords($area->area)
+                ];
+            }
+            $counter = $counter +1;
         }
-        foreach ($subAreas as $subArea) {
-            $data['results'][2]['children'][] =
+        if (count($subAreas) > 0) {
+            $data['results'][$counter] =
             [
-                'id'   => ucwords($subArea->sub_area),
-                'text' => ucwords($subArea->sub_area)
+                'text'     => 'Sub Area',
+                'children' => []
             ];
+            foreach ($subAreas as $subArea) {
+                $data['results'][$counter]['children'][] =
+                [
+                    'id' => ucwords($subArea->sub_area),
+                    'text' => ucwords($subArea->sub_area)
+                ];
+            }
+            $counter = $counter +1;
         }
-        foreach ($zips as $zip) {
-            $data['results'][3]['children'][] =
+        if (count($zips) > 0) {
+            $data['results'][$counter] =
             [
-                'id' => $zip->zip,
-                'text' => $zip->zip
+                'text'     => 'Zip',
+                'children' => []
             ];
+            foreach ($zips as $zip) {
+                $data['results'][$counter]['children'][] =
+                [
+                    'id' => ucwords($zip->zip),
+                    'text' => ucwords($zip->zip)
+                ];
+            }
+            $counter = $counter +1;
         }
-        foreach ($addresses as $address) {
-            $data['results'][4]['children'][] =
+        if (count($addresses) > 0) {
+            $data['results'][$counter] =
             [
-                'id' => $address->full_address,
-                'text' => $address->full_address
+                'text'     => 'Address',
+                'children' => []
             ];
+            foreach ($addresses as $address) {
+                $data['results'][$counter]['children'][] =
+                [
+                    'id' => ucwords($address->full_address),
+                    'text' => ucwords($address->full_address)
+                ];
+            }
+            $counter = $counter +1;
         }
-        foreach ($mlsNumbers as $mlsNumber) {
-            $data['results'][5]['children'][] =
+        if (count($mlsNumbers) > 0) {
+            $data['results'][$counter] =
             [
-                'id' => $mlsNumber->mls_account,
-                'text' => $mlsNumber->mls_account
+                'text'     => 'MLS ID',
+                'children' => []
             ];
+            foreach ($mlsNumbers as $mlsNumber) {
+                $data['results'][$counter]['children'][] =
+                [
+                    'id' => ucwords($mlsNumber->mls_account),
+                    'text' => ucwords($mlsNumber->mls_account)
+                ];
+            }
+            $counter = $counter +1;
         }
 
         return $data;
