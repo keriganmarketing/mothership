@@ -25,6 +25,8 @@ class SearchController extends Controller
         $acreage      = $request->acreage ?? '';
         $waterfront   = $request->waterfront ?? '';
         $pool         = $request->pool ?? '';
+        $sortBy       = $request->sortBy ?? 'date_modified';
+        $orderBy      = $request->orderBy ?? 'DESC';
 
         if ($propertyType != '') {
             $propertyType = explode('|', $propertyType);
@@ -40,7 +42,7 @@ class SearchController extends Controller
                     ->orWhere('sub_area', $city)
                     ->orWhere('area', $city)
                     ->orWhere('subdivision', $city)
-                    ->orWhereRaw("full_address LIKE '%{$city}%'")
+                    ->orWhere('full_address', $city)
                     ->orWhere('mls_account', $city);
             });
         })
@@ -74,6 +76,7 @@ class SearchController extends Controller
         ->when($pool, function ($query) use ($pool) {
             return $query->where('pool', true);
         })
+        ->orderBy($sortBy, $orderBy)
         ->paginate(36);
 
         // returns paginated links (with GET variables intact!)
