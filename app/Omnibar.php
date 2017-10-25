@@ -77,8 +77,8 @@ class Omnibar extends Model
         foreach ($addresses as $address) {
             $data['results'][4]['children'][] =
             [
-                'id' => $address->full_address,
-                'text' => $address->full_address
+                'id' => ucwords($address->full_address),
+                'text' => ucwords($address->full_address)
             ];
         }
         foreach ($mlsNumbers as $mlsNumber) {
