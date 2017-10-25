@@ -39,7 +39,9 @@ class SearchController extends Controller
                     ->orWhere('zip', $city)
                     ->orWhere('sub_area', $city)
                     ->orWhere('area', $city)
-                    ->orWhere('subdivision', $city);
+                    ->orWhere('subdivision', $city)
+                    ->orWhere('full_address', $city)
+                    ->orWhere('mls_account', $city);
             });
         })
         ->when($propertyType, function ($query) use ($propertyType) {
