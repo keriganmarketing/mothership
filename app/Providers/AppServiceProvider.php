@@ -15,6 +15,9 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Schema::defaultStringLength(191);
+        Horizon::auth(function ($request) {
+            return true;
+        });
     }
 
     /**
