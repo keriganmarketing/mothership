@@ -40,7 +40,7 @@ return [
     */
 
     'waits' => [
-        'redis:default' => 60,
+        'redis:default' => 90,
     ],
 
     /*
@@ -59,7 +59,7 @@ return [
             'supervisor-1' => [
                 'connection' => 'redis',
                 'queue' => ['default'],
-                'balance' => 'simple',
+                'balance' => 'auto',
                 'processes' => 10,
                 'tries' => 3,
             ],
