@@ -40,7 +40,7 @@ return [
     */
 
     'waits' => [
-        'redis:default' => 90,
+        'redis:default' => 60,
     ],
 
     /*
@@ -60,7 +60,7 @@ return [
                 'connection' => 'redis',
                 'queue' => ['default'],
                 'balance' => 'auto',
-                'processes' => 10,
+                'processes' => 3,
                 'tries' => 3,
             ],
         ],
