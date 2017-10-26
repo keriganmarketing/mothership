@@ -26,6 +26,16 @@ class Listing extends Model
         return $this->hasMany('App\Photo');
     }
 
+    public function clicks()
+    {
+        return $this->hasMany('App\Click', 'listing_id');
+    }
+
+    public function impresssions()
+    {
+        return $this->hasMany('App\Impression', 'listing_id');
+    }
+
     /**
      * Get all BCAR MLS listings
      *

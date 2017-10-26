@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Listing;
 use Illuminate\Http\Request;
+use App\Jobs\ProcessImpression;
 
 class SearchController extends Controller
 {
@@ -78,6 +79,8 @@ class SearchController extends Controller
         })
         ->orderBy($sortBy, $orderBy)
         ->paginate(36);
+
+        ProcessImpression::dispatch($listings);
 
         // returns paginated links (with GET variables intact!)
         $listings->appends($request->all())->links();

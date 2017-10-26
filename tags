@@ -12,7 +12,10 @@ AuthServiceProvider	app/Providers/AuthServiceProvider.php	/^class AuthServicePro
 BcarOptions	app/Http/Helpers/BcarOptions.php	/^class BcarOptions$/;"	c
 BroadcastServiceProvider	app/Providers/BroadcastServiceProvider.php	/^class BroadcastServiceProvider extends ServiceProvider$/;"	c
 CleanBcar	app/Jobs/CleanBcar.php	/^class CleanBcar implements ShouldQueue$/;"	c
+Click	app/Click.php	/^class Click extends Model$/;"	c
 Controller	app/Http/Controllers/Controller.php	/^class Controller extends BaseController$/;"	c
+CreateClicksTable	database/migrations/2017_10_26_134227_create_clicks_table.php	/^class CreateClicksTable extends Migration$/;"	c
+CreateImpressionsTable	database/migrations/2017_10_26_150026_create_impressions_table.php	/^class CreateImpressionsTable extends Migration$/;"	c
 CreateListingsTable	database/migrations/2017_10_18_204605_create_listings_table.php	/^class CreateListingsTable extends Migration$/;"	c
 CreatePasswordResetsTable	database/migrations/2014_10_12_100000_create_password_resets_table.php	/^class CreatePasswordResetsTable extends Migration$/;"	c
 CreatePhotosTable	database/migrations/2017_10_19_181334_create_photos_table.php	/^class CreatePhotosTable extends Migration$/;"	c
@@ -25,6 +28,7 @@ ExampleTest	tests/Feature/ExampleTest.php	/^class ExampleTest extends TestCase$/
 ExampleTest	tests/Unit/ExampleTest.php	/^class ExampleTest extends TestCase$/;"	c
 ForgotPasswordController	app/Http/Controllers/Auth/ForgotPasswordController.php	/^class ForgotPasswordController extends Controller$/;"	c
 Handler	app/Exceptions/Handler.php	/^class Handler extends ExceptionHandler$/;"	c
+Impression	app/Impression.php	/^class Impression extends Model$/;"	c
 Kernel	app/Console/Kernel.php	/^class Kernel extends ConsoleKernel$/;"	c
 Kernel	app/Http/Kernel.php	/^class Kernel extends HttpKernel$/;"	c
 LARAVEL_START	public/index.php	/^define('LARAVEL_START', microtime(true));$/;"	d
@@ -37,6 +41,8 @@ MapSearchController	app/Http/Controllers/MapSearchController.php	/^class MapSear
 Omnibar	app/Omnibar.php	/^class Omnibar extends Model$/;"	c
 OmnibarController	app/Http/Controllers/OmnibarController.php	/^class OmnibarController extends Controller$/;"	c
 Photo	app/Photo.php	/^class Photo extends Model$/;"	c
+ProcessClick	app/Jobs/ProcessClick.php	/^class ProcessClick implements ShouldQueue$/;"	c
+ProcessImpression	app/Jobs/ProcessImpression.php	/^class ProcessImpression implements ShouldQueue$/;"	c
 RedirectIfAuthenticated	app/Http/Middleware/RedirectIfAuthenticated.php	/^class RedirectIfAuthenticated$/;"	c
 RegisterController	app/Http/Controllers/Auth/RegisterController.php	/^class RegisterController extends Controller$/;"	c
 ResetPasswordController	app/Http/Controllers/Auth/ResetPasswordController.php	/^class ResetPasswordController extends Controller$/;"	c
@@ -54,12 +60,15 @@ __construct	app/Http/Controllers/Auth/LoginController.php	/^    public function 
 __construct	app/Http/Controllers/Auth/RegisterController.php	/^    public function __construct()$/;"	f
 __construct	app/Http/Controllers/Auth/ResetPasswordController.php	/^    public function __construct()$/;"	f
 __construct	app/Jobs/CleanBcar.php	/^    public function __construct()$/;"	f
+__construct	app/Jobs/ProcessClick.php	/^    public function __construct(Listing $listing)$/;"	f
+__construct	app/Jobs/ProcessImpression.php	/^    public function __construct($listings)$/;"	f
 __construct	app/Jobs/UpdateBcar.php	/^    public function __construct()$/;"	f
 __construct	app/Jobs/UpdateEcar.php	/^    public function __construct()$/;"	f
 __currentLoopData	storage/framework/views/f4fa2ecd83b38afeefbb3ae148cd46e820b1c147.php	/^                <?php $__currentLoopData = $element; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $page => $url): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>$/;"	v
 __currentLoopData	storage/framework/views/f4fa2ecd83b38afeefbb3ae148cd46e820b1c147.php	/^        <?php $__currentLoopData = $elements; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $element): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>$/;"	v
 acreage	app/Http/Controllers/SearchController.php	/^        $acreage      = $request->acreage ?? '';$/;"	v
 acreage	app/Http/Helpers/ListingsHelper.php	/^        $acreage              = $result['LIST_57'] > 0 ? $result['LIST_57'] : 0;$/;"	v
+addressIsValid	app/Listing.php	/^    public function addressIsValid($fullAddress)$/;"	f
 addresses	app/Omnibar.php	/^        $addresses    = Listing::getColumn($searchTerm, 'full_address');$/;"	v
 agentShortId	app/Http/Controllers/AgentListingsController.php	/^        $agentShortId = $request->agentId;$/;"	v
 aliases	config/app.php	/^    | This array of class aliases will be registered when this application$/;"	c
@@ -95,11 +104,12 @@ build	app/Omnibar.php	/^    public static function build($searchTerm)$/;"	f
 buildFullAddress	app/Listing.php	/^    public function buildFullAddress(Listing $listing)$/;"	f
 cities	app/Omnibar.php	/^        $cities       = Listing::getColumn($searchTerm, 'city');$/;"	v
 city	app/Http/Controllers/SearchController.php	/^        $city         = $request->city ?? '';$/;"	v
-city	app/Listing.php	/^        $city         = $listing->city;$/;"	v
+city	app/Listing.php	/^        $city         = ', '. $listing->city;$/;"	v
 classArray	app/Listing.php	/^        $classArray  = ['A', 'B', 'C', 'E', 'F', 'G', 'H', 'I'];$/;"	v
 classArray	app/Listing.php	/^        $classArray = ['A', 'C', 'E', 'F', 'G', 'J'];$/;"	v
 classArray	app/Photo.php	/^        $classArray = ($association == 'bcar') ?$/;"	v
 cleanBcar	app/Listing.php	/^    public function cleanBcar()$/;"	f
+clicks	app/Listing.php	/^    public function clicks()$/;"	f
 commands	app/Console/Kernel.php	/^    protected $commands = [$/;"	v
 commands	app/Console/Kernel.php	/^    protected function commands()$/;"	f
 config	app/ApiCall.php	/^        $config = new Configuration();$/;"	v
@@ -124,6 +134,8 @@ down	database/migrations/2014_10_12_100000_create_password_resets_table.php	/^  
 down	database/migrations/2017_10_18_204605_create_listings_table.php	/^    public function down()$/;"	f
 down	database/migrations/2017_10_19_181334_create_photos_table.php	/^    public function down()$/;"	f
 down	database/migrations/2017_10_25_135031_add_full_address_to_listings_table.php	/^    public function down()$/;"	f
+down	database/migrations/2017_10_26_134227_create_clicks_table.php	/^    public function down()$/;"	f
+down	database/migrations/2017_10_26_150026_create_impressions_table.php	/^    public function down()$/;"	f
 downloadPhotos	app/Photo.php	/^    private function downloadPhotos($association, $class, $rets)$/;"	f
 ecarLoginUrl	app/ApiCall.php	/^    private function ecarLoginUrl()$/;"	f
 ecarOptions	app/Http/Helpers/EcarOptions.php	/^        $ecarOptions = [$/;"	v
@@ -146,22 +158,27 @@ for	app/Photo.php	/^     * @param string         $class       The class for the 
 forAgent	app/Listing.php	/^    public static function forAgent($agentShortId)$/;"	f
 freshBcarListings	app/Listing.php	/^    public function freshBcarListings()$/;"	f
 freshEcarListings	app/Listing.php	/^    public function freshEcarListings()$/;"	f
-fullAddress	app/Listing.php	/^        $fullAddress  = $streetNumber . ' ' . $streetName . $unitNumber . $city;$/;"	v
+fullAddress	app/Listing.php	/^        $fullAddress  = $streetNumber . ' ' . $streetName . $city;$/;"	v
 fullBaths	app/Http/Helpers/ListingsHelper.php	/^        $fullBaths            = isset($result['LIST_68']) ? $result['LIST_68'] : 0;$/;"	v
 fullListing	app/Listing.php	/^                $fullListing = Listing::where('mls_account', $listing)->first();$/;"	v
 getAllListings	app/MapSearch.php	/^    public static function getAllListings()$/;"	f
 getAllPhotos	app/Photo.php	/^    public function getAllPhotos($association)$/;"	f
 getColumn	app/Listing.php	/^    public static function getColumn($searchTerm, $columnName)$/;"	f
 guard	app/Http/Middleware/RedirectIfAuthenticated.php	/^    public function handle($request, Closure $next, $guard = null)$/;"	v
+guarded	app/Click.php	/^    protected $guarded = [];$/;"	v
+guarded	app/Impression.php	/^    protected $guarded = [];$/;"	v
 guarded	app/Listing.php	/^    protected $guarded = [];$/;"	v
 guarded	app/Photo.php	/^    protected $guarded = [];$/;"	v
 halfBaths	app/Http/Helpers/ListingsHelper.php	/^        $halfBaths            = $result['LIST_69'] > 0 ? $result['LIST_69'] : 0;$/;"	v
 handle	app/Http/Middleware/RedirectIfAuthenticated.php	/^    public function handle($request, Closure $next, $guard = null)$/;"	f
 handle	app/Jobs/CleanBcar.php	/^    public function handle()$/;"	f
+handle	app/Jobs/ProcessClick.php	/^    public function handle()$/;"	f
+handle	app/Jobs/ProcessImpression.php	/^    public function handle()$/;"	f
 handle	app/Jobs/UpdateBcar.php	/^    public function handle()$/;"	f
 handle	app/Jobs/UpdateEcar.php	/^    public function handle()$/;"	f
 headers	app/Http/Middleware/TrustProxies.php	/^    protected $headers = [$/;"	v
 hidden	app/User.php	/^    protected $hidden = [$/;"	v
+impresssions	app/Listing.php	/^    public function impresssions()$/;"	f
 index	app/Http/Controllers/AgentListingsController.php	/^    public function index(Request $request)$/;"	f
 index	app/Http/Controllers/MapSearchController.php	/^    public function index()$/;"	f
 index	app/Http/Controllers/SearchController.php	/^    public function index(Request $request)$/;"	f
@@ -182,9 +199,13 @@ lastTaxes	app/Http/Helpers/ListingsHelper.php	/^        $lastTaxes            = 
 lastTaxes	app/Http/Helpers/ListingsHelper.php	/^        $lastTaxes            = $result['LIST_75'] > 0 ? $result['LIST_75'] : 0;$/;"	v
 latitude	app/Http/Helpers/ListingsHelper.php	/^        $latitude             = is_numeric($result['LIST_46']) ? $result['LIST_46'] : 0;$/;"	v
 listen	app/Providers/EventServiceProvider.php	/^    protected $listen = [$/;"	v
+listing	app/Click.php	/^    public function listing()$/;"	f
 listing	app/Http/Controllers/ListingController.php	/^        $listing = Listing::where('mls_account', $mlsNumber)->with('photos')->first();$/;"	v
 listing	app/Http/Helpers/ListingsHelper.php	/^        $listing = Listing::create($/;"	v
 listing	app/Http/Helpers/ListingsHelper.php	/^        $listing = Listing::find($record->id);$/;"	v
+listing	app/Impression.php	/^    public function listing()$/;"	f
+listing	app/Jobs/ProcessClick.php	/^        $this->listing = $listing;$/;"	v
+listing	app/Jobs/ProcessClick.php	/^    protected $listing;$/;"	v
 listing	app/Jobs/UpdateBcar.php	/^        $listing = new Listing();$/;"	v
 listing	app/Jobs/UpdateEcar.php	/^        $listing = new Listing();$/;"	v
 listing	app/Listing.php	/^                    $listing = ListingsHelper::createBcarListing($result, $class);$/;"	v
@@ -197,6 +218,8 @@ listingId	app/Listing.php	/^                $listingId = $fullListing->id;$/;"	v
 listings	app/Http/Controllers/AgentListingsController.php	/^        $listings = Listing::forAgent($agentShortId);$/;"	v
 listings	app/Http/Controllers/MapSearchController.php	/^        $listings = MapSearch::getAllListings();$/;"	v
 listings	app/Http/Controllers/SearchController.php	/^        $listings = Listing::when($city, function ($query) use ($city) {$/;"	v
+listings	app/Jobs/ProcessImpression.php	/^        $this->listings = $listings;$/;"	v
+listings	app/Jobs/ProcessImpression.php	/^    protected $listings;$/;"	v
 listings	app/Listing.php	/^        $listings       = Listing::where('association', 'bcar')->pluck('mls_account');$/;"	v
 listings	app/Listing.php	/^        $listings = Listing::where('listing_member_shortid', $agentShortId)$/;"	v
 listings	app/MapSearch.php	/^        $listings = DB::table('listings')$/;"	v
@@ -228,6 +251,7 @@ namespace	app/Providers/RouteServiceProvider.php	/^    protected $namespace = 'A
 of	app/Listing.php	/^     * @param string $class The class of the listing$/;"	c
 offset	app/Listing.php	/^        $offset         = 0;$/;"	v
 omniBar	app/Http/Controllers/OmnibarController.php	/^        $omniBar = Omnibar::build($searchTerm);$/;"	v
+orderBy	app/Http/Controllers/SearchController.php	/^        $orderBy      = $request->orderBy ?? 'DESC';$/;"	v
 password	database/factories/UserFactory.php	/^        'password' => $password ?: $password = bcrypt('secret'),$/;"	v
 password	database/factories/UserFactory.php	/^    static $password;$/;"	v
 photoCounter	app/Listing.php	/^                    $photoCounter = $photoCounter +1;$/;"	v
@@ -273,6 +297,7 @@ savePhotos	app/Photo.php	/^    private function savePhotos($association, $listin
 schedule	app/Console/Kernel.php	/^    protected function schedule(Schedule $schedule)$/;"	f
 searchTerm	app/Http/Controllers/OmnibarController.php	/^        $searchTerm = urldecode(str_replace('%^%', '', $request->search));$/;"	v
 show	app/Http/Controllers/ListingController.php	/^    public function show($mlsNumber)$/;"	f
+sortBy	app/Http/Controllers/SearchController.php	/^        $sortBy       = $request->sortBy ?? 'date_modified';$/;"	v
 sqft	app/Http/Controllers/SearchController.php	/^        $sqft         = $request->sq_ft ?? '';$/;"	v
 sqft	app/Http/Helpers/ListingsHelper.php	/^        $sqft                 = isset($result['LIST_48']) && is_numeric($result['LIST_48']) ? $result['LIST_48'] : 0;$/;"	v
 sqft	app/Http/Helpers/ListingsHelper.php	/^        $sqft                 = isset($result['LIST_48']) ? $result['LIST_48'] : 0;$/;"	v
@@ -282,18 +307,18 @@ stories	app/Http/Helpers/ListingsHelper.php	/^            $stories              
 stories	app/Http/Helpers/ListingsHelper.php	/^        $stories              = isset($result['LIST_64']) && is_numeric($result['LIST_64']) ? $result['LIST_64'] : 0;$/;"	v
 stories	app/Http/Helpers/ListingsHelper.php	/^        $stories              = isset($result['LIST_64']) && is_numeric($result['LIST_64']) ? $result['LIST_64'] : 1;$/;"	v
 streetName	app/Listing.php	/^        $streetName   = ucwords(strtolower($listing->street_name));$/;"	v
-streetName	app/Listing.php	/^        if ($streetNumber == null && $streetName == null) {$/;"	v
 streetNumber	app/Listing.php	/^        $streetNumber = $listing->street_number;$/;"	v
 subAreas	app/Omnibar.php	/^        $subAreas     = Listing::getColumn($searchTerm, 'sub_area');$/;"	v
 syncPreferredPhotos	app/Photo.php	/^    public function syncPreferredPhotos()$/;"	f
 testBasicTest	tests/Feature/ExampleTest.php	/^    public function testBasicTest()$/;"	f
 testBasicTest	tests/Unit/ExampleTest.php	/^    public function testBasicTest()$/;"	f
-unitNumber	app/Listing.php	/^        $unitNumber   = ($listing->unit_number != null) ? ' ' . ucwords(strtolower($listing->unit_number)) . ', ' :  ', ';$/;"	v
 up	database/migrations/2014_10_12_000000_create_users_table.php	/^    public function up()$/;"	f
 up	database/migrations/2014_10_12_100000_create_password_resets_table.php	/^    public function up()$/;"	f
 up	database/migrations/2017_10_18_204605_create_listings_table.php	/^    public function up()$/;"	f
 up	database/migrations/2017_10_19_181334_create_photos_table.php	/^    public function up()$/;"	f
 up	database/migrations/2017_10_25_135031_add_full_address_to_listings_table.php	/^    public function up()$/;"	f
+up	database/migrations/2017_10_26_134227_create_clicks_table.php	/^    public function up()$/;"	f
+up	database/migrations/2017_10_26_150026_create_impressions_table.php	/^    public function up()$/;"	f
 updateBcarListings	app/Http/Helpers/ListingsHelper.php	/^    public static function updateBcarListings($record, $result, $class)$/;"	f
 updateBcarListings	app/Listing.php	/^    public function updateBcarListings()$/;"	f
 updateEcarListings	app/Http/Helpers/ListingsHelper.php	/^    public static function updateEcarListings($record, $result, $class)$/;"	f
