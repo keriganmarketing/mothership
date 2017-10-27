@@ -31,8 +31,8 @@ class Kernel extends ConsoleKernel
             UpdateBcar::withChain([
                 new UpdateEcar,
                 new CleanBcar
-            ])->dispatch();
-        })->hourlyAt(9);
+            ])->dispatch()->onConnection('sync');
+        })->hourlyAt(25);
     }
 
     /**
