@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Click;
 use App\Photo;
 use App\ApiCall;
 use App\Listing;
@@ -309,8 +310,13 @@ class Listing extends Model
 
     public static function forAgent($agentShortId)
     {
-        $listings = Listing::where('listing_member_shortid', $agentShortId)
-            ->orWhere('colisting_member_shortid')
+        if (preg_match('/|/', $agentShortId)) {
+            $ids = explode('|', $agentShortId);
+        } else {
+            $ids = [$agentShortId];
+        }
+        $listings = Listing::whereIn('listing_member_shortid', $ids)
+            ->orWhereIn('colisting_member_shortid', $ids)
             ->get();
 
         return $listings;
@@ -333,5 +339,27 @@ class Listing extends Model
     public function addressIsValid($fullAddress)
     {
         return preg_match('/^[1-9]+([0-9]*)?\s(\d*?)([A-Z]+)?[a-z].+$/', $fullAddress);
+    }
+
+    public static function hotListings()
+    {
+        $hotListings = [];
+
+        $now = Carbon::now();
+
+        $clickedListings = Click::
+            whereDate('created_at', '>=', $now->copy()->subDays(7))
+            ->whereDate('created_at', '<=', $now)
+            ->groupBy('listing_id')
+            ->pluck('listing_id');
+
+        foreach ($clickedListings as $listingId) {
+            $clicks = Click::where('listing_id', $listingId)->count();
+            array_push($hotListings, [$listingId => $clicks]);
+        }
+
+        arsort($hotListings);
+
+        echo '<pre>',print_r($hotListings),'</pre>';
     }
 }
