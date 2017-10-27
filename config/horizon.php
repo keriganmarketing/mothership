@@ -59,9 +59,9 @@ return [
             'supervisor-1' => [
                 'connection' => 'redis',
                 'queue' => ['default'],
-                'balance' => 'simple',
+                'balance' => 'auto',
                 'processes' => 10,
-                'tries' => 5,
+                'tries' => 1,
             ],
         ],
 
