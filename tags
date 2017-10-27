@@ -15,6 +15,7 @@ CleanBcar	app/Jobs/CleanBcar.php	/^class CleanBcar implements ShouldQueue$/;"	c
 Click	app/Click.php	/^class Click extends Model$/;"	c
 Controller	app/Http/Controllers/Controller.php	/^class Controller extends BaseController$/;"	c
 CreateClicksTable	database/migrations/2017_10_26_134227_create_clicks_table.php	/^class CreateClicksTable extends Migration$/;"	c
+CreateFailedJobsTable	database/migrations/2017_10_27_004508_create_failed_jobs_table.php	/^class CreateFailedJobsTable extends Migration$/;"	c
 CreateImpressionsTable	database/migrations/2017_10_26_150026_create_impressions_table.php	/^class CreateImpressionsTable extends Migration$/;"	c
 CreateListingsTable	database/migrations/2017_10_18_204605_create_listings_table.php	/^class CreateListingsTable extends Migration$/;"	c
 CreatePasswordResetsTable	database/migrations/2014_10_12_100000_create_password_resets_table.php	/^class CreatePasswordResetsTable extends Migration$/;"	c
@@ -162,6 +163,7 @@ down	database/migrations/2017_10_19_181334_create_photos_table.php	/^    public 
 down	database/migrations/2017_10_25_135031_add_full_address_to_listings_table.php	/^    public function down()$/;"	f
 down	database/migrations/2017_10_26_134227_create_clicks_table.php	/^    public function down()$/;"	f
 down	database/migrations/2017_10_26_150026_create_impressions_table.php	/^    public function down()$/;"	f
+down	database/migrations/2017_10_27_004508_create_failed_jobs_table.php	/^    public function down()$/;"	f
 downloadPhotos	app/Photo.php	/^    private function downloadPhotos($association, $class, $rets)$/;"	f
 ecarLoginUrl	app/ApiCall.php	/^    private function ecarLoginUrl()$/;"	f
 ecarOptions	app/Http/Helpers/EcarOptions.php	/^        $ecarOptions = [$/;"	v
@@ -423,6 +425,7 @@ up	database/migrations/2017_10_19_181334_create_photos_table.php	/^    public fu
 up	database/migrations/2017_10_25_135031_add_full_address_to_listings_table.php	/^    public function up()$/;"	f
 up	database/migrations/2017_10_26_134227_create_clicks_table.php	/^    public function up()$/;"	f
 up	database/migrations/2017_10_26_150026_create_impressions_table.php	/^    public function up()$/;"	f
+up	database/migrations/2017_10_27_004508_create_failed_jobs_table.php	/^    public function up()$/;"	f
 updateBcarListings	app/Http/Helpers/ListingsHelper.php	/^    public static function updateBcarListings($record, $result, $class)$/;"	f
 updateBcarListings	app/Listing.php	/^    public function updateBcarListings()$/;"	f
 updateEcarListings	app/Http/Helpers/ListingsHelper.php	/^    public static function updateEcarListings($record, $result, $class)$/;"	f
