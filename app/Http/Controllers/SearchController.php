@@ -78,6 +78,7 @@ class SearchController extends Controller
             return $query->where('pool', true);
         })
         ->orderBy($sortBy, $orderBy)
+        ->groupBy('full_address');
         ->paginate(36);
 
         ProcessImpression::dispatch($listings);
