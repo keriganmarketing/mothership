@@ -27,12 +27,9 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->call(function () {
-            UpdateBcar::withChain([
-                new UpdateEcar,
-                new CleanBcar
-            ])->dispatch()->onConnection('sync');
-        })->hourlyAt(54);
+        $schedule->job(new UpdateBcar)->hourlyAt(25);
+        $schedule->job(new UpdateEcar)->hourlyAt(30);
+        $scedule->job(new CleanBcar)->hourlyAt(35);
     }
 
     /**
