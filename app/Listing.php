@@ -311,6 +311,7 @@ class Listing extends Model
     public static function forAgent($agentShortId)
     {
         if (preg_match('/|/', $agentShortId)) {
+            dd('yep');
             $ids = explode('|', $agentShortId);
         } else {
             $ids = [$agentShortId];
