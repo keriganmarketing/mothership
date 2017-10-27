@@ -29,6 +29,7 @@ ExampleTest	tests/Feature/ExampleTest.php	/^class ExampleTest extends TestCase$/
 ExampleTest	tests/Unit/ExampleTest.php	/^class ExampleTest extends TestCase$/;"	c
 ForgotPasswordController	app/Http/Controllers/Auth/ForgotPasswordController.php	/^class ForgotPasswordController extends Controller$/;"	c
 Handler	app/Exceptions/Handler.php	/^class Handler extends ExceptionHandler$/;"	c
+HomeController	app/Http/Controllers/HomeController.php	/^class HomeController extends Controller$/;"	c
 IS_REGEX_CAPTURING_BROKEN	public/js/app.js	/^var IS_REGEX_CAPTURING_BROKEN = false;$/;"	v
 Impression	app/Impression.php	/^class Impression extends Model$/;"	c
 Kernel	app/Console/Kernel.php	/^class Kernel extends ConsoleKernel$/;"	c
@@ -62,6 +63,7 @@ __construct	app/Http/Controllers/Auth/ForgotPasswordController.php	/^    public 
 __construct	app/Http/Controllers/Auth/LoginController.php	/^    public function __construct()$/;"	f
 __construct	app/Http/Controllers/Auth/RegisterController.php	/^    public function __construct()$/;"	f
 __construct	app/Http/Controllers/Auth/ResetPasswordController.php	/^    public function __construct()$/;"	f
+__construct	app/Http/Controllers/HomeController.php	/^    public function __construct()$/;"	f
 __construct	app/Jobs/CleanBcar.php	/^    public function __construct()$/;"	f
 __construct	app/Jobs/ProcessClick.php	/^    public function __construct(Listing $listing)$/;"	f
 __construct	app/Jobs/ProcessImpression.php	/^    public function __construct($listings)$/;"	f
@@ -123,6 +125,8 @@ classArray	app/Listing.php	/^        $classArray  = ['A', 'B', 'C', 'E', 'F', 'G
 classArray	app/Listing.php	/^        $classArray = ['A', 'C', 'E', 'F', 'G', 'J'];$/;"	v
 classArray	app/Photo.php	/^        $classArray = ($association == 'bcar') ?$/;"	v
 cleanBcar	app/Listing.php	/^    public function cleanBcar()$/;"	f
+clickedListings	app/Listing.php	/^        $clickedListings = Click::$/;"	v
+clicks	app/Listing.php	/^            $clicks = Click::where('listing_id', $listingId)->count();$/;"	v
 clicks	app/Listing.php	/^    public function clicks()$/;"	f
 commands	app/Console/Kernel.php	/^    protected $commands = [$/;"	v
 commands	app/Console/Kernel.php	/^    protected function commands()$/;"	f
@@ -211,8 +215,14 @@ handle	app/Jobs/UpdateBcar.php	/^    public function handle()$/;"	f
 handle	app/Jobs/UpdateEcar.php	/^    public function handle()$/;"	f
 headers	app/Http/Middleware/TrustProxies.php	/^    protected $headers = [$/;"	v
 hidden	app/User.php	/^    protected $hidden = [$/;"	v
+hotListings	app/Http/Controllers/HomeController.php	/^        $hotListings = Listing::hotListings();$/;"	v
+hotListings	app/Listing.php	/^        $hotListings = [];$/;"	v
+hotListings	app/Listing.php	/^    public static function hotListings()$/;"	f
+ids	app/Listing.php	/^            $ids = [$agentShortId];$/;"	v
+ids	app/Listing.php	/^            $ids = explode('|', $agentShortId);$/;"	v
 impresssions	app/Listing.php	/^    public function impresssions()$/;"	f
 index	app/Http/Controllers/AgentListingsController.php	/^    public function index(Request $request)$/;"	f
+index	app/Http/Controllers/HomeController.php	/^    public function index()$/;"	f
 index	app/Http/Controllers/MapSearchController.php	/^    public function index()$/;"	f
 index	app/Http/Controllers/SearchController.php	/^    public function index(Request $request)$/;"	f
 insertBcarListingsIntoDatabase	app/Listing.php	/^    public function insertBcarListingsIntoDatabase($class)$/;"	f
@@ -291,7 +301,7 @@ listings	app/Http/Controllers/SearchController.php	/^        $listings = Listing
 listings	app/Jobs/ProcessImpression.php	/^        $this->listings = $listings;$/;"	v
 listings	app/Jobs/ProcessImpression.php	/^    protected $listings;$/;"	v
 listings	app/Listing.php	/^        $listings       = Listing::where('association', 'bcar')->pluck('mls_account');$/;"	v
-listings	app/Listing.php	/^        $listings = Listing::where('listing_member_shortid', $agentShortId)$/;"	v
+listings	app/Listing.php	/^        $listings = Listing::whereIn('listing_member_shortid', $ids)$/;"	v
 listings	app/MapSearch.php	/^        $listings = DB::table('listings')$/;"	v
 listings	app/Photo.php	/^        $listings = Listing::where('class', $class)->where('association', $association)->get();$/;"	v
 listingsArray	app/Listing.php	/^        $listingsArray  = [];$/;"	v
@@ -320,6 +330,7 @@ mlsNumbers	app/Omnibar.php	/^        $mlsNumbers   = Listing::getColumn($searchT
 modifierRE	public/js/app.js	/^var modifierRE = \/\\.[^.]+\/g;$/;"	v
 namespace	app/Providers/RouteServiceProvider.php	/^    protected $namespace = 'App\\Http\\Controllers';$/;"	v
 ncname	public/js/app.js	/^var ncname = '[a-zA-Z_][\\\\w\\\\-\\\\.]*';$/;"	v
+now	app/Listing.php	/^        $now = Carbon::now();$/;"	v
 of	app/Listing.php	/^     * @param string $class The class of the listing$/;"	c
 offset	app/Listing.php	/^        $offset         = 0;$/;"	v
 omniBar	app/Http/Controllers/OmnibarController.php	/^        $omniBar = Omnibar::build($searchTerm);$/;"	v
