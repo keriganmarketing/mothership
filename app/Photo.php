@@ -21,49 +21,6 @@ class Photo extends Model
     }
 
     /**
-     * Get all photos for the specified association and persist them to the database
-     *
-     * @param string $association Can be 'bcar' or 'ecar'
-     *
-     * @return void
-     */
-    public function getAllPhotos($association)
-    {
-        $mls        = new ApiCall();
-        $rets       = ($association == 'bcar') ? $mls->loginToBcar() : $mls->loginToEcar();
-        $classArray = ($association == 'bcar') ?
-            ['A', 'C', 'E', 'F', 'G', 'J'] : ['A', 'B', 'C', 'E', 'F', 'G', 'H', 'I'];
-
-        foreach ($classArray as $class) {
-            $this->downloadPhotos($association, $class, $rets);
-        }
-
-        echo 'Adding preferred images to listing database';
-
-        $this->syncPreferredPhotos();
-
-        echo '\nSUCCESS!';
-    }
-
-    /**
-     * Download photos from the MLS Database
-     *
-     * @param string         $association Can be 'bcar' or 'ecar'
-     * @param string         $class       The class for the listing
-     * @param PHRETS\Session $rets        The PHRETS session
-     *
-     * @return void
-     */
-    private function downloadPhotos($association, $class, $rets)
-    {
-        $listings = Listing::where('class', $class)->where('association', $association)->get();
-
-        foreach ($listings as $listing) {
-            $this->savePhotos($association, $listing, $rets);
-        }
-    }
-
-    /**
      * Persist the photos to the database
      *
      * @param string   $association Can be 'bcar' or 'ecar'
@@ -72,10 +29,8 @@ class Photo extends Model
      *
      * @return void
      */
-    private function savePhotos($association, $listing, $rets)
+    public function savePhotos($listing, $photos)
     {
-        $photos   = $rets->GetObject('Property', 'HiRes', $listing->mls_account, '*', 1);
-
         foreach ($photos as $photo) {
             Photo::create(
                 [
@@ -94,7 +49,7 @@ class Photo extends Model
      *
      * @return void
      */
-    public function syncPreferredPhotos()
+    public static function syncPreferredPhotos()
     {
         $photos    = Photo::where('preferred', 1)->get();
         foreach ($photos as $photo) {
@@ -102,7 +57,6 @@ class Photo extends Model
 
             $listing->preferred_image = $photo->url;
             $listing->save();
-            echo '.';
         }
     }
 }

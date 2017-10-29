@@ -5,6 +5,7 @@ namespace App\Console;
 use App\Jobs\CleanBcar;
 use App\Jobs\UpdateBcar;
 use App\Jobs\UpdateEcar;
+use App\Jobs\UpdateAgents;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -27,9 +28,10 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->job(new UpdateBcar)->hourlyAt(43);
-        $schedule->job(new UpdateEcar)->hourlyAt(48);
-        $schedule->job(new CleanBcar)->hourlyAt(52);
+        $schedule->job(new CleanBcar)->hourly();
+        $schedule->job(new UpdateAgents)->hourlyAt(5);
+        $schedule->job(new UpdateBcar)->hourlyAt(10);
+        $schedule->job(new UpdateEcar)->hourlyAt(15);
     }
 
     /**

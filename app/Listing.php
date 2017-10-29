@@ -38,90 +38,6 @@ class Listing extends Model
     }
 
     /**
-     * Get all BCAR MLS listings
-     *
-     * @return void
-     */
-    public function freshBcarListings()
-    {
-        $classArray = ['A', 'C', 'E', 'F', 'G', 'J'];
-
-        foreach ($classArray as $class) {
-            $this->insertBcarListingsIntoDatabase($class);
-        }
-    }
-
-    /**
-     * Get all ECAR MLS listings
-     *
-     * @return void
-     */
-    public function freshEcarListings()
-    {
-        $classArray  = ['A', 'B', 'C', 'E', 'F', 'G', 'H', 'I'];
-
-        foreach ($classArray as $class) {
-            $this->insertEcarListingsIntoDatabase($class);
-        }
-    }
-
-    /**
-     * Insert the ECAR listings into the database
-     *
-     * @param string $class The class of the listing
-     *
-     * @return void
-     */
-    public function insertEcarListingsIntoDatabase($class)
-    {
-        $mls            = new ApiCall();
-        $rets           = $mls->loginToEcar();
-        $counter        = 0;
-        $maxRowsReached = false;
-        $offset         = 0;
-
-        echo "Fetching listings for class {$class}:";
-
-        while (! $maxRowsReached) {
-            $ecarOptions = EcarOptions::all($offset);
-
-            $results = $rets->Search('Property', $class, '*', $ecarOptions[$class]);
-
-            foreach ($results as $result) {
-                ListingsHelper::createEcarListing($result, $class);
-            }
-
-            $offset += $results->getReturnedResultsCount();
-
-            if ($offset >= $results->getTotalResultsCount()) {
-                $maxRowsReached = true;
-            }
-            echo '\nOffset for class ' . $class . ': ' . $offset .
-            ' | Total Results Count:' . $results->getTotalResultsCount() . '\n';
-        }
-    }
-
-    /**
-     * Persist the listings for the specified class into the database
-     *
-     * @param string $class The class of the listing
-     *
-     * @return void
-     */
-    public function insertBcarListingsIntoDatabase($class)
-    {
-        $mls         = new ApiCall();
-        $rets        = $mls->loginToBcar();
-        $bcarOptions = BcarOptions::all();
-
-        $results = $rets->Search('Property', $class, '*', $bcarOptions[$class]);
-
-        foreach ($results as $result) {
-            ListingsHelper::createBcarListing($result, $class);
-        }
-    }
-
-    /**
      * Return a specific column from the listings database
      *
      * @param string $columnName The name of the column
@@ -145,8 +61,8 @@ class Listing extends Model
      */
     public function updateBcarListings()
     {
-        $mls = new ApiCall();
-        $rets = $mls->loginToBcar();
+        $mls  = new ApiCall('bcar');
+        $rets = $mls->login();
         $bcarOptions = BcarOptions::all();
 
         $classArray = ['A', 'C', 'E', 'F', 'G', 'J'];
@@ -203,8 +119,8 @@ class Listing extends Model
      */
     public function updateEcarListings()
     {
-        $mls = new ApiCall();
-        $rets = $mls->loginToEcar();
+        $mls         = new ApiCall('ecar');
+        $rets        = $mls->login();
         $ecarOptions = EcarOptions::all();
 
         $classArray  = ['A', 'B', 'C', 'E', 'F', 'G', 'H', 'I'];
@@ -263,8 +179,8 @@ class Listing extends Model
      */
     public function cleanBcar()
     {
-        $mls            = new ApiCall();
-        $rets           = $mls->loginToBcar();
+        $mls            = new ApiCall('bcar');
+        $rets           = $mls->login();
         $bcarOptions    = BcarOptions::all();
         $listings       = Listing::where('association', 'bcar')->pluck('mls_account');
         $listingsArray  = [];
@@ -355,7 +271,7 @@ class Listing extends Model
 
         foreach ($clickedListings as $listingId) {
             $clicks = Click::where('listing_id', $listingId)->count();
-            array_push($hotListings, [$listingId => $clicks]);
+            $hotListings[$listingId] = $clicks;
         }
 
         arsort($hotListings);

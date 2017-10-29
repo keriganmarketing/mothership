@@ -9,7 +9,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 
-class UpdateBcar implements ShouldQueue
+class UpdateAgents implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
@@ -30,8 +30,10 @@ class UpdateBcar implements ShouldQueue
      */
     public function handle()
     {
-        $updater = new Updater('bcar');
+        $bcarUpdater = new Updater('bcar');
+        $bcarUpdater->updateAgents();
 
-        $updater->updateListings();
+        $ecarUpdater = new Updater('ecar');
+        $ecarUpdater->updateAgents();
     }
 }
