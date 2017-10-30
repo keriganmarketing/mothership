@@ -48,6 +48,7 @@ class Agent extends Model
         })
         ->with('photos')
         ->orderBy('last_name', 'ASC')
+        ->orderBy('date_modified', 'DESC')
         ->paginate(36);
 
         // returns paginated links (with GET variables intact!)
