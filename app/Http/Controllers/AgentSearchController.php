@@ -39,6 +39,7 @@ class AgentSearchController extends Controller
         ->when($officeShortId, function ($query) use ($officeShortId) {
             return $query->where('office_short_id', $officeShortId);
         })
+        ->with('photos')
         ->orderBy('last_name', 'ASC')
         ->paginate(36);
 
