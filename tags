@@ -177,6 +177,7 @@ decodingMap.&gt;	public/js/app.js	/^  '&gt;': '>',$/;"	p
 decodingMap.&lt;	public/js/app.js	/^  '&lt;': '<',$/;"	p
 decodingMap.&quot;	public/js/app.js	/^  '&quot;': '"',$/;"	p
 delimiters	public/js/app.js	/^var delimiters;$/;"	v
+derivedFullName	app/Agent.php	/^        $derivedFullName = $fullName != null ? explode(' ', $fullName) : '';$/;"	v
 destroy	app/Http/Controllers/AgentController.php	/^    public function destroy(Agent $agent)$/;"	f
 dirRE	public/js/app.js	/^var dirRE = \/^v-|^@|^:\/;$/;"	v
 doctype	public/js/app.js	/^var doctype = \/^<!DOCTYPE [^>]+>\/i;$/;"	v

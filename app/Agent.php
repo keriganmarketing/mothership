@@ -23,12 +23,15 @@ class Agent extends Model
         $firstName     = $request->firstName ?? '';
         $association   = $request->association ?? '';
         $officeShortId = $request->officeShortId ?? '';
+        $derivedFullName = $fullName != null ? explode(' ', $fullName) : '';
+
 
         $agents = Agent::when($shortId, function ($query) use ($shortId) {
             return $query->where('short_id', $shortId);
         })
-        ->when($fullName, function ($query) use ($fullName) {
-            return $query->where('full_name', $fullName);
+        ->when($fullName, function ($query) use ($fullName, $derivedFullName) {
+            return $query->where('full_name', $fullName)
+                ->orWhereRaw("(first_name LIKE '{$derivedFullName[0]}' AND last_name LIKE '{$derivedFullName[1]}')");
         })
         ->when($lastName, function ($query) use ($lastName) {
             return $query->where('last_name', $lastName);
