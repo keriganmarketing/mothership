@@ -185,4 +185,55 @@ class Listing extends Model
 
         echo '<pre>',print_r($hotListings),'</pre>';
     }
+        /**
+-     * Clean the BCAR listings table
+-     *
+-     * @return void
+-     */
+    public function cleanBcar()
+    {
+        $mls            = new ApiCall('bcar');
+        $rets           = $mls->login();
+        $bcarOptions    = BcarOptions::all();
+        $listings       = Listing::where('association', 'bcar')->pluck('mls_account');
+        $listingsArray  = [];
+        $listingCounter = 0;
+        $photoCounter   = 0;
+
+        $classArray = ['A', 'C', 'E', 'F', 'G', 'J'];
+
+        foreach ($classArray as $class) {
+            $results = $rets->Search(
+                'Property',
+                $class,
+                '*',
+                [
+                'Limit' => '99999',
+                'Offset' => 0,
+                'Select' => 'LIST_3'
+                ]
+            );
+            foreach ($results as $result) {
+                array_push($listingsArray, $result['LIST_3']);
+            }
+        }
+        foreach ($listings as $listing) {
+            if (! in_array($listing, $listingsArray)) {
+                $fullListing = Listing::where('mls_account', $listing)->first();
+                $listingId = $fullListing->id;
+                $fullListing->delete();
+                $listingCounter = $listingCounter + 1;
+                echo '.';
+
+                $photos = Photo::where('listing_id', $listingId)->get();
+                foreach ($photos as $photo) {
+                    $photo->delete();
+                    $photoCounter = $photoCounter +1;
+                    echo '*';
+                }
+            }
+        }
+        echo "Listings deleted: {$listingCounter}";
+        echo "Photos deleted: {$photoCounter}";
+    }
 }
