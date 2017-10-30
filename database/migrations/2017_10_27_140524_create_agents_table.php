@@ -17,8 +17,8 @@ class CreateAgentsTable extends Migration
             $table->increments('id');
             $table->string('agent_id')->index();
             $table->string('office_id');
-            $table->string('first_name');
-            $table->string('last_name');
+            $table->string('first_name')->index();
+            $table->string('last_name')->index();
             $table->string('office_phone');
             $table->string('cell_phone');
             $table->string('home_phone');
@@ -30,16 +30,16 @@ class CreateAgentsTable extends Migration
             $table->string('city');
             $table->string('state');
             $table->string('zip');
-            $table->string('short_id');
+            $table->string('short_id')->index();
             $table->string('middle_name');
-            $table->string('full_name');
+            $table->string('full_name')->index();
             $table->string('primary_phone');
             $table->boolean('active_status');
             $table->boolean('active');
             $table->boolean('mls_status');
             $table->string('license_number');
             $table->dateTime('date_modified');
-            $table->string('office_short_id');
+            $table->string('office_short_id')->index();
             $table->timestamps();
         });
     }
