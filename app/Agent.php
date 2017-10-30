@@ -17,21 +17,17 @@ class Agent extends Model
 
     public static function searchResults($request)
     {
-        $shortId       = $request->shortId ?? '';
-        $fullName      = $request->fullName ?? '';
-        $lastName      = $request->lastName ?? '';
-        $firstName     = $request->firstName ?? '';
-        $association   = $request->association ?? '';
-        $officeShortId = $request->officeShortId ?? '';
+        $shortId         = $request->shortId ?? '';
+        $fullName        = $request->fullName ?? '';
+        $lastName        = $request->lastName ?? '';
+        $firstName       = $request->firstName ?? '';
+        $association     = $request->association ?? '';
+        $officeShortId   = $request->officeShortId ?? '';
         $derivedFullName = $fullName != null ? explode(' ', $fullName) : '';
 
 
         $agents = Agent::when($shortId, function ($query) use ($shortId) {
             return $query->where('short_id', $shortId);
-        })
-        ->when($fullName, function ($query) use ($fullName, $derivedFullName) {
-            return $query->where('full_name', $fullName)
-                ->orWhereRaw("(first_name LIKE '{$derivedFullName[0]}' AND last_name LIKE '{$derivedFullName[1]}')");
         })
         ->when($lastName, function ($query) use ($lastName) {
             return $query->where('last_name', $lastName);
@@ -44,6 +40,11 @@ class Agent extends Model
         })
         ->when($officeShortId, function ($query) use ($officeShortId) {
             return $query->where('office_short_id', $officeShortId);
+        })
+        ->when($fullName, function ($query) use ($fullName, $derivedFullName) {
+            return $query->whereRaw(
+                "((full_name LIKE '{$fullName}') OR (first_name LIKE '{$derivedFullName[0]}' AND last_name LIKE '{$derivedFullName[1]}'))"
+            );
         })
         ->with('photos')
         ->orderBy('last_name', 'ASC')
