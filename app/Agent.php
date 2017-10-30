@@ -23,7 +23,9 @@ class Agent extends Model
         $firstName       = $request->firstName ?? '';
         $association     = $request->association ?? '';
         $officeShortId   = $request->officeShortId ?? '';
-        $derivedFullName = $fullName != null ? explode(' ', $fullName) : '';
+        // Sometimes the full name isn't in the database, so we'll fake one using the request and then check the
+        // first_name and last_name fields against it.
+        $derivedFullName = $fullName != null ? explode(' ', $fullName) : ''; // Array(['First', 'Last'])
 
 
         $agents = Agent::when($shortId, function ($query) use ($shortId) {

@@ -53,8 +53,8 @@ MapSearchController	app/Http/Controllers/MapSearchController.php	/^class MapSear
 Omnibar	app/Omnibar.php	/^class Omnibar extends Model$/;"	c
 OmnibarController	app/Http/Controllers/OmnibarController.php	/^class OmnibarController extends Controller$/;"	c
 Photo	app/Photo.php	/^class Photo extends Model$/;"	c
-ProcessClick	app/Jobs/ProcessClick.php	/^class ProcessClick implements ShouldQueue$/;"	c
-ProcessImpression	app/Jobs/ProcessImpression.php	/^class ProcessImpression implements ShouldQueue$/;"	c
+ProcessListingClick	app/Jobs/ProcessListingClick.php	/^class ProcessListingClick implements ShouldQueue$/;"	c
+ProcessListingImpression	app/Jobs/ProcessListingImpression.php	/^class ProcessListingImpression implements ShouldQueue$/;"	c
 RedirectIfAuthenticated	app/Http/Middleware/RedirectIfAuthenticated.php	/^class RedirectIfAuthenticated$/;"	c
 RegisterController	app/Http/Controllers/Auth/RegisterController.php	/^class RegisterController extends Controller$/;"	c
 ResetPasswordController	app/Http/Controllers/Auth/ResetPasswordController.php	/^class ResetPasswordController extends Controller$/;"	c
@@ -79,8 +79,8 @@ __construct	app/Http/Controllers/HomeController.php	/^    public function __cons
 __construct	app/Http/Helpers/Builder.php	/^    public function __construct($association)$/;"	f
 __construct	app/Http/Helpers/Updater.php	/^    public function __construct($association)$/;"	f
 __construct	app/Jobs/CleanBcar.php	/^    public function __construct()$/;"	f
-__construct	app/Jobs/ProcessClick.php	/^    public function __construct(Listing $listing)$/;"	f
-__construct	app/Jobs/ProcessImpression.php	/^    public function __construct($listings)$/;"	f
+__construct	app/Jobs/ProcessListingClick.php	/^    public function __construct(Listing $listing)$/;"	f
+__construct	app/Jobs/ProcessListingImpression.php	/^    public function __construct($listings)$/;"	f
 __construct	app/Jobs/UpdateAgents.php	/^    public function __construct()$/;"	f
 __construct	app/Jobs/UpdateBcar.php	/^    public function __construct()$/;"	f
 __construct	app/Jobs/UpdateEcar.php	/^    public function __construct()$/;"	f
@@ -114,7 +114,7 @@ appliances	app/Http/Helpers/ListingsHelper.php	/^        $appliances           =
 areas	app/Omnibar.php	/^        $areas        = Listing::getColumn($searchTerm, 'area');$/;"	v
 argRE	public/js/app.js	/^var argRE = \/:(.*)$\/;$/;"	v
 as	config/mail.php	/^    | Laravel supports both SMTP and PHP's "mail" function as drivers for the$/;"	f
-association	app/Agent.php	/^        $association   = $request->association ?? '';$/;"	v
+association	app/Agent.php	/^        $association     = $request->association ?? '';$/;"	v
 association	app/ApiCall.php	/^        $this->association = $association;$/;"	v
 association	app/ApiCall.php	/^    protected $association;$/;"	v
 association	app/Http/Helpers/Builder.php	/^        $this->association = $association;$/;"	v
@@ -177,7 +177,7 @@ decodingMap.&gt;	public/js/app.js	/^  '&gt;': '>',$/;"	p
 decodingMap.&lt;	public/js/app.js	/^  '&lt;': '<',$/;"	p
 decodingMap.&quot;	public/js/app.js	/^  '&quot;': '"',$/;"	p
 delimiters	public/js/app.js	/^var delimiters;$/;"	v
-derivedFullName	app/Agent.php	/^        $derivedFullName = $fullName != null ? explode(' ', $fullName) : '';$/;"	v
+derivedFullName	app/Agent.php	/^        $derivedFullName = $fullName != null ? explode(' ', $fullName) : ''; \/\/ Array(['First', 'Last'])$/;"	v
 destroy	app/Http/Controllers/AgentController.php	/^    public function destroy(Agent $agent)$/;"	f
 dirRE	public/js/app.js	/^var dirRE = \/^v-|^@|^:\/;$/;"	v
 doctype	public/js/app.js	/^var doctype = \/^<!DOCTYPE [^>]+>\/i;$/;"	v
@@ -216,7 +216,7 @@ fetchListings	app/Http/Helpers/Builder.php	/^    private function fetchListings(
 fetchPhotos	app/Http/Helpers/Builder.php	/^    private function fetchPhotos($listing)$/;"	f
 fillable	app/User.php	/^    protected $fillable = [$/;"	v
 findPrevElement	public/js/app.js	/^function findPrevElement (children) {$/;"	f
-firstName	app/Agent.php	/^        $firstName     = $request->firstName ?? '';$/;"	v
+firstName	app/Agent.php	/^        $firstName       = $request->firstName ?? '';$/;"	v
 for	app/Http/Helpers/ListingsHelper.php	/^     * @param string $class  The class for the listing$/;"	c
 forAgent	app/Listing.php	/^    public static function forAgent($agentShortId)$/;"	f
 forAliasRE	public/js/app.js	/^var forAliasRE = \/(.*?)\\s+(?:in|of)\\s+(.*)\/;$/;"	v
@@ -227,7 +227,7 @@ freshListings	app/Http/Helpers/Builder.php	/^    public function freshListings()
 freshPhotos	app/Http/Helpers/Builder.php	/^    public function freshPhotos()$/;"	f
 fullAddress	app/Listing.php	/^        $fullAddress  = $streetNumber . ' ' . $streetName . $city;$/;"	v
 fullBaths	app/Http/Helpers/ListingsHelper.php	/^        $fullBaths            = isset($result['LIST_68']) ? $result['LIST_68'] : 0;$/;"	v
-fullName	app/Agent.php	/^        $fullName      = $request->fullName ?? '';$/;"	v
+fullName	app/Agent.php	/^        $fullName        = $request->fullName ?? '';$/;"	v
 getAllListings	app/MapSearch.php	/^    public static function getAllListings()$/;"	f
 getColumn	app/Listing.php	/^    public static function getColumn($searchTerm, $columnName)$/;"	f
 guard	app/Http/Middleware/RedirectIfAuthenticated.php	/^    public function handle($request, Closure $next, $guard = null)$/;"	v
@@ -240,8 +240,8 @@ guarded	app/Photo.php	/^    protected $guarded = [];$/;"	v
 halfBaths	app/Http/Helpers/ListingsHelper.php	/^        $halfBaths            = $result['LIST_69'] > 0 ? $result['LIST_69'] : 0;$/;"	v
 handle	app/Http/Middleware/RedirectIfAuthenticated.php	/^    public function handle($request, Closure $next, $guard = null)$/;"	f
 handle	app/Jobs/CleanBcar.php	/^    public function handle()$/;"	f
-handle	app/Jobs/ProcessClick.php	/^    public function handle()$/;"	f
-handle	app/Jobs/ProcessImpression.php	/^    public function handle()$/;"	f
+handle	app/Jobs/ProcessListingClick.php	/^    public function handle()$/;"	f
+handle	app/Jobs/ProcessListingImpression.php	/^    public function handle()$/;"	f
 handle	app/Jobs/UpdateAgents.php	/^    public function handle()$/;"	f
 handle	app/Jobs/UpdateBcar.php	/^    public function handle()$/;"	f
 handle	app/Jobs/UpdateEcar.php	/^    public function handle()$/;"	f
@@ -304,7 +304,7 @@ isTextTag.preTransformNode	public/js/app.js	/^function preTransformNode (el, opt
 isTextTag.text	public/js/app.js	/^function text (el, dir) {$/;"	f
 kernel	public/index.php	/^$kernel = $app->make(Illuminate\\Contracts\\Http\\Kernel::class);$/;"	v
 l	app/Jobs/CleanBcar.php	/^        $l = new Listing();$/;"	v
-lastName	app/Agent.php	/^        $lastName      = $request->lastName ?? '';$/;"	v
+lastName	app/Agent.php	/^        $lastName        = $request->lastName ?? '';$/;"	v
 lastTaxYear	app/Http/Helpers/ListingsHelper.php	/^        $lastTaxYear          = $result['LIST_76'] > 0 && is_numeric($result['LIST_76']) && $result['LIST_76'] < 9999 ? $result['LIST_76'] : 0;$/;"	v
 lastTaxYear	app/Http/Helpers/ListingsHelper.php	/^        $lastTaxYear          = $result['LIST_76'] > 0 ? $result['LIST_76'] : 0;$/;"	v
 lastTaxes	app/Http/Helpers/ListingsHelper.php	/^        $lastTaxes            = $result['LIST_75'] > 0 && is_numeric($result['LIST_75']) ? $result['LIST_75'] : 0;$/;"	v
@@ -317,8 +317,8 @@ listing	app/Http/Helpers/ListingsHelper.php	/^        $listing = Listing::update
 listing	app/Http/Helpers/Updater.php	/^                    $listing = Listing::where('mls_account', $result['LIST_3'])->first();$/;"	v
 listing	app/Http/Helpers/Updater.php	/^                    $listing = ListingsHelper::saveListing($this->association, $result, $class);$/;"	v
 listing	app/Impression.php	/^    public function listing()$/;"	f
-listing	app/Jobs/ProcessClick.php	/^        $this->listing = $listing;$/;"	v
-listing	app/Jobs/ProcessClick.php	/^    protected $listing;$/;"	v
+listing	app/Jobs/ProcessListingClick.php	/^        $this->listing = $listing;$/;"	v
+listing	app/Jobs/ProcessListingClick.php	/^    protected $listing;$/;"	v
 listing	app/Photo.php	/^            $listing = Listing::where('id', $photo->listing_id)->first();$/;"	v
 listing	app/Photo.php	/^    public function listing()$/;"	f
 listingId	app/Http/Helpers/ListingsHelper.php	/^    public static function saveListing($association, $result, $class, $listingId = -1)$/;"	v
@@ -326,8 +326,8 @@ listings	app/Http/Controllers/AgentListingsController.php	/^        $listings = 
 listings	app/Http/Controllers/MapSearchController.php	/^        $listings = MapSearch::getAllListings();$/;"	v
 listings	app/Http/Controllers/SearchController.php	/^        $listings = Listing::searchResults($request);$/;"	v
 listings	app/Http/Helpers/Builder.php	/^            $listings = Listing::where('class', $class)->where('association', $this->association)->get();$/;"	v
-listings	app/Jobs/ProcessImpression.php	/^        $this->listings = $listings;$/;"	v
-listings	app/Jobs/ProcessImpression.php	/^    protected $listings;$/;"	v
+listings	app/Jobs/ProcessListingImpression.php	/^        $this->listings = $listings;$/;"	v
+listings	app/Jobs/ProcessListingImpression.php	/^    protected $listings;$/;"	v
 listings	app/Listing.php	/^        $listings = Listing::when($city, function ($query) use ($city) {$/;"	v
 listings	app/Listing.php	/^        $listings = Listing::whereIn('listing_member_shortid', $ids)$/;"	v
 listings	app/MapSearch.php	/^        $listings = DB::table('listings')$/;"	v
@@ -356,7 +356,7 @@ modifierRE	public/js/app.js	/^var modifierRE = \/\\.[^.]+\/g;$/;"	v
 namespace	app/Providers/RouteServiceProvider.php	/^    protected $namespace = 'App\\Http\\Controllers';$/;"	v
 ncname	public/js/app.js	/^var ncname = '[a-zA-Z_][\\\\w\\\\-\\\\.]*';$/;"	v
 now	app/Listing.php	/^        $now = Carbon::now();$/;"	v
-officeShortId	app/Agent.php	/^        $officeShortId = $request->officeShortId ?? '';$/;"	v
+officeShortId	app/Agent.php	/^        $officeShortId   = $request->officeShortId ?? '';$/;"	v
 offset	app/Http/Helpers/Builder.php	/^        $offset         = 0;$/;"	v
 offset	app/Http/Helpers/Builder.php	/^        $offset = 0;$/;"	v
 omniBar	app/Http/Controllers/OmnibarController.php	/^        $omniBar = Omnibar::build($searchTerm);$/;"	v
@@ -440,7 +440,7 @@ script.onreadystatechange	public/js/app.js	/^            script.onreadystatechan
 searchResults	app/Agent.php	/^    public static function searchResults($request)$/;"	f
 searchResults	app/Listing.php	/^    public static function searchResults($request)$/;"	f
 searchTerm	app/Http/Controllers/OmnibarController.php	/^        $searchTerm = urldecode(str_replace('%^%', '', $request->search));$/;"	v
-shortId	app/Agent.php	/^        $shortId       = $request->shortId ?? '';$/;"	v
+shortId	app/Agent.php	/^        $shortId         = $request->shortId ?? '';$/;"	v
 shouldIgnoreFirstNewline	public/js/app.js	/^var shouldIgnoreFirstNewline = function (tag, html) { return tag && isIgnoreNewlineTag(tag) && html[0] === '\\n'; };$/;"	f
 show	app/Http/Controllers/AgentController.php	/^    public function show(Agent $agent)$/;"	f
 show	app/Http/Controllers/ListingController.php	/^    public function show($mlsNumber)$/;"	f

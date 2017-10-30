@@ -2,28 +2,27 @@
 
 namespace App\Jobs;
 
-use App\Click;
-use App\Listing;
+use App\Impression;
 use Illuminate\Bus\Queueable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 
-class ProcessClick implements ShouldQueue
+class ProcessListingImpression implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    protected $listing;
+    protected $listings;
 
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct(Listing $listing)
+    public function __construct($listings)
     {
-        $this->listing = $listing;
+        $this->listings = $listings;
     }
 
     /**
@@ -33,6 +32,8 @@ class ProcessClick implements ShouldQueue
      */
     public function handle()
     {
-        Click::create(['listing_id' => $this->listing->id]);
+        foreach ($this->listings as $listing) {
+            Impression::create(['listing_id' => $listing->id]);
+        }
     }
 }

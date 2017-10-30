@@ -7,7 +7,7 @@ use App\Photo;
 use App\ApiCall;
 use App\Listing;
 use Carbon\Carbon;
-use App\Jobs\ProcessImpression;
+use App\Jobs\ProcessListingImpression;
 use App\Http\Helpers\BcarOptions;
 use App\Http\Helpers\EcarOptions;
 use Illuminate\Support\Facades\DB;
@@ -106,7 +106,7 @@ class Listing extends Model
         ->orderBy($sortBy, $orderBy)
         ->paginate(36);
 
-        ProcessImpression::dispatch($listings);
+        ProcessListingImpression::dispatch($listings);
 
         // returns paginated links (with GET variables intact!)
         $listings->appends($request->all())->links();

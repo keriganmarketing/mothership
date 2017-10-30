@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Photo;
 use App\Listing;
-use App\Jobs\ProcessClick;
+use App\Jobs\ProcessListingClick;
 use Illuminate\Http\Request;
 
 class ListingController extends Controller
@@ -20,7 +20,7 @@ class ListingController extends Controller
     {
         $listing = Listing::where('mls_account', $mlsNumber)->with('photos')->first();
 
-        ProcessClick::dispatch($listing);
+        ProcessListingClick::dispatch($listing);
 
         return response()->json($listing);
     }
