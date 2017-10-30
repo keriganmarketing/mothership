@@ -90,8 +90,8 @@ __webpack_require__	public/js/app.js	/^\/******\/ 	function __webpack_require__(
 __webpack_require__.d	public/js/app.js	/^\/******\/ 	__webpack_require__.d = function(exports, name, getter) {$/;"	f
 __webpack_require__.n	public/js/app.js	/^\/******\/ 	__webpack_require__.n = function(module) {$/;"	f
 __webpack_require__.o	public/js/app.js	/^\/******\/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };$/;"	f
-acreage	app/Http/Controllers/SearchController.php	/^        $acreage      = $request->acreage ?? '';$/;"	v
 acreage	app/Http/Helpers/ListingsHelper.php	/^        $acreage              = $result['LIST_57'] > 0 ? $result['LIST_57'] : 0;$/;"	v
+acreage	app/Listing.php	/^        $acreage      = $request->acreage ?? '';$/;"	v
 addIfCondition	public/js/app.js	/^function addIfCondition (el, condition) {$/;"	f
 addressIsValid	app/Listing.php	/^    public function addressIsValid($fullAddress)$/;"	f
 addresses	app/Omnibar.php	/^        $addresses    = Listing::getColumn($searchTerm, 'full_address');$/;"	v
@@ -99,7 +99,8 @@ agent	app/AgentPhoto.php	/^    public function agent()$/;"	f
 agent	app/Http/Helpers/AgentsHelper.php	/^        $agent = Agent::updateOrCreate($/;"	v
 agent	app/Http/Helpers/Updater.php	/^                $agent = AgentsHelper::updateOrCreateAgent($this->association, $result);$/;"	v
 agentShortId	app/Http/Controllers/AgentListingsController.php	/^        $agentShortId = $request->agentId;$/;"	v
-agents	app/Http/Controllers/AgentSearchController.php	/^        $agents = Agent::when($shortId, function ($query) use ($shortId) {$/;"	v
+agents	app/Agent.php	/^        $agents = Agent::when($shortId, function ($query) use ($shortId) {$/;"	v
+agents	app/Http/Controllers/AgentSearchController.php	/^        $agents = Agent::searchResults($request);$/;"	v
 aliases	config/app.php	/^    | This array of class aliases will be registered when this application$/;"	c
 all	app/Http/Helpers/BcarOptions.php	/^    public static function all($offset = 1)$/;"	f
 all	app/Http/Helpers/EcarOptions.php	/^    public static function all($offset = 1)$/;"	f
@@ -113,9 +114,9 @@ appliances	app/Http/Helpers/ListingsHelper.php	/^        $appliances           =
 areas	app/Omnibar.php	/^        $areas        = Listing::getColumn($searchTerm, 'area');$/;"	v
 argRE	public/js/app.js	/^var argRE = \/:(.*)$\/;$/;"	v
 as	config/mail.php	/^    | Laravel supports both SMTP and PHP's "mail" function as drivers for the$/;"	f
+association	app/Agent.php	/^        $association   = $request->association ?? '';$/;"	v
 association	app/ApiCall.php	/^        $this->association = $association;$/;"	v
 association	app/ApiCall.php	/^    protected $association;$/;"	v
-association	app/Http/Controllers/AgentSearchController.php	/^        $association   = $request->association ?? '';$/;"	v
 association	app/Http/Helpers/Builder.php	/^        $this->association = $association;$/;"	v
 association	app/Http/Helpers/Builder.php	/^    protected $association;$/;"	v
 association	app/Http/Helpers/Updater.php	/^        $this->association = $association;$/;"	v
@@ -124,7 +125,7 @@ attrs.name	public/js/app.js	/^        name: args[1],$/;"	p
 attrs.name	public/js/app.js	/^        name: el.attrsList[i].name,$/;"	p
 bathrooms	app/Http/Helpers/ListingsHelper.php	/^        $bathrooms            = isset($result['LIST_67']) && is_numeric($result['LIST_67']) ? $result['LIST_67'] : 0;$/;"	v
 bathrooms	app/Http/Helpers/ListingsHelper.php	/^        $bathrooms            = isset($result['LIST_67']) ? $result['LIST_67'] : 0;$/;"	v
-baths	app/Http/Controllers/SearchController.php	/^        $baths        = $request->bathrooms ?? '';$/;"	v
+baths	app/Listing.php	/^        $baths        = $request->bathrooms ?? '';$/;"	v
 bcarLoginUrl	app/ApiCall.php	/^    private function bcarLoginUrl()$/;"	f
 bcarOptions	app/Http/Helpers/BcarOptions.php	/^        $bcarOptions = [$/;"	v
 bcarPassword	app/ApiCall.php	/^    private function bcarPassword()$/;"	f
@@ -132,7 +133,7 @@ bcarUpdater	app/Jobs/UpdateAgents.php	/^        $bcarUpdater = new Updater('bcar
 bcarUserName	app/ApiCall.php	/^    private function bcarUserName()$/;"	f
 bedrooms	app/Http/Helpers/ListingsHelper.php	/^        $bedrooms             = isset($result['LIST_66']) && is_numeric($result['LIST_66']) ? $result['LIST_66'] : 0;$/;"	v
 bedrooms	app/Http/Helpers/ListingsHelper.php	/^        $bedrooms             = isset($result['LIST_66']) ? $result['LIST_66'] : 0;$/;"	v
-beds	app/Http/Controllers/SearchController.php	/^        $beds         = $request->bedrooms ?? '';$/;"	v
+beds	app/Listing.php	/^        $beds         = $request->bedrooms ?? '';$/;"	v
 bindRE	public/js/app.js	/^var bindRE = \/^:|^v-bind:\/;$/;"	v
 boot	app/Providers/AppServiceProvider.php	/^    public function boot()$/;"	f
 boot	app/Providers/AuthServiceProvider.php	/^    public function boot()$/;"	f
@@ -144,7 +145,7 @@ buildFullAddress	app/Listing.php	/^    public function buildFullAddress(Listing 
 channel.port1.onmessage	public/js/app.js	/^        channel.port1.onmessage = function(event) {$/;"	f
 checkInFor	public/js/app.js	/^function checkInFor (el) {$/;"	f
 cities	app/Omnibar.php	/^        $cities       = Listing::getColumn($searchTerm, 'city');$/;"	v
-city	app/Http/Controllers/SearchController.php	/^        $city         = $request->city ?? '';$/;"	v
+city	app/Listing.php	/^        $city         = $request->city ?? '';$/;"	v
 city	app/Listing.php	/^        $city         = ', '. $listing->city;$/;"	v
 classArray	app/Http/Helpers/Builder.php	/^        $this->classArray        = $this->association == 'bcar' ?$/;"	v
 classArray	app/Http/Helpers/Updater.php	/^        $this->classArray        = $this->association == 'bcar' ?$/;"	v
@@ -162,7 +163,6 @@ construction	app/Http/Helpers/ListingsHelper.php	/^            $construction    
 construction	app/Http/Helpers/ListingsHelper.php	/^        $construction         = null;$/;"	v
 counter	app/Omnibar.php	/^            $counter = $counter +1;$/;"	v
 counter	app/Omnibar.php	/^        $counter      = 0;$/;"	v
-create	app/Http/Controllers/AgentSearchController.php	/^    public function create()$/;"	f
 create	app/Http/Controllers/Auth/RegisterController.php	/^    protected function create(array $data)$/;"	f
 create	app/Http/Controllers/OmnibarController.php	/^    public function create(Request $request)$/;"	f
 createASTElement	public/js/app.js	/^function createASTElement ($/;"	f
@@ -215,7 +215,7 @@ fetchListings	app/Http/Helpers/Builder.php	/^    private function fetchListings(
 fetchPhotos	app/Http/Helpers/Builder.php	/^    private function fetchPhotos($listing)$/;"	f
 fillable	app/User.php	/^    protected $fillable = [$/;"	v
 findPrevElement	public/js/app.js	/^function findPrevElement (children) {$/;"	f
-firstName	app/Http/Controllers/AgentSearchController.php	/^        $firstName     = $request->firstName ?? '';$/;"	v
+firstName	app/Agent.php	/^        $firstName     = $request->firstName ?? '';$/;"	v
 for	app/Http/Helpers/ListingsHelper.php	/^     * @param string $class  The class for the listing$/;"	c
 forAgent	app/Listing.php	/^    public static function forAgent($agentShortId)$/;"	f
 forAliasRE	public/js/app.js	/^var forAliasRE = \/(.*?)\\s+(?:in|of)\\s+(.*)\/;$/;"	v
@@ -226,7 +226,7 @@ freshListings	app/Http/Helpers/Builder.php	/^    public function freshListings()
 freshPhotos	app/Http/Helpers/Builder.php	/^    public function freshPhotos()$/;"	f
 fullAddress	app/Listing.php	/^        $fullAddress  = $streetNumber . ' ' . $streetName . $city;$/;"	v
 fullBaths	app/Http/Helpers/ListingsHelper.php	/^        $fullBaths            = isset($result['LIST_68']) ? $result['LIST_68'] : 0;$/;"	v
-fullName	app/Http/Controllers/AgentSearchController.php	/^        $fullName      = $request->fullName ?? '';$/;"	v
+fullName	app/Agent.php	/^        $fullName      = $request->fullName ?? '';$/;"	v
 getAllListings	app/MapSearch.php	/^    public static function getAllListings()$/;"	f
 getColumn	app/Listing.php	/^    public static function getColumn($searchTerm, $columnName)$/;"	f
 guard	app/Http/Middleware/RedirectIfAuthenticated.php	/^    public function handle($request, Closure $next, $guard = null)$/;"	v
@@ -303,7 +303,7 @@ isTextTag.preTransformNode	public/js/app.js	/^function preTransformNode (el, opt
 isTextTag.text	public/js/app.js	/^function text (el, dir) {$/;"	f
 kernel	public/index.php	/^$kernel = $app->make(Illuminate\\Contracts\\Http\\Kernel::class);$/;"	v
 l	app/Jobs/CleanBcar.php	/^        $l = new Listing();$/;"	v
-lastName	app/Http/Controllers/AgentSearchController.php	/^        $lastName      = $request->lastName ?? '';$/;"	v
+lastName	app/Agent.php	/^        $lastName      = $request->lastName ?? '';$/;"	v
 lastTaxYear	app/Http/Helpers/ListingsHelper.php	/^        $lastTaxYear          = $result['LIST_76'] > 0 && is_numeric($result['LIST_76']) && $result['LIST_76'] < 9999 ? $result['LIST_76'] : 0;$/;"	v
 lastTaxYear	app/Http/Helpers/ListingsHelper.php	/^        $lastTaxYear          = $result['LIST_76'] > 0 ? $result['LIST_76'] : 0;$/;"	v
 lastTaxes	app/Http/Helpers/ListingsHelper.php	/^        $lastTaxes            = $result['LIST_75'] > 0 && is_numeric($result['LIST_75']) ? $result['LIST_75'] : 0;$/;"	v
@@ -323,10 +323,11 @@ listing	app/Photo.php	/^    public function listing()$/;"	f
 listingId	app/Http/Helpers/ListingsHelper.php	/^    public static function saveListing($association, $result, $class, $listingId = -1)$/;"	v
 listings	app/Http/Controllers/AgentListingsController.php	/^        $listings = Listing::forAgent($agentShortId);$/;"	v
 listings	app/Http/Controllers/MapSearchController.php	/^        $listings = MapSearch::getAllListings();$/;"	v
-listings	app/Http/Controllers/SearchController.php	/^        $listings = Listing::when($city, function ($query) use ($city) {$/;"	v
+listings	app/Http/Controllers/SearchController.php	/^        $listings = Listing::searchResults($request);$/;"	v
 listings	app/Http/Helpers/Builder.php	/^            $listings = Listing::where('class', $class)->where('association', $this->association)->get();$/;"	v
 listings	app/Jobs/ProcessImpression.php	/^        $this->listings = $listings;$/;"	v
 listings	app/Jobs/ProcessImpression.php	/^    protected $listings;$/;"	v
+listings	app/Listing.php	/^        $listings = Listing::when($city, function ($query) use ($city) {$/;"	v
 listings	app/Listing.php	/^        $listings = Listing::whereIn('listing_member_shortid', $ids)$/;"	v
 listings	app/MapSearch.php	/^        $listings = DB::table('listings')$/;"	v
 loader	public/index.php	/^| Composer provides a convenient, automatically generated class loader for$/;"	c
@@ -339,12 +340,12 @@ makeAttrsMap	public/js/app.js	/^function makeAttrsMap (attrs) {$/;"	f
 map	app/Providers/RouteServiceProvider.php	/^    public function map()$/;"	f
 mapApiRoutes	app/Providers/RouteServiceProvider.php	/^    protected function mapApiRoutes()$/;"	f
 mapWebRoutes	app/Providers/RouteServiceProvider.php	/^    protected function mapWebRoutes()$/;"	f
-maxPrice	app/Http/Controllers/SearchController.php	/^        $maxPrice     = $request->maxPrice ?? '';$/;"	v
+maxPrice	app/Listing.php	/^        $maxPrice     = $request->maxPrice ?? '';$/;"	v
 maxRowsReached	app/Http/Helpers/Builder.php	/^                $maxRowsReached = true;$/;"	v
 maxRowsReached	app/Http/Helpers/Builder.php	/^        $maxRowsReached = false;$/;"	v
 middleware	app/Http/Kernel.php	/^    protected $middleware = [$/;"	v
 middlewareGroups	app/Http/Kernel.php	/^    protected $middlewareGroups = [$/;"	v
-minPrice	app/Http/Controllers/SearchController.php	/^        $minPrice     = $request->minPrice ?? '';$/;"	v
+minPrice	app/Listing.php	/^        $minPrice     = $request->minPrice ?? '';$/;"	v
 mls	app/Http/Helpers/Builder.php	/^        $this->mls               = new ApiCall($this->association);$/;"	v
 mls	app/Http/Helpers/Updater.php	/^        $this->mls               = new ApiCall($this->association);$/;"	v
 mlsId	app/Http/Helpers/Updater.php	/^            $mlsId = $result['MEMBER_0'];$/;"	v
@@ -354,14 +355,14 @@ modifierRE	public/js/app.js	/^var modifierRE = \/\\.[^.]+\/g;$/;"	v
 namespace	app/Providers/RouteServiceProvider.php	/^    protected $namespace = 'App\\Http\\Controllers';$/;"	v
 ncname	public/js/app.js	/^var ncname = '[a-zA-Z_][\\\\w\\\\-\\\\.]*';$/;"	v
 now	app/Listing.php	/^        $now = Carbon::now();$/;"	v
-officeShortId	app/Http/Controllers/AgentSearchController.php	/^        $officeShortId = $request->officeShortId ?? '';$/;"	v
+officeShortId	app/Agent.php	/^        $officeShortId = $request->officeShortId ?? '';$/;"	v
 offset	app/Http/Helpers/Builder.php	/^        $offset         = 0;$/;"	v
 offset	app/Http/Helpers/Builder.php	/^        $offset = 0;$/;"	v
 omniBar	app/Http/Controllers/OmnibarController.php	/^        $omniBar = Omnibar::build($searchTerm);$/;"	v
 onRE	public/js/app.js	/^var onRE = \/^@|^v-on:\/;$/;"	v
 options	app/Http/Helpers/Builder.php	/^        $options        = $this->association == 'bcar' ?$/;"	v
 options	app/Http/Helpers/Updater.php	/^        $options = $this->association == 'bcar' ?$/;"	v
-orderBy	app/Http/Controllers/SearchController.php	/^        $orderBy      = $request->orderBy ?? 'DESC';$/;"	v
+orderBy	app/Listing.php	/^        $orderBy      = $request->orderBy ?? 'DESC';$/;"	v
 parse	public/js/app.js	/^function parse ($/;"	f
 parse.endPre	public/js/app.js	/^  function endPre (element) {$/;"	f
 parse.warnOnce	public/js/app.js	/^  function warnOnce (msg) {$/;"	f
@@ -387,9 +388,9 @@ platformGetTagNamespace	public/js/app.js	/^var platformGetTagNamespace;$/;"	v
 platformIsPreTag	public/js/app.js	/^var platformIsPreTag;$/;"	v
 platformMustUseProp	public/js/app.js	/^var platformMustUseProp;$/;"	v
 policies	app/Providers/AuthServiceProvider.php	/^    protected $policies = [$/;"	v
-pool	app/Http/Controllers/SearchController.php	/^        $pool         = $request->pool ?? '';$/;"	v
 pool	app/Http/Helpers/ListingsHelper.php	/^            $pool                 = ($result['LIST_147'] == 'Yes') ? 1 : 0;$/;"	v
 pool	app/Http/Helpers/ListingsHelper.php	/^        $pool                 = null;$/;"	v
+pool	app/Listing.php	/^        $pool         = $request->pool ?? '';$/;"	v
 postTransforms	public/js/app.js	/^var postTransforms;$/;"	v
 preTransforms	public/js/app.js	/^var preTransforms;$/;"	v
 price	app/Http/Helpers/ListingsHelper.php	/^        $price                = is_numeric($result['LIST_22']) ? $result['LIST_22'] : 0;$/;"	v
@@ -405,8 +406,8 @@ processPre	public/js/app.js	/^function processPre (el) {$/;"	f
 processRawAttrs	public/js/app.js	/^function processRawAttrs (el) {$/;"	f
 processRef	public/js/app.js	/^function processRef (el) {$/;"	f
 processSlot	public/js/app.js	/^function processSlot (el) {$/;"	f
-propertyType	app/Http/Controllers/SearchController.php	/^            $propertyType = explode('|', $propertyType);$/;"	v
-propertyType	app/Http/Controllers/SearchController.php	/^        $propertyType = $request->propertyType ?? '';$/;"	v
+propertyType	app/Listing.php	/^            $propertyType = explode('|', $propertyType);$/;"	v
+propertyType	app/Listing.php	/^        $propertyType = $request->propertyType ?? '';$/;"	v
 proxies	app/Http/Middleware/TrustProxies.php	/^    protected $proxies;$/;"	v
 qnameCapture	public/js/app.js	/^var qnameCapture = "((?:" + ncname + "\\\\:)?" + ncname + ")";$/;"	v
 redirectTo	app/Http/Controllers/Auth/LoginController.php	/^    protected $redirectTo = '\/home';$/;"	v
@@ -435,19 +436,20 @@ savePhotos	app/Photo.php	/^    public function savePhotos($listing, $photos)$/;"
 savedListing	app/Http/Helpers/ListingsHelper.php	/^        $savedListing = $association == 'bcar' ?$/;"	v
 schedule	app/Console/Kernel.php	/^    protected function schedule(Schedule $schedule)$/;"	f
 script.onreadystatechange	public/js/app.js	/^            script.onreadystatechange = function () {$/;"	f
+searchResults	app/Agent.php	/^    public static function searchResults($request)$/;"	f
+searchResults	app/Listing.php	/^    public static function searchResults($request)$/;"	f
 searchTerm	app/Http/Controllers/OmnibarController.php	/^        $searchTerm = urldecode(str_replace('%^%', '', $request->search));$/;"	v
-shortId	app/Http/Controllers/AgentSearchController.php	/^        $shortId       = $request->shortId ?? '';$/;"	v
+shortId	app/Agent.php	/^        $shortId       = $request->shortId ?? '';$/;"	v
 shouldIgnoreFirstNewline	public/js/app.js	/^var shouldIgnoreFirstNewline = function (tag, html) { return tag && isIgnoreNewlineTag(tag) && html[0] === '\\n'; };$/;"	f
 show	app/Http/Controllers/AgentController.php	/^    public function show(Agent $agent)$/;"	f
-show	app/Http/Controllers/AgentSearchController.php	/^    public function show($id)$/;"	f
 show	app/Http/Controllers/ListingController.php	/^    public function show($mlsNumber)$/;"	f
-sortBy	app/Http/Controllers/SearchController.php	/^        $sortBy       = $request->sortBy ?? 'date_modified';$/;"	v
-sqft	app/Http/Controllers/SearchController.php	/^        $sqft         = $request->sq_ft ?? '';$/;"	v
+sortBy	app/Listing.php	/^        $sortBy       = $request->sortBy ?? 'date_modified';$/;"	v
 sqft	app/Http/Helpers/ListingsHelper.php	/^        $sqft                 = isset($result['LIST_48']) && is_numeric($result['LIST_48']) ? $result['LIST_48'] : 0;$/;"	v
 sqft	app/Http/Helpers/ListingsHelper.php	/^        $sqft                 = isset($result['LIST_48']) ? $result['LIST_48'] : 0;$/;"	v
+sqft	app/Listing.php	/^        $sqft         = $request->sq_ft ?? '';$/;"	v
 startTagClose	public/js/app.js	/^var startTagClose = \/^\\s*(\\\/?)>\/;$/;"	v
-status	app/Http/Controllers/SearchController.php	/^            $status = explode('|', $status);$/;"	v
-status	app/Http/Controllers/SearchController.php	/^        $status       = $request->status ?? '';$/;"	v
+status	app/Listing.php	/^            $status = explode('|', $status);$/;"	v
+status	app/Listing.php	/^        $status       = $request->status ?? '';$/;"	v
 stories	app/Http/Helpers/ListingsHelper.php	/^            $stories              = is_numeric($result['LIST_64']) ? $result['LIST_64'] : 0;$/;"	v
 stories	app/Http/Helpers/ListingsHelper.php	/^        $stories              = isset($result['LIST_64']) && is_numeric($result['LIST_64']) ? $result['LIST_64'] : 0;$/;"	v
 stories	app/Http/Helpers/ListingsHelper.php	/^        $stories              = isset($result['LIST_64']) && is_numeric($result['LIST_64']) ? $result['LIST_64'] : 1;$/;"	v
@@ -491,9 +493,9 @@ utilities	app/Http/Helpers/ListingsHelper.php	/^        $utilities            = 
 validator	app/Http/Controllers/Auth/RegisterController.php	/^    protected function validator(array $data)$/;"	f
 values	app/Listing.php	/^        $values  = DB::table('listings')$/;"	v
 warn$2	public/js/app.js	/^var warn$2;$/;"	v
-waterfront	app/Http/Controllers/SearchController.php	/^        $waterfront   = $request->waterfront ?? '';$/;"	v
 waterfront	app/Http/Helpers/BcarOptions.php	/^        $waterfront = 'LIST_192';$/;"	v
 waterfront	app/Http/Helpers/EcarOptions.php	/^        $waterfront = 'GF20131203222329624962000000'; \/\/mother of god$/;"	v
+waterfront	app/Listing.php	/^        $waterfront   = $request->waterfront ?? '';$/;"	v
 waterviewDescription	app/Http/Helpers/ListingsHelper.php	/^            $waterviewDescription = $result['GF20131203222538613490000000'];$/;"	v
 waterviewDescription	app/Http/Helpers/ListingsHelper.php	/^            $waterviewDescription = $result['GF20131230164916093183000000'];$/;"	v
 waterviewDescription	app/Http/Helpers/ListingsHelper.php	/^            $waterviewDescription = $result['GF20131230211345387488000000'];$/;"	v
