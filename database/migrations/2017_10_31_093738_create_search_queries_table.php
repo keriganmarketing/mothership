@@ -15,7 +15,9 @@ class CreateSearchQueriesTable extends Migration
     {
         Schema::create('search_queries', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('query_type');
             $table->string('search_query');
+            $table->date('date');
             $table->integer('counter')->default(0);
             $table->timestamps();
         });

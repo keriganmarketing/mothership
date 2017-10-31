@@ -35,16 +35,21 @@ class ProcessSearch implements ShouldQueue
         $today       = Carbon::now()->toDateString();
         $searchQuery = '';
 
-        foreach ($this->request as $r) {
+        foreach ($this->request as $k => $v) {
             if ($r != '') {
-                $searchQuery = SearchQuery::where('search_query', $searchQuery)
-                    ->whereDate('created_at', $today)->first();
+                $searchQuery = SearchQuery::where('search_query', $v)
+                    ->where('query_type', $k)
+                    ->whereDate('date', $today)->first();
 
                 if (count($searchQuery) > 0) {
-                    $searchQuery->increment('counter');
+                    $searchQuery->update([
+                        'counter' => $searchQuery->counter + 1
+                    ]);
                 } else {
                     SearchQuery::create([
+                        'query_type'   => $k,
                         'search_query' => $r,
+                        'date'         => $today,
                         'counter'      => 1
                     ]);
                 }
