@@ -36,14 +36,14 @@ class ProcessListingImpression implements ShouldQueue
         $today = Carbon::now()->toDateString();
 
         foreach ($this->listings as $listing) {
-            $impression = Impression::where('listing_id', $this->listing->id)
+            $impression = Impression::where('listing_id', $listing->id)
                 ->where('date', $today)->first();
 
             if (count($impression) > 0) {
                 $impression->increment('counter');
             } else {
                 Impression::create([
-                    'listing_id' => $this->listing->id,
+                    'listing_id' => $listing->id,
                     'date'       => $today,
                     'counter'    => 1
                 ]);
