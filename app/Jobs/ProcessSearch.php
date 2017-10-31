@@ -48,7 +48,7 @@ class ProcessSearch implements ShouldQueue
                 } else {
                     SearchQuery::create([
                         'query_type'   => $k,
-                        'search_query' => $r,
+                        'search_query' => $v,
                         'date'         => $today,
                         'counter'      => 1
                     ]);
