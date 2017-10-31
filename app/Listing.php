@@ -166,32 +166,11 @@ class Listing extends Model
         return preg_match('/^[1-9]+([0-9]*)?\s(\d*?)([A-Z]+)?[a-z].+$/', $fullAddress);
     }
 
-    public static function hotListings()
-    {
-        $hotListings = [];
-
-        $now = Carbon::now();
-
-        $clickedListings = Click::
-            whereDate('created_at', '>=', $now->copy()->subDays(7))
-            ->whereDate('created_at', '<=', $now)
-            ->groupBy('listing_id')
-            ->pluck('listing_id');
-
-        foreach ($clickedListings as $listingId) {
-            $clicks = Click::where('listing_id', $listingId)->count();
-            $hotListings[$listingId] = $clicks;
-        }
-
-        arsort($hotListings);
-
-        echo '<pre>',print_r($hotListings),'</pre>';
-    }
-        /**
--     * Clean the BCAR listings table
--     *
--     * @return void
--     */
+    /**
+     * Clean the BCAR listings table
+     *
+     * @return void
+     */
     public function cleanBcar()
     {
         $mls            = new ApiCall('bcar');

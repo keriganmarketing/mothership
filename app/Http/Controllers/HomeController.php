@@ -24,8 +24,6 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
-        $hotListings = Listing::hotListings();
-
-        return view('home', compact('hotListings'));
+        return view('home');
     }
 }

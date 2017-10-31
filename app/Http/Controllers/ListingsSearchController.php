@@ -7,7 +7,7 @@ use App\Jobs\ProcessSearch;
 use Illuminate\Http\Request;
 use App\Jobs\ProcessImpression;
 
-class SearchController extends Controller
+class ListingsSearchController extends Controller
 {
     /**
      * Display the search results
