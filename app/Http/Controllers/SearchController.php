@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Listing;
+use App\Jobs\ProcessSearch;
 use Illuminate\Http\Request;
 use App\Jobs\ProcessImpression;
 
@@ -16,6 +17,7 @@ class SearchController extends Controller
     public function index(Request $request)
     {
         $listings = Listing::searchResults($request);
+        ProcessSearch::dispatch($request->all());
 
         return response()->json($listings);
     }

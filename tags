@@ -29,6 +29,7 @@ CreateImpressionsTable	database/migrations/2017_10_26_150026_create_impressions_
 CreateListingsTable	database/migrations/2017_10_18_204605_create_listings_table.php	/^class CreateListingsTable extends Migration$/;"	c
 CreatePasswordResetsTable	database/migrations/2014_10_12_100000_create_password_resets_table.php	/^class CreatePasswordResetsTable extends Migration$/;"	c
 CreatePhotosTable	database/migrations/2017_10_19_181334_create_photos_table.php	/^class CreatePhotosTable extends Migration$/;"	c
+CreateSearchQueriesTable	database/migrations/2017_10_31_093738_create_search_queries_table.php	/^class CreateSearchQueriesTable extends Migration$/;"	c
 CreateUsersTable	database/migrations/2014_10_12_000000_create_users_table.php	/^class CreateUsersTable extends Migration$/;"	c
 DatabaseSeeder	database/seeds/DatabaseSeeder.php	/^class DatabaseSeeder extends Seeder$/;"	c
 EcarOptions	app/Helpers/EcarOptions.php	/^class EcarOptions$/;"	c
@@ -55,11 +56,13 @@ OmnibarController	app/Http/Controllers/OmnibarController.php	/^class OmnibarCont
 Photo	app/Photo.php	/^class Photo extends Model$/;"	c
 ProcessListingClick	app/Jobs/ProcessListingClick.php	/^class ProcessListingClick implements ShouldQueue$/;"	c
 ProcessListingImpression	app/Jobs/ProcessListingImpression.php	/^class ProcessListingImpression implements ShouldQueue$/;"	c
+ProcessSearch	app/Jobs/ProcessSearch.php	/^class ProcessSearch implements ShouldQueue$/;"	c
 RedirectIfAuthenticated	app/Http/Middleware/RedirectIfAuthenticated.php	/^class RedirectIfAuthenticated$/;"	c
 RegisterController	app/Http/Controllers/Auth/RegisterController.php	/^class RegisterController extends Controller$/;"	c
 ResetPasswordController	app/Http/Controllers/Auth/ResetPasswordController.php	/^class ResetPasswordController extends Controller$/;"	c
 RouteServiceProvider	app/Providers/RouteServiceProvider.php	/^class RouteServiceProvider extends ServiceProvider$/;"	c
 SearchController	app/Http/Controllers/SearchController.php	/^class SearchController extends Controller$/;"	c
+SearchQuery	app/SearchQuery.php	/^class SearchQuery extends Model$/;"	c
 TestCase	tests/TestCase.php	/^abstract class TestCase extends BaseTestCase$/;"	c
 TrimStrings	app/Http/Middleware/TrimStrings.php	/^class TrimStrings extends Middleware$/;"	c
 TrustProxies	app/Http/Middleware/TrustProxies.php	/^class TrustProxies extends Middleware$/;"	c
@@ -81,6 +84,7 @@ __construct	app/Http/Controllers/HomeController.php	/^    public function __cons
 __construct	app/Jobs/CleanBcar.php	/^    public function __construct()$/;"	f
 __construct	app/Jobs/ProcessListingClick.php	/^    public function __construct(Listing $listing)$/;"	f
 __construct	app/Jobs/ProcessListingImpression.php	/^    public function __construct($listings)$/;"	f
+__construct	app/Jobs/ProcessSearch.php	/^    public function __construct($request)$/;"	f
 __construct	app/Jobs/UpdateAgents.php	/^    public function __construct()$/;"	f
 __construct	app/Jobs/UpdateBcar.php	/^    public function __construct()$/;"	f
 __construct	app/Jobs/UpdateEcar.php	/^    public function __construct()$/;"	f
@@ -197,6 +201,7 @@ down	database/migrations/2017_10_27_004508_create_failed_jobs_table.php	/^    pu
 down	database/migrations/2017_10_27_140524_create_agents_table.php	/^    public function down()$/;"	f
 down	database/migrations/2017_10_27_153518_create_agent_photos_table.php	/^    public function down()$/;"	f
 down	database/migrations/2017_10_28_175622_add_association_to_agents_table.php	/^    public function down()$/;"	f
+down	database/migrations/2017_10_31_093738_create_search_queries_table.php	/^    public function down()$/;"	f
 downloadPhotosForAgent	app/Helpers/Builder.php	/^    private function downloadPhotosForAgent($agent)$/;"	f
 ecarLoginUrl	app/ApiCall.php	/^    private function ecarLoginUrl()$/;"	f
 ecarOptions	app/Helpers/EcarOptions.php	/^        $ecarOptions = [$/;"	v
@@ -241,11 +246,13 @@ guarded	app/Click.php	/^    protected $guarded = [];$/;"	v
 guarded	app/Impression.php	/^    protected $guarded = [];$/;"	v
 guarded	app/Listing.php	/^    protected $guarded = [];$/;"	v
 guarded	app/Photo.php	/^    protected $guarded = [];$/;"	v
+guarded	app/SearchQuery.php	/^    protected $guarded = [];$/;"	v
 halfBaths	app/Helpers/ListingsHelper.php	/^        $halfBaths            = $result['LIST_69'] > 0 ? $result['LIST_69'] : 0;$/;"	v
 handle	app/Http/Middleware/RedirectIfAuthenticated.php	/^    public function handle($request, Closure $next, $guard = null)$/;"	f
 handle	app/Jobs/CleanBcar.php	/^    public function handle()$/;"	f
 handle	app/Jobs/ProcessListingClick.php	/^    public function handle()$/;"	f
 handle	app/Jobs/ProcessListingImpression.php	/^    public function handle()$/;"	f
+handle	app/Jobs/ProcessSearch.php	/^    public function handle()$/;"	f
 handle	app/Jobs/UpdateAgents.php	/^    public function handle()$/;"	f
 handle	app/Jobs/UpdateBcar.php	/^    public function handle()$/;"	f
 handle	app/Jobs/UpdateEcar.php	/^    public function handle()$/;"	f
@@ -260,7 +267,7 @@ impresssions	app/Listing.php	/^    public function impresssions()$/;"	f
 index	app/Http/Controllers/AgentController.php	/^    public function index()$/;"	f
 index	app/Http/Controllers/AgentListingsController.php	/^    public function index(Request $request)$/;"	f
 index	app/Http/Controllers/AgentSearchController.php	/^    public function index(Request $request)$/;"	f
-index	app/Http/Controllers/HomeController.php	/^    public function index()$/;"	f
+index	app/Http/Controllers/HomeController.php	/^    public function index(Request $request)$/;"	f
 index	app/Http/Controllers/MapSearchController.php	/^    public function index()$/;"	f
 index	app/Http/Controllers/SearchController.php	/^    public function index(Request $request)$/;"	f
 installMessageChannelImplementation	public/js/app.js	/^    function installMessageChannelImplementation() {$/;"	f
@@ -431,6 +438,8 @@ register	app/Providers/AppServiceProvider.php	/^    public function register()$/
 registerImmediate	public/js/app.js	/^        registerImmediate = function(handle) {$/;"	f
 render	app/Exceptions/Handler.php	/^    public function render($request, Exception $exception)$/;"	f
 report	app/Exceptions/Handler.php	/^    public function report(Exception $exception)$/;"	f
+request	app/Jobs/ProcessSearch.php	/^        $this->request      = $request;$/;"	v
+request	app/Jobs/ProcessSearch.php	/^    protected $request;$/;"	v
 request	public/index.php	/^    $request = Illuminate\\Http\\Request::capture()$/;"	v
 response	public/index.php	/^$response = $kernel->handle($/;"	v
 response	tests/Feature/ExampleTest.php	/^        $response = $this->get('\/');$/;"	v
@@ -460,6 +469,7 @@ shouldIgnoreFirstNewline	public/js/app.js	/^var shouldIgnoreFirstNewline = funct
 show	app/Http/Controllers/AgentController.php	/^    public function show(Agent $agent)$/;"	f
 show	app/Http/Controllers/ListingController.php	/^    public function show($mlsNumber)$/;"	f
 sortBy	app/Listing.php	/^        $sortBy       = $request->sortBy ?? 'date_modified';$/;"	v
+sq	app/Jobs/ProcessSearch.php	/^            $sq = SearchQuery::where('search_query', $sq)$/;"	v
 sqft	app/Helpers/ListingsHelper.php	/^        $sqft                 = isset($result['LIST_48']) && is_numeric($result['LIST_48']) ? $result['LIST_48'] : 0;$/;"	v
 sqft	app/Helpers/ListingsHelper.php	/^        $sqft                 = isset($result['LIST_48']) ? $result['LIST_48'] : 0;$/;"	v
 sqft	app/Listing.php	/^        $sqft         = $request->sq_ft ?? '';$/;"	v
@@ -475,6 +485,7 @@ subAreas	app/Omnibar.php	/^        $subAreas     = Listing::getColumn($searchTer
 syncPreferredPhotos	app/Photo.php	/^    public static function syncPreferredPhotos()$/;"	f
 testBasicTest	tests/Feature/ExampleTest.php	/^    public function testBasicTest()$/;"	f
 testBasicTest	tests/Unit/ExampleTest.php	/^    public function testBasicTest()$/;"	f
+today	app/Jobs/ProcessSearch.php	/^        $today  = Carbon::now()->toDateString();$/;"	v
 transforms	public/js/app.js	/^var transforms;$/;"	v
 up	database/migrations/2014_10_12_000000_create_users_table.php	/^    public function up()$/;"	f
 up	database/migrations/2014_10_12_100000_create_password_resets_table.php	/^    public function up()$/;"	f
@@ -487,6 +498,7 @@ up	database/migrations/2017_10_27_004508_create_failed_jobs_table.php	/^    publ
 up	database/migrations/2017_10_27_140524_create_agents_table.php	/^    public function up()$/;"	f
 up	database/migrations/2017_10_27_153518_create_agent_photos_table.php	/^    public function up()$/;"	f
 up	database/migrations/2017_10_28_175622_add_association_to_agents_table.php	/^    public function up()$/;"	f
+up	database/migrations/2017_10_31_093738_create_search_queries_table.php	/^    public function up()$/;"	f
 update	app/Http/Controllers/AgentController.php	/^    public function update(Request $request, Agent $agent)$/;"	f
 updateAgents	app/Helpers/Updater.php	/^    public function updateAgents()$/;"	f
 updateListings	app/Helpers/Updater.php	/^    public function updateListings()$/;"	f
