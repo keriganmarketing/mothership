@@ -4,6 +4,7 @@ namespace App\Jobs;
 
 use App\Click;
 use App\Listing;
+use Carbon\Carbon;
 use Illuminate\Bus\Queueable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
@@ -33,6 +34,19 @@ class ProcessListingClick implements ShouldQueue
      */
     public function handle()
     {
-        Click::create(['listing_id' => $this->listing->id]);
+        $today = Carbon::now()->toDateString();
+
+        $click = Click::where('listing_id', $this->listing->id)
+            ->where('date', $today)->first();
+
+        if (count($click) > 0) {
+            $click->increment('counter');
+        } else {
+            Click::create([
+                'listing_id' => $this->listing->id,
+                'date'       => $today,
+                'counter'    => 1
+            ]);
+        }
     }
 }

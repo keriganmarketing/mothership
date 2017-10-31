@@ -16,6 +16,8 @@ class CreateClicksTable extends Migration
         Schema::create('clicks', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('listing_id')->unsigned()->index();
+            $table->date('date');
+            $table->integer('counter');
             $table->timestamps();
         });
     }

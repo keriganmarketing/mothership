@@ -156,6 +156,7 @@ classArray	app/Helpers/Builder.php	/^        $this->classArray        = $this->a
 classArray	app/Helpers/Updater.php	/^        $this->classArray        = $this->association == 'bcar' ?$/;"	v
 classArray	app/Listing.php	/^        $classArray = ['A', 'C', 'E', 'F', 'G', 'J'];$/;"	v
 cleanBcar	app/Listing.php	/^    public function cleanBcar()$/;"	f
+click	app/Jobs/ProcessListingClick.php	/^        $click = Click::where('listing_id', $this->listing->id)$/;"	v
 clickedListings	app/Listing.php	/^        $clickedListings = Click::$/;"	v
 clicks	app/Listing.php	/^            $clicks = Click::where('listing_id', $listingId)->count();$/;"	v
 clicks	app/Listing.php	/^    public function clicks()$/;"	f
@@ -263,6 +264,7 @@ hotListings	app/Listing.php	/^        $hotListings = [];$/;"	v
 hotListings	app/Listing.php	/^    public static function hotListings()$/;"	f
 ids	app/Listing.php	/^            $ids = [$agentShortId];$/;"	v
 ids	app/Listing.php	/^            $ids = explode('|', $agentShortId);$/;"	v
+impression	app/Jobs/ProcessListingImpression.php	/^            $impression = Impression::where('listing_id', $this->listing->id)$/;"	v
 impresssions	app/Listing.php	/^    public function impresssions()$/;"	f
 index	app/Http/Controllers/AgentController.php	/^    public function index()$/;"	f
 index	app/Http/Controllers/AgentListingsController.php	/^    public function index(Request $request)$/;"	f
@@ -313,6 +315,7 @@ isTextTag.model$2.preTransformNode	public/js/app.js	/^  preTransformNode: preTra
 isTextTag.optimize	public/js/app.js	/^function optimize (root, options) {$/;"	f
 isTextTag.preTransformNode	public/js/app.js	/^function preTransformNode (el, options) {$/;"	f
 isTextTag.text	public/js/app.js	/^function text (el, dir) {$/;"	f
+k	app/Jobs/ProcessSearch.php	/^        foreach ($this->request as $k => $v) {$/;"	v
 kernel	public/index.php	/^$kernel = $app->make(Illuminate\\Contracts\\Http\\Kernel::class);$/;"	v
 l	app/Jobs/CleanBcar.php	/^        $l = new Listing();$/;"	v
 lastName	app/Agent.php	/^        $lastName        = $request->lastName ?? '';$/;"	v
@@ -461,6 +464,8 @@ savePhotos	app/Photo.php	/^    public function savePhotos($listing, $photos)$/;"
 savedListing	app/Helpers/ListingsHelper.php	/^        $savedListing = $association == 'bcar' ?$/;"	v
 schedule	app/Console/Kernel.php	/^    protected function schedule(Schedule $schedule)$/;"	f
 script.onreadystatechange	public/js/app.js	/^            script.onreadystatechange = function () {$/;"	f
+searchQuery	app/Jobs/ProcessSearch.php	/^                $searchQuery = SearchQuery::where('search_query', $v)$/;"	v
+searchQuery	app/Jobs/ProcessSearch.php	/^        $searchQuery = '';$/;"	v
 searchResults	app/Agent.php	/^    public static function searchResults($request)$/;"	f
 searchResults	app/Listing.php	/^    public static function searchResults($request)$/;"	f
 searchTerm	app/Http/Controllers/OmnibarController.php	/^        $searchTerm = urldecode(str_replace('%^%', '', $request->search));$/;"	v
@@ -469,7 +474,6 @@ shouldIgnoreFirstNewline	public/js/app.js	/^var shouldIgnoreFirstNewline = funct
 show	app/Http/Controllers/AgentController.php	/^    public function show(Agent $agent)$/;"	f
 show	app/Http/Controllers/ListingController.php	/^    public function show($mlsNumber)$/;"	f
 sortBy	app/Listing.php	/^        $sortBy       = $request->sortBy ?? 'date_modified';$/;"	v
-sq	app/Jobs/ProcessSearch.php	/^            $sq = SearchQuery::where('search_query', $sq)$/;"	v
 sqft	app/Helpers/ListingsHelper.php	/^        $sqft                 = isset($result['LIST_48']) && is_numeric($result['LIST_48']) ? $result['LIST_48'] : 0;$/;"	v
 sqft	app/Helpers/ListingsHelper.php	/^        $sqft                 = isset($result['LIST_48']) ? $result['LIST_48'] : 0;$/;"	v
 sqft	app/Listing.php	/^        $sqft         = $request->sq_ft ?? '';$/;"	v
@@ -485,7 +489,9 @@ subAreas	app/Omnibar.php	/^        $subAreas     = Listing::getColumn($searchTer
 syncPreferredPhotos	app/Photo.php	/^    public static function syncPreferredPhotos()$/;"	f
 testBasicTest	tests/Feature/ExampleTest.php	/^    public function testBasicTest()$/;"	f
 testBasicTest	tests/Unit/ExampleTest.php	/^    public function testBasicTest()$/;"	f
-today	app/Jobs/ProcessSearch.php	/^        $today  = Carbon::now()->toDateString();$/;"	v
+today	app/Jobs/ProcessListingClick.php	/^        $today = Carbon::now()->toDateString();$/;"	v
+today	app/Jobs/ProcessListingImpression.php	/^        $today = Carbon::now()->toDateString();$/;"	v
+today	app/Jobs/ProcessSearch.php	/^        $today       = Carbon::now()->toDateString();$/;"	v
 transforms	public/js/app.js	/^var transforms;$/;"	v
 up	database/migrations/2014_10_12_000000_create_users_table.php	/^    public function up()$/;"	f
 up	database/migrations/2014_10_12_100000_create_password_resets_table.php	/^    public function up()$/;"	f

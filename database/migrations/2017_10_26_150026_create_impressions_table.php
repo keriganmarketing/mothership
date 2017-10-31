@@ -16,6 +16,8 @@ class CreateImpressionsTable extends Migration
         Schema::create('impressions', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('listing_id')->unsigned()->index();
+            $table->date('date');
+            $table->integer('counter');
             $table->timestamps();
         });
     }

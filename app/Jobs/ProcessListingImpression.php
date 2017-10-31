@@ -2,6 +2,7 @@
 
 namespace App\Jobs;
 
+use Carbon\Carbon;
 use App\Impression;
 use Illuminate\Bus\Queueable;
 use Illuminate\Queue\SerializesModels;
@@ -32,8 +33,21 @@ class ProcessListingImpression implements ShouldQueue
      */
     public function handle()
     {
+        $today = Carbon::now()->toDateString();
+
         foreach ($this->listings as $listing) {
-            Impression::create(['listing_id' => $listing->id]);
+            $impression = Impression::where('listing_id', $this->listing->id)
+                ->where('date', $today)->first();
+
+            if (count($impression) > 0) {
+                $impression->increment('counter');
+            } else {
+                Impression::create([
+                    'listing_id' => $this->listing->id,
+                    'date'       => $today,
+                    'counter'    => 1
+                ]);
+            }
         }
     }
 }
