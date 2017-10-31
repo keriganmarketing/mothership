@@ -36,16 +36,18 @@ class ProcessSearch implements ShouldQueue
         $searchQuery = '';
 
         foreach ($this->request as $r) {
-            $searchQuery = SearchQuery::where('search_query', $searchQuery)
-                ->whereDate('created_at', $today)->first();
+            if ($r != '') {
+                $searchQuery = SearchQuery::where('search_query', $searchQuery)
+                    ->whereDate('created_at', $today)->first();
 
-            if (count($searchQuery) > 0) {
-                $searchQuery->increment('counter');
-            } else {
-                SearchQuery::create([
-                    'search_query' => $r,
-                    'counter'      => 1
-                ]);
+                if (count($searchQuery) > 0) {
+                    $searchQuery->increment('counter');
+                } else {
+                    SearchQuery::create([
+                        'search_query' => $r,
+                        'counter'      => 1
+                    ]);
+                }
             }
         }
     }
