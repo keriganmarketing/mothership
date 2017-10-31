@@ -142,6 +142,8 @@ class Listing extends Model
             ->orWhereIn('colisting_member_shortid', $ids)
             ->get();
 
+        ProcessListingImpression::dispatch($listings);
+
         return $listings;
     }
 

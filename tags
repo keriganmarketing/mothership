@@ -61,7 +61,7 @@ RedirectIfAuthenticated	app/Http/Middleware/RedirectIfAuthenticated.php	/^class 
 RegisterController	app/Http/Controllers/Auth/RegisterController.php	/^class RegisterController extends Controller$/;"	c
 ResetPasswordController	app/Http/Controllers/Auth/ResetPasswordController.php	/^class ResetPasswordController extends Controller$/;"	c
 RouteServiceProvider	app/Providers/RouteServiceProvider.php	/^class RouteServiceProvider extends ServiceProvider$/;"	c
-SearchController	app/Http/Controllers/SearchController.php	/^class SearchController extends Controller$/;"	c
+SearchController	app/Http/Controllers/ListingsSearchController.php	/^class SearchController extends Controller$/;"	c
 SearchQuery	app/SearchQuery.php	/^class SearchQuery extends Model$/;"	c
 TestCase	tests/TestCase.php	/^abstract class TestCase extends BaseTestCase$/;"	c
 TrimStrings	app/Http/Middleware/TrimStrings.php	/^class TrimStrings extends Middleware$/;"	c
@@ -264,14 +264,14 @@ hotListings	app/Listing.php	/^        $hotListings = [];$/;"	v
 hotListings	app/Listing.php	/^    public static function hotListings()$/;"	f
 ids	app/Listing.php	/^            $ids = [$agentShortId];$/;"	v
 ids	app/Listing.php	/^            $ids = explode('|', $agentShortId);$/;"	v
-impression	app/Jobs/ProcessListingImpression.php	/^            $impression = Impression::where('listing_id', $this->listing->id)$/;"	v
+impression	app/Jobs/ProcessListingImpression.php	/^            $impression = Impression::where('listing_id', $listing->id)$/;"	v
 impresssions	app/Listing.php	/^    public function impresssions()$/;"	f
 index	app/Http/Controllers/AgentController.php	/^    public function index()$/;"	f
 index	app/Http/Controllers/AgentListingsController.php	/^    public function index(Request $request)$/;"	f
 index	app/Http/Controllers/AgentSearchController.php	/^    public function index(Request $request)$/;"	f
 index	app/Http/Controllers/HomeController.php	/^    public function index(Request $request)$/;"	f
+index	app/Http/Controllers/ListingsSearchController.php	/^    public function index(Request $request)$/;"	f
 index	app/Http/Controllers/MapSearchController.php	/^    public function index()$/;"	f
-index	app/Http/Controllers/SearchController.php	/^    public function index(Request $request)$/;"	f
 installMessageChannelImplementation	public/js/app.js	/^    function installMessageChannelImplementation() {$/;"	f
 installPostMessageImplementation	public/js/app.js	/^    function installPostMessageImplementation() {$/;"	f
 installPostMessageImplementation.onGlobalMessage	public/js/app.js	/^        var onGlobalMessage = function(event) {$/;"	f
@@ -341,8 +341,8 @@ listingId	app/Helpers/ListingsHelper.php	/^    public static function saveListin
 listingId	app/Listing.php	/^                $listingId = $fullListing->id;$/;"	v
 listings	app/Helpers/Builder.php	/^            $listings = Listing::where('class', $class)->where('association', $this->association)->get();$/;"	v
 listings	app/Http/Controllers/AgentListingsController.php	/^        $listings = Listing::forAgent($agentShortId);$/;"	v
+listings	app/Http/Controllers/ListingsSearchController.php	/^        $listings = Listing::searchResults($request);$/;"	v
 listings	app/Http/Controllers/MapSearchController.php	/^        $listings = MapSearch::getAllListings();$/;"	v
-listings	app/Http/Controllers/SearchController.php	/^        $listings = Listing::searchResults($request);$/;"	v
 listings	app/Jobs/ProcessListingImpression.php	/^        $this->listings = $listings;$/;"	v
 listings	app/Jobs/ProcessListingImpression.php	/^    protected $listings;$/;"	v
 listings	app/Listing.php	/^        $listings       = Listing::where('association', 'bcar')->pluck('mls_account');$/;"	v

@@ -2,6 +2,7 @@
 
 namespace App\Jobs;
 
+use App\Search;
 use Carbon\Carbon;
 use App\SearchQuery;
 use Illuminate\Bus\Queueable;
@@ -48,6 +49,7 @@ class ProcessSearch implements ShouldQueue
                 } else {
                     SearchQuery::create([
                         'query_type'   => $k,
+                        'search_id'    => $search->id,
                         'search_query' => $v,
                         'date'         => $today,
                         'counter'      => 1
