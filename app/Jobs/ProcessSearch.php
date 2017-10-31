@@ -36,7 +36,7 @@ class ProcessSearch implements ShouldQueue
         $searchQuery = '';
 
         foreach ($this->request as $k => $v) {
-            if ($r != '') {
+            if ($v != '') {
                 $searchQuery = SearchQuery::where('search_query', $v)
                     ->where('query_type', $k)
                     ->whereDate('date', $today)->first();
