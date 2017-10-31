@@ -1,5 +1,5 @@
 <?php
-namespace App\Http\Helpers;
+namespace App\Helpers;
 
 class EcarOptions
 {

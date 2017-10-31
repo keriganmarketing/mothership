@@ -1,16 +1,16 @@
 <?php
-namespace App\Http\Helpers;
+namespace App\Helpers;
 
 use App\Agent;
 use App\Photo;
 use App\ApiCall;
 use App\Listing;
 use App\AgentPhoto;
-use App\Http\Helpers\BcarOptions;
-use App\Http\Helpers\EcarOptions;
-use App\Http\Helpers\AgentsHelper;
+use App\Helpers\BcarOptions;
+use App\Helpers\EcarOptions;
+use App\Helpers\AgentsHelper;
 use Illuminate\Support\Facades\DB;
-use App\Http\Helpers\ListingsHelper;
+use App\Helpers\ListingsHelper;
 
 class Builder
 {

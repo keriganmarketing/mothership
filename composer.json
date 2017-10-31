@@ -27,11 +27,7 @@
         ],
         "psr-4": {
             "App\\": "app/"
-        },
-        "files": [
-            "app/Http/Helpers/BcarOptions.php",
-            "app/Http/Helpers/ListingsHelper.php"
-        ]
+        }
     },
     "autoload-dev": {
         "psr-4": {

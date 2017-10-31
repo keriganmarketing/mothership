@@ -7,10 +7,10 @@ use App\ApiCall;
 use App\Listing;
 use Carbon\Carbon;
 use App\AgentPhoto;
-use App\Http\Helpers\BcarOptions;
-use App\Http\Helpers\EcarOptions;
-use App\Http\Helpers\AgentsHelper;
-use App\Http\Helpers\ListingsHelper;
+use App\Helpers\BcarOptions;
+use App\Helpers\EcarOptions;
+use App\Helpers\AgentsHelper;
+use App\Helpers\ListingsHelper;
 
 class Updater
 {

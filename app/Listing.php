@@ -8,10 +8,10 @@ use App\ApiCall;
 use App\Listing;
 use Carbon\Carbon;
 use App\Jobs\ProcessListingImpression;
-use App\Http\Helpers\BcarOptions;
-use App\Http\Helpers\EcarOptions;
+use App\Helpers\BcarOptions;
+use App\Helpers\EcarOptions;
 use Illuminate\Support\Facades\DB;
-use App\Http\Helpers\ListingsHelper;
+use App\Helpers\ListingsHelper;
 use Illuminate\Database\Eloquent\Model;
 
 class Listing extends Model
