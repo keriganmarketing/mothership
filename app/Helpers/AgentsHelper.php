@@ -38,5 +38,6 @@ class AgentsHelper
                'office_short_id' => $result['OFFICESHORT']
             ]
         );
+        return $agent;
     }
 }
