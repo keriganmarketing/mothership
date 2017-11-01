@@ -48,6 +48,7 @@ LARAVEL_START	public/index.php	/^define('LARAVEL_START', microtime(true));$/;"	d
 Listing	app/Listing.php	/^class Listing extends Model$/;"	c
 ListingController	app/Http/Controllers/ListingController.php	/^class ListingController extends Controller$/;"	c
 ListingsHelper	app/Helpers/ListingsHelper.php	/^class ListingsHelper$/;"	c
+ListingsSearchController	app/Http/Controllers/ListingsSearchController.php	/^class ListingsSearchController extends Controller$/;"	c
 LoginController	app/Http/Controllers/Auth/LoginController.php	/^class LoginController extends Controller$/;"	c
 MapSearch	app/MapSearch.php	/^class MapSearch extends Model$/;"	c
 MapSearchController	app/Http/Controllers/MapSearchController.php	/^class MapSearchController extends Controller$/;"	c
@@ -61,7 +62,6 @@ RedirectIfAuthenticated	app/Http/Middleware/RedirectIfAuthenticated.php	/^class 
 RegisterController	app/Http/Controllers/Auth/RegisterController.php	/^class RegisterController extends Controller$/;"	c
 ResetPasswordController	app/Http/Controllers/Auth/ResetPasswordController.php	/^class ResetPasswordController extends Controller$/;"	c
 RouteServiceProvider	app/Providers/RouteServiceProvider.php	/^class RouteServiceProvider extends ServiceProvider$/;"	c
-SearchController	app/Http/Controllers/ListingsSearchController.php	/^class SearchController extends Controller$/;"	c
 SearchQuery	app/SearchQuery.php	/^class SearchQuery extends Model$/;"	c
 TestCase	tests/TestCase.php	/^abstract class TestCase extends BaseTestCase$/;"	c
 TrimStrings	app/Http/Middleware/TrimStrings.php	/^class TrimStrings extends Middleware$/;"	c
@@ -96,6 +96,7 @@ __webpack_require__.n	public/js/app.js	/^\/******\/ 	__webpack_require__.n = fun
 __webpack_require__.o	public/js/app.js	/^\/******\/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };$/;"	f
 acreage	app/Helpers/ListingsHelper.php	/^        $acreage              = $result['LIST_57'] > 0 ? $result['LIST_57'] : 0;$/;"	v
 acreage	app/Listing.php	/^        $acreage      = $request->acreage ?? '';$/;"	v
+acreage	app/MapSearch.php	/^        $acreage      = $request->acreage ?? '';$/;"	v
 addIfCondition	public/js/app.js	/^function addIfCondition (el, condition) {$/;"	f
 addressIsValid	app/Listing.php	/^    public function addressIsValid($fullAddress)$/;"	f
 addresses	app/Omnibar.php	/^        $addresses    = Listing::getColumn($searchTerm, 'full_address');$/;"	v
@@ -130,6 +131,7 @@ attrs.name	public/js/app.js	/^        name: el.attrsList[i].name,$/;"	p
 bathrooms	app/Helpers/ListingsHelper.php	/^        $bathrooms            = isset($result['LIST_67']) && is_numeric($result['LIST_67']) ? $result['LIST_67'] : 0;$/;"	v
 bathrooms	app/Helpers/ListingsHelper.php	/^        $bathrooms            = isset($result['LIST_67']) ? $result['LIST_67'] : 0;$/;"	v
 baths	app/Listing.php	/^        $baths        = $request->bathrooms ?? '';$/;"	v
+baths	app/MapSearch.php	/^        $baths        = $request->bathrooms ?? '';$/;"	v
 bcarLoginUrl	app/ApiCall.php	/^    private function bcarLoginUrl()$/;"	f
 bcarOptions	app/Helpers/BcarOptions.php	/^        $bcarOptions = [$/;"	v
 bcarOptions	app/Listing.php	/^        $bcarOptions    = BcarOptions::all();$/;"	v
@@ -139,6 +141,7 @@ bcarUserName	app/ApiCall.php	/^    private function bcarUserName()$/;"	f
 bedrooms	app/Helpers/ListingsHelper.php	/^        $bedrooms             = isset($result['LIST_66']) && is_numeric($result['LIST_66']) ? $result['LIST_66'] : 0;$/;"	v
 bedrooms	app/Helpers/ListingsHelper.php	/^        $bedrooms             = isset($result['LIST_66']) ? $result['LIST_66'] : 0;$/;"	v
 beds	app/Listing.php	/^        $beds         = $request->bedrooms ?? '';$/;"	v
+beds	app/MapSearch.php	/^        $beds         = $request->bedrooms ?? '';$/;"	v
 bindRE	public/js/app.js	/^var bindRE = \/^:|^v-bind:\/;$/;"	v
 boot	app/Providers/AppServiceProvider.php	/^    public function boot()$/;"	f
 boot	app/Providers/AuthServiceProvider.php	/^    public function boot()$/;"	f
@@ -152,13 +155,12 @@ checkInFor	public/js/app.js	/^function checkInFor (el) {$/;"	f
 cities	app/Omnibar.php	/^        $cities       = Listing::getColumn($searchTerm, 'city');$/;"	v
 city	app/Listing.php	/^        $city         = $request->city ?? '';$/;"	v
 city	app/Listing.php	/^        $city         = ', '. $listing->city;$/;"	v
+city	app/MapSearch.php	/^        $city         = $request->city ?? '';$/;"	v
 classArray	app/Helpers/Builder.php	/^        $this->classArray        = $this->association == 'bcar' ?$/;"	v
 classArray	app/Helpers/Updater.php	/^        $this->classArray        = $this->association == 'bcar' ?$/;"	v
 classArray	app/Listing.php	/^        $classArray = ['A', 'C', 'E', 'F', 'G', 'J'];$/;"	v
 cleanBcar	app/Listing.php	/^    public function cleanBcar()$/;"	f
 click	app/Jobs/ProcessListingClick.php	/^        $click = Click::where('listing_id', $this->listing->id)$/;"	v
-clickedListings	app/Listing.php	/^        $clickedListings = Click::$/;"	v
-clicks	app/Listing.php	/^            $clicks = Click::where('listing_id', $listingId)->count();$/;"	v
 clicks	app/Listing.php	/^    public function clicks()$/;"	f
 commands	app/Console/Kernel.php	/^    protected $commands = [$/;"	v
 commands	app/Console/Kernel.php	/^    protected function commands()$/;"	f
@@ -238,7 +240,7 @@ fullAddress	app/Listing.php	/^        $fullAddress  = $streetNumber . ' ' . $str
 fullBaths	app/Helpers/ListingsHelper.php	/^        $fullBaths            = isset($result['LIST_68']) ? $result['LIST_68'] : 0;$/;"	v
 fullListing	app/Listing.php	/^                $fullListing = Listing::where('mls_account', $listing)->first();$/;"	v
 fullName	app/Agent.php	/^        $fullName        = $request->fullName ?? '';$/;"	v
-getAllListings	app/MapSearch.php	/^    public static function getAllListings()$/;"	f
+getAllListings	app/MapSearch.php	/^    public static function getAllListings($request)$/;"	f
 getColumn	app/Listing.php	/^    public static function getColumn($searchTerm, $columnName)$/;"	f
 guard	app/Http/Middleware/RedirectIfAuthenticated.php	/^    public function handle($request, Closure $next, $guard = null)$/;"	v
 guarded	app/Agent.php	/^    protected $guarded = [];$/;"	v
@@ -259,9 +261,6 @@ handle	app/Jobs/UpdateBcar.php	/^    public function handle()$/;"	f
 handle	app/Jobs/UpdateEcar.php	/^    public function handle()$/;"	f
 headers	app/Http/Middleware/TrustProxies.php	/^    protected $headers = [$/;"	v
 hidden	app/User.php	/^    protected $hidden = [$/;"	v
-hotListings	app/Http/Controllers/HomeController.php	/^        $hotListings = Listing::hotListings();$/;"	v
-hotListings	app/Listing.php	/^        $hotListings = [];$/;"	v
-hotListings	app/Listing.php	/^    public static function hotListings()$/;"	f
 ids	app/Listing.php	/^            $ids = [$agentShortId];$/;"	v
 ids	app/Listing.php	/^            $ids = explode('|', $agentShortId);$/;"	v
 impression	app/Jobs/ProcessListingImpression.php	/^            $impression = Impression::where('listing_id', $listing->id)$/;"	v
@@ -271,7 +270,7 @@ index	app/Http/Controllers/AgentListingsController.php	/^    public function ind
 index	app/Http/Controllers/AgentSearchController.php	/^    public function index(Request $request)$/;"	f
 index	app/Http/Controllers/HomeController.php	/^    public function index(Request $request)$/;"	f
 index	app/Http/Controllers/ListingsSearchController.php	/^    public function index(Request $request)$/;"	f
-index	app/Http/Controllers/MapSearchController.php	/^    public function index()$/;"	f
+index	app/Http/Controllers/MapSearchController.php	/^    public function index(Request $request)$/;"	f
 installMessageChannelImplementation	public/js/app.js	/^    function installMessageChannelImplementation() {$/;"	f
 installPostMessageImplementation	public/js/app.js	/^    function installPostMessageImplementation() {$/;"	f
 installPostMessageImplementation.onGlobalMessage	public/js/app.js	/^        var onGlobalMessage = function(event) {$/;"	f
@@ -342,7 +341,7 @@ listingId	app/Listing.php	/^                $listingId = $fullListing->id;$/;"	v
 listings	app/Helpers/Builder.php	/^            $listings = Listing::where('class', $class)->where('association', $this->association)->get();$/;"	v
 listings	app/Http/Controllers/AgentListingsController.php	/^        $listings = Listing::forAgent($agentShortId);$/;"	v
 listings	app/Http/Controllers/ListingsSearchController.php	/^        $listings = Listing::searchResults($request);$/;"	v
-listings	app/Http/Controllers/MapSearchController.php	/^        $listings = MapSearch::getAllListings();$/;"	v
+listings	app/Http/Controllers/MapSearchController.php	/^        $listings = MapSearch::getAllListings($request);$/;"	v
 listings	app/Jobs/ProcessListingImpression.php	/^        $this->listings = $listings;$/;"	v
 listings	app/Jobs/ProcessListingImpression.php	/^    protected $listings;$/;"	v
 listings	app/Listing.php	/^        $listings       = Listing::where('association', 'bcar')->pluck('mls_account');$/;"	v
@@ -361,11 +360,13 @@ map	app/Providers/RouteServiceProvider.php	/^    public function map()$/;"	f
 mapApiRoutes	app/Providers/RouteServiceProvider.php	/^    protected function mapApiRoutes()$/;"	f
 mapWebRoutes	app/Providers/RouteServiceProvider.php	/^    protected function mapWebRoutes()$/;"	f
 maxPrice	app/Listing.php	/^        $maxPrice     = $request->maxPrice ?? '';$/;"	v
+maxPrice	app/MapSearch.php	/^        $maxPrice     = $request->maxPrice ?? '';$/;"	v
 maxRowsReached	app/Helpers/Builder.php	/^                $maxRowsReached = true;$/;"	v
 maxRowsReached	app/Helpers/Builder.php	/^        $maxRowsReached = false;$/;"	v
 middleware	app/Http/Kernel.php	/^    protected $middleware = [$/;"	v
 middlewareGroups	app/Http/Kernel.php	/^    protected $middlewareGroups = [$/;"	v
 minPrice	app/Listing.php	/^        $minPrice     = $request->minPrice ?? '';$/;"	v
+minPrice	app/MapSearch.php	/^        $minPrice     = $request->minPrice ?? '';$/;"	v
 mls	app/Helpers/Builder.php	/^        $this->mls               = new ApiCall($this->association);$/;"	v
 mls	app/Helpers/Updater.php	/^        $this->mls               = new ApiCall($this->association);$/;"	v
 mls	app/Listing.php	/^        $mls            = new ApiCall('bcar');$/;"	v
@@ -375,7 +376,6 @@ mlsNumbers	app/Omnibar.php	/^        $mlsNumbers   = Listing::getColumn($searchT
 modifierRE	public/js/app.js	/^var modifierRE = \/\\.[^.]+\/g;$/;"	v
 namespace	app/Providers/RouteServiceProvider.php	/^    protected $namespace = 'App\\Http\\Controllers';$/;"	v
 ncname	public/js/app.js	/^var ncname = '[a-zA-Z_][\\\\w\\\\-\\\\.]*';$/;"	v
-now	app/Listing.php	/^        $now = Carbon::now();$/;"	v
 officeShortId	app/Agent.php	/^        $officeShortId   = $request->officeShortId ?? '';$/;"	v
 offset	app/Helpers/Builder.php	/^        $offset         = 0;$/;"	v
 offset	app/Helpers/Builder.php	/^        $offset = 0;$/;"	v
@@ -384,6 +384,7 @@ onRE	public/js/app.js	/^var onRE = \/^@|^v-on:\/;$/;"	v
 options	app/Helpers/Builder.php	/^        $options        = $this->association == 'bcar' ?$/;"	v
 options	app/Helpers/Updater.php	/^        $options = $this->association == 'bcar' ?$/;"	v
 orderBy	app/Listing.php	/^        $orderBy      = $request->orderBy ?? 'DESC';$/;"	v
+orderBy	app/MapSearch.php	/^        $orderBy      = $request->orderBy ?? 'DESC';$/;"	v
 parse	public/js/app.js	/^function parse ($/;"	f
 parse.endPre	public/js/app.js	/^  function endPre (element) {$/;"	f
 parse.warnOnce	public/js/app.js	/^  function warnOnce (msg) {$/;"	f
@@ -415,6 +416,7 @@ policies	app/Providers/AuthServiceProvider.php	/^    protected $policies = [$/;"
 pool	app/Helpers/ListingsHelper.php	/^            $pool                 = ($result['LIST_147'] == 'Yes') ? 1 : 0;$/;"	v
 pool	app/Helpers/ListingsHelper.php	/^        $pool                 = null;$/;"	v
 pool	app/Listing.php	/^        $pool         = $request->pool ?? '';$/;"	v
+pool	app/MapSearch.php	/^        $pool         = $request->pool ?? '';$/;"	v
 postTransforms	public/js/app.js	/^var postTransforms;$/;"	v
 preTransforms	public/js/app.js	/^var preTransforms;$/;"	v
 price	app/Helpers/ListingsHelper.php	/^        $price                = is_numeric($result['LIST_22']) ? $result['LIST_22'] : 0;$/;"	v
@@ -432,6 +434,8 @@ processRef	public/js/app.js	/^function processRef (el) {$/;"	f
 processSlot	public/js/app.js	/^function processSlot (el) {$/;"	f
 propertyType	app/Listing.php	/^            $propertyType = explode('|', $propertyType);$/;"	v
 propertyType	app/Listing.php	/^        $propertyType = $request->propertyType ?? '';$/;"	v
+propertyType	app/MapSearch.php	/^            $propertyType = explode('|', $propertyType);$/;"	v
+propertyType	app/MapSearch.php	/^        $propertyType = $request->propertyType ?? '';$/;"	v
 proxies	app/Http/Middleware/TrustProxies.php	/^    protected $proxies;$/;"	v
 qnameCapture	public/js/app.js	/^var qnameCapture = "((?:" + ncname + "\\\\:)?" + ncname + ")";$/;"	v
 redirectTo	app/Http/Controllers/Auth/LoginController.php	/^    protected $redirectTo = '\/home';$/;"	v
@@ -474,12 +478,16 @@ shouldIgnoreFirstNewline	public/js/app.js	/^var shouldIgnoreFirstNewline = funct
 show	app/Http/Controllers/AgentController.php	/^    public function show(Agent $agent)$/;"	f
 show	app/Http/Controllers/ListingController.php	/^    public function show($mlsNumber)$/;"	f
 sortBy	app/Listing.php	/^        $sortBy       = $request->sortBy ?? 'date_modified';$/;"	v
+sortBy	app/MapSearch.php	/^        $sortBy       = $request->sortBy ?? 'date_modified';$/;"	v
 sqft	app/Helpers/ListingsHelper.php	/^        $sqft                 = isset($result['LIST_48']) && is_numeric($result['LIST_48']) ? $result['LIST_48'] : 0;$/;"	v
 sqft	app/Helpers/ListingsHelper.php	/^        $sqft                 = isset($result['LIST_48']) ? $result['LIST_48'] : 0;$/;"	v
 sqft	app/Listing.php	/^        $sqft         = $request->sq_ft ?? '';$/;"	v
+sqft	app/MapSearch.php	/^        $sqft         = $request->sq_ft ?? '';$/;"	v
 startTagClose	public/js/app.js	/^var startTagClose = \/^\\s*(\\\/?)>\/;$/;"	v
 status	app/Listing.php	/^            $status = explode('|', $status);$/;"	v
 status	app/Listing.php	/^        $status       = $request->status ?? '';$/;"	v
+status	app/MapSearch.php	/^            $status = explode('|', $status);$/;"	v
+status	app/MapSearch.php	/^        $status       = $request->status ?? '';$/;"	v
 stories	app/Helpers/ListingsHelper.php	/^            $stories              = is_numeric($result['LIST_64']) ? $result['LIST_64'] : 0;$/;"	v
 stories	app/Helpers/ListingsHelper.php	/^        $stories              = isset($result['LIST_64']) && is_numeric($result['LIST_64']) ? $result['LIST_64'] : 0;$/;"	v
 stories	app/Helpers/ListingsHelper.php	/^        $stories              = isset($result['LIST_64']) && is_numeric($result['LIST_64']) ? $result['LIST_64'] : 1;$/;"	v
@@ -530,6 +538,7 @@ warn$2	public/js/app.js	/^var warn$2;$/;"	v
 waterfront	app/Helpers/BcarOptions.php	/^        $waterfront = 'LIST_192';$/;"	v
 waterfront	app/Helpers/EcarOptions.php	/^        $waterfront = 'GF20131203222329624962000000'; \/\/mother of god$/;"	v
 waterfront	app/Listing.php	/^        $waterfront   = $request->waterfront ?? '';$/;"	v
+waterfront	app/MapSearch.php	/^        $waterfront   = $request->waterfront ?? '';$/;"	v
 waterviewDescription	app/Helpers/ListingsHelper.php	/^            $waterviewDescription = $result['GF20131203222538613490000000'];$/;"	v
 waterviewDescription	app/Helpers/ListingsHelper.php	/^            $waterviewDescription = $result['GF20131230164916093183000000'];$/;"	v
 waterviewDescription	app/Helpers/ListingsHelper.php	/^            $waterviewDescription = $result['GF20131230211345387488000000'];$/;"	v

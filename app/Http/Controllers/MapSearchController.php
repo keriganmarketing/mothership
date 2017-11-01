@@ -12,9 +12,9 @@ class MapSearchController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $listings = MapSearch::getAllListings();
+        $listings = MapSearch::getAllListings($request);
 
         return response()->json($listings);
     }
