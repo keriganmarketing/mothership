@@ -6,6 +6,7 @@ Route::get('/', function () {
 });
 Route::get('/api/v1/search', 'ListingsSearchController@index');
 Route::get('/api/v1/listing/{mlsNumber}', 'ListingController@show');
+Route::get('/api/v1/listings', 'ListingController@index');
 Route::get('/api/v1/omnibar', 'OmnibarController@create');
 Route::get('/api/v1/allMapListings', 'MapSearchController@index');
 Route::get('/api/v1/agentlistings', 'AgentListingsController@index');

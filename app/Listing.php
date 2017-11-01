@@ -7,11 +7,11 @@ use App\Photo;
 use App\ApiCall;
 use App\Listing;
 use Carbon\Carbon;
-use App\Jobs\ProcessListingImpression;
 use App\Helpers\BcarOptions;
 use App\Helpers\EcarOptions;
-use Illuminate\Support\Facades\DB;
 use App\Helpers\ListingsHelper;
+use Illuminate\Support\Facades\DB;
+use App\Jobs\ProcessListingImpression;
 use Illuminate\Database\Eloquent\Model;
 
 class Listing extends Model
@@ -163,58 +163,19 @@ class Listing extends Model
 
     public function addressIsValid($fullAddress)
     {
+        // I just want to point out that I came up with this REGEX all by myself and it
+        // only took 2 hours of testing...
+        // This is as close as I can get to filtering out the garbage that realtors put
+        // in the address field
         return preg_match('/^[1-9]+([0-9]*)?\s(\d*?)([A-Z]+)?[a-z].+$/', $fullAddress);
     }
 
-    /**
-     * Clean the BCAR listings table
-     *
-     * @return void
-     */
-    public function cleanBcar()
+    public static function findByMlsNumbers($mlsNumbers)
     {
-        $mls            = new ApiCall('bcar');
-        $rets           = $mls->login();
-        $bcarOptions    = BcarOptions::all();
-        $listings       = Listing::where('association', 'bcar')->pluck('mls_account');
-        $listingsArray  = [];
-        $listingCounter = 0;
-        $photoCounter   = 0;
+        $mlsArray = explode('|', $mlsNumbers);
 
-        $classArray = ['A', 'C', 'E', 'F', 'G', 'J'];
+        $listings = Listing::whereIn('mls_account', $mlsArray)->get();
 
-        foreach ($classArray as $class) {
-            $results = $rets->Search(
-                'Property',
-                $class,
-                '*',
-                [
-                'Limit' => '99999',
-                'Offset' => 0,
-                'Select' => 'LIST_3'
-                ]
-            );
-            foreach ($results as $result) {
-                array_push($listingsArray, $result['LIST_3']);
-            }
-        }
-        foreach ($listings as $listing) {
-            if (! in_array($listing, $listingsArray)) {
-                $fullListing = Listing::where('mls_account', $listing)->first();
-                $listingId = $fullListing->id;
-                $fullListing->delete();
-                $listingCounter = $listingCounter + 1;
-                echo '.';
-
-                $photos = Photo::where('listing_id', $listingId)->get();
-                foreach ($photos as $photo) {
-                    $photo->delete();
-                    $photoCounter = $photoCounter +1;
-                    echo '*';
-                }
-            }
-        }
-        echo "Listings deleted: {$listingCounter}";
-        echo "Photos deleted: {$photoCounter}";
+        return $listings;
     }
 }

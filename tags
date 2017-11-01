@@ -134,7 +134,7 @@ baths	app/Listing.php	/^        $baths        = $request->bathrooms ?? '';$/;"	v
 baths	app/MapSearch.php	/^        $baths        = $request->bathrooms ?? '';$/;"	v
 bcarLoginUrl	app/ApiCall.php	/^    private function bcarLoginUrl()$/;"	f
 bcarOptions	app/Helpers/BcarOptions.php	/^        $bcarOptions = [$/;"	v
-bcarOptions	app/Listing.php	/^        $bcarOptions    = BcarOptions::all();$/;"	v
+bcarOptions	app/Jobs/CleanBcar.php	/^        $bcarOptions    = BcarOptions::all();$/;"	v
 bcarPassword	app/ApiCall.php	/^    private function bcarPassword()$/;"	f
 bcarUpdater	app/Jobs/UpdateAgents.php	/^        $bcarUpdater = new Updater('bcar');$/;"	v
 bcarUserName	app/ApiCall.php	/^    private function bcarUserName()$/;"	f
@@ -158,8 +158,7 @@ city	app/Listing.php	/^        $city         = ', '. $listing->city;$/;"	v
 city	app/MapSearch.php	/^        $city         = $request->city ?? '';$/;"	v
 classArray	app/Helpers/Builder.php	/^        $this->classArray        = $this->association == 'bcar' ?$/;"	v
 classArray	app/Helpers/Updater.php	/^        $this->classArray        = $this->association == 'bcar' ?$/;"	v
-classArray	app/Listing.php	/^        $classArray = ['A', 'C', 'E', 'F', 'G', 'J'];$/;"	v
-cleanBcar	app/Listing.php	/^    public function cleanBcar()$/;"	f
+classArray	app/Jobs/CleanBcar.php	/^        $classArray = ['A', 'C', 'E', 'F', 'G', 'J'];$/;"	v
 click	app/Jobs/ProcessListingClick.php	/^        $click = Click::where('listing_id', $this->listing->id)$/;"	v
 clicks	app/Listing.php	/^    public function clicks()$/;"	f
 commands	app/Console/Kernel.php	/^    protected $commands = [$/;"	v
@@ -226,6 +225,7 @@ exterior	app/Helpers/ListingsHelper.php	/^        $exterior             = null;$
 fetchListings	app/Helpers/Builder.php	/^    private function fetchListings($class)$/;"	f
 fetchPhotos	app/Helpers/Builder.php	/^    private function fetchPhotos($listing)$/;"	f
 fillable	app/User.php	/^    protected $fillable = [$/;"	v
+findByMlsNumbers	app/Listing.php	/^    public static function findByMlsNumbers($mlsNumbers)$/;"	f
 findPrevElement	public/js/app.js	/^function findPrevElement (children) {$/;"	f
 firstName	app/Agent.php	/^        $firstName       = $request->firstName ?? '';$/;"	v
 for	app/Helpers/ListingsHelper.php	/^     * @param string $class  The class for the listing$/;"	c
@@ -238,7 +238,7 @@ freshListings	app/Helpers/Builder.php	/^    public function freshListings()$/;"	
 freshPhotos	app/Helpers/Builder.php	/^    public function freshPhotos()$/;"	f
 fullAddress	app/Listing.php	/^        $fullAddress  = $streetNumber . ' ' . $streetName . $city;$/;"	v
 fullBaths	app/Helpers/ListingsHelper.php	/^        $fullBaths            = isset($result['LIST_68']) ? $result['LIST_68'] : 0;$/;"	v
-fullListing	app/Listing.php	/^                $fullListing = Listing::where('mls_account', $listing)->first();$/;"	v
+fullListing	app/Jobs/CleanBcar.php	/^                $fullListing = Listing::where('mls_account', $listing)->first();$/;"	v
 fullName	app/Agent.php	/^        $fullName        = $request->fullName ?? '';$/;"	v
 getAllListings	app/MapSearch.php	/^    public static function getAllListings($request)$/;"	f
 getColumn	app/Listing.php	/^    public static function getColumn($searchTerm, $columnName)$/;"	f
@@ -269,6 +269,7 @@ index	app/Http/Controllers/AgentController.php	/^    public function index()$/;"
 index	app/Http/Controllers/AgentListingsController.php	/^    public function index(Request $request)$/;"	f
 index	app/Http/Controllers/AgentSearchController.php	/^    public function index(Request $request)$/;"	f
 index	app/Http/Controllers/HomeController.php	/^    public function index(Request $request)$/;"	f
+index	app/Http/Controllers/ListingController.php	/^    public function index(Request $request)$/;"	f
 index	app/Http/Controllers/ListingsSearchController.php	/^    public function index(Request $request)$/;"	f
 index	app/Http/Controllers/MapSearchController.php	/^    public function index(Request $request)$/;"	f
 installMessageChannelImplementation	public/js/app.js	/^    function installMessageChannelImplementation() {$/;"	f
@@ -316,7 +317,6 @@ isTextTag.preTransformNode	public/js/app.js	/^function preTransformNode (el, opt
 isTextTag.text	public/js/app.js	/^function text (el, dir) {$/;"	f
 k	app/Jobs/ProcessSearch.php	/^        foreach ($this->request as $k => $v) {$/;"	v
 kernel	public/index.php	/^$kernel = $app->make(Illuminate\\Contracts\\Http\\Kernel::class);$/;"	v
-l	app/Jobs/CleanBcar.php	/^        $l = new Listing();$/;"	v
 lastName	app/Agent.php	/^        $lastName        = $request->lastName ?? '';$/;"	v
 lastTaxYear	app/Helpers/ListingsHelper.php	/^        $lastTaxYear          = $result['LIST_76'] > 0 && is_numeric($result['LIST_76']) && $result['LIST_76'] < 9999 ? $result['LIST_76'] : 0;$/;"	v
 lastTaxYear	app/Helpers/ListingsHelper.php	/^        $lastTaxYear          = $result['LIST_76'] > 0 ? $result['LIST_76'] : 0;$/;"	v
@@ -334,21 +334,23 @@ listing	app/Jobs/ProcessListingClick.php	/^        $this->listing = $listing;$/;
 listing	app/Jobs/ProcessListingClick.php	/^    protected $listing;$/;"	v
 listing	app/Photo.php	/^            $listing = Listing::where('id', $photo->listing_id)->first();$/;"	v
 listing	app/Photo.php	/^    public function listing()$/;"	f
-listingCounter	app/Listing.php	/^                $listingCounter = $listingCounter + 1;$/;"	v
-listingCounter	app/Listing.php	/^        $listingCounter = 0;$/;"	v
+listingCounter	app/Jobs/CleanBcar.php	/^                $listingCounter = $listingCounter + 1;$/;"	v
+listingCounter	app/Jobs/CleanBcar.php	/^        $listingCounter = 0;$/;"	v
 listingId	app/Helpers/ListingsHelper.php	/^    public static function saveListing($association, $result, $class, $listingId = -1)$/;"	v
-listingId	app/Listing.php	/^                $listingId = $fullListing->id;$/;"	v
+listingId	app/Jobs/CleanBcar.php	/^                $listingId = $fullListing->id;$/;"	v
 listings	app/Helpers/Builder.php	/^            $listings = Listing::where('class', $class)->where('association', $this->association)->get();$/;"	v
 listings	app/Http/Controllers/AgentListingsController.php	/^        $listings = Listing::forAgent($agentShortId);$/;"	v
+listings	app/Http/Controllers/ListingController.php	/^        $listings = Listing::findByMlsNumbers($request->mlsNumbers);$/;"	v
 listings	app/Http/Controllers/ListingsSearchController.php	/^        $listings = Listing::searchResults($request);$/;"	v
 listings	app/Http/Controllers/MapSearchController.php	/^        $listings = MapSearch::getAllListings($request);$/;"	v
+listings	app/Jobs/CleanBcar.php	/^        $listings       = Listing::where('association', 'bcar')->pluck('mls_account');$/;"	v
 listings	app/Jobs/ProcessListingImpression.php	/^        $this->listings = $listings;$/;"	v
 listings	app/Jobs/ProcessListingImpression.php	/^    protected $listings;$/;"	v
-listings	app/Listing.php	/^        $listings       = Listing::where('association', 'bcar')->pluck('mls_account');$/;"	v
 listings	app/Listing.php	/^        $listings = Listing::when($city, function ($query) use ($city) {$/;"	v
 listings	app/Listing.php	/^        $listings = Listing::whereIn('listing_member_shortid', $ids)$/;"	v
+listings	app/Listing.php	/^        $listings = Listing::whereIn('mls_account', $mlsArray)->get();$/;"	v
 listings	app/MapSearch.php	/^        $listings = DB::table('listings')$/;"	v
-listingsArray	app/Listing.php	/^        $listingsArray  = [];$/;"	v
+listingsArray	app/Jobs/CleanBcar.php	/^        $listingsArray  = [];$/;"	v
 loader	public/index.php	/^| Composer provides a convenient, automatically generated class loader for$/;"	c
 login	app/ApiCall.php	/^    public function login()$/;"	f
 loginUrl	app/ApiCall.php	/^        $this->loginUrl    = $this->association == 'bcar' ? $this->bcarLoginUrl() : $this->ecarLoginUrl();$/;"	v
@@ -369,7 +371,8 @@ minPrice	app/Listing.php	/^        $minPrice     = $request->minPrice ?? '';$/;"
 minPrice	app/MapSearch.php	/^        $minPrice     = $request->minPrice ?? '';$/;"	v
 mls	app/Helpers/Builder.php	/^        $this->mls               = new ApiCall($this->association);$/;"	v
 mls	app/Helpers/Updater.php	/^        $this->mls               = new ApiCall($this->association);$/;"	v
-mls	app/Listing.php	/^        $mls            = new ApiCall('bcar');$/;"	v
+mls	app/Jobs/CleanBcar.php	/^        $mls            = new ApiCall('bcar');$/;"	v
+mlsArray	app/Listing.php	/^        $mlsArray = explode('|', $mlsNumbers);$/;"	v
 mlsId	app/Helpers/Updater.php	/^            $mlsId = $result['MEMBER_0'];$/;"	v
 mlsNumber	app/Helpers/Updater.php	/^                $mlsNumber = $result['LIST_3'];$/;"	v
 mlsNumbers	app/Omnibar.php	/^        $mlsNumbers   = Listing::getColumn($searchTerm, 'mls_account');$/;"	v
@@ -398,15 +401,15 @@ parseModifiers	public/js/app.js	/^function parseModifiers (name) {$/;"	f
 password	app/ApiCall.php	/^        $this->password    = $this->association == 'bcar' ? $this->bcarPassword() : $this->ecarPassword();$/;"	v
 password	database/factories/UserFactory.php	/^        'password' => $password ?: $password = bcrypt('secret'),$/;"	v
 password	database/factories/UserFactory.php	/^    static $password;$/;"	v
-photoCounter	app/Listing.php	/^                    $photoCounter = $photoCounter +1;$/;"	v
-photoCounter	app/Listing.php	/^        $photoCounter   = 0;$/;"	v
+photoCounter	app/Jobs/CleanBcar.php	/^                    $photoCounter = $photoCounter +1;$/;"	v
+photoCounter	app/Jobs/CleanBcar.php	/^        $photoCounter   = 0;$/;"	v
 photos	app/Agent.php	/^    public function photos()$/;"	f
 photos	app/Helpers/Builder.php	/^                $photos = $this->fetchPhotos($listing);$/;"	v
 photos	app/Helpers/Builder.php	/^        $photos = $this->rets->GetObject('ActiveAgent', 'Photo', $agent->agent_id, '*', 1);$/;"	v
 photos	app/Helpers/Builder.php	/^        $photos = $this->rets->GetObject('Property', 'HiRes', $listing->mls_account, '*', 1);$/;"	v
 photos	app/Helpers/Updater.php	/^                    $photos  = $this->rets->GetObject('Property', 'HiRes', $mlsNumber, '*', 1);$/;"	v
 photos	app/Helpers/Updater.php	/^                $photos = $this->rets->GetObject('ActiveAgent', 'Photo', $agent->agent_id, '*', 1);$/;"	v
-photos	app/Listing.php	/^                $photos = Photo::where('listing_id', $listingId)->get();$/;"	v
+photos	app/Jobs/CleanBcar.php	/^                $photos = Photo::where('listing_id', $listingId)->get();$/;"	v
 photos	app/Listing.php	/^    public function photos()$/;"	f
 photos	app/Photo.php	/^        $photos    = Photo::where('preferred', 1)->get();$/;"	v
 platformGetTagNamespace	public/js/app.js	/^var platformGetTagNamespace;$/;"	v
@@ -454,11 +457,11 @@ results	app/Helpers/Builder.php	/^            $results = $this->rets->Search($/;
 results	app/Helpers/Builder.php	/^            $results = $this->rets->Search('Property', $class, '*', $options[$class]);$/;"	v
 results	app/Helpers/Updater.php	/^            $results = $this->rets->Search($/;"	v
 results	app/Helpers/Updater.php	/^        $results = $this->rets->Search($/;"	v
-results	app/Listing.php	/^            $results = $rets->Search($/;"	v
+results	app/Jobs/CleanBcar.php	/^            $results = $rets->Search($/;"	v
 rets	app/ApiCall.php	/^        $rets = new Session($config);$/;"	v
 rets	app/Helpers/Builder.php	/^        $this->rets              = $this->mls->login();$/;"	v
 rets	app/Helpers/Updater.php	/^        $this->rets              = $this->mls->login();$/;"	v
-rets	app/Listing.php	/^        $rets           = $mls->login();$/;"	v
+rets	app/Jobs/CleanBcar.php	/^        $rets           = $mls->login();$/;"	v
 return	public/js/app.js	/^\/******\/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };$/;"	c
 return.hasOwnProperty	public/js/app.js	/^\/******\/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };$/;"	m
 routeMiddleware	app/Http/Kernel.php	/^    protected $routeMiddleware = [$/;"	v

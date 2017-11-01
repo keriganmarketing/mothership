@@ -9,6 +9,17 @@ use Illuminate\Http\Request;
 
 class ListingController extends Controller
 {
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index(Request $request)
+    {
+        $listings = Listing::findByMlsNumbers($request->mlsNumbers);
+
+        return response()->json($listings);
+    }
 
     /**
      * Display the specified resource.
