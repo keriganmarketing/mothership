@@ -4,13 +4,16 @@
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/api/v1/search', 'ListingsSearchController@index');
-Route::get('/api/v1/listing/{mlsNumber}', 'ListingController@show');
-Route::get('/api/v1/listings', 'ListingController@index');
-Route::get('/api/v1/omnibar', 'OmnibarController@create');
-Route::get('/api/v1/allMapListings', 'MapSearchController@index');
-Route::get('/api/v1/agentlistings', 'AgentListingsController@index');
-Route::get('/api/v1/agents', 'AgentSearchController@index');
+Route::prefix('api/v1')->group(function () {
+    Route::get('search', 'ListingsSearchController@index');
+    Route::get('listing/{mlsNumber}', 'ListingController@show');
+    Route::get('listings', 'ListingController@index');
+    Route::get('omnibar', 'OmnibarController@create');
+    Route::get('allMapListings', 'MapSearchController@index');
+    Route::get('agentlistings', 'AgentListingsController@index');
+    Route::get('agents', 'AgentSearchController@index');
+    Route::get('updatedListings', 'UpdatedListingsController@index');
+});
 
 Auth::routes();
 

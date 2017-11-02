@@ -69,6 +69,7 @@ TrustProxies	app/Http/Middleware/TrustProxies.php	/^class TrustProxies extends M
 UpdateAgents	app/Jobs/UpdateAgents.php	/^class UpdateAgents implements ShouldQueue$/;"	c
 UpdateBcar	app/Jobs/UpdateBcar.php	/^class UpdateBcar implements ShouldQueue$/;"	c
 UpdateEcar	app/Jobs/UpdateEcar.php	/^class UpdateEcar implements ShouldQueue$/;"	c
+UpdatedListingsController	app/Http/Controllers/UpdatedListingsController.php	/^class UpdatedListingsController extends Controller$/;"	c
 Updater	app/Helpers/Updater.php	/^class Updater$/;"	c
 User	app/User.php	/^class User extends Authenticatable$/;"	c
 VerifyCsrfToken	app/Http/Middleware/VerifyCsrfToken.php	/^class VerifyCsrfToken extends Middleware$/;"	c
@@ -272,6 +273,7 @@ index	app/Http/Controllers/HomeController.php	/^    public function index(Reques
 index	app/Http/Controllers/ListingController.php	/^    public function index(Request $request)$/;"	f
 index	app/Http/Controllers/ListingsSearchController.php	/^    public function index(Request $request)$/;"	f
 index	app/Http/Controllers/MapSearchController.php	/^    public function index(Request $request)$/;"	f
+index	app/Http/Controllers/UpdatedListingsController.php	/^    public function index()$/;"	f
 installMessageChannelImplementation	public/js/app.js	/^    function installMessageChannelImplementation() {$/;"	f
 installPostMessageImplementation	public/js/app.js	/^    function installPostMessageImplementation() {$/;"	f
 installPostMessageImplementation.onGlobalMessage	public/js/app.js	/^        var onGlobalMessage = function(event) {$/;"	f
@@ -343,6 +345,7 @@ listings	app/Http/Controllers/AgentListingsController.php	/^        $listings = 
 listings	app/Http/Controllers/ListingController.php	/^        $listings = Listing::findByMlsNumbers($request->mlsNumbers);$/;"	v
 listings	app/Http/Controllers/ListingsSearchController.php	/^        $listings = Listing::searchResults($request);$/;"	v
 listings	app/Http/Controllers/MapSearchController.php	/^        $listings = MapSearch::getAllListings($request);$/;"	v
+listings	app/Http/Controllers/UpdatedListingsController.php	/^        $listings = Listing::whereDate('date_modified', $today)->get();$/;"	v
 listings	app/Jobs/CleanBcar.php	/^        $listings       = Listing::where('association', 'bcar')->pluck('mls_account');$/;"	v
 listings	app/Jobs/ProcessListingImpression.php	/^        $this->listings = $listings;$/;"	v
 listings	app/Jobs/ProcessListingImpression.php	/^    protected $listings;$/;"	v
@@ -500,6 +503,7 @@ subAreas	app/Omnibar.php	/^        $subAreas     = Listing::getColumn($searchTer
 syncPreferredPhotos	app/Photo.php	/^    public static function syncPreferredPhotos()$/;"	f
 testBasicTest	tests/Feature/ExampleTest.php	/^    public function testBasicTest()$/;"	f
 testBasicTest	tests/Unit/ExampleTest.php	/^    public function testBasicTest()$/;"	f
+today	app/Http/Controllers/UpdatedListingsController.php	/^        $today = Carbon::now()->toDateString();$/;"	v
 today	app/Jobs/ProcessListingClick.php	/^        $today = Carbon::now()->toDateString();$/;"	v
 today	app/Jobs/ProcessListingImpression.php	/^        $today = Carbon::now()->toDateString();$/;"	v
 today	app/Jobs/ProcessSearch.php	/^        $today       = Carbon::now()->toDateString();$/;"	v
