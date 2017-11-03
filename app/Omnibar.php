@@ -12,7 +12,7 @@ class Omnibar extends Model
         $data         = [];
         $cities       = Listing::getColumn($searchTerm, 'city');
         $areas        = Listing::getColumn($searchTerm, 'area');
-        $subAreas     = Listing::getColumn($searchTerm, 'sub_area');
+        // $subAreas     = Listing::getColumn($searchTerm, 'sub_area');
         $subdivisions = Listing::getColumn($searchTerm, 'subdivision');
         $zips         = Listing::getColumn($searchTerm, 'zip');
         $addresses    = Listing::getColumn($searchTerm, 'full_address');
