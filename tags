@@ -500,6 +500,7 @@ stories	app/Helpers/ListingsHelper.php	/^        $stories              = isset($
 streetName	app/Listing.php	/^        $streetName   = ucwords(strtolower($listing->street_name));$/;"	v
 streetNumber	app/Listing.php	/^        $streetNumber = $listing->street_number;$/;"	v
 subAreas	app/Omnibar.php	/^        $subAreas     = Listing::getColumn($searchTerm, 'sub_area');$/;"	v
+subdivisions	app/Omnibar.php	/^        $subdivisions = Listing::getColumn($searchTerm, 'subdivision');$/;"	v
 syncPreferredPhotos	app/Photo.php	/^    public static function syncPreferredPhotos()$/;"	f
 testBasicTest	tests/Feature/ExampleTest.php	/^    public function testBasicTest()$/;"	f
 testBasicTest	tests/Unit/ExampleTest.php	/^    public function testBasicTest()$/;"	f

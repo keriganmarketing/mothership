@@ -13,6 +13,7 @@ class Omnibar extends Model
         $cities       = Listing::getColumn($searchTerm, 'city');
         $areas        = Listing::getColumn($searchTerm, 'area');
         $subAreas     = Listing::getColumn($searchTerm, 'sub_area');
+        $subdivisions = Listing::getColumn($searchTerm, 'subdivision');
         $zips         = Listing::getColumn($searchTerm, 'zip');
         $addresses    = Listing::getColumn($searchTerm, 'full_address');
         $mlsNumbers   = Listing::getColumn($searchTerm, 'mls_account');
@@ -63,6 +64,21 @@ class Omnibar extends Model
                 [
                     'id' => ucwords($subArea->sub_area),
                     'text' => ucwords($subArea->sub_area)
+                ];
+            }
+            $counter = $counter +1;
+        }
+        if (count($subdivisions) > 0) {
+            $data['results'][$counter] =
+            [
+                'text'     => 'Subdivision',
+                'children' => []
+            ];
+            foreach ($subdivisions as $subdivision) {
+                $data['results'][$counter]['children'][] =
+                [
+                    'id' => ucwords($subdivision->subdivision),
+                    'text' => ucwords($subdivision->subdivision)
                 ];
             }
             $counter = $counter +1;
