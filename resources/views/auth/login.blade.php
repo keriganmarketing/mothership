@@ -1,9 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div class="container ufo-background">
     <div class="row">
-        <div class="col-md-8 col-md-offset-2">
+        <div class="col-md-8 col-md-offset-2 text-center">
+            <h1>KMA Mothership</h1>
+            <img src="{{ asset('images/ufo.svg') }}" alt="UFO" class="ufo">
             <div class="panel panel-default">
                 <div class="panel-heading">Login</div>
 
@@ -60,8 +62,8 @@
                                 </a>
                             </div>
                         </div>
-                    </form>
-                </div>
+                    </form> -->
+                <!-- </div>
             </div>
         </div>
     </div>

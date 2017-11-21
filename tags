@@ -380,6 +380,8 @@ mlsId	app/Helpers/Updater.php	/^            $mlsId = $result['MEMBER_0'];$/;"	v
 mlsNumber	app/Helpers/Updater.php	/^                $mlsNumber = $result['LIST_3'];$/;"	v
 mlsNumbers	app/Omnibar.php	/^        $mlsNumbers   = Listing::getColumn($searchTerm, 'mls_account');$/;"	v
 modifierRE	public/js/app.js	/^var modifierRE = \/\\.[^.]+\/g;$/;"	v
+module.exports.colors	tailwind.js	/^  colors: colors,$/;"	p
+module.exports.screens	tailwind.js	/^  screens: {$/;"	p
 namespace	app/Providers/RouteServiceProvider.php	/^    protected $namespace = 'App\\Http\\Controllers';$/;"	v
 ncname	public/js/app.js	/^var ncname = '[a-zA-Z_][\\\\w\\\\-\\\\.]*';$/;"	v
 officeShortId	app/Agent.php	/^        $officeShortId   = $request->officeShortId ?? '';$/;"	v
@@ -499,9 +501,10 @@ stories	app/Helpers/ListingsHelper.php	/^        $stories              = isset($
 stories	app/Helpers/ListingsHelper.php	/^        $stories              = isset($result['LIST_64']) && is_numeric($result['LIST_64']) ? $result['LIST_64'] : 1;$/;"	v
 streetName	app/Listing.php	/^        $streetName   = ucwords(strtolower($listing->street_name));$/;"	v
 streetNumber	app/Listing.php	/^        $streetNumber = $listing->street_number;$/;"	v
-subAreas	app/Omnibar.php	/^        $subAreas     = Listing::getColumn($searchTerm, 'sub_area');$/;"	v
+subAreas	app/Omnibar.php	/^        \/\/ $subAreas     = Listing::getColumn($searchTerm, 'sub_area');$/;"	v
 subdivisions	app/Omnibar.php	/^        $subdivisions = Listing::getColumn($searchTerm, 'subdivision');$/;"	v
 syncPreferredPhotos	app/Photo.php	/^    public static function syncPreferredPhotos()$/;"	f
+tailwindcss	webpack.mix.js	/^var tailwindcss = require('tailwindcss');$/;"	v
 testBasicTest	tests/Feature/ExampleTest.php	/^    public function testBasicTest()$/;"	f
 testBasicTest	tests/Unit/ExampleTest.php	/^    public function testBasicTest()$/;"	f
 today	app/Http/Controllers/UpdatedListingsController.php	/^        $today = Carbon::now()->toDateString();$/;"	v

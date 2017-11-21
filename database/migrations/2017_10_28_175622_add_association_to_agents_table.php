@@ -14,7 +14,7 @@ class AddAssociationToAgentsTable extends Migration
     public function up()
     {
         Schema::table('agents', function (Blueprint $table) {
-            $table->string('association');
+            $table->string('association')->nullable();
         });
     }
 

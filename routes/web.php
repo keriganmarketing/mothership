@@ -1,9 +1,8 @@
 <?php
 
+Route::get('/', 'HomeController@index')->name('home');
+Auth::routes();
 
-Route::get('/', function () {
-    return view('welcome');
-});
 Route::prefix('api/v1')->group(function () {
     Route::get('search', 'ListingsSearchController@index');
     Route::get('listing/{mlsNumber}', 'ListingController@show');
@@ -14,7 +13,3 @@ Route::prefix('api/v1')->group(function () {
     Route::get('agents', 'AgentSearchController@index');
     Route::get('updatedListings', 'UpdatedListingsController@index');
 });
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');

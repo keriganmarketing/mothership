@@ -53,21 +53,6 @@ class Omnibar extends Model
             }
             $counter = $counter +1;
         }
-        // if (count($subAreas) > 0) {
-        //     $data['results'][$counter] =
-        //     [
-        //         'text'     => 'Sub Area',
-        //         'children' => []
-        //     ];
-        //     foreach ($subAreas as $subArea) {
-        //         $data['results'][$counter]['children'][] =
-        //         [
-        //             'id' => ucwords($subArea->sub_area),
-        //             'text' => ucwords($subArea->sub_area)
-        //         ];
-        //     }
-        //     $counter = $counter +1;
-        // }
         if (count($subdivisions) > 0) {
             $data['results'][$counter] =
             [
