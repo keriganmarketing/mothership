@@ -147,6 +147,13 @@ class Listing extends Model
         return $listings;
     }
 
+    /**
+     * Build full address from the columns in the database
+     *
+     * @param \Listing $listing
+     *
+     * @return mixed|array
+     */
     public function buildFullAddress(Listing $listing)
     {
         $streetNumber = $listing->street_number;
