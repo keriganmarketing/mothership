@@ -33,7 +33,7 @@ class Listing extends Model
         return $this->hasMany('App\Click', 'listing_id');
     }
 
-    public function impresssions()
+    public function impressions()
     {
         return $this->hasMany('App\Impression', 'listing_id');
     }
@@ -154,11 +154,11 @@ class Listing extends Model
      *
      * @return mixed|array
      */
-    public function buildFullAddress(Listing $listing)
+    public function buildFullAddress()
     {
-        $streetNumber = $listing->street_number;
-        $streetName   = ucwords(strtolower($listing->street_name));
-        $city         = ', '. $listing->city;
+        $streetNumber = $this->street_number;
+        $streetName   = ucwords(strtolower($this->street_name));
+        $city         = ', '. $this->city;
         $fullAddress  = $streetNumber . ' ' . $streetName . $city;
 
         if ($this->addressIsValid($fullAddress)) {

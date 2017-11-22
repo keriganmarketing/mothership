@@ -36,7 +36,6 @@ $factory->define(App\Listing::class, function (Faker $faker) {
         'acreage'                  => $faker->randomNumber(2, false),
         'class'                    => $faker->randomElement (['A', 'B', 'C', 'E', 'F', 'G', 'H', 'I', 'J']),
         'property_type'            => 'Detached Single Family',
-        'preferred_image'          => $faker->url,
         'status'                   => 'Active',
         'waterfront'               => $faker->boolean(),
         'foreclosure'              => $faker->boolean(),

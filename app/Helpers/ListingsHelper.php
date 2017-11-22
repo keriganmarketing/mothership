@@ -131,7 +131,7 @@ class ListingsHelper
             ]
         );
 
-        $listing->full_address = $listing->buildFullAddress($listing);
+        $listing->full_address = $listing->buildFullAddress();
         $listing->save();
 
         return $listing;
@@ -277,7 +277,7 @@ class ListingsHelper
             ]
         );
 
-        $listing->full_address = $listing->buildFullAddress($listing);
+        $listing->full_address = $listing->buildFullAddress();
         $listing->save();
 
         return $listing;
