@@ -170,10 +170,6 @@ class Listing extends Model
 
     public function addressIsValid($fullAddress)
     {
-        // I just want to point out that I came up with this REGEX all by myself and it
-        // only took 2 hours of testing...
-        // This is as close as I can get to filtering out the garbage that realtors put
-        // in the address field
         return preg_match('/^[1-9]+([0-9]*)?\s(\d*?)([A-Z]+)?[a-z].+$/', $fullAddress);
     }
 
