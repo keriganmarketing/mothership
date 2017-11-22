@@ -23,7 +23,7 @@ class ProcessSearch implements ShouldQueue
      */
     public function __construct($request)
     {
-        $this->request      = $request;
+        $this->request = $request;
     }
 
     /**

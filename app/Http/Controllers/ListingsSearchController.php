@@ -17,6 +17,7 @@ class ListingsSearchController extends Controller
     public function index(Request $request)
     {
         $listings = Listing::searchResults($request);
+
         ProcessSearch::dispatch($request->all());
 
         return response()->json($listings);

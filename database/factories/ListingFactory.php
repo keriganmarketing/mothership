@@ -1,6 +1,7 @@
 <?php
 
 use Faker\Generator as Faker;
+use App\Listing;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,8 +16,8 @@ use Faker\Generator as Faker;
 
 $factory->define(App\Listing::class, function (Faker $faker) {
 
-    return [
-        'mls_account'              => $faker->randomNumber(6, true),
+    return  [
+        'mls_account'              => (string) $faker->randomNumber(6, true),
         'price'                    => $faker->numberBetween(100000, 9000000),
         'area'                     => $faker->city,
         'sub_area'                 => $faker->city,
@@ -76,6 +77,7 @@ $factory->define(App\Listing::class, function (Faker $faker) {
         'last_tax_year'            => $faker->year(),
         'description'              => $faker->sentence,
         'apn'                      => '324242342342342',
-        'directions'               => $faker->paragraph
+        'directions'               => $faker->paragraph,
+        'full_address'             => $faker->streetAddress
     ];
 });
