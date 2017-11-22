@@ -2,13 +2,7 @@
 
 ## An API for our BCAR and ECAR real estate sites
 
-### Endpoints
-* Base
-    * http://mothership.kerigan.com/api/v1
-* Search
-    * /search
-        - Params
-            + city
-
+## Build Status
+[![Build Status](https://travis-ci.org/Doomtickle/mothership.svg?branch=master)](https://travis-ci.org/Doomtickle/mothership)
 
 
