@@ -61,6 +61,7 @@ class SearchListingsTest extends TestCase
         $response->assertStatus(200);
         $response->assertJsonFragment(['city' => $this->firstListing->city]);
         $response->assertJsonMissing(['city' => $this->secondListing->city]);
+        $this->assertCount(1, json_decode($response->getContent())->data);
 
         Queue::assertPushed(ProcessSearch::class, 1);
         Queue::assertPushed(ProcessListingImpression::class, 1);
@@ -74,6 +75,7 @@ class SearchListingsTest extends TestCase
         $response->assertStatus(200);
         $response->assertJsonFragment(['subdivision' => $this->firstListing->subdivision]);
         $response->assertJsonMissing(['subdivision' => $this->secondListing->subdivision]);
+        $this->assertCount(1, json_decode($response->getContent())->data);
 
         Queue::assertPushed(ProcessSearch::class, 1);
         Queue::assertPushed(ProcessListingImpression::class, 1);
@@ -87,6 +89,7 @@ class SearchListingsTest extends TestCase
         $response->assertStatus(200);
         $response->assertJsonFragment(['area' => $this->firstListing->area]);
         $response->assertJsonMissing(['area' => $this->secondListing->area]);
+        $this->assertCount(1, json_decode($response->getContent())->data);
 
         Queue::assertPushed(ProcessSearch::class, 1);
         Queue::assertPushed(ProcessListingImpression::class, 1);
@@ -100,6 +103,7 @@ class SearchListingsTest extends TestCase
         $response->assertStatus(200);
         $response->assertJsonFragment(['zip' => $this->firstListing->zip]);
         $response->assertJsonMissing(['zip' => $this->secondListing->zip]);
+        $this->assertCount(1, json_decode($response->getContent())->data);
 
         Queue::assertPushed(ProcessSearch::class, 1);
         Queue::assertPushed(ProcessListingImpression::class, 1);
@@ -113,6 +117,7 @@ class SearchListingsTest extends TestCase
         $response->assertStatus(200);
         $response->assertJsonFragment(['sub_area' => $this->firstListing->sub_area]);
         $response->assertJsonMissing(['sub_area' => $this->secondListing->sub_area]);
+        $this->assertCount(1, json_decode($response->getContent())->data);
 
         Queue::assertPushed(ProcessSearch::class, 1);
         Queue::assertPushed(ProcessListingImpression::class, 1);
@@ -126,6 +131,7 @@ class SearchListingsTest extends TestCase
         $response->assertStatus(200);
         $response->assertJsonFragment(['full_address' => $this->firstListing->full_address]);
         $response->assertJsonMissing(['full_address' => $this->secondListing->full_address]);
+        $this->assertCount(1, json_decode($response->getContent())->data);
 
         Queue::assertPushed(ProcessSearch::class, 1);
         Queue::assertPushed(ProcessListingImpression::class, 1);
@@ -139,6 +145,7 @@ class SearchListingsTest extends TestCase
         $response->assertStatus(200);
         $response->assertJsonFragment(['mls_account' => $this->firstListing->mls_account]);
         $response->assertJsonMissing(['mls_account' =>  $this->secondListing->mls_account]);
+        $this->assertCount(1, json_decode($response->getContent())->data);
 
         Queue::assertPushed(ProcessSearch::class, 1);
         Queue::assertPushed(ProcessListingImpression::class, 1);
@@ -150,10 +157,12 @@ class SearchListingsTest extends TestCase
         $response = $this->searchFor(['minPrice' => 2]);
         $response->assertJsonMissing(['id' => $this->firstListing->id]);
         $response->assertJsonFragment(['id' => $this->secondListing->id]);
+        $this->assertCount(1, json_decode($response->getContent())->data);
 
         $response = $this->searchFor(['minPrice' => 1]);
         $response->assertJsonFragment(['price' => $this->firstListing->price]);
         $response->assertJsonFragment(['price' => $this->secondListing->price]);
+        $this->assertCount(2, json_decode($response->getContent())->data);
 
         Queue::assertPushed(ProcessSearch::class, 2);
         Queue::assertPushed(ProcessListingImpression::class, 2);
@@ -167,6 +176,7 @@ class SearchListingsTest extends TestCase
         $response->assertStatus(200);
         $response->assertJsonFragment(['price' => $this->firstListing->price]);
         $response->assertJsonMissing(['price' => $this->secondListing->price]);
+        $this->assertCount(1, json_decode($response->getContent())->data);
 
         Queue::assertPushed(ProcessSearch::class, 1);
         Queue::assertPushed(ProcessListingImpression::class, 1);
@@ -185,6 +195,7 @@ class SearchListingsTest extends TestCase
         $response->assertStatus(200);
         $response->assertJsonFragment(['id' => $this->firstListing->id]);
         $response->assertJsonFragment(['id' => $this->secondListing->id]);
+        $this->assertCount(2, json_decode($response->getContent())->data);
 
         Queue::assertPushed(ProcessSearch::class, 1);
         Queue::assertPushed(ProcessListingImpression::class, 1);
@@ -198,12 +209,14 @@ class SearchListingsTest extends TestCase
         $response->assertStatus(200);
         $response->assertJsonFragment(['id' => $this->firstListing->id]);
         $response->assertJsonMissing(['id' => $this->secondListing->id]);
+        $this->assertCount(1, json_decode($response->getContent())->data);
 
         $response = $this->searchFor(['status' => 'Pending']);
 
         $response->assertStatus(200);
         $response->assertJsonFragment(['id' => $this->secondListing->id]);
         $response->assertJsonMissing(['id' => $this->firstListing->id]);
+        $this->assertCount(1, json_decode($response->getContent())->data);
 
         Queue::assertPushed(ProcessSearch::class, 2);
         Queue::assertPushed(ProcessListingImpression::class, 2);
@@ -219,6 +232,7 @@ class SearchListingsTest extends TestCase
         $response->assertStatus(200);
         $response->assertJsonFragment(['id' => $this->firstListing->id]);
         $response->assertJsonMissing(['id' => $this->secondListing->id]);
+        $this->assertCount(1, json_decode($response->getContent())->data);
 
         Queue::assertPushed(ProcessSearch::class, 1);
         Queue::assertPushed(ProcessListingImpression::class, 1);
@@ -231,6 +245,7 @@ class SearchListingsTest extends TestCase
         $response->assertStatus(200);
         $response->assertJsonMissing(['id' => $this->firstListing->id]);
         $response->assertJsonFragment(['id' => $this->secondListing->id]);
+        $this->assertCount(1, json_decode($response->getContent())->data);
 
         Queue::assertPushed(ProcessSearch::class, 1);
         Queue::assertPushed(ProcessListingImpression::class, 1);
@@ -244,6 +259,7 @@ class SearchListingsTest extends TestCase
         $response->assertStatus(200);
         $response->assertJsonMissing(['id' => $this->firstListing->id]);
         $response->assertJsonFragment(['id' => $this->secondListing->id]);
+        $this->assertCount(1, json_decode($response->getContent())->data);
 
         Queue::assertPushed(ProcessSearch::class, 1);
         Queue::assertPushed(ProcessListingImpression::class, 1);
@@ -257,6 +273,7 @@ class SearchListingsTest extends TestCase
         $response->assertStatus(200);
         $response->assertJsonMissing(['id' => $this->firstListing->id]);
         $response->assertJsonFragment(['id' => $this->secondListing->id]);
+        $this->assertCount(1, json_decode($response->getContent())->data);
 
         Queue::assertPushed(ProcessSearch::class, 1);
         Queue::assertPushed(ProcessListingImpression::class, 1);
@@ -283,6 +300,7 @@ class SearchListingsTest extends TestCase
         $response->assertStatus(200);
         $response->assertJsonMissing(['id' => $this->firstListing->id]);
         $response->assertJsonFragment(['id' => $this->secondListing->id]);
+        $this->assertCount(1, json_decode($response->getContent())->data);
 
         Queue::assertPushed(ProcessSearch::class, 1);
         Queue::assertPushed(ProcessListingImpression::class, 1);
@@ -296,6 +314,7 @@ class SearchListingsTest extends TestCase
         $response->assertStatus(200);
         $response->assertJsonMissing(['id' => $this->firstListing->id]);
         $response->assertJsonFragment(['id' => $this->secondListing->id]);
+        $this->assertCount(1, json_decode($response->getContent())->data);
 
         Queue::assertPushed(ProcessSearch::class, 1);
         Queue::assertPushed(ProcessListingImpression::class, 1);
@@ -319,6 +338,7 @@ class SearchListingsTest extends TestCase
 
         $response->assertStatus(200);
         $this->assertEquals($sortedListings[0]->id, $highestToLowest[0]);
+        $this->assertCount(2, json_decode($response->getContent())->data);
 
         $response = $this->searchFor(['sortBy' => 'price', 'orderBy' => 'ASC']);
 
@@ -326,6 +346,7 @@ class SearchListingsTest extends TestCase
 
         $response->assertStatus(200);
         $this->assertEquals($sortedListings[0]->id, $lowestToHighest[0]);
+        $this->assertCount(2, json_decode($response->getContent())->data);
 
         Queue::assertPushed(ProcessSearch::class, 2);
         Queue::assertPushed(ProcessListingImpression::class, 2);
@@ -348,6 +369,7 @@ class SearchListingsTest extends TestCase
 
         $response->assertStatus(200);
         $this->assertEquals($sortedListings[0]->id, $highestToLowest[0]);
+        $this->assertCount(2, json_decode($response->getContent())->data);
 
         $response = $this->searchFor(
             [
@@ -360,6 +382,7 @@ class SearchListingsTest extends TestCase
 
         $response->assertStatus(200);
         $this->assertEquals($sortedListings[0]->id, $lowestToHighest[0]);
+        $this->assertCount(2, json_decode($response->getContent())->data);
 
         Queue::assertPushed(ProcessSearch::class, 2);
         Queue::assertPushed(ProcessListingImpression::class, 2);
