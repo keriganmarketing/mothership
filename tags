@@ -380,7 +380,7 @@ listing	app/Http/Controllers/ListingController.php	/^        $listing = Listing:
 listing	app/Impression.php	/^    public function listing()$/;"	f
 listing	app/Jobs/ProcessListingClick.php	/^        $this->listing = $listing;$/;"	v
 listing	app/Jobs/ProcessListingClick.php	/^    protected $listing;$/;"	v
-listing	app/Photo.php	/^            $listing = Listing::where('id', $photo->listing_id)->first();$/;"	v
+listing	app/Photo.php	/^        \/\/         $listing = Listing::where('id', $photo->listing_id)->first();$/;"	v
 listing	app/Photo.php	/^    public function listing()$/;"	f
 listing	database/factories/PhotoFactory.php	/^    $listing = factory('App\\Listing')->create();$/;"	v
 listing	tests/Unit/ListingTest.php	/^        $listing = create('App\\Listing');$/;"	v
@@ -403,7 +403,7 @@ listings	app/Listing.php	/^        $listings = Listing::whereIn('listing_member_
 listings	app/Listing.php	/^        $listings = Listing::whereIn('mls_account', $mlsArray)->get();$/;"	v
 listings	app/MapSearch.php	/^        $listings = DB::table('listings')$/;"	v
 listingsArray	app/Jobs/CleanBcar.php	/^        $listingsArray  = [];$/;"	v
-listingsWithNoPhotos	app/Photo.php	/^        $listingsWithNoPhotos = Listing::where('preferred_image', null)->get();$/;"	v
+listingsWithNoPhotos	app/Photo.php	/^        $listingsWithNoPhotos = Listing::where('preferred_image', null)->orWhere('preferred_image', '')->get();$/;"	v
 listings_can_be_searched_by_acreage	tests/Feature/SearchListingsTest.php	/^    public function listings_can_be_searched_by_acreage()$/;"	f
 listings_can_be_searched_by_bathrooms	tests/Feature/SearchListingsTest.php	/^    public function listings_can_be_searched_by_bathrooms()$/;"	f
 listings_can_be_searched_by_bedrooms	tests/Feature/SearchListingsTest.php	/^    public function listings_can_be_searched_by_bedrooms()$/;"	f
@@ -484,7 +484,6 @@ photos	app/Helpers/Updater.php	/^                $photos = $this->rets->GetObjec
 photos	app/Jobs/CleanBcar.php	/^                $photos = Photo::where('listing_id', $listingId)->get();$/;"	v
 photos	app/Listing.php	/^    public function photos()$/;"	f
 photos	app/Photo.php	/^                $photos = (new Builder($listing->association))->fetchPhotos($listing);$/;"	v
-photos	app/Photo.php	/^        $photos    = Photo::where('preferred', 1)->get();$/;"	v
 platformGetTagNamespace	public/js/app.js	/^var platformGetTagNamespace;$/;"	v
 platformIsPreTag	public/js/app.js	/^var platformIsPreTag;$/;"	v
 platformMustUseProp	public/js/app.js	/^var platformMustUseProp;$/;"	v

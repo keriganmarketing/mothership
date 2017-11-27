@@ -51,15 +51,17 @@ class Photo extends Model
      */
     public static function syncPreferredPhotos()
     {
-        $photos    = Photo::where('preferred', 1)->get();
-        foreach ($photos as $photo) {
-            $listing = Listing::where('id', $photo->listing_id)->first();
+        // Photo::where('preferred', 1)->chunk(500, function ($photos){
+        //     foreach ($photos as $photo) {
+        //         $listing = Listing::where('id', $photo->listing_id)->first();
 
-            $listing->preferred_image = $photo->url;
-            $listing->save();
-        }
+        //         $listing->preferred_image = $photo->url;
+        //         $listing->save();
+        //         echo '*';
+        //     }
+        // });
 
-        $listingsWithNoPhotos = Listing::where('preferred_image', null)->get();
+        $listingsWithNoPhotos = Listing::where('preferred_image', null)->orWhere('preferred_image', '')->get();
 
         foreach ($listingsWithNoPhotos as $listing) {
             if (Photo::where('listing_id', $listing->id)->exists()) {
