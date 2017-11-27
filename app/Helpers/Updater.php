@@ -38,7 +38,7 @@ class Updater
             $results = $this->rets->Search(
                 'Property',
                 $class,
-                '(LIST_87=' . $dateLastModified . '+)',
+                '(LIST_87=' . $dateLastModified . '+)|(LIST_134=' . $dateLastModified . '+)',
                 $options[$class]
             );
 
@@ -64,9 +64,30 @@ class Updater
                         echo '.';
                     }
                 } else {
-                    $listing = Listing::where('mls_account', $result['LIST_3'])->first();
+                    $listing = Listing::where('mls_account', $mlsNumber)->first();
+                    $oldPhotos  = $listing->photos;
                     ListingsHelper::saveListing($this->association, $result, $class, $listing->id);
-                    echo '*';
+
+                    foreach ($oldPhotos as $oldPhoto) {
+                        $oldPhoto->delete();
+                        echo '-';
+                    }
+                    $newPhotos  = $this->rets->GetObject('Property', 'HiRes', $mlsNumber, '*', 1);
+
+                    foreach ($newPhotos as $photo) {
+                        if (! $photo->isError()) {
+                            Photo::create(
+                                [
+                                'mls_account'       => $mlsNumber,
+                                'url'               => $photo->getLocation(),
+                                'preferred'         => $photo->isPreferred(),
+                                'listing_id'        => $listing->id,
+                                'photo_description' => $photo->getContentDescription()
+                                ]
+                            );
+                        echo '+';
+                        }
+                    }
                 }
             }
         }

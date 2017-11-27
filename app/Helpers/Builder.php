@@ -101,7 +101,7 @@ class Builder
         }
     }
 
-    private function fetchListings($class)
+    public function fetchListings($class)
     {
         $offset         = 0;
         $options        = $this->association == 'bcar' ?
@@ -122,7 +122,8 @@ class Builder
             }
         }
     }
-    private function fetchPhotos($listing)
+
+    public function fetchPhotos($listing)
     {
         $photos = $this->rets->GetObject('Property', 'HiRes', $listing->mls_account, '*', 1);
 

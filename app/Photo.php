@@ -5,6 +5,7 @@ namespace App;
 use App\ApiCall;
 use App\Listing;
 use Illuminate\Database\Eloquent\Model;
+use App\Helpers\Builder;
 
 class Photo extends Model
 {
@@ -23,9 +24,8 @@ class Photo extends Model
     /**
      * Persist the photos to the database
      *
-     * @param string   $association Can be 'bcar' or 'ecar'
      * @param string   $listing     The listing for the photos
-     * @param \Session $rets        The PHRETS session
+     * @param array    $photos      The photos for the listing
      *
      * @return void
      */
@@ -57,6 +57,20 @@ class Photo extends Model
 
             $listing->preferred_image = $photo->url;
             $listing->save();
+        }
+
+        $listingsWithNoPhotos = Listing::where('preferred_image', null)->get();
+
+        foreach ($listingsWithNoPhotos as $listing) {
+            if (Photo::where('listing_id', $listing->id)->exists()) {
+                $listing->preferred_image = Photo::where('listing_id', $listing->id)->first()->url;
+                $listing->save();
+                echo 'z';
+            } else {
+                $photos = (new Builder($listing->association))->fetchPhotos($listing);
+                (new Photo)->savePhotos($listing, $photos);
+                echo 'x';
+            }
         }
     }
 }

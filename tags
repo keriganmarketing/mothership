@@ -12,6 +12,7 @@ AgentListingsController	app/Http/Controllers/AgentListingsController.php	/^class
 AgentPhoto	app/AgentPhoto.php	/^class AgentPhoto extends Model$/;"	c
 AgentSearchController	app/Http/Controllers/AgentSearchController.php	/^class AgentSearchController extends Controller$/;"	c
 AgentsHelper	app/Helpers/AgentsHelper.php	/^class AgentsHelper$/;"	c
+AgentsTest	tests/Unit/AgentsTest.php	/^class AgentsTest extends TestCase$/;"	c
 ApiCall	app/ApiCall.php	/^class ApiCall extends Model$/;"	c
 AppServiceProvider	app/Providers/AppServiceProvider.php	/^class AppServiceProvider extends ServiceProvider$/;"	c
 AuthServiceProvider	app/Providers/AuthServiceProvider.php	/^class AuthServiceProvider extends ServiceProvider$/;"	c
@@ -47,6 +48,7 @@ Kernel	app/Http/Kernel.php	/^class Kernel extends HttpKernel$/;"	c
 LARAVEL_START	public/index.php	/^define('LARAVEL_START', microtime(true));$/;"	d
 Listing	app/Listing.php	/^class Listing extends Model$/;"	c
 ListingController	app/Http/Controllers/ListingController.php	/^class ListingController extends Controller$/;"	c
+ListingTest	tests/Unit/ListingTest.php	/^class ListingTest extends TestCase$/;"	c
 ListingsHelper	app/Helpers/ListingsHelper.php	/^class ListingsHelper$/;"	c
 ListingsSearchController	app/Http/Controllers/ListingsSearchController.php	/^class ListingsSearchController extends Controller$/;"	c
 LoginController	app/Http/Controllers/Auth/LoginController.php	/^class LoginController extends Controller$/;"	c
@@ -55,6 +57,7 @@ MapSearchController	app/Http/Controllers/MapSearchController.php	/^class MapSear
 Omnibar	app/Omnibar.php	/^class Omnibar extends Model$/;"	c
 OmnibarController	app/Http/Controllers/OmnibarController.php	/^class OmnibarController extends Controller$/;"	c
 Photo	app/Photo.php	/^class Photo extends Model$/;"	c
+PhotoTest	tests/Unit/PhotoTest.php	/^class PhotoTest extends TestCase$/;"	c
 ProcessListingClick	app/Jobs/ProcessListingClick.php	/^class ProcessListingClick implements ShouldQueue$/;"	c
 ProcessListingImpression	app/Jobs/ProcessListingImpression.php	/^class ProcessListingImpression implements ShouldQueue$/;"	c
 ProcessSearch	app/Jobs/ProcessSearch.php	/^class ProcessSearch implements ShouldQueue$/;"	c
@@ -62,6 +65,7 @@ RedirectIfAuthenticated	app/Http/Middleware/RedirectIfAuthenticated.php	/^class 
 RegisterController	app/Http/Controllers/Auth/RegisterController.php	/^class RegisterController extends Controller$/;"	c
 ResetPasswordController	app/Http/Controllers/Auth/ResetPasswordController.php	/^class ResetPasswordController extends Controller$/;"	c
 RouteServiceProvider	app/Providers/RouteServiceProvider.php	/^class RouteServiceProvider extends ServiceProvider$/;"	c
+SearchAgentsTest	tests/Feature/SearchAgentsTest.php	/^class SearchAgentsTest extends TestCase$/;"	c
 SearchListingsTest	tests/Feature/SearchListingsTest.php	/^class SearchListingsTest extends TestCase$/;"	c
 SearchQuery	app/SearchQuery.php	/^class SearchQuery extends Model$/;"	c
 TestCase	tests/TestCase.php	/^abstract class TestCase extends BaseTestCase$/;"	c
@@ -96,6 +100,10 @@ __webpack_require__	public/js/app.js	/^\/******\/ 	function __webpack_require__(
 __webpack_require__.d	public/js/app.js	/^\/******\/ 	__webpack_require__.d = function(exports, name, getter) {$/;"	f
 __webpack_require__.n	public/js/app.js	/^\/******\/ 	__webpack_require__.n = function(module) {$/;"	f
 __webpack_require__.o	public/js/app.js	/^\/******\/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };$/;"	f
+a_listing_can_validate_its_address	tests/Unit/ListingTest.php	/^    public function a_listing_can_validate_its_address()$/;"	f
+a_listing_has_clicks	tests/Unit/ListingTest.php	/^    public function a_listing_has_clicks()$/;"	f
+a_listing_has_impressions	tests/Unit/ListingTest.php	/^    public function a_listing_has_impressions()$/;"	f
+a_listing_has_photos	tests/Unit/ListingTest.php	/^    public function a_listing_has_photos()$/;"	f
 a_listing_is_searchable_by_area	tests/Feature/SearchListingsTest.php	/^    public function a_listing_is_searchable_by_area()$/;"	f
 a_listing_is_searchable_by_city	tests/Feature/SearchListingsTest.php	/^    public function a_listing_is_searchable_by_city()$/;"	f
 a_listing_is_searchable_by_full_address	tests/Feature/SearchListingsTest.php	/^    public function a_listing_is_searchable_by_full_address()$/;"	f
@@ -105,6 +113,8 @@ a_listing_is_searchable_by_mls_account	tests/Feature/SearchListingsTest.php	/^  
 a_listing_is_searchable_by_sub_area	tests/Feature/SearchListingsTest.php	/^    public function a_listing_is_searchable_by_sub_area()$/;"	f
 a_listing_is_searchable_by_subdivision	tests/Feature/SearchListingsTest.php	/^    public function a_listing_is_searchable_by_subdivision()$/;"	f
 a_listing_is_searchable_by_zip	tests/Feature/SearchListingsTest.php	/^    public function a_listing_is_searchable_by_zip()$/;"	f
+a_listing_will_not_build_an_invalid_address	tests/Unit/ListingTest.php	/^    public function a_listing_will_not_build_an_invalid_address()$/;"	f
+a_photo_belongs_to_a_listing	tests/Unit/PhotoTest.php	/^    public function a_photo_belongs_to_a_listing()$/;"	f
 acreage	app/Helpers/ListingsHelper.php	/^        $acreage              = $result['LIST_57'] > 0 ? $result['LIST_57'] : 0;$/;"	v
 acreage	app/Listing.php	/^        $acreage      = $request->acreage ?? '';$/;"	v
 acreage	app/MapSearch.php	/^        $acreage      = $request->acreage ?? '';$/;"	v
@@ -114,12 +124,22 @@ addresses	app/Omnibar.php	/^        $addresses    = Listing::getColumn($searchTe
 agent	app/AgentPhoto.php	/^    public function agent()$/;"	f
 agent	app/Helpers/AgentsHelper.php	/^        $agent = Agent::updateOrCreate($/;"	v
 agent	app/Helpers/Updater.php	/^                $agent = AgentsHelper::updateOrCreateAgent($this->association, $result);$/;"	v
+agent	tests/Feature/SearchAgentsTest.php	/^        $agent = create('App\\Agent',$/;"	v
+agent	tests/Unit/AgentsTest.php	/^        $agent = create('App\\Agent');$/;"	v
 agentShortId	app/Http/Controllers/AgentListingsController.php	/^        $agentShortId = $request->agentId;$/;"	v
 agents	app/Agent.php	/^        $agents = Agent::when($shortId, function ($query) use ($shortId) {$/;"	v
 agents	app/Http/Controllers/AgentSearchController.php	/^        $agents = Agent::searchResults($request);$/;"	v
+agents	tests/Feature/SearchAgentsTest.php	/^        $agents = factory('App\\Agent', 2)->create();$/;"	v
 aliases	config/app.php	/^    | This array of class aliases will be registered when this application$/;"	c
 all	app/Helpers/BcarOptions.php	/^    public static function all($offset = 1)$/;"	f
 all	app/Helpers/EcarOptions.php	/^    public static function all($offset = 1)$/;"	f
+an_agent_has_photos	tests/Unit/AgentsTest.php	/^    public function an_agent_has_photos()$/;"	f
+an_agent_is_searchable_by_association	tests/Feature/SearchAgentsTest.php	/^    public function an_agent_is_searchable_by_association()$/;"	f
+an_agent_is_searchable_by_full_name	tests/Feature/SearchAgentsTest.php	/^    public function an_agent_is_searchable_by_full_name()$/;"	f
+an_agent_is_searchable_by_full_name_even_if_the_full_name_is_not_in_the_database	tests/Feature/SearchAgentsTest.php	/^    public function an_agent_is_searchable_by_full_name_even_if_the_full_name_is_not_in_the_database()$/;"	f
+an_agent_is_searchable_by_last_name	tests/Feature/SearchAgentsTest.php	/^    public function an_agent_is_searchable_by_last_name()$/;"	f
+an_agent_is_searchable_by_office_short_id	tests/Feature/SearchAgentsTest.php	/^    public function an_agent_is_searchable_by_office_short_id()$/;"	f
+an_agent_is_searchable_by_short_id	tests/Feature/SearchAgentsTest.php	/^    public function an_agent_is_searchable_by_short_id()$/;"	f
 app	bootstrap/app.php	/^$app = new Illuminate\\Foundation\\Application($/;"	v
 app	public/index.php	/^$app = require_once __DIR__.'\/..\/bootstrap\/app.php';$/;"	v
 app	tests/CreatesApplication.php	/^        $app = require __DIR__.'\/..\/bootstrap\/app.php';$/;"	v
@@ -147,6 +167,7 @@ bathrooms	app/Helpers/ListingsHelper.php	/^        $bathrooms            = isset
 bathrooms	app/Helpers/ListingsHelper.php	/^        $bathrooms            = isset($result['LIST_67']) ? $result['LIST_67'] : 0;$/;"	v
 baths	app/Listing.php	/^        $baths        = $request->bathrooms ?? '';$/;"	v
 baths	app/MapSearch.php	/^        $baths        = $request->bathrooms ?? '';$/;"	v
+bcar	tests/Feature/SearchAgentsTest.php	/^        $bcar = create('App\\Agent', ['association' => 'bcar']);$/;"	v
 bcarLoginUrl	app/ApiCall.php	/^    private function bcarLoginUrl()$/;"	f
 bcarOptions	app/Helpers/BcarOptions.php	/^        $bcarOptions = [$/;"	v
 bcarOptions	app/Jobs/CleanBcar.php	/^        $bcarOptions    = BcarOptions::all();$/;"	v
@@ -164,12 +185,12 @@ boot	app/Providers/BroadcastServiceProvider.php	/^    public function boot()$/;"
 boot	app/Providers/EventServiceProvider.php	/^    public function boot()$/;"	f
 boot	app/Providers/RouteServiceProvider.php	/^    public function boot()$/;"	f
 build	app/Omnibar.php	/^    public static function build($searchTerm)$/;"	f
-buildFullAddress	app/Listing.php	/^    public function buildFullAddress(Listing $listing)$/;"	f
+buildFullAddress	app/Listing.php	/^    public function buildFullAddress()$/;"	f
 channel.port1.onmessage	public/js/app.js	/^        channel.port1.onmessage = function(event) {$/;"	f
 checkInFor	public/js/app.js	/^function checkInFor (el) {$/;"	f
 cities	app/Omnibar.php	/^        $cities       = Listing::getColumn($searchTerm, 'city');$/;"	v
 city	app/Listing.php	/^        $city         = $request->city ?? '';$/;"	v
-city	app/Listing.php	/^        $city         = ', '. $listing->city;$/;"	v
+city	app/Listing.php	/^        $city         = ', '. $this->city;$/;"	v
 city	app/MapSearch.php	/^        $city         = $request->city ?? '';$/;"	v
 classArray	app/Helpers/Builder.php	/^        $this->classArray        = $this->association == 'bcar' ?$/;"	v
 classArray	app/Helpers/Updater.php	/^        $this->classArray        = $this->association == 'bcar' ?$/;"	v
@@ -222,6 +243,7 @@ down	database/migrations/2017_10_27_153518_create_agent_photos_table.php	/^    p
 down	database/migrations/2017_10_28_175622_add_association_to_agents_table.php	/^    public function down()$/;"	f
 down	database/migrations/2017_10_31_093738_create_search_queries_table.php	/^    public function down()$/;"	f
 downloadPhotosForAgent	app/Helpers/Builder.php	/^    private function downloadPhotosForAgent($agent)$/;"	f
+ecar	tests/Feature/SearchAgentsTest.php	/^        $ecar = create('App\\Agent', ['association' => 'ecar']);$/;"	v
 ecarLoginUrl	app/ApiCall.php	/^    private function ecarLoginUrl()$/;"	f
 ecarOptions	app/Helpers/EcarOptions.php	/^        $ecarOptions = [$/;"	v
 ecarPassword	app/ApiCall.php	/^    private function ecarPassword()$/;"	f
@@ -239,13 +261,14 @@ except	app/Http/Middleware/VerifyCsrfToken.php	/^    protected $except = [$/;"	v
 exterior	app/Helpers/ListingsHelper.php	/^            $exterior             = $result['GF20131203203501805928000000'];$/;"	v
 exterior	app/Helpers/ListingsHelper.php	/^            $exterior             = $result['GF20131230164914069211000000'];$/;"	v
 exterior	app/Helpers/ListingsHelper.php	/^        $exterior             = null;$/;"	v
-fetchListings	app/Helpers/Builder.php	/^    private function fetchListings($class)$/;"	f
-fetchPhotos	app/Helpers/Builder.php	/^    private function fetchPhotos($listing)$/;"	f
+fetchListings	app/Helpers/Builder.php	/^    public function fetchListings($class)$/;"	f
+fetchPhotos	app/Helpers/Builder.php	/^    public function fetchPhotos($listing)$/;"	f
 fillable	app/User.php	/^    protected $fillable = [$/;"	v
 findByMlsNumbers	app/Listing.php	/^    public static function findByMlsNumbers($mlsNumbers)$/;"	f
 findPrevElement	public/js/app.js	/^function findPrevElement (children) {$/;"	f
 firstListing	tests/Feature/SearchListingsTest.php	/^        $this->firstListing  = create($/;"	v
 firstName	app/Agent.php	/^        $firstName       = $request->firstName ?? '';$/;"	v
+firstName	database/factories/AgentFactory.php	/^    $firstName    = $faker->firstName;$/;"	v
 for	app/Helpers/ListingsHelper.php	/^     * @param string $class  The class for the listing$/;"	c
 forAgent	app/Listing.php	/^    public static function forAgent($agentShortId)$/;"	f
 forAliasRE	public/js/app.js	/^var forAliasRE = \/(.*?)\\s+(?:in|of)\\s+(.*)\/;$/;"	v
@@ -258,6 +281,7 @@ fullAddress	app/Listing.php	/^        $fullAddress  = $streetNumber . ' ' . $str
 fullBaths	app/Helpers/ListingsHelper.php	/^        $fullBaths            = isset($result['LIST_68']) ? $result['LIST_68'] : 0;$/;"	v
 fullListing	app/Jobs/CleanBcar.php	/^                $fullListing = Listing::where('mls_account', $listing)->first();$/;"	v
 fullName	app/Agent.php	/^        $fullName        = $request->fullName ?? '';$/;"	v
+fullName	database/factories/AgentFactory.php	/^    $fullName     = $firstName . ' ' . $lastName;$/;"	v
 getAllListings	app/MapSearch.php	/^    public static function getAllListings($request)$/;"	f
 getColumn	app/Listing.php	/^    public static function getColumn($searchTerm, $columnName)$/;"	f
 getPropertyTypes	tests/utilities/functions.php	/^function getPropertyTypes ($class = null) {$/;"	f
@@ -285,7 +309,7 @@ highestToLowest	tests/Feature/SearchListingsTest.php	/^        $highestToLowest 
 ids	app/Listing.php	/^            $ids = [$agentShortId];$/;"	v
 ids	app/Listing.php	/^            $ids = explode('|', $agentShortId);$/;"	v
 impression	app/Jobs/ProcessListingImpression.php	/^            $impression = Impression::where('listing_id', $listing->id)$/;"	v
-impresssions	app/Listing.php	/^    public function impresssions()$/;"	f
+impressions	app/Listing.php	/^    public function impressions()$/;"	f
 index	app/Http/Controllers/AgentController.php	/^    public function index()$/;"	f
 index	app/Http/Controllers/AgentListingsController.php	/^    public function index(Request $request)$/;"	f
 index	app/Http/Controllers/AgentSearchController.php	/^    public function index(Request $request)$/;"	f
@@ -341,6 +365,7 @@ k	app/Jobs/ProcessSearch.php	/^        foreach ($this->request as $k => $v) {$/;
 kernel	public/index.php	/^$kernel = $app->make(Illuminate\\Contracts\\Http\\Kernel::class);$/;"	v
 key	tests/Feature/SearchListingsTest.php	/^        foreach ($queries as $key => $value) {$/;"	v
 lastName	app/Agent.php	/^        $lastName        = $request->lastName ?? '';$/;"	v
+lastName	database/factories/AgentFactory.php	/^    $lastName     = $faker->lastName;$/;"	v
 lastTaxYear	app/Helpers/ListingsHelper.php	/^        $lastTaxYear          = $result['LIST_76'] > 0 && is_numeric($result['LIST_76']) && $result['LIST_76'] < 9999 ? $result['LIST_76'] : 0;$/;"	v
 lastTaxYear	app/Helpers/ListingsHelper.php	/^        $lastTaxYear          = $result['LIST_76'] > 0 ? $result['LIST_76'] : 0;$/;"	v
 lastTaxes	app/Helpers/ListingsHelper.php	/^        $lastTaxes            = $result['LIST_75'] > 0 && is_numeric($result['LIST_75']) ? $result['LIST_75'] : 0;$/;"	v
@@ -349,7 +374,7 @@ latitude	app/Helpers/ListingsHelper.php	/^        $latitude             = is_num
 listen	app/Providers/EventServiceProvider.php	/^    protected $listen = [$/;"	v
 listing	app/Click.php	/^    public function listing()$/;"	f
 listing	app/Helpers/ListingsHelper.php	/^        $listing = Listing::updateOrCreate($/;"	v
-listing	app/Helpers/Updater.php	/^                    $listing = Listing::where('mls_account', $result['LIST_3'])->first();$/;"	v
+listing	app/Helpers/Updater.php	/^                    $listing = Listing::where('mls_account', $mlsNumber)->first();$/;"	v
 listing	app/Helpers/Updater.php	/^                    $listing = ListingsHelper::saveListing($this->association, $result, $class);$/;"	v
 listing	app/Http/Controllers/ListingController.php	/^        $listing = Listing::where('mls_account', $mlsNumber)->with('photos')->first();$/;"	v
 listing	app/Impression.php	/^    public function listing()$/;"	f
@@ -357,6 +382,9 @@ listing	app/Jobs/ProcessListingClick.php	/^        $this->listing = $listing;$/;
 listing	app/Jobs/ProcessListingClick.php	/^    protected $listing;$/;"	v
 listing	app/Photo.php	/^            $listing = Listing::where('id', $photo->listing_id)->first();$/;"	v
 listing	app/Photo.php	/^    public function listing()$/;"	f
+listing	database/factories/PhotoFactory.php	/^    $listing = factory('App\\Listing')->create();$/;"	v
+listing	tests/Unit/ListingTest.php	/^        $listing = create('App\\Listing');$/;"	v
+listing	tests/Unit/ListingTest.php	/^        $listing = create('App\\Listing', [$/;"	v
 listingCounter	app/Jobs/CleanBcar.php	/^                $listingCounter = $listingCounter + 1;$/;"	v
 listingCounter	app/Jobs/CleanBcar.php	/^        $listingCounter = 0;$/;"	v
 listingId	app/Helpers/ListingsHelper.php	/^    public static function saveListing($association, $result, $class, $listingId = -1)$/;"	v
@@ -375,6 +403,7 @@ listings	app/Listing.php	/^        $listings = Listing::whereIn('listing_member_
 listings	app/Listing.php	/^        $listings = Listing::whereIn('mls_account', $mlsArray)->get();$/;"	v
 listings	app/MapSearch.php	/^        $listings = DB::table('listings')$/;"	v
 listingsArray	app/Jobs/CleanBcar.php	/^        $listingsArray  = [];$/;"	v
+listingsWithNoPhotos	app/Photo.php	/^        $listingsWithNoPhotos = Listing::where('preferred_image', null)->get();$/;"	v
 listings_can_be_searched_by_acreage	tests/Feature/SearchListingsTest.php	/^    public function listings_can_be_searched_by_acreage()$/;"	f
 listings_can_be_searched_by_bathrooms	tests/Feature/SearchListingsTest.php	/^    public function listings_can_be_searched_by_bathrooms()$/;"	f
 listings_can_be_searched_by_bedrooms	tests/Feature/SearchListingsTest.php	/^    public function listings_can_be_searched_by_bedrooms()$/;"	f
@@ -419,9 +448,11 @@ module.exports.colors	tailwind.js	/^  colors: colors,$/;"	p
 module.exports.screens	tailwind.js	/^  screens: {$/;"	p
 namespace	app/Providers/RouteServiceProvider.php	/^    protected $namespace = 'App\\Http\\Controllers';$/;"	v
 ncname	public/js/app.js	/^var ncname = '[a-zA-Z_][\\\\w\\\\-\\\\.]*';$/;"	v
+newPhotos	app/Helpers/Updater.php	/^                    $newPhotos  = $this->rets->GetObject('Property', 'HiRes', $mlsNumber, '*', 1);$/;"	v
 officeShortId	app/Agent.php	/^        $officeShortId   = $request->officeShortId ?? '';$/;"	v
 offset	app/Helpers/Builder.php	/^        $offset         = 0;$/;"	v
 offset	app/Helpers/Builder.php	/^        $offset = 0;$/;"	v
+oldPhotos	app/Helpers/Updater.php	/^                    $oldPhotos  = $listing->photos;$/;"	v
 omniBar	app/Http/Controllers/OmnibarController.php	/^        $omniBar = Omnibar::build($searchTerm);$/;"	v
 onRE	public/js/app.js	/^var onRE = \/^@|^v-on:\/;$/;"	v
 options	app/Helpers/Builder.php	/^        $options        = $this->association == 'bcar' ?$/;"	v
@@ -441,6 +472,7 @@ parseModifiers	public/js/app.js	/^function parseModifiers (name) {$/;"	f
 password	app/ApiCall.php	/^        $this->password    = $this->association == 'bcar' ? $this->bcarPassword() : $this->ecarPassword();$/;"	v
 password	database/factories/UserFactory.php	/^        'password' => $password ?: $password = bcrypt('secret'),$/;"	v
 password	database/factories/UserFactory.php	/^    static $password;$/;"	v
+photo	tests/Unit/PhotoTest.php	/^        $photo = create('App\\Photo');$/;"	v
 photoCounter	app/Jobs/CleanBcar.php	/^                    $photoCounter = $photoCounter +1;$/;"	v
 photoCounter	app/Jobs/CleanBcar.php	/^        $photoCounter   = 0;$/;"	v
 photos	app/Agent.php	/^    public function photos()$/;"	f
@@ -451,6 +483,7 @@ photos	app/Helpers/Updater.php	/^                    $photos  = $this->rets->Get
 photos	app/Helpers/Updater.php	/^                $photos = $this->rets->GetObject('ActiveAgent', 'Photo', $agent->agent_id, '*', 1);$/;"	v
 photos	app/Jobs/CleanBcar.php	/^                $photos = Photo::where('listing_id', $listingId)->get();$/;"	v
 photos	app/Listing.php	/^    public function photos()$/;"	f
+photos	app/Photo.php	/^                $photos = (new Builder($listing->association))->fetchPhotos($listing);$/;"	v
 photos	app/Photo.php	/^        $photos    = Photo::where('preferred', 1)->get();$/;"	v
 platformGetTagNamespace	public/js/app.js	/^var platformGetTagNamespace;$/;"	v
 platformIsPreTag	public/js/app.js	/^var platformIsPreTag;$/;"	v
@@ -494,6 +527,12 @@ request	app/Jobs/ProcessSearch.php	/^    protected $request;$/;"	v
 request	public/index.php	/^    $request = Illuminate\\Http\\Request::capture()$/;"	v
 response	public/index.php	/^$response = $kernel->handle($/;"	v
 response	tests/Feature/ExampleTest.php	/^        $response = $this->get('\/');$/;"	v
+response	tests/Feature/SearchAgentsTest.php	/^        $response = $this->get($this->baseUri . '\/agents?association=' . $bcar->association);$/;"	v
+response	tests/Feature/SearchAgentsTest.php	/^        $response = $this->get($this->baseUri . '\/agents?fullName=' . $agents->first()->full_name);$/;"	v
+response	tests/Feature/SearchAgentsTest.php	/^        $response = $this->get($this->baseUri . '\/agents?fullName=Bill Thomas');$/;"	v
+response	tests/Feature/SearchAgentsTest.php	/^        $response = $this->get($this->baseUri . '\/agents?lastName=' . $agents->first()->last_name);$/;"	v
+response	tests/Feature/SearchAgentsTest.php	/^        $response = $this->get($this->baseUri . '\/agents?officeShortId=' . $agents->first()->office_short_id);$/;"	v
+response	tests/Feature/SearchAgentsTest.php	/^        $response = $this->get($this->baseUri . '\/agents?shortId=' . $agents->first()->short_id);$/;"	v
 response	tests/Feature/SearchListingsTest.php	/^        $response = $this->searchFor($/;"	v
 response	tests/Feature/SearchListingsTest.php	/^        $response = $this->searchFor(['acreage' => 2]);$/;"	v
 response	tests/Feature/SearchListingsTest.php	/^        $response = $this->searchFor(['bathrooms' => 2]);$/;"	v
@@ -541,8 +580,10 @@ searchResults	app/Agent.php	/^    public static function searchResults($request)
 searchResults	app/Listing.php	/^    public static function searchResults($request)$/;"	f
 searchTerm	app/Http/Controllers/OmnibarController.php	/^        $searchTerm = urldecode(str_replace('%^%', '', $request->search));$/;"	v
 secondListing	tests/Feature/SearchListingsTest.php	/^        $this->secondListing = create($/;"	v
+setUp	tests/Feature/SearchAgentsTest.php	/^    public function setUp()$/;"	f
 setUp	tests/Feature/SearchListingsTest.php	/^    protected function setUp()$/;"	f
 setUp	tests/TestCase.php	/^    protected function setUp()$/;"	f
+setUp	tests/Unit/ListingTest.php	/^    public function setUp()$/;"	f
 shortId	app/Agent.php	/^        $shortId         = $request->shortId ?? '';$/;"	v
 shouldIgnoreFirstNewline	public/js/app.js	/^var shouldIgnoreFirstNewline = function (tag, html) { return tag && isIgnoreNewlineTag(tag) && html[0] === '\\n'; };$/;"	f
 show	app/Http/Controllers/AgentController.php	/^    public function show(Agent $agent)$/;"	f
@@ -550,6 +591,7 @@ show	app/Http/Controllers/ListingController.php	/^    public function show($mlsN
 sortBy	app/Listing.php	/^        $sortBy       = $request->sortBy ?? 'date_modified';$/;"	v
 sortBy	app/MapSearch.php	/^        $sortBy       = $request->sortBy ?? 'date_modified';$/;"	v
 sortedListings	tests/Feature/SearchListingsTest.php	/^        $sortedListings = json_decode($response->getContent())->data;$/;"	v
+specified_values_in_listing_columns_can_be_returned_on_command	tests/Unit/ListingTest.php	/^    public function specified_values_in_listing_columns_can_be_returned_on_command()$/;"	f
 sqft	app/Helpers/ListingsHelper.php	/^        $sqft                 = isset($result['LIST_48']) && is_numeric($result['LIST_48']) ? $result['LIST_48'] : 0;$/;"	v
 sqft	app/Helpers/ListingsHelper.php	/^        $sqft                 = isset($result['LIST_48']) ? $result['LIST_48'] : 0;$/;"	v
 sqft	app/Listing.php	/^        $sqft         = $request->sq_ft ?? '';$/;"	v
@@ -562,8 +604,8 @@ status	app/MapSearch.php	/^        $status       = $request->status ?? '';$/;"	v
 stories	app/Helpers/ListingsHelper.php	/^            $stories              = is_numeric($result['LIST_64']) ? $result['LIST_64'] : 0;$/;"	v
 stories	app/Helpers/ListingsHelper.php	/^        $stories              = isset($result['LIST_64']) && is_numeric($result['LIST_64']) ? $result['LIST_64'] : 0;$/;"	v
 stories	app/Helpers/ListingsHelper.php	/^        $stories              = isset($result['LIST_64']) && is_numeric($result['LIST_64']) ? $result['LIST_64'] : 1;$/;"	v
-streetName	app/Listing.php	/^        $streetName   = ucwords(strtolower($listing->street_name));$/;"	v
-streetNumber	app/Listing.php	/^        $streetNumber = $listing->street_number;$/;"	v
+streetName	app/Listing.php	/^        $streetName   = ucwords(strtolower($this->street_name));$/;"	v
+streetNumber	app/Listing.php	/^        $streetNumber = $this->street_number;$/;"	v
 subAreas	app/Omnibar.php	/^        \/\/ $subAreas     = Listing::getColumn($searchTerm, 'sub_area');$/;"	v
 subdivisions	app/Omnibar.php	/^        $subdivisions = Listing::getColumn($searchTerm, 'subdivision');$/;"	v
 syncPreferredPhotos	app/Photo.php	/^    public static function syncPreferredPhotos()$/;"	f
@@ -608,6 +650,7 @@ utilities	app/Helpers/ListingsHelper.php	/^            $utilities            = $
 utilities	app/Helpers/ListingsHelper.php	/^            $utilities            = $result['GF20150506150244143322000000'];$/;"	v
 utilities	app/Helpers/ListingsHelper.php	/^        $utilities            = null;$/;"	v
 validator	app/Http/Controllers/Auth/RegisterController.php	/^    protected function validator(array $data)$/;"	f
+value	tests/Unit/ListingTest.php	/^        $value = $listing->getColumn($listing->city, 'city');$/;"	v
 values	app/Listing.php	/^        $values  = DB::table('listings')$/;"	v
 warn$2	public/js/app.js	/^var warn$2;$/;"	v
 waterfront	app/Helpers/BcarOptions.php	/^        $waterfront = 'LIST_192';$/;"	v
