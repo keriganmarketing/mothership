@@ -51,17 +51,20 @@ class Photo extends Model
      */
     public static function syncPreferredPhotos()
     {
+        // Get the listings that still don't have photos
         $listingsWithNoPhotos = Listing::where('preferred_image', null)->orWhere('preferred_image', '')->get();
 
+        // Try to find photos in the database. If none exist, try to get them from MLS API.
+        // If neither of those work, safe to say the the photos haven't been uploaded yet.
         foreach ($listingsWithNoPhotos as $listing) {
             if (Photo::where('listing_id', $listing->id)->exists()) {
                 $listing->preferred_image = self::preferredPhotoUrl($listing->id);
                 $listing->save();
-                echo 'z';
+                echo 'x';
             } else {
                 $photos = (new Builder($listing->association))->fetchPhotos($listing);
                 (new Photo)->savePhotos($listing, $photos);
-                echo 'x';
+                echo '+';
             }
         }
     }
@@ -70,10 +73,8 @@ class Photo extends Model
     {
         if (Photo::where('listing_id', $listingId)->where('preferred', 1)->exists()) {
             return Photo::where('listing_id', $listingId)->where('preferred', 1)->first()->url;
-        } elseif (Photo::where('listing_id', $listingId)->exists()) {
+        } else {
             return Photo::where('listing_id', $listingId)->first()->url;
         }
-
-        return;
     }
 }
