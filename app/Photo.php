@@ -51,21 +51,11 @@ class Photo extends Model
      */
     public static function syncPreferredPhotos()
     {
-        Photo::where('preferred', 1)->chunk(500, function ($photos){
-            foreach ($photos as $photo) {
-                $listing = Listing::where('id', $photo->listing_id)->first();
-
-                $listing->preferred_image = $photo->url;
-                $listing->save();
-                echo '*';
-            }
-        });
-
         $listingsWithNoPhotos = Listing::where('preferred_image', null)->orWhere('preferred_image', '')->get();
 
         foreach ($listingsWithNoPhotos as $listing) {
             if (Photo::where('listing_id', $listing->id)->exists()) {
-                $listing->preferred_image = Photo::where('listing_id', $listing->id)->first()->url;
+                $listing->preferred_image = self::preferredPhotoUrl($listing->id);
                 $listing->save();
                 echo 'z';
             } else {
@@ -74,5 +64,16 @@ class Photo extends Model
                 echo 'x';
             }
         }
+    }
+
+    protected static function preferredPhotoUrl($listingId)
+    {
+        if (Photo::where('listing_id', $listingId)->where('preferred', 1)->exists()) {
+            return Photo::where('listing_id', $listingId)->where('preferred', 1)->first()->url;
+        } elseif (Photo::where('listing_id', $listingId)->exists()) {
+            return Photo::where('listing_id', $listingId)->first()->url;
+        }
+
+        return;
     }
 }
