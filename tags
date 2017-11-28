@@ -380,7 +380,7 @@ listing	app/Http/Controllers/ListingController.php	/^        $listing = Listing:
 listing	app/Impression.php	/^    public function listing()$/;"	f
 listing	app/Jobs/ProcessListingClick.php	/^        $this->listing = $listing;$/;"	v
 listing	app/Jobs/ProcessListingClick.php	/^    protected $listing;$/;"	v
-listing	app/Photo.php	/^        \/\/         $listing = Listing::where('id', $photo->listing_id)->first();$/;"	v
+listing	app/Photo.php	/^                $listing = Listing::where('id', $photo->listing_id)->first();$/;"	v
 listing	app/Photo.php	/^    public function listing()$/;"	f
 listing	database/factories/PhotoFactory.php	/^    $listing = factory('App\\Listing')->create();$/;"	v
 listing	tests/Unit/ListingTest.php	/^        $listing = create('App\\Listing');$/;"	v
