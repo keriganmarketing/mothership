@@ -9,8 +9,8 @@ use App\AgentPhoto;
 use App\Helpers\BcarOptions;
 use App\Helpers\EcarOptions;
 use App\Helpers\AgentsHelper;
-use Illuminate\Support\Facades\DB;
 use App\Helpers\ListingsHelper;
+use Illuminate\Support\Facades\DB;
 
 class Builder
 {
