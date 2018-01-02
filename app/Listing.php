@@ -41,7 +41,7 @@ class Listing extends Model
     public static function searchResults($request)
     {
         $city         = $request->city ?? '';
-        $status       = $request->status ?? '';
+        $status       = $request->status ?? 'Active';
         $propertyType = $request->propertyType ?? '';
         $minPrice     = $request->minPrice ?? '';
         $maxPrice     = $request->maxPrice ?? '';

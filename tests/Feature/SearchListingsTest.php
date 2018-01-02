@@ -40,7 +40,7 @@ class SearchListingsTest extends TestCase
             [
                 'city'          => 'Lynn Haven',
                 'price'         => '2',
-                'status'        => 'Pending',
+                'status'        => 'Active',
                 'property_type' => 'Condominium',
                 'bedrooms'      => '2',
                 'bathrooms'     => '2',
@@ -204,18 +204,35 @@ class SearchListingsTest extends TestCase
     /** @test */
     public function listings_can_be_searched_by_status()
     {
+        $pendingListing = create(
+            'App\Listing',
+            [
+                'city'          => 'Lynn Haven',
+                'price'         => '2',
+                'status'        => 'Pending',
+                'property_type' => 'Condominium',
+                'bedrooms'      => '2',
+                'bathrooms'     => '2',
+                'sq_ft'          => '2',
+                'acreage'       => '2',
+                'pool'          => 1,
+                'waterfront'    => 1,
+                'mls_account'   => '777777'
+            ]
+        );
         $response = $this->searchFor(['status' => 'Active']);
 
         $response->assertStatus(200);
         $response->assertJsonFragment(['id' => $this->firstListing->id]);
-        $response->assertJsonMissing(['id' => $this->secondListing->id]);
-        $this->assertCount(1, json_decode($response->getContent())->data);
+        $response->assertJsonMissing(['id' => $pendingListing->id]);
+        $this->assertCount(2, json_decode($response->getContent())->data);
 
         $response = $this->searchFor(['status' => 'Pending']);
 
         $response->assertStatus(200);
-        $response->assertJsonFragment(['id' => $this->secondListing->id]);
+        $response->assertJsonFragment(['id' => $pendingListing->id]);
         $response->assertJsonMissing(['id' => $this->firstListing->id]);
+        $response->assertJsonMissing(['id' => $this->secondListing->id]);
         $this->assertCount(1, json_decode($response->getContent())->data);
 
         Queue::assertPushed(ProcessSearch::class, 2);

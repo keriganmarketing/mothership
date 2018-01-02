@@ -485,6 +485,7 @@ parseModifiers	public/js/app.js	/^function parseModifiers (name) {$/;"	f
 password	app/ApiCall.php	/^        $this->password    = $this->association == 'bcar' ? $this->bcarPassword() : $this->ecarPassword();$/;"	v
 password	database/factories/UserFactory.php	/^        'password' => $password ?: $password = bcrypt('secret'),$/;"	v
 password	database/factories/UserFactory.php	/^    static $password;$/;"	v
+pendingListing	tests/Feature/SearchListingsTest.php	/^        $pendingListing = create($/;"	v
 photo	tests/Unit/PhotoTest.php	/^        $photo = create('App\\Photo');$/;"	v
 photoCounter	app/Helpers/Updater.php	/^                $photoCounter = $photoCounter + 1;$/;"	v
 photoCounter	app/Helpers/Updater.php	/^        $photoCounter = 0;$/;"	v
@@ -615,7 +616,7 @@ sqft	app/Listing.php	/^        $sqft         = $request->sq_ft ?? '';$/;"	v
 sqft	app/MapSearch.php	/^        $sqft         = $request->sq_ft ?? '';$/;"	v
 startTagClose	public/js/app.js	/^var startTagClose = \/^\\s*(\\\/?)>\/;$/;"	v
 status	app/Listing.php	/^            $status = explode('|', $status);$/;"	v
-status	app/Listing.php	/^        $status       = $request->status ?? '';$/;"	v
+status	app/Listing.php	/^        $status       = $request->status ?? 'Active';$/;"	v
 status	app/MapSearch.php	/^            $status = explode('|', $status);$/;"	v
 status	app/MapSearch.php	/^        $status       = $request->status ?? '';$/;"	v
 stories	app/Helpers/ListingsHelper.php	/^            $stories              = is_numeric($result['LIST_64']) ? $result['LIST_64'] : 0;$/;"	v

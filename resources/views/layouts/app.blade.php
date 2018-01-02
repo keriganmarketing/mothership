@@ -15,7 +15,8 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-default navbar-static-top">
+        <main-nav></main-nav>
+        {{-- <nav class="navbar navbar-default navbar-static-top">
             <div class="container">
                 <div class="navbar-header">
 
@@ -69,9 +70,10 @@
                     </ul>
                 </div>
             </div>
-        </nav>
+        </nav> --}}
 
         @yield('content')
+
     </div>
 
     <!-- Scripts -->
