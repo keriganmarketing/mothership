@@ -2,8 +2,8 @@
 
 namespace App\Jobs;
 
-use App\Helpers\Updater;
 use Illuminate\Bus\Queueable;
+use App\Updaters\AgentsUpdater;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -30,10 +30,7 @@ class UpdateAgents implements ShouldQueue
      */
     public function handle()
     {
-        $bcarUpdater = new Updater('bcar');
-        $bcarUpdater->updateAgents();
-
-        $ecarUpdater = new Updater('ecar');
-        $ecarUpdater->updateAgents();
+        (new AgentsUpdater('bcar'))->update();
+        (new AgentsUpdater('ecar'))->update();
     }
 }

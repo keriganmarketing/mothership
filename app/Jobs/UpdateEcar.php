@@ -2,8 +2,8 @@
 
 namespace App\Jobs;
 
-use App\Helpers\Updater;
 use Illuminate\Bus\Queueable;
+use App\Updaters\ListingsUpdater;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -30,8 +30,6 @@ class UpdateEcar implements ShouldQueue
      */
     public function handle()
     {
-        $updater = new Updater('ecar');
-
-        $updater->updateListings();
+        (new ListingsUpdater('ecar'))->update();
     }
 }

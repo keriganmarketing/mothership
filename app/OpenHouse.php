@@ -78,4 +78,9 @@ class OpenHouse extends Model
             ]);
         }
     }
+
+    public static function byEventId($eventId)
+    {
+        return OpenHouse::where('event_unique_id', $eventId)->first();
+    }
 }

@@ -10,6 +10,8 @@ class Agent extends Model
 {
     protected $guarded = [];
 
+    const SEARCH_OPTIONS = 'MEMBER_0,MEMBER_1,MEMBER_3,MEMBER_4,MEMBER_5,MEMBER_6,MEMBER_7,MEMBER_8,MEMBER_10,MEMBER_11,MEMBER_12,MEMBER_13,MEMBER_14,MEMBER_15,MEMBER_16,MEMBER_17,MEMBER_18,MEMBER_19,MEMBER_21,STATUS,ACTIVE,MLS_STATUS,LICENSE,TIMESTAMP,OFFICESHORT';
+
     public function photos()
     {
         return $this->hasMany('App\AgentPhoto', 'agent_id');
@@ -57,5 +59,10 @@ class Agent extends Model
         $agents->appends($request->all())->links();
 
         return $agents;
+    }
+
+    public static function byMlsId($mlsId)
+    {
+        return Agent::where('agent_id', $mlsId)->first();
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Jobs;
 
 use App\Helpers\Updater;
+use App\Cleaners\EcarCleaner;
 use Illuminate\Bus\Queueable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
@@ -30,7 +31,6 @@ class CleanEcar implements ShouldQueue
      */
     public function handle()
     {
-        $updater = new Updater('ecar');
-        $updater->cleanEcar();
+        (new EcarCleaner())->clean();
     }
 }

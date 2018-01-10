@@ -8,7 +8,9 @@ class AgentsHelper
     public static function updateOrCreateAgent($association, $result)
     {
         $agent = Agent::updateOrCreate(
-            ['agent_id' => $result['MEMBER_0']],
+            [
+                'agent_id' => $result['MEMBER_0']
+            ],
             [
                'agent_id'        => $result['MEMBER_0'],
                'office_id'       => $result['MEMBER_1'],

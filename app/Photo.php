@@ -29,7 +29,7 @@ class Photo extends Model
      *
      * @return void
      */
-    public function savePhotos($listing, $photos)
+    public static function savePhotos($listing, $photos)
     {
         foreach ($photos as $photo) {
             Photo::create(
@@ -41,6 +41,7 @@ class Photo extends Model
                     'photo_description' => $photo->getContentDescription()
                 ]
             );
+            echo '+';
         }
     }
 
@@ -49,7 +50,7 @@ class Photo extends Model
      *
      * @return void
      */
-    public static function syncPreferredPhotos()
+    public static function sync()
     {
         // Get the listings that still don't have photos
         $listingsWithNoPhotos = Listing::where('preferred_image', null)->orWhere('preferred_image', '')->get();
@@ -76,5 +77,10 @@ class Photo extends Model
         } else {
             return Photo::where('listing_id', $listingId)->first()->url;
         }
+    }
+
+    public static function fromListingId($listingId)
+    {
+        return Photo::where('listing_id', $listingId)->get();
     }
 }

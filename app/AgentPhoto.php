@@ -14,4 +14,18 @@ class AgentPhoto extends Model
     {
         return $this->belongsTo('App\Agent');
     }
+
+    public static function savePhotos($agent, $photos)
+    {
+        foreach ($photos as $photo) {
+            if (! $photo->isError()) {
+                echo '*';
+                AgentPhoto::create([
+                    'agent_id'    => $agent->id,
+                    'url'         => $photo->getLocation(),
+                    'description' => $photo->getContentDescription() ?? 'No photo description provided'
+                ]);
+            }
+        }
+    }
 }

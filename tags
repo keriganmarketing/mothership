@@ -13,14 +13,17 @@ AgentPhoto	app/AgentPhoto.php	/^class AgentPhoto extends Model$/;"	c
 AgentSearchController	app/Http/Controllers/AgentSearchController.php	/^class AgentSearchController extends Controller$/;"	c
 AgentsHelper	app/Helpers/AgentsHelper.php	/^class AgentsHelper$/;"	c
 AgentsTest	tests/Unit/AgentsTest.php	/^class AgentsTest extends TestCase$/;"	c
+AgentsUpdater	app/Updaters/AgentsUpdater.php	/^class AgentsUpdater extends Updater implements MakesUpdates$/;"	c
 ApiCall	app/ApiCall.php	/^class ApiCall extends Model$/;"	c
 AppServiceProvider	app/Providers/AppServiceProvider.php	/^class AppServiceProvider extends ServiceProvider$/;"	c
 AuthServiceProvider	app/Providers/AuthServiceProvider.php	/^class AuthServiceProvider extends ServiceProvider$/;"	c
+BcarCleaner	app/Cleaners/BcarCleaner.php	/^class BcarCleaner extends Cleaner$/;"	c
 BcarOptions	app/Helpers/BcarOptions.php	/^class BcarOptions$/;"	c
 BroadcastServiceProvider	app/Providers/BroadcastServiceProvider.php	/^class BroadcastServiceProvider extends ServiceProvider$/;"	c
 Builder	app/Helpers/Builder.php	/^class Builder$/;"	c
 CleanBcar	app/Jobs/CleanBcar.php	/^class CleanBcar implements ShouldQueue$/;"	c
 CleanEcar	app/Jobs/CleanEcar.php	/^class CleanEcar implements ShouldQueue$/;"	c
+Cleaner	app/Cleaners/Cleaner.php	/^abstract class Cleaner$/;"	c
 Click	app/Click.php	/^class Click extends Model$/;"	c
 Controller	app/Http/Controllers/Controller.php	/^class Controller extends BaseController$/;"	c
 CreateAgentPhotosTable	database/migrations/2017_10_27_153518_create_agent_photos_table.php	/^class CreateAgentPhotosTable extends Migration$/;"	c
@@ -35,6 +38,7 @@ CreatePhotosTable	database/migrations/2017_10_19_181334_create_photos_table.php	
 CreateSearchQueriesTable	database/migrations/2017_10_31_093738_create_search_queries_table.php	/^class CreateSearchQueriesTable extends Migration$/;"	c
 CreateUsersTable	database/migrations/2014_10_12_000000_create_users_table.php	/^class CreateUsersTable extends Migration$/;"	c
 DatabaseSeeder	database/seeds/DatabaseSeeder.php	/^class DatabaseSeeder extends Seeder$/;"	c
+EcarCleaner	app/Cleaners/EcarCleaner.php	/^class EcarCleaner extends Cleaner$/;"	c
 EcarOptions	app/Helpers/EcarOptions.php	/^class EcarOptions$/;"	c
 EncryptCookies	app/Http/Middleware/EncryptCookies.php	/^class EncryptCookies extends Middleware$/;"	c
 EventServiceProvider	app/Providers/EventServiceProvider.php	/^class EventServiceProvider extends ServiceProvider$/;"	c
@@ -53,12 +57,15 @@ ListingController	app/Http/Controllers/ListingController.php	/^class ListingCont
 ListingTest	tests/Unit/ListingTest.php	/^class ListingTest extends TestCase$/;"	c
 ListingsHelper	app/Helpers/ListingsHelper.php	/^class ListingsHelper$/;"	c
 ListingsSearchController	app/Http/Controllers/ListingsSearchController.php	/^class ListingsSearchController extends Controller$/;"	c
+ListingsUpdater	app/Updaters/ListingsUpdater.php	/^class ListingsUpdater extends Updater implements MakesUpdates$/;"	c
 LoginController	app/Http/Controllers/Auth/LoginController.php	/^class LoginController extends Controller$/;"	c
+MakesUpdates	app/Updaters/MakesUpdates.php	/^interface MakesUpdates$/;"	i
 MapSearch	app/MapSearch.php	/^class MapSearch extends Model$/;"	c
 MapSearchController	app/Http/Controllers/MapSearchController.php	/^class MapSearchController extends Controller$/;"	c
 Omnibar	app/Omnibar.php	/^class Omnibar extends Model$/;"	c
 OmnibarController	app/Http/Controllers/OmnibarController.php	/^class OmnibarController extends Controller$/;"	c
 OpenHouse	app/OpenHouse.php	/^class OpenHouse extends Model$/;"	c
+OpenHousesUpdater	app/Updaters/OpenHousesUpdater.php	/^class OpenHousesUpdater extends Updater implements MakesUpdates$/;"	c
 Photo	app/Photo.php	/^class Photo extends Model$/;"	c
 PhotoTest	tests/Unit/PhotoTest.php	/^class PhotoTest extends TestCase$/;"	c
 ProcessListingClick	app/Jobs/ProcessListingClick.php	/^class ProcessListingClick implements ShouldQueue$/;"	c
@@ -78,13 +85,15 @@ UpdateAgents	app/Jobs/UpdateAgents.php	/^class UpdateAgents implements ShouldQue
 UpdateBcar	app/Jobs/UpdateBcar.php	/^class UpdateBcar implements ShouldQueue$/;"	c
 UpdateEcar	app/Jobs/UpdateEcar.php	/^class UpdateEcar implements ShouldQueue$/;"	c
 UpdatedListingsController	app/Http/Controllers/UpdatedListingsController.php	/^class UpdatedListingsController extends Controller$/;"	c
-Updater	app/Helpers/Updater.php	/^class Updater$/;"	c
+Updater	app/Updaters/Updater.php	/^abstract class Updater$/;"	c
 User	app/User.php	/^class User extends Authenticatable$/;"	c
 VerifyCsrfToken	app/Http/Middleware/VerifyCsrfToken.php	/^class VerifyCsrfToken extends Middleware$/;"	c
 _	public/js/app.js	/^  var _ = runInContext();$/;"	v
 __construct	app/ApiCall.php	/^    public function __construct($association)$/;"	f
+__construct	app/Cleaners/BcarCleaner.php	/^    public function __construct()$/;"	f
+__construct	app/Cleaners/Cleaner.php	/^    public function __construct()$/;"	f
+__construct	app/Cleaners/EcarCleaner.php	/^    public function __construct()$/;"	f
 __construct	app/Helpers/Builder.php	/^    public function __construct($association)$/;"	f
-__construct	app/Helpers/Updater.php	/^    public function __construct($association)$/;"	f
 __construct	app/Http/Controllers/Auth/ForgotPasswordController.php	/^    public function __construct()$/;"	f
 __construct	app/Http/Controllers/Auth/LoginController.php	/^    public function __construct()$/;"	f
 __construct	app/Http/Controllers/Auth/RegisterController.php	/^    public function __construct()$/;"	f
@@ -98,6 +107,10 @@ __construct	app/Jobs/ProcessSearch.php	/^    public function __construct($reques
 __construct	app/Jobs/UpdateAgents.php	/^    public function __construct()$/;"	f
 __construct	app/Jobs/UpdateBcar.php	/^    public function __construct()$/;"	f
 __construct	app/Jobs/UpdateEcar.php	/^    public function __construct()$/;"	f
+__construct	app/Updaters/AgentsUpdater.php	/^    public function __construct($association)$/;"	f
+__construct	app/Updaters/ListingsUpdater.php	/^    public function __construct($association)$/;"	f
+__construct	app/Updaters/OpenHousesUpdater.php	/^    public function __construct($association)$/;"	f
+__construct	app/Updaters/Updater.php	/^    public function __construct()$/;"	f
 __currentLoopData	storage/framework/views/f4fa2ecd83b38afeefbb3ae148cd46e820b1c147.php	/^                <?php $__currentLoopData = $element; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $page => $url): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>$/;"	v
 __currentLoopData	storage/framework/views/f4fa2ecd83b38afeefbb3ae148cd46e820b1c147.php	/^        <?php $__currentLoopData = $elements; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $element): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>$/;"	v
 __webpack_require__	public/js/app.js	/^\/******\/ 	function __webpack_require__(moduleId) {$/;"	f
@@ -128,7 +141,8 @@ addressIsValid	app/Listing.php	/^    public function addressIsValid($fullAddress
 addresses	app/Omnibar.php	/^        $addresses    = Listing::getColumn($searchTerm, 'full_address');$/;"	v
 agent	app/AgentPhoto.php	/^    public function agent()$/;"	f
 agent	app/Helpers/AgentsHelper.php	/^        $agent = Agent::updateOrCreate($/;"	v
-agent	app/Helpers/Updater.php	/^                $agent = AgentsHelper::updateOrCreateAgent($this->association, $result);$/;"	v
+agent	app/Updaters/AgentsUpdater.php	/^            $agent = AgentsHelper::updateOrCreateAgent($this->association, $result);$/;"	v
+agent	app/Updaters/AgentsUpdater.php	/^        $agent = Agent::byMlsId($mlsId);$/;"	v
 agent	tests/Feature/SearchAgentsTest.php	/^        $agent = create('App\\Agent',$/;"	v
 agent	tests/Unit/AgentsTest.php	/^        $agent = create('App\\Agent');$/;"	v
 agentShortId	app/Http/Controllers/AgentListingsController.php	/^        $agentShortId = $request->agentId;$/;"	v
@@ -158,10 +172,18 @@ as	config/mail.php	/^    | Laravel supports both SMTP and PHP's "mail" function 
 association	app/Agent.php	/^        $association     = $request->association ?? '';$/;"	v
 association	app/ApiCall.php	/^        $this->association = $association;$/;"	v
 association	app/ApiCall.php	/^    protected $association;$/;"	v
+association	app/Cleaners/BcarCleaner.php	/^        $this->association = 'bcar';$/;"	v
+association	app/Cleaners/BcarCleaner.php	/^    protected $association;$/;"	v
+association	app/Cleaners/EcarCleaner.php	/^        $this->association = 'ecar';$/;"	v
+association	app/Cleaners/EcarCleaner.php	/^    protected $association;$/;"	v
 association	app/Helpers/Builder.php	/^        $this->association = $association;$/;"	v
 association	app/Helpers/Builder.php	/^    protected $association;$/;"	v
-association	app/Helpers/Updater.php	/^        $this->association = $association;$/;"	v
-association	app/Helpers/Updater.php	/^    protected $association;$/;"	v
+association	app/Updaters/AgentsUpdater.php	/^        $this->association = $association;$/;"	v
+association	app/Updaters/AgentsUpdater.php	/^    protected $association;$/;"	v
+association	app/Updaters/ListingsUpdater.php	/^        $this->association = $association;$/;"	v
+association	app/Updaters/ListingsUpdater.php	/^    protected $association;$/;"	v
+association	app/Updaters/OpenHousesUpdater.php	/^        $this->association = $association;$/;"	v
+association	app/Updaters/OpenHousesUpdater.php	/^    protected $association;$/;"	v
 attributes	tests/utilities/functions.php	/^function create($class, $attributes = [])$/;"	v
 attributes	tests/utilities/functions.php	/^function make($class, $attributes = [])$/;"	v
 attrs.name	public/js/app.js	/^        name: args[1],$/;"	p
@@ -175,9 +197,7 @@ baths	app/MapSearch.php	/^        $baths        = $request->bathrooms ?? '';$/;"
 bcar	tests/Feature/SearchAgentsTest.php	/^        $bcar = create('App\\Agent', ['association' => 'bcar']);$/;"	v
 bcarLoginUrl	app/ApiCall.php	/^    private function bcarLoginUrl()$/;"	f
 bcarOptions	app/Helpers/BcarOptions.php	/^        $bcarOptions = [$/;"	v
-bcarOptions	app/Jobs/CleanBcar.php	/^        $bcarOptions    = BcarOptions::all();$/;"	v
 bcarPassword	app/ApiCall.php	/^    private function bcarPassword()$/;"	f
-bcarUpdater	app/Jobs/UpdateAgents.php	/^        $bcarUpdater = new Updater('bcar');$/;"	v
 bcarUserName	app/ApiCall.php	/^    private function bcarUserName()$/;"	f
 bedrooms	app/Helpers/ListingsHelper.php	/^        $bedrooms             = isset($result['LIST_66']) && is_numeric($result['LIST_66']) ? $result['LIST_66'] : 0;$/;"	v
 bedrooms	app/Helpers/ListingsHelper.php	/^        $bedrooms             = isset($result['LIST_66']) ? $result['LIST_66'] : 0;$/;"	v
@@ -191,6 +211,8 @@ boot	app/Providers/EventServiceProvider.php	/^    public function boot()$/;"	f
 boot	app/Providers/RouteServiceProvider.php	/^    public function boot()$/;"	f
 build	app/Omnibar.php	/^    public static function build($searchTerm)$/;"	f
 buildFullAddress	app/Listing.php	/^    public function buildFullAddress()$/;"	f
+byEventId	app/OpenHouse.php	/^    public static function byEventId($eventId)$/;"	f
+byMlsId	app/Agent.php	/^    public static function byMlsId($mlsId)$/;"	f
 byMlsNumber	app/Listing.php	/^    public static function byMlsNumber($mlsNumber){$/;"	f
 channel.port1.onmessage	public/js/app.js	/^        channel.port1.onmessage = function(event) {$/;"	f
 checkInFor	public/js/app.js	/^function checkInFor (el) {$/;"	f
@@ -198,10 +220,14 @@ cities	app/Omnibar.php	/^        $cities       = Listing::getColumn($searchTerm,
 city	app/Listing.php	/^        $city         = $request->city ?? '';$/;"	v
 city	app/Listing.php	/^        $city         = ', '. $this->city;$/;"	v
 city	app/MapSearch.php	/^        $city         = $request->city ?? '';$/;"	v
+classArray	app/Cleaners/Cleaner.php	/^        $this->classArray  = $this->association == 'bcar' ?$/;"	v
+classArray	app/Cleaners/Cleaner.php	/^    protected $classArray;$/;"	v
 classArray	app/Helpers/Builder.php	/^        $this->classArray  = $this->association == 'bcar' ?$/;"	v
-classArray	app/Helpers/Updater.php	/^        $this->classArray  = $this->association == 'bcar' ?$/;"	v
-classArray	app/Jobs/CleanBcar.php	/^        $classArray = ['A', 'C', 'E', 'F', 'G', 'J'];$/;"	v
-cleanEcar	app/Helpers/Updater.php	/^    public function cleanEcar()$/;"	f
+classArray	app/Updaters/Updater.php	/^        $this->classArray  = $this->association == 'bcar' ?$/;"	v
+classArray	app/Updaters/Updater.php	/^    protected $classArray;$/;"	v
+clean	app/Cleaners/BcarCleaner.php	/^    public function clean()$/;"	f
+clean	app/Cleaners/EcarCleaner.php	/^    public function clean()$/;"	f
+cleanEcar	app/Updaters/Updater.php	/^    public function cleanEcar()$/;"	f
 click	app/Jobs/ProcessListingClick.php	/^        $click = Click::where('listing_id', $this->listing->id)$/;"	v
 clicks	app/Listing.php	/^    public function clicks()$/;"	f
 commands	app/Console/Kernel.php	/^    protected $commands = [$/;"	v
@@ -222,8 +248,8 @@ create	tests/utilities/functions.php	/^function create($class, $attributes = [])
 createASTElement	public/js/app.js	/^function createASTElement ($/;"	f
 createApplication	tests/CreatesApplication.php	/^    public function createApplication()$/;"	f
 data	app/Omnibar.php	/^        $data         = [];$/;"	v
-dateLastModified	app/Helpers/Updater.php	/^        $dateLastModified = $this->getLastModifiedDate('agents');$/;"	v
-dateLastModified	app/Helpers/Updater.php	/^        $dateLastModified = $this->getLastModifiedDate('listings');$/;"	v
+dateLastModified	app/Updaters/AgentsUpdater.php	/^        $dateLastModified = $this->getLastModifiedDate('agents');$/;"	v
+dateLastModified	app/Updaters/ListingsUpdater.php	/^        $dateLastModified = $this->getLastModifiedDate('listings');$/;"	v
 decodeAttr	public/js/app.js	/^function decodeAttr (value, shouldDecodeNewlines) {$/;"	f
 decodeHTMLCached	public/js/app.js	/^var decodeHTMLCached = cached(he.decode);$/;"	v
 decodingMap.&#10;	public/js/app.js	/^  '&#10;': '\\n'$/;"	p
@@ -231,7 +257,8 @@ decodingMap.&amp;	public/js/app.js	/^  '&amp;': '&',$/;"	p
 decodingMap.&gt;	public/js/app.js	/^  '&gt;': '>',$/;"	p
 decodingMap.&lt;	public/js/app.js	/^  '&lt;': '<',$/;"	p
 decodingMap.&quot;	public/js/app.js	/^  '&quot;': '"',$/;"	p
-deletedListings	app/Helpers/Updater.php	/^        $deletedListings = array_diff($listings->toArray(), $listingsArray);$/;"	v
+delete	app/Updaters/ListingsUpdater.php	/^    protected function delete($photos)$/;"	f
+deletedListings	app/Cleaners/EcarCleaner.php	/^        $deletedListings = array_diff($listings->toArray(), $listingsArray);$/;"	v
 delimiters	public/js/app.js	/^var delimiters;$/;"	v
 derivedFullName	app/Agent.php	/^        $derivedFullName = $fullName != null ? explode(' ', $fullName) : ''; \/\/ Array(['First', 'Last'])$/;"	v
 destroy	app/Http/Controllers/AgentController.php	/^    public function destroy(Agent $agent)$/;"	f
@@ -257,7 +284,6 @@ ecar	tests/Feature/SearchAgentsTest.php	/^        $ecar = create('App\\Agent', [
 ecarLoginUrl	app/ApiCall.php	/^    private function ecarLoginUrl()$/;"	f
 ecarOptions	app/Helpers/EcarOptions.php	/^        $ecarOptions = [$/;"	v
 ecarPassword	app/ApiCall.php	/^    private function ecarPassword()$/;"	f
-ecarUpdater	app/Jobs/UpdateAgents.php	/^        $ecarUpdater = new Updater('ecar');$/;"	v
 ecarUserName	app/ApiCall.php	/^    private function ecarUserName()$/;"	f
 edit	app/Http/Controllers/AgentController.php	/^    public function edit(Agent $agent)$/;"	f
 encodedAttr	public/js/app.js	/^var encodedAttr = \/&(?:lt|gt|quot|amp);\/g;$/;"	v
@@ -265,7 +291,7 @@ encodedAttrWithNewLines	public/js/app.js	/^var encodedAttrWithNewLines = \/&(?:l
 energyFeatures	app/Helpers/ListingsHelper.php	/^            $energyFeatures       = $result['GF20131203185526796706000000'];$/;"	v
 energyFeatures	app/Helpers/ListingsHelper.php	/^            $energyFeatures       = $result['GF20131230164913550188000000'];$/;"	v
 energyFeatures	app/Helpers/ListingsHelper.php	/^        $energyFeatures       = null;$/;"	v
-eventId	app/Helpers/Updater.php	/^            $eventId   = $result['EVENT0'];$/;"	v
+eventId	app/Updaters/OpenHousesUpdater.php	/^        $eventId   = $result['EVENT0'];$/;"	v
 except	app/Http/Middleware/EncryptCookies.php	/^    protected $except = [$/;"	v
 except	app/Http/Middleware/TrimStrings.php	/^    protected $except = [$/;"	v
 except	app/Http/Middleware/VerifyCsrfToken.php	/^    protected $except = [$/;"	v
@@ -273,7 +299,6 @@ exterior	app/Helpers/ListingsHelper.php	/^            $exterior             = $r
 exterior	app/Helpers/ListingsHelper.php	/^            $exterior             = $result['GF20131230164914069211000000'];$/;"	v
 exterior	app/Helpers/ListingsHelper.php	/^        $exterior             = null;$/;"	v
 fetchListings	app/Helpers/Builder.php	/^    public function fetchListings($class)$/;"	f
-fetchNewOpenHouses	app/Helpers/Updater.php	/^    protected function fetchNewOpenHouses($lastModified)$/;"	f
 fetchPhotos	app/Helpers/Builder.php	/^    public function fetchPhotos($listing)$/;"	f
 fillable	app/User.php	/^    protected $fillable = [$/;"	v
 findByMlsNumbers	app/Listing.php	/^    public static function findByMlsNumbers($mlsNumbers)$/;"	f
@@ -289,17 +314,23 @@ freshAgentPhotos	app/Helpers/Builder.php	/^    public function freshAgentPhotos(
 freshAgents	app/Helpers/Builder.php	/^    public function freshAgents()$/;"	f
 freshListings	app/Helpers/Builder.php	/^    public function freshListings()$/;"	f
 freshPhotos	app/Helpers/Builder.php	/^    public function freshPhotos()$/;"	f
+fromListingId	app/Photo.php	/^    public static function fromListingId($listingId)$/;"	f
 fullAddress	app/Listing.php	/^        $fullAddress  = $streetNumber . ' ' . $streetName . $city;$/;"	v
 fullBaths	app/Helpers/ListingsHelper.php	/^        $fullBaths            = isset($result['LIST_68']) ? $result['LIST_68'] : 0;$/;"	v
-fullListing	app/Helpers/Updater.php	/^            $fullListing = Listing::where('mls_account', $listing)->first();$/;"	v
-fullListing	app/Jobs/CleanBcar.php	/^                $fullListing = Listing::where('mls_account', $listing)->first();$/;"	v
+fullListing	app/Cleaners/BcarCleaner.php	/^                $fullListing = Listing::where('mls_account', $listingId)->first();$/;"	v
+fullListing	app/Cleaners/EcarCleaner.php	/^            $fullListing = Listing::where('mls_account', $listing)->first();$/;"	v
 fullName	app/Agent.php	/^        $fullName        = $request->fullName ?? '';$/;"	v
 fullName	database/factories/AgentFactory.php	/^    $fullName     = $firstName . ' ' . $lastName;$/;"	v
 getAllListings	app/MapSearch.php	/^    public static function getAllListings($request)$/;"	f
 getColumn	app/Listing.php	/^    public static function getColumn($searchTerm, $columnName)$/;"	f
-getLastModifiedDate	app/Helpers/Updater.php	/^    protected function getLastModifiedDate($table)$/;"	f
-getNewProperties	app/Helpers/Updater.php	/^    protected function getNewProperties($class, $dateLastModified)$/;"	f
-getPhotosForListing	app/Helpers/Updater.php	/^    protected function getPhotosForListing($mlsNumber)$/;"	f
+getLastModifiedDate	app/Updaters/Updater.php	/^    protected function getLastModifiedDate($table)$/;"	f
+getListingMlsIds	app/Cleaners/BcarCleaner.php	/^    protected function getListingMlsIds($class)$/;"	f
+getListingMlsIds	app/Cleaners/EcarCleaner.php	/^    protected function getListingMlsIds($class, $offset)$/;"	f
+getNewAgents	app/Updaters/AgentsUpdater.php	/^    protected function getNewAgents($dateLastModified)$/;"	f
+getNewOpenHouses	app/Updaters/OpenHousesUpdater.php	/^    protected function getNewOpenHouses($lastModified)$/;"	f
+getNewProperties	app/Updaters/ListingsUpdater.php	/^    protected function getNewProperties($class, $dateLastModified)$/;"	f
+getPhotosForAgent	app/Updaters/AgentsUpdater.php	/^    protected function getPhotosForAgent($agent)$/;"	f
+getPhotosForListing	app/Updaters/ListingsUpdater.php	/^    protected function getPhotosForListing($mlsNumber)$/;"	f
 getPropertyTypes	tests/utilities/functions.php	/^function getPropertyTypes ($class = null) {$/;"	f
 guard	app/Http/Middleware/RedirectIfAuthenticated.php	/^    public function handle($request, Closure $next, $guard = null)$/;"	v
 guarded	app/Agent.php	/^    protected $guarded = [];$/;"	v
@@ -320,7 +351,9 @@ handle	app/Jobs/ProcessSearch.php	/^    public function handle()$/;"	f
 handle	app/Jobs/UpdateAgents.php	/^    public function handle()$/;"	f
 handle	app/Jobs/UpdateBcar.php	/^    public function handle()$/;"	f
 handle	app/Jobs/UpdateEcar.php	/^    public function handle()$/;"	f
-handleResult	app/Helpers/Updater.php	/^    protected function handleResult($class, $result)$/;"	f
+handleResult	app/Updaters/AgentsUpdater.php	/^    protected function handleResult($result)$/;"	f
+handleResult	app/Updaters/ListingsUpdater.php	/^    protected function handleResult($class, $result)$/;"	f
+handleResult	app/Updaters/OpenHousesUpdater.php	/^    protected function handleResult($result)$/;"	f
 headers	app/Http/Middleware/TrustProxies.php	/^    protected $headers = [$/;"	v
 hidden	app/User.php	/^    protected $hidden = [$/;"	v
 highestToLowest	tests/Feature/SearchListingsTest.php	/^        $highestToLowest = \\App\\Listing::orderBy('date_modified', 'DESC')->pluck('id');$/;"	v
@@ -383,8 +416,8 @@ isTextTag.text	public/js/app.js	/^function text (el, dir) {$/;"	f
 k	app/Jobs/ProcessSearch.php	/^        foreach ($this->request as $k => $v) {$/;"	v
 kernel	public/index.php	/^$kernel = $app->make(Illuminate\\Contracts\\Http\\Kernel::class);$/;"	v
 key	tests/Feature/SearchListingsTest.php	/^        foreach ($queries as $key => $value) {$/;"	v
-lastModified	app/Helpers/Updater.php	/^        $lastModified = $this->getLastModifiedDate('open_houses');$/;"	v
-lastModified	app/Helpers/Updater.php	/^        $lastModified = Carbon::parse($/;"	v
+lastModified	app/Updaters/OpenHousesUpdater.php	/^        $lastModified = $this->getLastModifiedDate('open_houses');$/;"	v
+lastModified	app/Updaters/Updater.php	/^        $lastModified = Carbon::parse($/;"	v
 lastName	app/Agent.php	/^        $lastName        = $request->lastName ?? '';$/;"	v
 lastName	database/factories/AgentFactory.php	/^    $lastName     = $faker->lastName;$/;"	v
 lastTaxYear	app/Helpers/ListingsHelper.php	/^        $lastTaxYear          = $result['LIST_76'] > 0 && is_numeric($result['LIST_76']) && $result['LIST_76'] < 9999 ? $result['LIST_76'] : 0;$/;"	v
@@ -395,9 +428,6 @@ latitude	app/Helpers/ListingsHelper.php	/^        $latitude             = is_num
 listen	app/Providers/EventServiceProvider.php	/^    protected $listen = [$/;"	v
 listing	app/Click.php	/^    public function listing()$/;"	f
 listing	app/Helpers/ListingsHelper.php	/^        $listing = Listing::updateOrCreate($/;"	v
-listing	app/Helpers/Updater.php	/^            $listing = Listing::where('mls_account', $mlsNumber)->first();$/;"	v
-listing	app/Helpers/Updater.php	/^            $listing = ListingsHelper::saveListing($this->association, $result, $class);$/;"	v
-listing	app/Helpers/Updater.php	/^        $listing = Listing::byMlsNumber($mlsNumber);$/;"	v
 listing	app/Http/Controllers/ListingController.php	/^        $listing = Listing::where('mls_account', $mlsNumber)->with(['photos', 'openHouses'])->first();$/;"	v
 listing	app/Impression.php	/^    public function listing()$/;"	f
 listing	app/Jobs/ProcessListingClick.php	/^        $this->listing = $listing;$/;"	v
@@ -406,34 +436,36 @@ listing	app/OpenHouse.php	/^        $listing =  Listing::where('mls_account', $r
 listing	app/OpenHouse.php	/^        $listing = Listing::where('mls_account', $result['LIST105'])->first();$/;"	v
 listing	app/OpenHouse.php	/^    public function listing()$/;"	f
 listing	app/Photo.php	/^    public function listing()$/;"	f
+listing	app/Updaters/ListingsUpdater.php	/^            $listing = Listing::byMlsNumber($mlsNumber);$/;"	v
+listing	app/Updaters/ListingsUpdater.php	/^            $listing = ListingsHelper::saveListing($this->association, $result, $class);$/;"	v
+listing	app/Updaters/ListingsUpdater.php	/^        $listing = Listing::byMlsNumber($mlsNumber);$/;"	v
 listing	database/factories/PhotoFactory.php	/^    $listing = factory('App\\Listing')->create();$/;"	v
 listing	tests/Unit/ListingTest.php	/^        $listing = create('App\\Listing');$/;"	v
 listing	tests/Unit/ListingTest.php	/^        $listing = create('App\\Listing', [$/;"	v
-listingCounter	app/Helpers/Updater.php	/^            $listingCounter = $listingCounter + 1;$/;"	v
-listingCounter	app/Helpers/Updater.php	/^        $listingCounter = 0;$/;"	v
-listingCounter	app/Jobs/CleanBcar.php	/^                $listingCounter = $listingCounter + 1;$/;"	v
-listingCounter	app/Jobs/CleanBcar.php	/^        $listingCounter = 0;$/;"	v
+listingCounter	app/Cleaners/BcarCleaner.php	/^                $listingCounter = $listingCounter + 1;$/;"	v
+listingCounter	app/Cleaners/BcarCleaner.php	/^        $listingCounter = 0;$/;"	v
+listingCounter	app/Cleaners/EcarCleaner.php	/^            $listingCounter = $listingCounter + 1;$/;"	v
+listingCounter	app/Cleaners/EcarCleaner.php	/^        $listingCounter = 0;$/;"	v
+listingId	app/Cleaners/EcarCleaner.php	/^            $listingId = $fullListing->id;$/;"	v
 listingId	app/Helpers/ListingsHelper.php	/^    public static function saveListing($association, $result, $class, $listingId = -1)$/;"	v
-listingId	app/Helpers/Updater.php	/^            $listingId = $fullListing->id;$/;"	v
-listingId	app/Jobs/CleanBcar.php	/^                $listingId = $fullListing->id;$/;"	v
+listingIds	app/Cleaners/BcarCleaner.php	/^        $listingIds     = Listing::where('association', $this->association)->pluck('mls_account');$/;"	v
+listings	app/Cleaners/EcarCleaner.php	/^        $listings = Listing::where('association', 'ecar')->pluck('mls_account');$/;"	v
 listings	app/Helpers/Builder.php	/^            $listings = Listing::where('class', $class)->where('association', $this->association)->get();$/;"	v
-listings	app/Helpers/Updater.php	/^        $listings = Listing::where('association', 'ecar')->pluck('mls_account');$/;"	v
 listings	app/Http/Controllers/AgentListingsController.php	/^        $listings = Listing::forAgent($agentShortId);$/;"	v
 listings	app/Http/Controllers/ListingController.php	/^        $listings = Listing::findByMlsNumbers($request->mlsNumbers);$/;"	v
 listings	app/Http/Controllers/ListingsSearchController.php	/^        $listings = Listing::searchResults($request);$/;"	v
 listings	app/Http/Controllers/MapSearchController.php	/^        $listings = MapSearch::getAllListings($request);$/;"	v
 listings	app/Http/Controllers/UpdatedListingsController.php	/^        $listings = Listing::whereDate('date_modified', $today)->get();$/;"	v
-listings	app/Jobs/CleanBcar.php	/^        $listings       = Listing::where('association', 'bcar')->pluck('mls_account');$/;"	v
 listings	app/Jobs/ProcessListingImpression.php	/^        $this->listings = $listings;$/;"	v
 listings	app/Jobs/ProcessListingImpression.php	/^    protected $listings;$/;"	v
 listings	app/Listing.php	/^        $listings = Listing::when($city, function ($query) use ($city) {$/;"	v
 listings	app/Listing.php	/^        $listings = Listing::whereIn('listing_member_shortid', $ids)$/;"	v
 listings	app/Listing.php	/^        $listings = Listing::whereIn('mls_account', $mlsArray)->get();$/;"	v
 listings	app/MapSearch.php	/^        $listings = DB::table('listings')$/;"	v
-listingsArray	app/Helpers/Updater.php	/^        $listingsArray = [];$/;"	v
-listingsArray	app/Jobs/CleanBcar.php	/^        $listingsArray  = [];$/;"	v
-listingsRemain	app/Helpers/Updater.php	/^                    $listingsRemain = false;$/;"	v
-listingsRemain	app/Helpers/Updater.php	/^            $listingsRemain = true;$/;"	v
+listingsArray	app/Cleaners/BcarCleaner.php	/^        $listingsArray  = [];$/;"	v
+listingsArray	app/Cleaners/EcarCleaner.php	/^        $listingsArray = [];$/;"	v
+listingsRemain	app/Cleaners/EcarCleaner.php	/^                    $listingsRemain = false;$/;"	v
+listingsRemain	app/Cleaners/EcarCleaner.php	/^            $listingsRemain = true;$/;"	v
 listingsWithNoPhotos	app/Photo.php	/^        $listingsWithNoPhotos = Listing::where('preferred_image', null)->orWhere('preferred_image', '')->get();$/;"	v
 listings_can_be_searched_by_acreage	tests/Feature/SearchListingsTest.php	/^    public function listings_can_be_searched_by_acreage()$/;"	f
 listings_can_be_searched_by_bathrooms	tests/Feature/SearchListingsTest.php	/^    public function listings_can_be_searched_by_bathrooms()$/;"	f
@@ -467,32 +499,36 @@ middleware	app/Http/Kernel.php	/^    protected $middleware = [$/;"	v
 middlewareGroups	app/Http/Kernel.php	/^    protected $middlewareGroups = [$/;"	v
 minPrice	app/Listing.php	/^        $minPrice     = $request->minPrice ?? '';$/;"	v
 minPrice	app/MapSearch.php	/^        $minPrice     = $request->minPrice ?? '';$/;"	v
+mls	app/Cleaners/Cleaner.php	/^        $this->mls         = new ApiCall($this->association);$/;"	v
+mls	app/Cleaners/Cleaner.php	/^    protected $mls;$/;"	v
 mls	app/Helpers/Builder.php	/^        $this->mls         = new ApiCall($this->association);$/;"	v
-mls	app/Helpers/Updater.php	/^        $this->mls         = new ApiCall($this->association);$/;"	v
-mls	app/Jobs/CleanBcar.php	/^        $mls            = new ApiCall('bcar');$/;"	v
+mls	app/Updaters/Updater.php	/^        $this->mls         = new ApiCall($this->association);$/;"	v
+mls	app/Updaters/Updater.php	/^    protected $mls;$/;"	v
 mlsArray	app/Listing.php	/^        $mlsArray = explode('|', $mlsNumbers);$/;"	v
-mlsId	app/Helpers/Updater.php	/^            $mlsId = $result['MEMBER_0'];$/;"	v
-mlsNumber	app/Helpers/Updater.php	/^        $mlsNumber = $result['LIST_3'];$/;"	v
+mlsId	app/Updaters/AgentsUpdater.php	/^        $mlsId = $result['MEMBER_0'];$/;"	v
+mlsNumber	app/Updaters/ListingsUpdater.php	/^        $mlsNumber = $result['LIST_3'];$/;"	v
 mlsNumbers	app/Omnibar.php	/^        $mlsNumbers   = Listing::getColumn($searchTerm, 'mls_account');$/;"	v
 modifierRE	public/js/app.js	/^var modifierRE = \/\\.[^.]+\/g;$/;"	v
 module.exports.colors	tailwind.js	/^  colors: colors,$/;"	p
 module.exports.screens	tailwind.js	/^  screens: {$/;"	p
 namespace	app/Providers/RouteServiceProvider.php	/^    protected $namespace = 'App\\Http\\Controllers';$/;"	v
 ncname	public/js/app.js	/^var ncname = '[a-zA-Z_][\\\\w\\\\-\\\\.]*';$/;"	v
-newPhotos	app/Helpers/Updater.php	/^            $newPhotos  = $this->rets->GetObject('Property', 'HiRes', $mlsNumber, '*', 1);$/;"	v
+newPhotos	app/Updaters/ListingsUpdater.php	/^            $newPhotos  = $this->getPhotosForListing($mlsNumber);$/;"	v
 officeShortId	app/Agent.php	/^        $officeShortId   = $request->officeShortId ?? '';$/;"	v
+offset	app/Cleaners/EcarCleaner.php	/^            $offset = 0;$/;"	v
 offset	app/Helpers/Builder.php	/^        $offset         = 0;$/;"	v
 offset	app/Helpers/Builder.php	/^        $offset = 0;$/;"	v
-offset	app/Helpers/Updater.php	/^            $offset = 0;$/;"	v
-oldPhotos	app/Helpers/Updater.php	/^            $oldPhotos  = $listing->photos;$/;"	v
+oldPhotos	app/Updaters/ListingsUpdater.php	/^            $oldPhotos  = $listing->photos;$/;"	v
 omniBar	app/Http/Controllers/OmnibarController.php	/^        $omniBar = Omnibar::build($searchTerm);$/;"	v
 onRE	public/js/app.js	/^var onRE = \/^@|^v-on:\/;$/;"	v
-openHouse	app/Helpers/Updater.php	/^            $openHouse = OpenHouse::where('event_unique_id', $eventId)->first();$/;"	v
+openHouse	app/Updaters/OpenHousesUpdater.php	/^        $openHouse = OpenHouse::byEventId($eventId);$/;"	v
 openHouses	app/Helpers/Builder.php	/^    public function openHouses()$/;"	f
-openHouses	app/Helpers/Updater.php	/^    public function openHouses()$/;"	f
 openHouses	app/Listing.php	/^    public function openHouses()$/;"	f
+options	app/Cleaners/Cleaner.php	/^        $this->options = $this->association == 'bcar' ?$/;"	v
+options	app/Cleaners/Cleaner.php	/^    protected $options;$/;"	v
 options	app/Helpers/Builder.php	/^        $options        = $this->association == 'bcar' ?$/;"	v
-options	app/Helpers/Updater.php	/^        $this->options = $this->association == 'bcar' ?$/;"	v
+options	app/Updaters/Updater.php	/^        $this->options = $this->association == 'bcar' ?$/;"	v
+options	app/Updaters/Updater.php	/^    protected $options;$/;"	v
 orderBy	app/Listing.php	/^        $orderBy      = $request->orderBy ?? 'DESC';$/;"	v
 orderBy	app/MapSearch.php	/^        $orderBy      = $request->orderBy ?? 'DESC';$/;"	v
 parse	public/js/app.js	/^function parse ($/;"	f
@@ -510,20 +546,20 @@ password	database/factories/UserFactory.php	/^        'password' => $password ?:
 password	database/factories/UserFactory.php	/^    static $password;$/;"	v
 pendingListing	tests/Feature/SearchListingsTest.php	/^        $pendingListing = create($/;"	v
 photo	tests/Unit/PhotoTest.php	/^        $photo = create('App\\Photo');$/;"	v
-photoCounter	app/Helpers/Updater.php	/^                $photoCounter = $photoCounter + 1;$/;"	v
-photoCounter	app/Helpers/Updater.php	/^        $photoCounter = 0;$/;"	v
-photoCounter	app/Jobs/CleanBcar.php	/^                    $photoCounter = $photoCounter +1;$/;"	v
-photoCounter	app/Jobs/CleanBcar.php	/^        $photoCounter   = 0;$/;"	v
+photoCounter	app/Cleaners/BcarCleaner.php	/^                    $photoCounter = $photoCounter +1;$/;"	v
+photoCounter	app/Cleaners/BcarCleaner.php	/^        $photoCounter   = 0;$/;"	v
+photoCounter	app/Cleaners/EcarCleaner.php	/^                $photoCounter = $photoCounter + 1;$/;"	v
+photoCounter	app/Cleaners/EcarCleaner.php	/^        $photoCounter = 0;$/;"	v
 photos	app/Agent.php	/^    public function photos()$/;"	f
+photos	app/Cleaners/BcarCleaner.php	/^                $photos = Photo::fromListingId($fullListing->id);$/;"	v
+photos	app/Cleaners/EcarCleaner.php	/^            $photos = Photo::where('listing_id', $listingId)->get();$/;"	v
 photos	app/Helpers/Builder.php	/^                $photos = $this->fetchPhotos($listing);$/;"	v
 photos	app/Helpers/Builder.php	/^        $photos = $this->rets->GetObject('ActiveAgent', 'Photo', $agent->agent_id, '*', 1);$/;"	v
 photos	app/Helpers/Builder.php	/^        $photos = $this->rets->GetObject('Property', 'HiRes', $listing->mls_account, '*', 1);$/;"	v
-photos	app/Helpers/Updater.php	/^                $photos = $this->rets->GetObject('ActiveAgent', 'Photo', $agent->agent_id, '*', 1);$/;"	v
-photos	app/Helpers/Updater.php	/^            $photos  = $this->getPhotosForListing($mlsNumber);$/;"	v
-photos	app/Helpers/Updater.php	/^            $photos = Photo::where('listing_id', $listingId)->get();$/;"	v
-photos	app/Jobs/CleanBcar.php	/^                $photos = Photo::where('listing_id', $listingId)->get();$/;"	v
 photos	app/Listing.php	/^    public function photos()$/;"	f
 photos	app/Photo.php	/^                $photos = (new Builder($listing->association))->fetchPhotos($listing);$/;"	v
+photos	app/Updaters/AgentsUpdater.php	/^            $photos = $this->getPhotosForAgent($agent);$/;"	v
+photos	app/Updaters/ListingsUpdater.php	/^            $photos  = $this->getPhotosForListing($mlsNumber);$/;"	v
 platformGetTagNamespace	public/js/app.js	/^var platformGetTagNamespace;$/;"	v
 platformIsPreTag	public/js/app.js	/^var platformIsPreTag;$/;"	v
 platformMustUseProp	public/js/app.js	/^var platformMustUseProp;$/;"	v
@@ -594,24 +630,27 @@ response	tests/Feature/SearchListingsTest.php	/^        $response = $this->searc
 response	tests/Feature/SearchListingsTest.php	/^        $response = $this->searchFor(['status' => 'Active']);$/;"	v
 response	tests/Feature/SearchListingsTest.php	/^        $response = $this->searchFor(['status' => 'Pending']);$/;"	v
 response	tests/Feature/SearchListingsTest.php	/^        $response = $this->searchFor(['waterfront' => 1]);$/;"	v
+results	app/Cleaners/BcarCleaner.php	/^            $results = $this->getListingMlsIds($class);$/;"	v
+results	app/Cleaners/EcarCleaner.php	/^                $results = $this->getListingMlsIds($class, $offset);$/;"	v
 results	app/Helpers/Builder.php	/^            $results = $this->rets->Search($/;"	v
 results	app/Helpers/Builder.php	/^            $results = $this->rets->Search('Property', $class, '*', $options[$class]);$/;"	v
 results	app/Helpers/Builder.php	/^        $results = $this->rets->Search('OpenHouse', 'OpenHouse', '*');$/;"	v
-results	app/Helpers/Updater.php	/^                $results = $this->rets->Search($/;"	v
-results	app/Helpers/Updater.php	/^            $results = $this->getNewProperties($class, $dateLastModified);$/;"	v
-results	app/Helpers/Updater.php	/^        $results = $this->fetchNewOpenHouses($lastModified);$/;"	v
-results	app/Helpers/Updater.php	/^        $results = $this->rets->Search($/;"	v
-results	app/Jobs/CleanBcar.php	/^            $results = $rets->Search($/;"	v
+results	app/Updaters/AgentsUpdater.php	/^        $results = $this->getNewAgents($dateLastModified);$/;"	v
+results	app/Updaters/ListingsUpdater.php	/^            $results = $this->getNewProperties($class, $dateLastModified);$/;"	v
+results	app/Updaters/OpenHousesUpdater.php	/^        $results = $this->getNewOpenHouses($lastModified);$/;"	v
 rets	app/ApiCall.php	/^        $rets = new Session($config);$/;"	v
+rets	app/Cleaners/Cleaner.php	/^        $this->rets        = $this->mls->login();$/;"	v
+rets	app/Cleaners/Cleaner.php	/^    protected $rets;$/;"	v
 rets	app/Helpers/Builder.php	/^        $this->rets        = $this->mls->login();$/;"	v
-rets	app/Helpers/Updater.php	/^        $this->rets        = $this->mls->login();$/;"	v
-rets	app/Jobs/CleanBcar.php	/^        $rets           = $mls->login();$/;"	v
+rets	app/Updaters/Updater.php	/^        $this->rets        = $this->mls->login();$/;"	v
+rets	app/Updaters/Updater.php	/^    protected $rets;$/;"	v
 return	public/js/app.js	/^\/******\/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };$/;"	c
 return.hasOwnProperty	public/js/app.js	/^\/******\/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };$/;"	m
 routeMiddleware	app/Http/Kernel.php	/^    protected $routeMiddleware = [$/;"	v
 run	database/seeds/DatabaseSeeder.php	/^    public function run()$/;"	f
 saveListing	app/Helpers/ListingsHelper.php	/^    public static function saveListing($association, $result, $class, $listingId = -1)$/;"	f
-savePhotos	app/Photo.php	/^    public function savePhotos($listing, $photos)$/;"	f
+savePhotos	app/AgentPhoto.php	/^    public static function savePhotos($agent, $photos)$/;"	f
+savePhotos	app/Photo.php	/^    public static function savePhotos($listing, $photos)$/;"	f
 savedListing	app/Helpers/ListingsHelper.php	/^        $savedListing = $association == 'bcar' ?$/;"	v
 schedule	app/Console/Kernel.php	/^    protected function schedule(Schedule $schedule)$/;"	f
 script.onreadystatechange	public/js/app.js	/^            script.onreadystatechange = function () {$/;"	f
@@ -650,7 +689,7 @@ stories	app/Helpers/ListingsHelper.php	/^        $stories              = isset($
 streetName	app/Listing.php	/^        $streetName   = ucwords(strtolower($this->street_name));$/;"	v
 streetNumber	app/Listing.php	/^        $streetNumber = $this->street_number;$/;"	v
 subdivisions	app/Omnibar.php	/^        $subdivisions = Listing::getColumn($searchTerm, 'subdivision');$/;"	v
-syncPreferredPhotos	app/Photo.php	/^    public static function syncPreferredPhotos()$/;"	f
+sync	app/Photo.php	/^    public static function sync()$/;"	f
 table	app/OpenHouse.php	/^    protected $table = 'open_houses';$/;"	v
 tailwindcss	webpack.mix.js	/^var tailwindcss = require('tailwindcss');$/;"	v
 testBasicTest	tests/Feature/ExampleTest.php	/^    public function testBasicTest()$/;"	f
@@ -675,15 +714,14 @@ up	database/migrations/2017_10_28_175622_add_association_to_agents_table.php	/^ 
 up	database/migrations/2017_10_31_093738_create_search_queries_table.php	/^    public function up()$/;"	f
 up	database/migrations/2018_01_09_143841_create_open_houses_table.php	/^    public function up()$/;"	f
 update	app/Http/Controllers/AgentController.php	/^    public function update(Request $request, Agent $agent)$/;"	f
-updateAgents	app/Helpers/Updater.php	/^    public function updateAgents()$/;"	f
+update	app/Updaters/AgentsUpdater.php	/^    public function update()$/;"	f
+update	app/Updaters/ListingsUpdater.php	/^    public function update()$/;"	f
+update	app/Updaters/MakesUpdates.php	/^    public function update();$/;"	f
+update	app/Updaters/OpenHousesUpdater.php	/^    public function update()$/;"	f
 updateFromReturnedResult	app/OpenHouse.php	/^    public function updateFromReturnedResult($result)$/;"	f
-updateListings	app/Helpers/Updater.php	/^    public function updateListings()$/;"	f
 updateOrCreateAgent	app/Helpers/AgentsHelper.php	/^    public static function updateOrCreateAgent($association, $result)$/;"	f
 updateOrCreateBcarListing	app/Helpers/ListingsHelper.php	/^    private static function updateOrCreateBcarListing($result, $class, $listingId)$/;"	f
 updateOrCreateEcarListing	app/Helpers/ListingsHelper.php	/^    private static function updateOrCreateEcarListing($result, $class, $listingId)$/;"	f
-updater	app/Jobs/CleanEcar.php	/^        $updater = new Updater('ecar');$/;"	v
-updater	app/Jobs/UpdateBcar.php	/^        $updater = new Updater('bcar');$/;"	v
-updater	app/Jobs/UpdateEcar.php	/^        $updater = new Updater('ecar');$/;"	v
 uri	server.php	/^$uri = urldecode($/;"	v
 username	app/ApiCall.php	/^        $this->username    = $this->association == 'bcar' ? $this->bcarUserName() : $this->ecarUserName();$/;"	v
 utilities	app/Helpers/ListingsHelper.php	/^            $utilities            = $result['GF20131203185458688530000000'];$/;"	v
