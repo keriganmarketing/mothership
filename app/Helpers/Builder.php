@@ -134,33 +134,8 @@ class Builder
     public function openHouses()
     {
         $results = $this->rets->Search('OpenHouse', 'OpenHouse', '*');
-
         foreach ($results as $result) {
-            $listing =  Listing::where('mls_account', $result['LIST105'])->first();
-            if ($listing != null) {
-                OpenHouse::create([
-                    'listing_id'               => $listing->id,
-                    'mls_id'                   => $result['LIST105'],
-                    'event_unique_id'          => $result['EVENT0'],
-                    'last_modified'            => $result['EVENT6'],
-                    'event_start'              => $result['EVENT100'],
-                    'event_end'                => $result['EVENT200'],
-                    'unique_listing_id'        => $result['LIST1'],
-                    'list_price'               => $result['LIST22'],
-                    'listing_area'             => $result['LIST29'],
-                    'street_address'           => $result['ADD0'],
-                    'city'                     => $result['ADD5'],
-                    'state'                    => $result['ADD10'],
-                    'listing_agent_id'         => $result['MBR0'],
-                    'listing_agent_first_name' => $result['MBR5'],
-                    'listing_agent_last_name'  => $result['MBR7'],
-                    'agent_primary_phone'      => $result['PHONE0'],
-                    'listing_office_id'        => $result['OFC0'],
-                    'listing_office_name'      => $result['OFC3'],
-                    'listing_office_phone'     => $result['PHONE1'],
-                    'comments'                 => $result['OPEN_HOUSE_COMMENT'],
-                ]);
-            }
+            (new OpenHouse())->addEvent($result);
         }
     }
 }

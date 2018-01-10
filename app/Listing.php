@@ -7,6 +7,7 @@ use App\Photo;
 use App\ApiCall;
 use App\Listing;
 use Carbon\Carbon;
+use App\OpenHouse;
 use App\Helpers\BcarOptions;
 use App\Helpers\EcarOptions;
 use App\Helpers\ListingsHelper;
@@ -26,6 +27,16 @@ class Listing extends Model
     public function photos()
     {
         return $this->hasMany('App\Photo');
+    }
+
+    /**
+     * A listing can have many Open Houses
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function openHouses()
+    {
+        return $this->hasMany(OpenHouse::class);
     }
 
     /**
@@ -214,5 +225,9 @@ class Listing extends Model
         $listings = Listing::whereIn('mls_account', $mlsArray)->get();
 
         return $listings;
+    }
+
+    public static function byMlsNumber($mlsNumber){
+        return Listing::where('mls_account', $mlsNumber)->first();
     }
 }

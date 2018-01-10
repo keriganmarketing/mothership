@@ -17,8 +17,9 @@ class CreateOpenHousesTable extends Migration
             $table->increments('id');
             $table->integer('listing_id');
             $table->string('mls_id');
-            $table->string('event_unique_id')->nullable();
-            $table->dateTime('last_modified')->nullable();
+            $table->string('association')->nullable();
+            $table->string('event_unique_id')->nullable()->index();
+            $table->dateTime('date_modified')->nullable();
             $table->dateTime('event_start')->nullable();
             $table->dateTime('event_end')->nullable();
             $table->string('unique_listing_id')->nullable();
@@ -47,7 +48,7 @@ class CreateOpenHousesTable extends Migration
     public function down()
     {
         Schema::table('open_houses', function (Blueprint $table) {
-            //
+            $table->dropIfExists('open_houses');
         });
     }
 }

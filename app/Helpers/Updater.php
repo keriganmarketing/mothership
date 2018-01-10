@@ -6,11 +6,13 @@ use App\Photo;
 use App\ApiCall;
 use App\Listing;
 use Carbon\Carbon;
+use App\OpenHouse;
 use App\AgentPhoto;
 use App\Helpers\BcarOptions;
 use App\Helpers\EcarOptions;
 use App\Helpers\AgentsHelper;
 use App\Helpers\ListingsHelper;
+use Illuminate\Support\Facades\DB;
 
 class Updater
 {
@@ -23,74 +25,18 @@ class Updater
         $this->rets        = $this->mls->login();
         $this->classArray  = $this->association == 'bcar' ?
             ['A', 'C', 'E', 'F', 'G', 'J'] : ['A', 'B', 'C', 'E', 'F', 'G', 'H', 'I'];
+        $this->options = $this->association == 'bcar' ?
+                            BcarOptions::all() : EcarOptions::all();
     }
 
     public function updateListings()
     {
-        $options = $this->association == 'bcar' ?
-            BcarOptions::all() : EcarOptions::all();
-
-        $dateLastModified = Carbon::parse(
-            Listing::where('association', $this->association)
-                ->pluck('date_modified')
-                ->max())
-                ->toAtomString();
+        $dateLastModified = $this->getLastModifiedDate('listings');
 
         foreach ($this->classArray as $class) {
-            $results = $this->rets->Search(
-                'Property',
-                $class,
-                '(LIST_87=' . $dateLastModified . '+)|(LIST_134=' . $dateLastModified . '+)',
-                $options[$class]
-            );
-
+            $results = $this->getNewProperties($class, $dateLastModified);
             foreach ($results as $result) {
-                $mlsNumber = $result['LIST_3'];
-
-                if (! Listing::where('mls_account', $mlsNumber)->exists()) {
-                    $listing = ListingsHelper::saveListing($this->association, $result, $class);
-                    $photos  = $this->rets->GetObject('Property', 'HiRes', $mlsNumber, '*', 1);
-
-                    foreach ($photos as $photo) {
-                        if (! $photo->isError()) {
-                            Photo::create(
-                                [
-                                'mls_account'       => $mlsNumber,
-                                'url'               => $photo->getLocation(),
-                                'preferred'         => $photo->isPreferred(),
-                                'listing_id'        => $listing->id,
-                                'photo_description' => $photo->getContentDescription()
-                                ]
-                            );
-                        }
-                        echo '.';
-                    }
-                } else {
-                    $listing = Listing::where('mls_account', $mlsNumber)->first();
-                    $oldPhotos  = $listing->photos;
-                    ListingsHelper::saveListing($this->association, $result, $class, $listing->id);
-
-                    foreach ($oldPhotos as $oldPhoto) {
-                        $oldPhoto->delete();
-                        echo '-';
-                    }
-                    $newPhotos  = $this->rets->GetObject('Property', 'HiRes', $mlsNumber, '*', 1);
-
-                    foreach ($newPhotos as $photo) {
-                        if (! $photo->isError()) {
-                            Photo::create(
-                                [
-                                'mls_account'       => $mlsNumber,
-                                'url'               => $photo->getLocation(),
-                                'preferred'         => $photo->isPreferred(),
-                                'listing_id'        => $listing->id,
-                                'photo_description' => $photo->getContentDescription()
-                                ]
-                            );
-                        echo '+';
-                        }
-                    }
-                }
+                $this->handleResult($class, $result);
             }
         }
         Photo::syncPreferredPhotos();
@@ -98,10 +44,7 @@ class Updater
 
     public function updateAgents()
     {
-        $dateLastModified = Carbon::parse(
-            Agent::where('association', $this->association)->pluck('date_modified')->max()
-        )->toAtomString();
-
+        $dateLastModified = $this->getLastModifiedDate('agents');
         $results = $this->rets->Search(
             'ActiveAgent',
             'Agent',
@@ -177,6 +120,101 @@ class Updater
             foreach ($photos as $photo) {
                 $photo->delete();
                 $photoCounter = $photoCounter + 1;
+            }
+        }
+    }
+
+    public function openHouses()
+    {
+        $lastModified = $this->getLastModifiedDate('open_houses');
+        $results = $this->fetchNewOpenHouses($lastModified);
+        foreach ($results as $result) {
+            $eventId   = $result['EVENT0'];
+            $openHouse = OpenHouse::where('event_unique_id', $eventId)->first();
+            if ($openHouse != null) {
+                $openHouse->updateFromReturnedResult($result);
+            } else {
+                (new OpenHouse())->addEvent($result);
+            }
+        }
+    }
+
+    protected function getLastModifiedDate($table)
+    {
+        $lastModified = Carbon::parse(
+                DB::table($table)
+                ->where('association', $this->association)
+                ->pluck('date_modified')
+                ->max()
+            )->toAtomString();
+
+        return $lastModified;
+    }
+
+    protected function fetchNewOpenHouses($lastModified)
+    {
+        return $this->rets->Search('OpenHouse', 'OpenHouse', '(EVENT6='. $lastModified .'+)');
+    }
+
+    protected function getNewProperties($class, $dateLastModified)
+    {
+       return $this->rets->Search(
+            'Property',
+            $class,
+            '(LIST_87=' . $dateLastModified . '+)|(LIST_134=' . $dateLastModified . '+)',
+            $this->options[$class]
+        );
+    }
+
+    protected function getPhotosForListing($mlsNumber)
+    {
+        return $this->rets->GetObject('Property', 'HiRes', $mlsNumber, '*', 1);
+    }
+    protected function handleResult($class, $result)
+    {
+        $mlsNumber = $result['LIST_3'];
+        $listing = Listing::byMlsNumber($mlsNumber);
+        if (count($listing) == 0) {
+            $listing = ListingsHelper::saveListing($this->association, $result, $class);
+            $photos  = $this->getPhotosForListing($mlsNumber);
+
+            foreach ($photos as $photo) {
+                if (! $photo->isError()) {
+                    Photo::create(
+                        [
+                        'mls_account'       => $mlsNumber,
+                        'url'               => $photo->getLocation(),
+                        'preferred'         => $photo->isPreferred(),
+                        'listing_id'        => $listing->id,
+                        'photo_description' => $photo->getContentDescription()
+                        ]
+                    );
+                }
+            }
+        } else {
+            $listing = Listing::where('mls_account', $mlsNumber)->first();
+            $oldPhotos  = $listing->photos;
+            ListingsHelper::saveListing($this->association, $result, $class, $listing->id);
+
+            foreach ($oldPhotos as $oldPhoto) {
+                $oldPhoto->delete();
+                echo '-';
+            }
+            $newPhotos  = $this->rets->GetObject('Property', 'HiRes', $mlsNumber, '*', 1);
+
+            foreach ($newPhotos as $photo) {
+                if (! $photo->isError()) {
+                    Photo::create(
+                        [
+                        'mls_account'       => $mlsNumber,
+                        'url'               => $photo->getLocation(),
+                        'preferred'         => $photo->isPreferred(),
+                        'listing_id'        => $listing->id,
+                        'photo_description' => $photo->getContentDescription()
+                        ]
+                    );
+                echo '+';
+                }
             }
         }
     }
