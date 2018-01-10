@@ -28,16 +28,32 @@ class Listing extends Model
         return $this->hasMany('App\Photo');
     }
 
+    /**
+     * A Listing has many clicks
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function clicks()
     {
         return $this->hasMany('App\Click', 'listing_id');
     }
 
+    /**
+     * A Listing has many impressions
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function impressions()
     {
         return $this->hasMany('App\Impression', 'listing_id');
     }
 
+    /**
+     * Retrieve the requested listings from the database
+     *
+     * @param array $request
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
     public static function searchResults($request)
     {
         $city         = $request->city ?? '';
@@ -119,7 +135,7 @@ class Listing extends Model
      *
      * @param string $columnName The name of the column
      *
-     * @return void
+     * @return array
      */
     public static function getColumn($searchTerm, $columnName)
     {
@@ -131,6 +147,12 @@ class Listing extends Model
         return $values->toArray();
     }
 
+    /**
+     * Retrieve listings for the specified agent
+     *
+     * @param string  $agentShortId
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
     public static function forAgent($agentShortId)
     {
         if (preg_match('/|/', $agentShortId)) {
@@ -168,11 +190,23 @@ class Listing extends Model
         return null;
     }
 
+    /**
+     * Check that the given address is valid
+     *
+     * @param string $fullAddress
+     * @return boolean
+     */
     public function addressIsValid($fullAddress)
     {
         return preg_match('/^[1-9]+([0-9]*)?\s(\d*?)([A-Z]+)?[a-z].+$/', $fullAddress);
     }
 
+    /**
+     * Retrieve the listings for the given MLS numbers
+     *
+     * @param string  $mlsNumbers
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
     public static function findByMlsNumbers($mlsNumbers)
     {
         $mlsArray = explode('|', $mlsNumbers);

@@ -19,9 +19,9 @@ class Updater
     public function __construct($association)
     {
         $this->association = $association;
-        $this->mls               = new ApiCall($this->association);
-        $this->rets              = $this->mls->login();
-        $this->classArray        = $this->association == 'bcar' ?
+        $this->mls         = new ApiCall($this->association);
+        $this->rets        = $this->mls->login();
+        $this->classArray  = $this->association == 'bcar' ?
             ['A', 'C', 'E', 'F', 'G', 'J'] : ['A', 'B', 'C', 'E', 'F', 'G', 'H', 'I'];
     }
 
@@ -31,8 +31,10 @@ class Updater
             BcarOptions::all() : EcarOptions::all();
 
         $dateLastModified = Carbon::parse(
-            Listing::where('association', $this->association)->pluck('date_modified')->max()
-        )->toAtomString();
+            Listing::where('association', $this->association)
+                ->pluck('date_modified')
+                ->max())
+                ->toAtomString();
 
         foreach ($this->classArray as $class) {
             $results = $this->rets->Search(

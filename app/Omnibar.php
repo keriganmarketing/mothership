@@ -10,9 +10,9 @@ class Omnibar extends Model
     public static function build($searchTerm)
     {
         $data         = [];
+        // TODO: figure out a faster way to do this
         $cities       = Listing::getColumn($searchTerm, 'city');
         $areas        = Listing::getColumn($searchTerm, 'area');
-        // $subAreas     = Listing::getColumn($searchTerm, 'sub_area');
         $subdivisions = Listing::getColumn($searchTerm, 'subdivision');
         $zips         = Listing::getColumn($searchTerm, 'zip');
         $addresses    = Listing::getColumn($searchTerm, 'full_address');
