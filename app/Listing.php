@@ -231,6 +231,12 @@ class Listing extends Model
         return $listings;
     }
 
+    /**
+     * Return listing for the specified MLS number
+     *
+     * @param string $mlsNumber
+     * @return \App\Listing
+     */
     public static function byMlsNumber($mlsNumber){
         return Listing::where('mls_account', $mlsNumber)->first();
     }

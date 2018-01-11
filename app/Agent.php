@@ -12,11 +12,22 @@ class Agent extends Model
 
     const SEARCH_OPTIONS = 'MEMBER_0,MEMBER_1,MEMBER_3,MEMBER_4,MEMBER_5,MEMBER_6,MEMBER_7,MEMBER_8,MEMBER_10,MEMBER_11,MEMBER_12,MEMBER_13,MEMBER_14,MEMBER_15,MEMBER_16,MEMBER_17,MEMBER_18,MEMBER_19,MEMBER_21,STATUS,ACTIVE,MLS_STATUS,LICENSE,TIMESTAMP,OFFICESHORT';
 
+    /**
+     * An agent has many photos
+     *
+     * @return \Illuminate\Database\Eloquent\hasMany
+     */
     public function photos()
     {
         return $this->hasMany('App\AgentPhoto', 'agent_id');
     }
 
+    /**
+     * Return the requested results
+     *
+     * @param mixed $request
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
     public static function searchResults($request)
     {
         $shortId         = $request->shortId ?? '';
@@ -61,6 +72,12 @@ class Agent extends Model
         return $agents;
     }
 
+    /**
+     * Return the agent for the given MLS ID
+     *
+     * @param string $mlsId
+     * @return \App\Agent
+     */
     public static function byMlsId($mlsId)
     {
         return Agent::where('agent_id', $mlsId)->first();

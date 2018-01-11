@@ -20,6 +20,12 @@ class OpenHouse extends Model
         return $this->belongsTo(Listing::class, 'listing_id');
     }
 
+    /**
+     * Update the listing with the results returned from FLEX
+     *
+     * @param PHRETS\Models\Search\Results $result
+     * @return void
+     */
     public function updateFromReturnedResult($result)
     {
         $listing = Listing::where('mls_account', $result['LIST105'])->first();
@@ -49,6 +55,13 @@ class OpenHouse extends Model
             ]);
         }
     }
+
+    /**
+     * Persist the open house event to storage
+     *
+     * @param \PHRETS\Model\Search\Results $result
+     * @return void
+     */
     public function addEvent($result)
     {
         $listing =  Listing::where('mls_account', $result['LIST105'])->first();
@@ -79,10 +92,22 @@ class OpenHouse extends Model
         }
     }
 
+    /**
+     * Find the open house for the specified event ID
+     *
+     * @param string $eventId
+     * @return \App\OpenHouse
+     */
     public static function byEventId($eventId)
     {
         return OpenHouse::where('event_unique_id', $eventId)->first();
     }
+
+    /**
+     * Sync the events with the listings table
+     *
+     * @return void
+     */
     public static function syncWithListings()
     {
         $openHouses = OpenHouse::all();

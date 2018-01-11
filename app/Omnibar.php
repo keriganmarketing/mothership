@@ -7,6 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Omnibar extends Model
 {
+    /**
+     * Build the select options for the omnibar
+     *
+     * @param string $searchTerm
+     * @return mixed
+     */
     public static function build($searchTerm)
     {
         $data         = [];
