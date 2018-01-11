@@ -6,6 +6,7 @@
 !_TAG_PROGRAM_VERSION	5.8	//
 AddAssociationToAgentsTable	database/migrations/2017_10_28_175622_add_association_to_agents_table.php	/^class AddAssociationToAgentsTable extends Migration$/;"	c
 AddFullAddressToListingsTable	database/migrations/2017_10_25_135031_add_full_address_to_listings_table.php	/^class AddFullAddressToListingsTable extends Migration$/;"	c
+AddOpenHousesToListingsTable	database/migrations/2018_01_11_110544_add_open_houses_to_listings_table.php	/^class AddOpenHousesToListingsTable extends Migration$/;"	c
 Agent	app/Agent.php	/^class Agent extends Model$/;"	c
 AgentController	app/Http/Controllers/AgentController.php	/^class AgentController extends Controller$/;"	c
 AgentListingsController	app/Http/Controllers/AgentListingsController.php	/^class AgentListingsController extends Controller$/;"	c
@@ -23,7 +24,9 @@ BroadcastServiceProvider	app/Providers/BroadcastServiceProvider.php	/^class Broa
 Builder	app/Helpers/Builder.php	/^class Builder$/;"	c
 CleanBcar	app/Jobs/CleanBcar.php	/^class CleanBcar implements ShouldQueue$/;"	c
 CleanEcar	app/Jobs/CleanEcar.php	/^class CleanEcar implements ShouldQueue$/;"	c
+CleanOpenHouses	app/Jobs/CleanOpenHouses.php	/^class CleanOpenHouses implements ShouldQueue$/;"	c
 Cleaner	app/Cleaners/Cleaner.php	/^abstract class Cleaner$/;"	c
+CleansDatabase	app/Cleaners/CleansDatabase.php	/^interface CleansDatabase$/;"	i
 Click	app/Click.php	/^class Click extends Model$/;"	c
 Controller	app/Http/Controllers/Controller.php	/^class Controller extends BaseController$/;"	c
 CreateAgentPhotosTable	database/migrations/2017_10_27_153518_create_agent_photos_table.php	/^class CreateAgentPhotosTable extends Migration$/;"	c
@@ -65,6 +68,7 @@ MapSearchController	app/Http/Controllers/MapSearchController.php	/^class MapSear
 Omnibar	app/Omnibar.php	/^class Omnibar extends Model$/;"	c
 OmnibarController	app/Http/Controllers/OmnibarController.php	/^class OmnibarController extends Controller$/;"	c
 OpenHouse	app/OpenHouse.php	/^class OpenHouse extends Model$/;"	c
+OpenHouseCleaner	app/Cleaners/OpenHouseCleaner.php	/^class OpenHouseCleaner implements CleansDatabase$/;"	c
 OpenHousesUpdater	app/Updaters/OpenHousesUpdater.php	/^class OpenHousesUpdater extends Updater implements MakesUpdates$/;"	c
 Photo	app/Photo.php	/^class Photo extends Model$/;"	c
 PhotoTest	tests/Unit/PhotoTest.php	/^class PhotoTest extends TestCase$/;"	c
@@ -84,6 +88,7 @@ TrustProxies	app/Http/Middleware/TrustProxies.php	/^class TrustProxies extends M
 UpdateAgents	app/Jobs/UpdateAgents.php	/^class UpdateAgents implements ShouldQueue$/;"	c
 UpdateBcar	app/Jobs/UpdateBcar.php	/^class UpdateBcar implements ShouldQueue$/;"	c
 UpdateEcar	app/Jobs/UpdateEcar.php	/^class UpdateEcar implements ShouldQueue$/;"	c
+UpdateOpenHouses	app/Jobs/UpdateOpenHouses.php	/^class UpdateOpenHouses implements ShouldQueue$/;"	c
 UpdatedListingsController	app/Http/Controllers/UpdatedListingsController.php	/^class UpdatedListingsController extends Controller$/;"	c
 Updater	app/Updaters/Updater.php	/^abstract class Updater$/;"	c
 User	app/User.php	/^class User extends Authenticatable$/;"	c
@@ -101,12 +106,14 @@ __construct	app/Http/Controllers/Auth/ResetPasswordController.php	/^    public f
 __construct	app/Http/Controllers/HomeController.php	/^    public function __construct()$/;"	f
 __construct	app/Jobs/CleanBcar.php	/^    public function __construct()$/;"	f
 __construct	app/Jobs/CleanEcar.php	/^    public function __construct()$/;"	f
+__construct	app/Jobs/CleanOpenHouses.php	/^    public function __construct()$/;"	f
 __construct	app/Jobs/ProcessListingClick.php	/^    public function __construct(Listing $listing)$/;"	f
 __construct	app/Jobs/ProcessListingImpression.php	/^    public function __construct($listings)$/;"	f
 __construct	app/Jobs/ProcessSearch.php	/^    public function __construct($request)$/;"	f
 __construct	app/Jobs/UpdateAgents.php	/^    public function __construct()$/;"	f
 __construct	app/Jobs/UpdateBcar.php	/^    public function __construct()$/;"	f
 __construct	app/Jobs/UpdateEcar.php	/^    public function __construct()$/;"	f
+__construct	app/Jobs/UpdateOpenHouses.php	/^    public function __construct()$/;"	f
 __construct	app/Updaters/AgentsUpdater.php	/^    public function __construct($association)$/;"	f
 __construct	app/Updaters/ListingsUpdater.php	/^    public function __construct($association)$/;"	f
 __construct	app/Updaters/OpenHousesUpdater.php	/^    public function __construct($association)$/;"	f
@@ -226,7 +233,9 @@ classArray	app/Helpers/Builder.php	/^        $this->classArray  = $this->associa
 classArray	app/Updaters/Updater.php	/^        $this->classArray  = $this->association == 'bcar' ?$/;"	v
 classArray	app/Updaters/Updater.php	/^    protected $classArray;$/;"	v
 clean	app/Cleaners/BcarCleaner.php	/^    public function clean()$/;"	f
+clean	app/Cleaners/CleansDatabase.php	/^    public function clean();$/;"	f
 clean	app/Cleaners/EcarCleaner.php	/^    public function clean()$/;"	f
+clean	app/Cleaners/OpenHouseCleaner.php	/^    public function clean()$/;"	f
 cleanEcar	app/Updaters/Updater.php	/^    public function cleanEcar()$/;"	f
 click	app/Jobs/ProcessListingClick.php	/^        $click = Click::where('listing_id', $this->listing->id)$/;"	v
 clicks	app/Listing.php	/^    public function clicks()$/;"	f
@@ -279,6 +288,7 @@ down	database/migrations/2017_10_27_153518_create_agent_photos_table.php	/^    p
 down	database/migrations/2017_10_28_175622_add_association_to_agents_table.php	/^    public function down()$/;"	f
 down	database/migrations/2017_10_31_093738_create_search_queries_table.php	/^    public function down()$/;"	f
 down	database/migrations/2018_01_09_143841_create_open_houses_table.php	/^    public function down()$/;"	f
+down	database/migrations/2018_01_11_110544_add_open_houses_to_listings_table.php	/^    public function down()$/;"	f
 downloadPhotosForAgent	app/Helpers/Builder.php	/^    private function downloadPhotosForAgent($agent)$/;"	f
 ecar	tests/Feature/SearchAgentsTest.php	/^        $ecar = create('App\\Agent', ['association' => 'ecar']);$/;"	v
 ecarLoginUrl	app/ApiCall.php	/^    private function ecarLoginUrl()$/;"	f
@@ -295,6 +305,7 @@ eventId	app/Updaters/OpenHousesUpdater.php	/^        $eventId   = $result['EVENT
 except	app/Http/Middleware/EncryptCookies.php	/^    protected $except = [$/;"	v
 except	app/Http/Middleware/TrimStrings.php	/^    protected $except = [$/;"	v
 except	app/Http/Middleware/VerifyCsrfToken.php	/^    protected $except = [$/;"	v
+expiredOpenHouses	app/Cleaners/OpenHouseCleaner.php	/^        $expiredOpenHouses = OpenHouse::where('event_end', '<=', $now)->get();$/;"	v
 exterior	app/Helpers/ListingsHelper.php	/^            $exterior             = $result['GF20131203203501805928000000'];$/;"	v
 exterior	app/Helpers/ListingsHelper.php	/^            $exterior             = $result['GF20131230164914069211000000'];$/;"	v
 exterior	app/Helpers/ListingsHelper.php	/^        $exterior             = null;$/;"	v
@@ -346,12 +357,14 @@ halfBaths	app/Helpers/ListingsHelper.php	/^        $halfBaths            = $resu
 handle	app/Http/Middleware/RedirectIfAuthenticated.php	/^    public function handle($request, Closure $next, $guard = null)$/;"	f
 handle	app/Jobs/CleanBcar.php	/^    public function handle()$/;"	f
 handle	app/Jobs/CleanEcar.php	/^    public function handle()$/;"	f
+handle	app/Jobs/CleanOpenHouses.php	/^    public function handle()$/;"	f
 handle	app/Jobs/ProcessListingClick.php	/^    public function handle()$/;"	f
 handle	app/Jobs/ProcessListingImpression.php	/^    public function handle()$/;"	f
 handle	app/Jobs/ProcessSearch.php	/^    public function handle()$/;"	f
 handle	app/Jobs/UpdateAgents.php	/^    public function handle()$/;"	f
 handle	app/Jobs/UpdateBcar.php	/^    public function handle()$/;"	f
 handle	app/Jobs/UpdateEcar.php	/^    public function handle()$/;"	f
+handle	app/Jobs/UpdateOpenHouses.php	/^    public function handle()$/;"	f
 handleResult	app/Updaters/AgentsUpdater.php	/^    protected function handleResult($result)$/;"	f
 handleResult	app/Updaters/ListingsUpdater.php	/^    protected function handleResult($class, $result)$/;"	f
 handleResult	app/Updaters/OpenHousesUpdater.php	/^    protected function handleResult($result)$/;"	f
@@ -433,6 +446,7 @@ listing	app/Http/Controllers/ListingController.php	/^        $listing = Listing:
 listing	app/Impression.php	/^    public function listing()$/;"	f
 listing	app/Jobs/ProcessListingClick.php	/^        $this->listing = $listing;$/;"	v
 listing	app/Jobs/ProcessListingClick.php	/^    protected $listing;$/;"	v
+listing	app/OpenHouse.php	/^            $listing = Listing::find($openHouse->listing_id);$/;"	v
 listing	app/OpenHouse.php	/^        $listing =  Listing::where('mls_account', $result['LIST105'])->first();$/;"	v
 listing	app/OpenHouse.php	/^        $listing = Listing::where('mls_account', $result['LIST105'])->first();$/;"	v
 listing	app/OpenHouse.php	/^    public function listing()$/;"	f
@@ -515,6 +529,8 @@ module.exports.screens	tailwind.js	/^  screens: {$/;"	p
 namespace	app/Providers/RouteServiceProvider.php	/^    protected $namespace = 'App\\Http\\Controllers';$/;"	v
 ncname	public/js/app.js	/^var ncname = '[a-zA-Z_][\\\\w\\\\-\\\\.]*';$/;"	v
 newPhotos	app/Updaters/ListingsUpdater.php	/^            $newPhotos  = $this->getPhotosForListing($mlsNumber);$/;"	v
+now	app/Cleaners/OpenHouseCleaner.php	/^        $now = Carbon::now();$/;"	v
+now	app/Helpers/Builder.php	/^        $now = Carbon::now()->toAtomString();$/;"	v
 officeShortId	app/Agent.php	/^        $officeShortId   = $request->officeShortId ?? '';$/;"	v
 offset	app/Cleaners/EcarCleaner.php	/^            $offset = 0;$/;"	v
 offset	app/Helpers/Builder.php	/^        $offset         = 0;$/;"	v
@@ -524,8 +540,9 @@ omniBar	app/Http/Controllers/OmnibarController.php	/^        $omniBar = Omnibar:
 onRE	public/js/app.js	/^var onRE = \/^@|^v-on:\/;$/;"	v
 openHouse	app/Updaters/OpenHousesUpdater.php	/^        $openHouse = OpenHouse::byEventId($eventId);$/;"	v
 openHouses	app/Helpers/Builder.php	/^    public function openHouses()$/;"	f
-openHouses	app/Listing.php	/^        $openHouses   = $request->openHouses ?? 0;$/;"	v
+openHouses	app/Listing.php	/^        $openHouses   = $request->openHouses ?? '';$/;"	v
 openHouses	app/Listing.php	/^    public function openHouses()$/;"	f
+openHouses	app/OpenHouse.php	/^        $openHouses = OpenHouse::all();$/;"	v
 options	app/Cleaners/Cleaner.php	/^        $this->options = $this->association == 'bcar' ?$/;"	v
 options	app/Cleaners/Cleaner.php	/^    protected $options;$/;"	v
 options	app/Helpers/Builder.php	/^        $options        = $this->association == 'bcar' ?$/;"	v
@@ -636,7 +653,7 @@ results	app/Cleaners/BcarCleaner.php	/^            $results = $this->getListingM
 results	app/Cleaners/EcarCleaner.php	/^                $results = $this->getListingMlsIds($class, $offset);$/;"	v
 results	app/Helpers/Builder.php	/^            $results = $this->rets->Search($/;"	v
 results	app/Helpers/Builder.php	/^            $results = $this->rets->Search('Property', $class, '*', $options[$class]);$/;"	v
-results	app/Helpers/Builder.php	/^        $results = $this->rets->Search('OpenHouse', 'OpenHouse', '*');$/;"	v
+results	app/Helpers/Builder.php	/^        $results = $this->rets->Search('OpenHouse', 'OpenHouse', '(EVENT200='. $now .'+)');$/;"	v
 results	app/Updaters/AgentsUpdater.php	/^        $results = $this->getNewAgents($dateLastModified);$/;"	v
 results	app/Updaters/ListingsUpdater.php	/^            $results = $this->getNewProperties($class, $dateLastModified);$/;"	v
 results	app/Updaters/OpenHousesUpdater.php	/^        $results = $this->getNewOpenHouses($lastModified);$/;"	v
@@ -692,6 +709,7 @@ streetName	app/Listing.php	/^        $streetName   = ucwords(strtolower($this->s
 streetNumber	app/Listing.php	/^        $streetNumber = $this->street_number;$/;"	v
 subdivisions	app/Omnibar.php	/^        $subdivisions = Listing::getColumn($searchTerm, 'subdivision');$/;"	v
 sync	app/Photo.php	/^    public static function sync()$/;"	f
+syncWithListings	app/OpenHouse.php	/^    public static function syncWithListings()$/;"	f
 table	app/OpenHouse.php	/^    protected $table = 'open_houses';$/;"	v
 tailwindcss	webpack.mix.js	/^var tailwindcss = require('tailwindcss');$/;"	v
 testBasicTest	tests/Feature/ExampleTest.php	/^    public function testBasicTest()$/;"	f
@@ -715,6 +733,7 @@ up	database/migrations/2017_10_27_153518_create_agent_photos_table.php	/^    pub
 up	database/migrations/2017_10_28_175622_add_association_to_agents_table.php	/^    public function up()$/;"	f
 up	database/migrations/2017_10_31_093738_create_search_queries_table.php	/^    public function up()$/;"	f
 up	database/migrations/2018_01_09_143841_create_open_houses_table.php	/^    public function up()$/;"	f
+up	database/migrations/2018_01_11_110544_add_open_houses_to_listings_table.php	/^    public function up()$/;"	f
 update	app/Http/Controllers/AgentController.php	/^    public function update(Request $request, Agent $agent)$/;"	f
 update	app/Updaters/AgentsUpdater.php	/^    public function update()$/;"	f
 update	app/Updaters/ListingsUpdater.php	/^    public function update()$/;"	f

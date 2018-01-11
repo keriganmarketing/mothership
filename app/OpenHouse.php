@@ -83,4 +83,16 @@ class OpenHouse extends Model
     {
         return OpenHouse::where('event_unique_id', $eventId)->first();
     }
+    public static function syncWithListings()
+    {
+        $openHouses = OpenHouse::all();
+        foreach ($openHouses as $openHouse) {
+            $listing = Listing::find($openHouse->listing_id);
+            if ($listing != null) {
+                $listing->update([
+                    'has_open_houses' => 1
+                ]);
+            }
+        }
+    }
 }

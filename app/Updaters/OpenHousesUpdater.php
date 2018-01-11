@@ -23,6 +23,7 @@ class OpenHousesUpdater extends Updater implements MakesUpdates
         foreach ($results as $result) {
             $this->handleResult($result);
         }
+        OpenHouse::syncWithListings();
     }
 
     protected function getNewOpenHouses($lastModified)

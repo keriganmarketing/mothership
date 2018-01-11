@@ -70,7 +70,7 @@ class Listing extends Model
         $city         = $request->city ?? '';
         $status       = $request->status ?? 'Active';
         $propertyType = $request->propertyType ?? '';
-        $openHouses   = $request->openHouses ?? 0;
+        $openHouses   = $request->openHouses ?? '';
         $minPrice     = $request->minPrice ?? '';
         $maxPrice     = $request->maxPrice ?? '';
         $beds         = $request->bedrooms ?? '';
@@ -131,7 +131,7 @@ class Listing extends Model
             return $query->where('pool', true);
         })
         ->when($openHouses, function ($query) use ($openHouses) {
-            return $query->whereHas('openHouses');
+            return $query->where('has_open_houses', true);
         })
         ->groupBy('full_address')
         ->orderBy($sortBy, $orderBy)
@@ -139,12 +139,6 @@ class Listing extends Model
 
         ProcessListingImpression::dispatch($listings);
 
-        // TODO: Export this to a standalone Job
-        ///////////////////////////////////////
-        foreach ($listings as $listing) {
-            $listing->openHouses = $openHouses;
-        }
-        ////////////////////////////////////////
         // returns paginated links (with GET variables intact!)
         $listings->appends($request->all())->links();
 

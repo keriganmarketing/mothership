@@ -9,6 +9,9 @@ use App\Jobs\UpdateEcar;
 use App\Jobs\UpdateAgents;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use App\Updaters\OpenHousesUpdater;
+use App\Jobs\UpdateOpenHouses;
+use App\Jobs\CleanOpenHouses;
 
 class Kernel extends ConsoleKernel
 {
@@ -31,9 +34,11 @@ class Kernel extends ConsoleKernel
     {
         $schedule->job(new CleanBcar)->hourly()->withOutOverlapping();
         $schedule->job(new CleanEcar)->hourly()->withOutOverlapping();
+        $schedule->job(new CleanOpenHouses)->hourly()->withoutOverlapping();
         $schedule->job(new UpdateAgents)->hourlyAt(5)->withOutOverlapping();
         $schedule->job(new UpdateBcar)->hourlyAt(10)->withOutOverlapping();
         $schedule->job(new UpdateEcar)->hourlyAt(15)->withOutOverlapping();
+        $schedule->job(new UpdateOpenHouses)->hourly(20)->withoutOverlapping();
     }
 
     /**

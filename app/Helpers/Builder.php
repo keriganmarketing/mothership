@@ -12,6 +12,7 @@ use App\Helpers\EcarOptions;
 use App\Helpers\AgentsHelper;
 use App\Helpers\ListingsHelper;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class Builder
 {
@@ -160,9 +161,11 @@ class Builder
      */
     public function openHouses()
     {
-        $results = $this->rets->Search('OpenHouse', 'OpenHouse', '*');
+        $now = Carbon::now()->toAtomString();
+        $results = $this->rets->Search('OpenHouse', 'OpenHouse', '(EVENT200='. $now .'+)');
         foreach ($results as $result) {
             (new OpenHouse())->addEvent($result);
         }
+        OpenHouse::syncWithListings();
     }
 }
