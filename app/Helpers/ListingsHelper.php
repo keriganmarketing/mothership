@@ -17,10 +17,9 @@ class ListingsHelper
     /**
      * Persist the BCAR listing in storage
      *
-     * @param object $result The PHRETS listing object
-     * @param string $class  The class for the listing
-     *
-     * @return object $listing The Listing Object
+     * @param string        $class  The class for the listing
+     * @param \Results      $result The PHRETS Results object
+     * @return App\Listing  $listing The Listing Object
      */
     private static function updateOrCreateBcarListing($result, $class, $listingId)
     {

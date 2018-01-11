@@ -43,7 +43,7 @@ class Builder
             }
         }
 
-        Photo::syncPreferredPhotos();
+        Photo::sync();
     }
 
     public function freshAgents()
@@ -59,8 +59,7 @@ class Builder
                 [
                   'Offset' => $offset,
                   'Limit' => 5000,
-                  'SELECT' =>
-                      'MEMBER_0,MEMBER_1,MEMBER_3,MEMBER_4,MEMBER_5,MEMBER_6,MEMBER_7,MEMBER_8,MEMBER_10,MEMBER_11,MEMBER_12,MEMBER_13,MEMBER_14,MEMBER_15,MEMBER_16,MEMBER_17,MEMBER_18,MEMBER_19,MEMBER_21,STATUS,ACTIVE,MLS_STATUS,LICENSE,TIMESTAMP,OFFICESHORT'
+                  'SELECT' => Agent::SEARCH_OPTIONS
                 ]
             );
 
@@ -76,6 +75,11 @@ class Builder
         }
     }
 
+    /**
+     * Build the agents photos table
+     *
+     * @return void
+     */
     public function freshAgentPhotos()
     {
         DB::table('agents')->where('association', $this->association)->orderBy('id')->chunk(100, function ($agents) {
@@ -86,6 +90,12 @@ class Builder
         });
     }
 
+    /**
+     * Fetch and save photos for the specified agent
+     *
+     * @param \App\Agent $agent
+     * @return void
+     */
     private function downloadPhotosForAgent($agent)
     {
         $photos = $this->rets->GetObject('ActiveAgent', 'Photo', $agent->agent_id, '*', 1);
@@ -102,6 +112,12 @@ class Builder
         }
     }
 
+    /**
+     * Fetch listings for the specified class
+     *
+     * @param string $class
+     * @return void
+     */
     public function fetchListings($class)
     {
         $offset         = 0;
@@ -124,6 +140,12 @@ class Builder
         }
     }
 
+    /**
+     * Fetch new photos for the specified listing
+     *
+     * @param \App\Listing $listing
+     * @return \Illuminate\Support\Collection
+     */
     public function fetchPhotos($listing)
     {
         $photos = $this->rets->GetObject('Property', 'HiRes', $listing->mls_account, '*', 1);
@@ -131,6 +153,11 @@ class Builder
         return $photos;
     }
 
+    /**
+     * Fetch open houses and store them in the database
+     *
+     * @return void
+     */
     public function openHouses()
     {
         $results = $this->rets->Search('OpenHouse', 'OpenHouse', '*');

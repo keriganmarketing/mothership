@@ -306,6 +306,7 @@ findPrevElement	public/js/app.js	/^function findPrevElement (children) {$/;"	f
 firstListing	tests/Feature/SearchListingsTest.php	/^        $this->firstListing  = create($/;"	v
 firstName	app/Agent.php	/^        $firstName       = $request->firstName ?? '';$/;"	v
 firstName	database/factories/AgentFactory.php	/^    $firstName    = $faker->firstName;$/;"	v
+for	app/Helpers/ListingsHelper.php	/^     * @param string        $class  The class for the listing$/;"	c
 for	app/Helpers/ListingsHelper.php	/^     * @param string $class  The class for the listing$/;"	c
 forAgent	app/Listing.php	/^    public static function forAgent($agentShortId)$/;"	f
 forAliasRE	public/js/app.js	/^var forAliasRE = \/(.*?)\\s+(?:in|of)\\s+(.*)\/;$/;"	v
@@ -523,6 +524,7 @@ omniBar	app/Http/Controllers/OmnibarController.php	/^        $omniBar = Omnibar:
 onRE	public/js/app.js	/^var onRE = \/^@|^v-on:\/;$/;"	v
 openHouse	app/Updaters/OpenHousesUpdater.php	/^        $openHouse = OpenHouse::byEventId($eventId);$/;"	v
 openHouses	app/Helpers/Builder.php	/^    public function openHouses()$/;"	f
+openHouses	app/Listing.php	/^        $openHouses   = $request->openHouses ?? 0;$/;"	v
 openHouses	app/Listing.php	/^    public function openHouses()$/;"	f
 options	app/Cleaners/Cleaner.php	/^        $this->options = $this->association == 'bcar' ?$/;"	v
 options	app/Cleaners/Cleaner.php	/^    protected $options;$/;"	v
