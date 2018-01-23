@@ -177,7 +177,7 @@ class Listing extends Model
         }
         $listings = Listing::whereIn('listing_member_shortid', $ids)
             ->orWhereIn('colisting_member_shortid', $ids)
-            ->groupBy('association', 'full_address')
+            ->groupBy('price', 'full_address')
             ->get();
 
         ProcessListingImpression::dispatch($listings);
