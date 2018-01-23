@@ -181,13 +181,8 @@ class Listing extends Model
         $listings = Listing::whereIn('listing_member_shortid', $ids)
             ->orWhereIn('colisting_member_shortid', $ids)
             ->latest()
+            ->groupBy('street_number', 'street_name')
             ->get();
-
-        foreach ($listings as $listing) {
-            if (! in_array($listing->full_address, $addresses)) {
-                array_push($filtered, $listing);
-            }
-        }
 
         ProcessListingImpression::dispatch($listings);
 
