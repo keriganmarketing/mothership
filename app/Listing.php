@@ -177,8 +177,8 @@ class Listing extends Model
         }
         $listings = Listing::whereIn('listing_member_shortid', $ids)
             ->orWhereIn('colisting_member_shortid', $ids)
-            ->oldest()
-            ->groupBy('street_number')
+            ->latest()
+            ->groupBy('latitude', 'longitude')
             ->get();
 
         ProcessListingImpression::dispatch($listings);
