@@ -170,8 +170,6 @@ class Listing extends Model
      */
     public static function forAgent($agentShortId)
     {
-        $addresses = [];
-        $filtered =[];
 
         if (preg_match('/|/', $agentShortId)) {
             $ids = explode('|', $agentShortId);
@@ -181,12 +179,12 @@ class Listing extends Model
         $listings = Listing::whereIn('listing_member_shortid', $ids)
             ->orWhereIn('colisting_member_shortid', $ids)
             ->latest()
-            ->groupBy('street_name')
+            ->groupBy('street_number', 'street_name')
             ->get();
 
         ProcessListingImpression::dispatch($listings);
 
-        return $filtered;
+        return $listings;
     }
 
     /**
