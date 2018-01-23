@@ -177,7 +177,7 @@ class Listing extends Model
         }
         $listings = Listing::whereIn('listing_member_shortid', $ids)
             ->orWhereIn('colisting_member_shortid', $ids)
-            ->oldest()
+            ->orderBy('date_modified', 'desc')
             ->groupBy('full_address')
             ->get();
 
