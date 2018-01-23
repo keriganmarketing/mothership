@@ -178,12 +178,19 @@ class Listing extends Model
         $listings = Listing::whereIn('listing_member_shortid', $ids)
             ->orWhereIn('colisting_member_shortid', $ids)
             ->latest()
-            ->groupBy('latitude', 'longitude')
             ->get();
+
+        $filtered = [];
+
+        foreach ($listings as $listing) {
+            if (!in_array($listing->street_number, $filtered)) {
+                $filtered->push($listing);
+            }
+        }
 
         ProcessListingImpression::dispatch($listings);
 
-        return $listings;
+        return $filtered;
     }
 
     /**
