@@ -35,7 +35,8 @@ return [
             'X-Auth-Token',
             'Origin',
             'Authorization',
-            'X-CSRF-Token'
+            'X-CSRF-Token',
+            'Access-Control-Allow-Origin'
         ],
 
         /*
