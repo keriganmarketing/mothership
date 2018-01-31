@@ -29,6 +29,7 @@ Cleaner	app/Cleaners/Cleaner.php	/^abstract class Cleaner$/;"	c
 CleansDatabase	app/Cleaners/CleansDatabase.php	/^interface CleansDatabase$/;"	i
 Click	app/Click.php	/^class Click extends Model$/;"	c
 Controller	app/Http/Controllers/Controller.php	/^class Controller extends BaseController$/;"	c
+Cors	app/Http/Middleware/Cors.php	/^class Cors$/;"	c
 CreateAgentPhotosTable	database/migrations/2017_10_27_153518_create_agent_photos_table.php	/^class CreateAgentPhotosTable extends Migration$/;"	c
 CreateAgentsTable	database/migrations/2017_10_27_140524_create_agents_table.php	/^class CreateAgentsTable extends Migration$/;"	c
 CreateClicksTable	database/migrations/2017_10_26_134227_create_clicks_table.php	/^class CreateClicksTable extends Migration$/;"	c
@@ -104,6 +105,7 @@ __construct	app/Http/Controllers/Auth/LoginController.php	/^    public function 
 __construct	app/Http/Controllers/Auth/RegisterController.php	/^    public function __construct()$/;"	f
 __construct	app/Http/Controllers/Auth/ResetPasswordController.php	/^    public function __construct()$/;"	f
 __construct	app/Http/Controllers/HomeController.php	/^    public function __construct()$/;"	f
+__construct	app/Http/Controllers/OmnibarController.php	/^    public function __construct()$/;"	f
 __construct	app/Jobs/CleanBcar.php	/^    public function __construct()$/;"	f
 __construct	app/Jobs/CleanEcar.php	/^    public function __construct()$/;"	f
 __construct	app/Jobs/CleanOpenHouses.php	/^    public function __construct()$/;"	f
@@ -354,6 +356,7 @@ guarded	app/OpenHouse.php	/^    protected $guarded = [];$/;"	v
 guarded	app/Photo.php	/^    protected $guarded = [];$/;"	v
 guarded	app/SearchQuery.php	/^    protected $guarded = [];$/;"	v
 halfBaths	app/Helpers/ListingsHelper.php	/^        $halfBaths            = $result['LIST_69'] > 0 ? $result['LIST_69'] : 0;$/;"	v
+handle	app/Http/Middleware/Cors.php	/^    public function handle($request, Closure $next)$/;"	f
 handle	app/Http/Middleware/RedirectIfAuthenticated.php	/^    public function handle($request, Closure $next, $guard = null)$/;"	f
 handle	app/Jobs/CleanBcar.php	/^    public function handle()$/;"	f
 handle	app/Jobs/CleanEcar.php	/^    public function handle()$/;"	f

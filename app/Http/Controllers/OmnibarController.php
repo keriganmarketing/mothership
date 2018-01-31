@@ -6,6 +6,12 @@ use Illuminate\Http\Request;
 
 class OmnibarController extends Controller
 {
+    public function __construct()
+    {
+        parent::__construct();
+
+        $this->middleware('cors');
+    }
     /**
      * Gather the data for the Omnibar used on the search page and send to the
      * requestor
