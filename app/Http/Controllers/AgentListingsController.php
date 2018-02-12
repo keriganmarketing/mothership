@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Listing;
 use Illuminate\Http\Request;
+use App\Impression;
+use App\Click;
 
 class AgentListingsController extends Controller
 {
@@ -17,6 +19,12 @@ class AgentListingsController extends Controller
         $agentShortId = $request->agentId;
 
         $listings = Listing::forAgent($agentShortId);
+        if ($request->analytics) {
+            foreach ($listings as $listing) {
+                $listing->impressions = Impression::where('listing_id', $listing->id)->pluck('counter')->sum();
+                $listing->clicks = Click::where('listing_id', $listing->id)->pluck('counter')->sum();
+            }
+        }
 
         return response()->json($listings)->withHeaders(
             [
