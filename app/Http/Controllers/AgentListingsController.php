@@ -18,6 +18,10 @@ class AgentListingsController extends Controller
 
         $listings = Listing::forAgent($agentShortId);
 
-        return response()->json($listings);
+        return response()->json($listings)->withHeaders(
+            [
+                'Access-Control-Allow-Origin' => '*'
+            ]
+        );
     }
 }

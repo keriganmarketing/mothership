@@ -133,7 +133,6 @@ class Listing extends Model
         ->when($openHouses, function ($query) use ($openHouses) {
             return $query->where('has_open_houses', true);
         })
-        ->groupBy('full_address')
         ->orderBy($sortBy, $orderBy)
         ->paginate(36);
 
