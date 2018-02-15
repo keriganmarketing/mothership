@@ -45,7 +45,8 @@ class ListingTest extends TestCase
     {
         $listing = create('App\Listing', [
             'street_number' => '123',
-            'street_name'   => 'Example Street',
+            'street_name'   => 'Example',
+            'street_suffix' => 'Street',
             'city'          => 'Lynn Haven',
         ]);
 

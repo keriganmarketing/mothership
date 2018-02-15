@@ -126,7 +126,8 @@ class ListingsHelper
                 'description'              => $result['LIST_78'],
                 'apn'                      => $result['LIST_80'],
                 'directions'               => $result['LIST_82'],
-                'association'              => 'bcar'
+                'association'              => 'bcar',
+                'street_suffix'            => $result['LIST_37']
             ]
         );
 
@@ -271,7 +272,8 @@ class ListingsHelper
                 'description'              => $result['LIST_78'],
                 'apn'                      => $result['LIST_80'],
                 'directions'               => $result['LIST_82'],
-                'association'              => 'ecar'
+                'association'              => 'ecar',
+                'street_suffix'            => $result['LIST_37']
 
             ]
         );

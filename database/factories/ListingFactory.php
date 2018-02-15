@@ -66,6 +66,7 @@ $factory->define(App\Listing::class, function (Faker $faker) {
         'description'              => $faker->sentence,
         'apn'                      => '324242342342342',
         'directions'               => $faker->paragraph,
+        'street_suffix'            => $faker->streetSuffix,
         'full_address'             => $faker->streetAddress
     ];
 });

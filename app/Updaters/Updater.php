@@ -28,6 +28,7 @@ abstract class Updater
 
     public function cleanEcar()
     {
+        //TODO: put stuff here
     }
 
     protected function getLastModifiedDate($table)

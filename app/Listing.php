@@ -195,14 +195,60 @@ class Listing extends Model
     {
         $streetNumber = $this->street_number;
         $streetName   = ucwords(strtolower($this->street_name));
+        $streetSuffix = $this->street_suffix != null ? ucwords(strtolower($this->street_suffix)) : '';
         $city         = ', '. $this->city;
-        $fullAddress  = $streetNumber . ' ' . $streetName . $city;
+        $fullAddress  = $streetNumber . ' ' . $streetName . ' '  . $streetSuffix . $city;
 
         if ($this->addressIsValid($fullAddress)) {
             return $fullAddress;
         }
 
         return null;
+    }
+
+    public function getStreetSuffix($association)
+    {
+        $mls = new ApiCall($association);
+        $rets = $mls->login();
+        $classArray  = $association == 'bcar' ?
+            ['A', 'C', 'E', 'F', 'G'] : ['A', 'B', 'C', 'E', 'F', 'G', 'H', 'I'];
+
+
+        foreach ($classArray as $class){
+            $listingsRemain = true;
+            $offset = 0;
+            while ($listingsRemain) {
+                $results = $rets->Search(
+                        'Property',
+                        $class,
+                        '*',
+                        [
+                        'Limit' => '9999',
+                        'Offset' => $offset,
+                        'Select' => 'LIST_3,LIST_37'
+                        ]
+                    );
+
+                echo 'Got the results';
+                foreach ($results as $result) {
+                    $listing = Listing::where('mls_account', $result['LIST_3'])->first();
+                    if ($listing) {
+                        $address = $listing->buildFullAddress();
+                        $listing->update([
+                            'street_suffix' => $result['LIST_37'],
+                            'full_address'  => $address
+                        ]);
+                        echo '*';
+
+                    }
+                }
+                $offset += $results->getReturnedResultsCount();
+
+                if ($offset >= $results->getTotalResultsCount()) {
+                    $listingsRemain = false;
+                }
+            }
+        }
     }
 
     /**
