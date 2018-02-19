@@ -705,7 +705,7 @@ setUp	tests/Unit/ListingTest.php	/^    public function setUp()$/;"	f
 shortId	app/Agent.php	/^        $shortId         = $request->shortId ?? '';$/;"	v
 shouldIgnoreFirstNewline	public/js/app.js	/^var shouldIgnoreFirstNewline = function (tag, html) { return tag && isIgnoreNewlineTag(tag) && html[0] === '\\n'; };$/;"	f
 show	app/Http/Controllers/AgentController.php	/^    public function show(Agent $agent)$/;"	f
-show	app/Http/Controllers/AgentSearchController.php	/^    protected function show(Request $request)$/;"	f
+show	app/Http/Controllers/AgentSearchController.php	/^    public function show(Request $request)$/;"	f
 show	app/Http/Controllers/ListingController.php	/^    public function show($mlsNumber)$/;"	f
 sortBy	app/Listing.php	/^        $sortBy       = $request->sortBy ?? 'date_modified';$/;"	v
 sortBy	app/MapSearch.php	/^        $sortBy       = $request->sortBy ?? 'date_modified';$/;"	v

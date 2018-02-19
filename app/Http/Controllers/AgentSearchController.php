@@ -19,10 +19,11 @@ class AgentSearchController extends Controller
         return response()->json($agents->toArray());
     }
 
-    protected function show(Request $request)
+    public function show(Request $request)
     {
         if ($request->email) {
             $agent = Agent::buildAgentData($request->email);
+
             return response()->json($agent);
         }
     }
