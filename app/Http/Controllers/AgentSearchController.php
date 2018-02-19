@@ -22,9 +22,8 @@ class AgentSearchController extends Controller
     protected function show(Request $request)
     {
         if ($request->email) {
-            $agent = new Agent();
 
-            return $agent->buildAgentData($request->email);
+            return Agent::buildAgentData($request->email);
         }
     }
 }

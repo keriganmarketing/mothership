@@ -152,7 +152,6 @@ addresses	app/Omnibar.php	/^        $addresses    = Listing::getColumn($searchTe
 agent	app/Agent.php	/^        $agent = [];$/;"	v
 agent	app/AgentPhoto.php	/^    public function agent()$/;"	f
 agent	app/Helpers/AgentsHelper.php	/^        $agent = Agent::updateOrCreate($/;"	v
-agent	app/Http/Controllers/AgentSearchController.php	/^            $agent = new Agent();$/;"	v
 agent	app/Updaters/AgentsUpdater.php	/^            $agent = AgentsHelper::updateOrCreateAgent($this->association, $result);$/;"	v
 agent	app/Updaters/AgentsUpdater.php	/^        $agent = Agent::byMlsId($mlsId);$/;"	v
 agent	tests/Feature/SearchAgentsTest.php	/^        $agent = create('App\\Agent',$/;"	v
@@ -222,7 +221,7 @@ boot	app/Providers/BroadcastServiceProvider.php	/^    public function boot()$/;"
 boot	app/Providers/EventServiceProvider.php	/^    public function boot()$/;"	f
 boot	app/Providers/RouteServiceProvider.php	/^    public function boot()$/;"	f
 build	app/Omnibar.php	/^    public static function build($searchTerm)$/;"	f
-buildAgentData	app/Agent.php	/^    public function buildAgentData($email)$/;"	f
+buildAgentData	app/Agent.php	/^    public static function buildAgentData($email)$/;"	f
 buildFullAddress	app/Listing.php	/^    public function buildFullAddress()$/;"	f
 byEventId	app/OpenHouse.php	/^    public static function byEventId($eventId)$/;"	f
 byMlsId	app/Agent.php	/^    public static function byMlsId($mlsId)$/;"	f

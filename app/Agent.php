@@ -83,7 +83,7 @@ class Agent extends Model
         return Agent::where('agent_id', $mlsId)->first();
     }
 
-    public function buildAgentData($email)
+    public static function buildAgentData($email)
     {
         $agent = [];
 
