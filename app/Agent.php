@@ -82,4 +82,30 @@ class Agent extends Model
     {
         return Agent::where('agent_id', $mlsId)->first();
     }
+
+    public function buildAgentData($email)
+    {
+        $agent = [];
+
+        $rows = Agent::where('email', $email)
+            ->where('active', 1)
+            ->where('mls_status', 1)
+            ->where('active_status', 1)
+            ->with('photos')
+            ->get();
+
+        for($i = 0; $i < count($rows); $i++) {
+            $agent['office_phone'][$i] = $rows[$i]->office_phone;
+            $agent['cell_phone'][$i]   = $rows[$i]->cell_phone;
+            $agent['street_1'][$i]     = $rows[$i]->street_1;
+            $agent['street_2'][$i]     = $rows[$i]->street_2;
+            $agent['city'][$i]         = $rows[$i]->city;
+            $agent['state'][$i]        = $rows[$i]->state;
+            $agent['zip'][$i]          = $rows[$i]->zip;
+            $agent['mls_id'][$i]       = $rows[$i]->short_id;
+            $agent['photos'][$i]       = $rows[$i]->photos;
+        }
+
+        return $agent;
+    }
 }

@@ -149,8 +149,10 @@ addIfCondition	public/js/app.js	/^function addIfCondition (el, condition) {$/;"	
 address	app/Listing.php	/^                        $address = $listing->buildFullAddress();$/;"	v
 addressIsValid	app/Listing.php	/^    public function addressIsValid($fullAddress)$/;"	f
 addresses	app/Omnibar.php	/^        $addresses    = Listing::getColumn($searchTerm, 'full_address');$/;"	v
+agent	app/Agent.php	/^        $agent = [];$/;"	v
 agent	app/AgentPhoto.php	/^    public function agent()$/;"	f
 agent	app/Helpers/AgentsHelper.php	/^        $agent = Agent::updateOrCreate($/;"	v
+agent	app/Http/Controllers/AgentSearchController.php	/^            $agent = new Agent();$/;"	v
 agent	app/Updaters/AgentsUpdater.php	/^            $agent = AgentsHelper::updateOrCreateAgent($this->association, $result);$/;"	v
 agent	app/Updaters/AgentsUpdater.php	/^        $agent = Agent::byMlsId($mlsId);$/;"	v
 agent	tests/Feature/SearchAgentsTest.php	/^        $agent = create('App\\Agent',$/;"	v
@@ -220,6 +222,7 @@ boot	app/Providers/BroadcastServiceProvider.php	/^    public function boot()$/;"
 boot	app/Providers/EventServiceProvider.php	/^    public function boot()$/;"	f
 boot	app/Providers/RouteServiceProvider.php	/^    public function boot()$/;"	f
 build	app/Omnibar.php	/^    public static function build($searchTerm)$/;"	f
+buildAgentData	app/Agent.php	/^    public function buildAgentData($email)$/;"	f
 buildFullAddress	app/Listing.php	/^    public function buildFullAddress()$/;"	f
 byEventId	app/OpenHouse.php	/^    public static function byEventId($eventId)$/;"	f
 byMlsId	app/Agent.php	/^    public static function byMlsId($mlsId)$/;"	f
@@ -679,6 +682,7 @@ rets	app/Updaters/Updater.php	/^    protected $rets;$/;"	v
 return	public/js/app.js	/^\/******\/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };$/;"	c
 return.hasOwnProperty	public/js/app.js	/^\/******\/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };$/;"	m
 routeMiddleware	app/Http/Kernel.php	/^    protected $routeMiddleware = [$/;"	v
+rows	app/Agent.php	/^        $rows = Agent::where('email', $email)$/;"	v
 run	database/seeds/DatabaseSeeder.php	/^    public function run()$/;"	f
 saveListing	app/Helpers/ListingsHelper.php	/^    public static function saveListing($association, $result, $class, $listingId = -1)$/;"	f
 savePhotos	app/AgentPhoto.php	/^    public static function savePhotos($agent, $photos)$/;"	f
@@ -701,6 +705,7 @@ setUp	tests/Unit/ListingTest.php	/^    public function setUp()$/;"	f
 shortId	app/Agent.php	/^        $shortId         = $request->shortId ?? '';$/;"	v
 shouldIgnoreFirstNewline	public/js/app.js	/^var shouldIgnoreFirstNewline = function (tag, html) { return tag && isIgnoreNewlineTag(tag) && html[0] === '\\n'; };$/;"	f
 show	app/Http/Controllers/AgentController.php	/^    public function show(Agent $agent)$/;"	f
+show	app/Http/Controllers/AgentSearchController.php	/^    protected function show(Request $request)$/;"	f
 show	app/Http/Controllers/ListingController.php	/^    public function show($mlsNumber)$/;"	f
 sortBy	app/Listing.php	/^        $sortBy       = $request->sortBy ?? 'date_modified';$/;"	v
 sortBy	app/MapSearch.php	/^        $sortBy       = $request->sortBy ?? 'date_modified';$/;"	v
