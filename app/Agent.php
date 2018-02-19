@@ -87,7 +87,7 @@ class Agent extends Model
     {
         $agent = [];
 
-        $rows = Agent::where('email', $email)
+        $rows = Agent::where('email', urldecode($email))
             ->where('active', 1)
             ->where('mls_status', 1)
             ->where('active_status', 1)

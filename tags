@@ -682,7 +682,7 @@ rets	app/Updaters/Updater.php	/^    protected $rets;$/;"	v
 return	public/js/app.js	/^\/******\/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };$/;"	c
 return.hasOwnProperty	public/js/app.js	/^\/******\/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };$/;"	m
 routeMiddleware	app/Http/Kernel.php	/^    protected $routeMiddleware = [$/;"	v
-rows	app/Agent.php	/^        $rows = Agent::where('email', $email)$/;"	v
+rows	app/Agent.php	/^        $rows = Agent::where('email', urldecode($email))$/;"	v
 run	database/seeds/DatabaseSeeder.php	/^    public function run()$/;"	f
 saveListing	app/Helpers/ListingsHelper.php	/^    public static function saveListing($association, $result, $class, $listingId = -1)$/;"	f
 savePhotos	app/AgentPhoto.php	/^    public static function savePhotos($agent, $photos)$/;"	f
