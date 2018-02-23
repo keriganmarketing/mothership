@@ -29,7 +29,7 @@ class ListingController extends Controller
      */
     public function show($mlsNumber)
     {
-        $listing = Listing::where('mls_account', $mlsNumber)->with(['photos', 'openHouses'])->first();
+        $listing = Listing::where('mls_account', $mlsNumber)->with(['photos', 'openHouses', 'agent'])->first();
 
         ProcessListingClick::dispatch($listing);
 

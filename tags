@@ -153,6 +153,7 @@ agent	app/Agent.php	/^        $agent = [];$/;"	v
 agent	app/AgentPhoto.php	/^    public function agent()$/;"	f
 agent	app/Helpers/AgentsHelper.php	/^        $agent = Agent::updateOrCreate($/;"	v
 agent	app/Http/Controllers/AgentSearchController.php	/^            $agent = Agent::buildAgentData($request->email);$/;"	v
+agent	app/Listing.php	/^    public function agent()$/;"	f
 agent	app/Updaters/AgentsUpdater.php	/^            $agent = AgentsHelper::updateOrCreateAgent($this->association, $result);$/;"	v
 agent	app/Updaters/AgentsUpdater.php	/^        $agent = Agent::byMlsId($mlsId);$/;"	v
 agent	tests/Feature/SearchAgentsTest.php	/^        $agent = create('App\\Agent',$/;"	v
@@ -451,7 +452,7 @@ latitude	app/Helpers/ListingsHelper.php	/^        $latitude             = is_num
 listen	app/Providers/EventServiceProvider.php	/^    protected $listen = [$/;"	v
 listing	app/Click.php	/^    public function listing()$/;"	f
 listing	app/Helpers/ListingsHelper.php	/^        $listing = Listing::updateOrCreate($/;"	v
-listing	app/Http/Controllers/ListingController.php	/^        $listing = Listing::where('mls_account', $mlsNumber)->with(['photos', 'openHouses'])->first();$/;"	v
+listing	app/Http/Controllers/ListingController.php	/^        $listing = Listing::where('mls_account', $mlsNumber)->with(['photos', 'openHouses', 'agent'])->first();$/;"	v
 listing	app/Impression.php	/^    public function listing()$/;"	f
 listing	app/Jobs/ProcessListingClick.php	/^        $this->listing = $listing;$/;"	v
 listing	app/Jobs/ProcessListingClick.php	/^    protected $listing;$/;"	v

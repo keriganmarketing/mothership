@@ -29,6 +29,11 @@ class Listing extends Model
         return $this->hasMany('App\Photo');
     }
 
+    public function agent()
+    {
+        return $this->hasOne('App\Agent', 'short_id', 'listing_member_shortid');
+    }
+
     /**
      * A listing can have many Open Houses
      *
