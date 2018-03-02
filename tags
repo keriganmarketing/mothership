@@ -618,6 +618,7 @@ processPre	public/js/app.js	/^function processPre (el) {$/;"	f
 processRawAttrs	public/js/app.js	/^function processRawAttrs (el) {$/;"	f
 processRef	public/js/app.js	/^function processRef (el) {$/;"	f
 processSlot	public/js/app.js	/^function processSlot (el) {$/;"	f
+propertyType	app/Helpers/ListingsHelper.php	/^        $propertyType         = $result['LIST_9'] ?? 'Commercial';$/;"	v
 propertyType	app/Listing.php	/^            $propertyType = explode('|', $propertyType);$/;"	v
 propertyType	app/Listing.php	/^        $propertyType = $request->propertyType ?? '';$/;"	v
 propertyType	app/MapSearch.php	/^            $propertyType = explode('|', $propertyType);$/;"	v

@@ -149,6 +149,7 @@ class ListingsHelper
     {
         $acreage              = $result['LIST_57'] > 0 ? $result['LIST_57'] : 0;
         $fullBaths            = isset($result['LIST_68']) ? $result['LIST_68'] : 0;
+        $propertyType         = $result['LIST_9'] ?? 'Commercial';
         $halfBaths            = $result['LIST_69'] > 0 ? $result['LIST_69'] : 0;
         $lastTaxes            = $result['LIST_75'] > 0 && is_numeric($result['LIST_75']) ? $result['LIST_75'] : 0;
         $lastTaxYear          = $result['LIST_76'] > 0 && is_numeric($result['LIST_76']) && $result['LIST_76'] < 9999 ? $result['LIST_76'] : 0;
@@ -221,7 +222,7 @@ class ListingsHelper
             ['id' => $listingId],
             [
                 'mls_account'              => $result['LIST_3'],
-                'property_type'            => $result['LIST_9'],
+                'property_type'            => $propertyType,
                 'class'                    => $result['LIST_8'],
                 'status'                   => $result['LIST_15'],
                 'price'                    => $price,
