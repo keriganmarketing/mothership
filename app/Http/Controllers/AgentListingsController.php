@@ -16,7 +16,7 @@ class AgentListingsController extends Controller
      */
     public function index(Request $request)
     {
-        $agentShortId = $request->agentId;
+        $agentShortId = isset($request->agentId) && $request->agentId != '' ? $request->agentId : 'xxxx';
 
         $listings = Listing::forAgent($agentShortId);
         if ($request->analytics) {

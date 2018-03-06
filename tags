@@ -158,7 +158,7 @@ agent	app/Updaters/AgentsUpdater.php	/^            $agent = AgentsHelper::update
 agent	app/Updaters/AgentsUpdater.php	/^        $agent = Agent::byMlsId($mlsId);$/;"	v
 agent	tests/Feature/SearchAgentsTest.php	/^        $agent = create('App\\Agent',$/;"	v
 agent	tests/Unit/AgentsTest.php	/^        $agent = create('App\\Agent');$/;"	v
-agentShortId	app/Http/Controllers/AgentListingsController.php	/^        $agentShortId = $request->agentId;$/;"	v
+agentShortId	app/Http/Controllers/AgentListingsController.php	/^        $agentShortId = isset($request->agentId) && $request->agentId != '' ? $request->agentId : 'xxxx';$/;"	v
 agents	app/Agent.php	/^        $agents = Agent::when($shortId, function ($query) use ($shortId) {$/;"	v
 agents	app/Http/Controllers/AgentSearchController.php	/^        $agents = Agent::searchResults($request);$/;"	v
 agents	tests/Feature/SearchAgentsTest.php	/^        $agents = factory('App\\Agent', 2)->create();$/;"	v
