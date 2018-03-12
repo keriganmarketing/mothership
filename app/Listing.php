@@ -202,14 +202,10 @@ class Listing extends Model
         $streetNumber = $this->street_number;
         $streetName   = ucwords(strtolower($this->street_name));
         $streetSuffix = $this->street_suffix != null ? ucwords(strtolower($this->street_suffix)) : '';
-        $city         = ', '. $this->city;
-        $fullAddress  = $streetNumber . ' ' . $streetName . ' '  . $streetSuffix . $city;
+        $city         = $this->city;
+        $fullAddress  = $streetNumber . ' ' . $streetName . ' '  . $streetSuffix . ' ' . $city;
 
-        if ($this->addressIsValid($fullAddress)) {
-            return $fullAddress;
-        }
-
-        return null;
+        return $fullAddress;
     }
 
     public function getStreetSuffix($association)

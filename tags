@@ -232,7 +232,7 @@ channel.port1.onmessage	public/js/app.js	/^        channel.port1.onmessage = fun
 checkInFor	public/js/app.js	/^function checkInFor (el) {$/;"	f
 cities	app/Omnibar.php	/^        $cities       = Listing::getColumn($searchTerm, 'city');$/;"	v
 city	app/Listing.php	/^        $city         = $request->city ?? '';$/;"	v
-city	app/Listing.php	/^        $city         = ', '. $this->city;$/;"	v
+city	app/Listing.php	/^        $city         = $this->city;$/;"	v
 city	app/MapSearch.php	/^        $city         = $request->city ?? '';$/;"	v
 classArray	app/Cleaners/Cleaner.php	/^        $this->classArray  = $this->association == 'bcar' ?$/;"	v
 classArray	app/Cleaners/Cleaner.php	/^    protected $classArray;$/;"	v
@@ -336,7 +336,7 @@ freshAgents	app/Helpers/Builder.php	/^    public function freshAgents()$/;"	f
 freshListings	app/Helpers/Builder.php	/^    public function freshListings()$/;"	f
 freshPhotos	app/Helpers/Builder.php	/^    public function freshPhotos()$/;"	f
 fromListingId	app/Photo.php	/^    public static function fromListingId($listingId)$/;"	f
-fullAddress	app/Listing.php	/^        $fullAddress  = $streetNumber . ' ' . $streetName . ' '  . $streetSuffix . $city;$/;"	v
+fullAddress	app/Listing.php	/^        $fullAddress  = $streetNumber . ' ' . $streetName . ' '  . $streetSuffix . ' ' . $city;$/;"	v
 fullBaths	app/Helpers/ListingsHelper.php	/^        $fullBaths            = isset($result['LIST_68']) ? $result['LIST_68'] : 0;$/;"	v
 fullListing	app/Cleaners/BcarCleaner.php	/^                $fullListing = Listing::where('mls_account', $listingId)->first();$/;"	v
 fullListing	app/Cleaners/EcarCleaner.php	/^            $fullListing = Listing::where('mls_account', $listing)->first();$/;"	v
