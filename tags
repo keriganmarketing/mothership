@@ -485,6 +485,7 @@ listings	app/Http/Controllers/UpdatedListingsController.php	/^        $listings 
 listings	app/Jobs/ProcessListingImpression.php	/^        $this->listings = $listings;$/;"	v
 listings	app/Jobs/ProcessListingImpression.php	/^    protected $listings;$/;"	v
 listings	app/Listing.php	/^        $listings = Listing::when($city, function ($query) use ($city) {$/;"	v
+listings	app/Listing.php	/^        $listings = Listing::whereIn('listing_member_shortid', $ids)$/;"	v
 listings	app/Listing.php	/^        $listings = Listing::whereIn('mls_account', $mlsArray)->get();$/;"	v
 listings	app/MapSearch.php	/^        $listings = DB::table('listings')$/;"	v
 listingsArray	app/Cleaners/BcarCleaner.php	/^        $listingsArray  = [];$/;"	v
@@ -625,7 +626,6 @@ propertyType	app/MapSearch.php	/^        $propertyType = $request->propertyType 
 propertyType	tests/Feature/SearchListingsTest.php	/^        $propertyType = implode('|', getPropertyTypes('Single Family Home'));$/;"	v
 proxies	app/Http/Middleware/TrustProxies.php	/^    protected $proxies;$/;"	v
 qnameCapture	public/js/app.js	/^var qnameCapture = "((?:" + ncname + "\\\\:)?" + ncname + ")";$/;"	v
-query	app/Listing.php	/^        $query = Listing::whereIn('listing_member_shortid', $ids)$/;"	v
 redirectTo	app/Http/Controllers/Auth/LoginController.php	/^    protected $redirectTo = '\/home';$/;"	v
 redirectTo	app/Http/Controllers/Auth/RegisterController.php	/^    protected $redirectTo = '\/home';$/;"	v
 redirectTo	app/Http/Controllers/Auth/ResetPasswordController.php	/^    protected $redirectTo = '\/home';$/;"	v
