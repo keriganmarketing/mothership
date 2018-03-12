@@ -179,9 +179,10 @@ class Listing extends Model
         } else {
             $ids = [$agentShortId];
         }
-        $listings = Listing::whereIn('listing_member_shortid', $ids)
+        $query = Listing::whereIn('listing_member_shortid', $ids)
             ->orWhereIn('colisting_member_shortid', $ids)
             ->groupBy('full_address')
+            ->having('full_address', '!=', null)
             ->latest()
             ->get();
 
