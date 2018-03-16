@@ -26,11 +26,6 @@ abstract class Updater
                             BcarOptions::all() : EcarOptions::all();
     }
 
-    public function cleanEcar()
-    {
-        //TODO: put stuff here
-    }
-
     protected function getLastModifiedDate($table)
     {
         $lastModified = Carbon::parse(

@@ -126,7 +126,7 @@ __webpack_require__	public/js/app.js	/^\/******\/ 	function __webpack_require__(
 __webpack_require__.d	public/js/app.js	/^\/******\/ 	__webpack_require__.d = function(exports, name, getter) {$/;"	f
 __webpack_require__.n	public/js/app.js	/^\/******\/ 	__webpack_require__.n = function(module) {$/;"	f
 __webpack_require__.o	public/js/app.js	/^\/******\/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };$/;"	f
-a_listing_can_validate_its_address	tests/Unit/ListingTest.php	/^    public function a_listing_can_validate_its_address()$/;"	f
+a_listing_can_validate_its_address	tests/Unit/ListingTest.php	/^    \/\/ public function a_listing_can_validate_its_address()$/;"	f
 a_listing_has_clicks	tests/Unit/ListingTest.php	/^    public function a_listing_has_clicks()$/;"	f
 a_listing_has_impressions	tests/Unit/ListingTest.php	/^    public function a_listing_has_impressions()$/;"	f
 a_listing_has_photos	tests/Unit/ListingTest.php	/^    public function a_listing_has_photos()$/;"	f
@@ -139,7 +139,7 @@ a_listing_is_searchable_by_mls_account	tests/Feature/SearchListingsTest.php	/^  
 a_listing_is_searchable_by_sub_area	tests/Feature/SearchListingsTest.php	/^    public function a_listing_is_searchable_by_sub_area()$/;"	f
 a_listing_is_searchable_by_subdivision	tests/Feature/SearchListingsTest.php	/^    public function a_listing_is_searchable_by_subdivision()$/;"	f
 a_listing_is_searchable_by_zip	tests/Feature/SearchListingsTest.php	/^    public function a_listing_is_searchable_by_zip()$/;"	f
-a_listing_will_not_build_an_invalid_address	tests/Unit/ListingTest.php	/^    public function a_listing_will_not_build_an_invalid_address()$/;"	f
+a_listing_will_not_build_an_invalid_address	tests/Unit/ListingTest.php	/^    \/\/ public function a_listing_will_not_build_an_invalid_address()$/;"	f
 a_photo_belongs_to_a_listing	tests/Unit/PhotoTest.php	/^    public function a_photo_belongs_to_a_listing()$/;"	f
 acreage	app/Helpers/ListingsHelper.php	/^        $acreage              = $result['LIST_57'] > 0 ? $result['LIST_57'] : 0;$/;"	v
 acreage	app/Listing.php	/^        $acreage      = $request->acreage ?? '';$/;"	v
@@ -244,7 +244,6 @@ clean	app/Cleaners/BcarCleaner.php	/^    public function clean()$/;"	f
 clean	app/Cleaners/CleansDatabase.php	/^    public function clean();$/;"	f
 clean	app/Cleaners/EcarCleaner.php	/^    public function clean()$/;"	f
 clean	app/Cleaners/OpenHouseCleaner.php	/^    public function clean()$/;"	f
-cleanEcar	app/Updaters/Updater.php	/^    public function cleanEcar()$/;"	f
 click	app/Jobs/ProcessListingClick.php	/^        $click = Click::where('listing_id', $this->listing->id)$/;"	v
 clicks	app/Listing.php	/^    public function clicks()$/;"	f
 commands	app/Console/Kernel.php	/^    protected $commands = [$/;"	v
@@ -331,6 +330,7 @@ for	app/Helpers/ListingsHelper.php	/^     * @param string $class  The class for 
 forAgent	app/Listing.php	/^    public static function forAgent($agentShortId)$/;"	f
 forAliasRE	public/js/app.js	/^var forAliasRE = \/(.*?)\\s+(?:in|of)\\s+(.*)\/;$/;"	v
 forIteratorRE	public/js/app.js	/^var forIteratorRE = \/\\((\\{[^}]*\\}|[^,]*),([^,]*)(?:,([^,]*))?\\)\/;$/;"	v
+force	app/Updaters/ListingsUpdater.php	/^    public function force($class)$/;"	f
 freshAgentPhotos	app/Helpers/Builder.php	/^    public function freshAgentPhotos()$/;"	f
 freshAgents	app/Helpers/Builder.php	/^    public function freshAgents()$/;"	f
 freshListings	app/Helpers/Builder.php	/^    public function freshListings()$/;"	f
@@ -382,6 +382,7 @@ headers	app/Http/Middleware/TrustProxies.php	/^    protected $headers = [$/;"	v
 hidden	app/User.php	/^    protected $hidden = [$/;"	v
 highestToLowest	tests/Feature/SearchListingsTest.php	/^        $highestToLowest = \\App\\Listing::orderBy('date_modified', 'DESC')->pluck('id');$/;"	v
 highestToLowest	tests/Feature/SearchListingsTest.php	/^        $highestToLowest = \\App\\Listing::orderBy('price', 'DESC')->pluck('id');$/;"	v
+idList	app/Helpers/EcarOptions.php	/^    public static function idList($offset = 1)$/;"	f
 ids	app/Listing.php	/^            $ids = [$agentShortId];$/;"	v
 ids	app/Listing.php	/^            $ids = explode('|', $agentShortId);$/;"	v
 impression	app/Jobs/ProcessListingImpression.php	/^            $impression = Impression::where('listing_id', $listing->id)$/;"	v
@@ -462,12 +463,13 @@ listing	app/OpenHouse.php	/^        $listing =  Listing::where('mls_account', $r
 listing	app/OpenHouse.php	/^        $listing = Listing::where('mls_account', $result['LIST105'])->first();$/;"	v
 listing	app/OpenHouse.php	/^    public function listing()$/;"	f
 listing	app/Photo.php	/^    public function listing()$/;"	f
+listing	app/Updaters/ListingsUpdater.php	/^                $listing = ListingsHelper::saveListing($this->association, $result, $class);$/;"	v
 listing	app/Updaters/ListingsUpdater.php	/^            $listing = Listing::byMlsNumber($mlsNumber);$/;"	v
 listing	app/Updaters/ListingsUpdater.php	/^            $listing = ListingsHelper::saveListing($this->association, $result, $class);$/;"	v
 listing	app/Updaters/ListingsUpdater.php	/^        $listing = Listing::byMlsNumber($mlsNumber);$/;"	v
 listing	database/factories/PhotoFactory.php	/^    $listing = factory('App\\Listing')->create();$/;"	v
 listing	tests/Unit/ListingTest.php	/^        $listing = create('App\\Listing');$/;"	v
-listing	tests/Unit/ListingTest.php	/^        $listing = create('App\\Listing', [$/;"	v
+listing	tests/Unit/ListingTest.php	/^    \/\/     $listing = create('App\\Listing', [$/;"	v
 listingCounter	app/Cleaners/BcarCleaner.php	/^                $listingCounter = $listingCounter + 1;$/;"	v
 listingCounter	app/Cleaners/BcarCleaner.php	/^        $listingCounter = 0;$/;"	v
 listingCounter	app/Cleaners/EcarCleaner.php	/^            $listingCounter = $listingCounter + 1;$/;"	v
@@ -523,6 +525,8 @@ maxPrice	app/Listing.php	/^        $maxPrice     = $request->maxPrice ?? '';$/;"
 maxPrice	app/MapSearch.php	/^        $maxPrice     = $request->maxPrice ?? '';$/;"	v
 maxRowsReached	app/Helpers/Builder.php	/^                $maxRowsReached = true;$/;"	v
 maxRowsReached	app/Helpers/Builder.php	/^        $maxRowsReached = false;$/;"	v
+maxRowsReached	app/Updaters/ListingsUpdater.php	/^                $maxRowsReached = true;$/;"	v
+maxRowsReached	app/Updaters/ListingsUpdater.php	/^        $maxRowsReached = false;$/;"	v
 middleware	app/Http/Kernel.php	/^    protected $middleware = [$/;"	v
 middlewareGroups	app/Http/Kernel.php	/^    protected $middlewareGroups = [$/;"	v
 minPrice	app/Listing.php	/^        $minPrice     = $request->minPrice ?? '';$/;"	v
@@ -542,6 +546,7 @@ module.exports.colors	tailwind.js	/^  colors: colors,$/;"	p
 module.exports.screens	tailwind.js	/^  screens: {$/;"	p
 namespace	app/Providers/RouteServiceProvider.php	/^    protected $namespace = 'App\\Http\\Controllers';$/;"	v
 ncname	public/js/app.js	/^var ncname = '[a-zA-Z_][\\\\w\\\\-\\\\.]*';$/;"	v
+newOptions	app/Updaters/ListingsUpdater.php	/^            $newOptions = $this->association == 'bcar' ?$/;"	v
 newPhotos	app/Updaters/ListingsUpdater.php	/^            $newPhotos  = $this->getPhotosForListing($mlsNumber);$/;"	v
 now	app/Cleaners/OpenHouseCleaner.php	/^        $now = Carbon::now();$/;"	v
 now	app/Helpers/Builder.php	/^        $now = Carbon::now()->toAtomString();$/;"	v
@@ -550,6 +555,7 @@ offset	app/Cleaners/EcarCleaner.php	/^            $offset = 0;$/;"	v
 offset	app/Helpers/Builder.php	/^        $offset         = 0;$/;"	v
 offset	app/Helpers/Builder.php	/^        $offset = 0;$/;"	v
 offset	app/Listing.php	/^            $offset = 0;$/;"	v
+offset	app/Updaters/ListingsUpdater.php	/^        $offset         = 0;$/;"	v
 oldPhotos	app/Updaters/ListingsUpdater.php	/^            $oldPhotos  = $listing->photos;$/;"	v
 omniBar	app/Http/Controllers/OmnibarController.php	/^        $omniBar = Omnibar::build($searchTerm);$/;"	v
 onRE	public/js/app.js	/^var onRE = \/^@|^v-on:\/;$/;"	v
@@ -593,6 +599,7 @@ photos	app/Helpers/Builder.php	/^        $photos = $this->rets->GetObject('Prope
 photos	app/Listing.php	/^    public function photos()$/;"	f
 photos	app/Photo.php	/^                $photos = (new Builder($listing->association))->fetchPhotos($listing);$/;"	v
 photos	app/Updaters/AgentsUpdater.php	/^            $photos = $this->getPhotosForAgent($agent);$/;"	v
+photos	app/Updaters/ListingsUpdater.php	/^                $photos  = $this->getPhotosForListing($mlsNumber);$/;"	v
 photos	app/Updaters/ListingsUpdater.php	/^            $photos  = $this->getPhotosForListing($mlsNumber);$/;"	v
 platformGetTagNamespace	public/js/app.js	/^var platformGetTagNamespace;$/;"	v
 platformIsPreTag	public/js/app.js	/^var platformIsPreTag;$/;"	v
@@ -673,6 +680,8 @@ results	app/Helpers/Builder.php	/^        $results = $this->rets->Search('OpenHo
 results	app/Listing.php	/^                $results = $rets->Search($/;"	v
 results	app/Updaters/AgentsUpdater.php	/^        $results = $this->getNewAgents($dateLastModified);$/;"	v
 results	app/Updaters/ListingsUpdater.php	/^            $results = $this->getNewProperties($class, $dateLastModified);$/;"	v
+results	app/Updaters/ListingsUpdater.php	/^            $results = $this->rets->Search('Property', $class, '(LIST_3='. $mlsNumber .')', (EcarOptions::singleListing())[$class]);$/;"	v
+results	app/Updaters/ListingsUpdater.php	/^            $results = $this->rets->Search('Property', $class, '*', $newOptions[$class]);$/;"	v
 results	app/Updaters/OpenHousesUpdater.php	/^        $results = $this->getNewOpenHouses($lastModified);$/;"	v
 rets	app/ApiCall.php	/^        $rets = new Session($config);$/;"	v
 rets	app/Cleaners/Cleaner.php	/^        $this->rets        = $this->mls->login();$/;"	v
@@ -709,6 +718,7 @@ shouldIgnoreFirstNewline	public/js/app.js	/^var shouldIgnoreFirstNewline = funct
 show	app/Http/Controllers/AgentController.php	/^    public function show(Agent $agent)$/;"	f
 show	app/Http/Controllers/AgentSearchController.php	/^    public function show(Request $request)$/;"	f
 show	app/Http/Controllers/ListingController.php	/^    public function show($mlsNumber)$/;"	f
+singleListing	app/Helpers/EcarOptions.php	/^    public static function singleListing($offset = 0)$/;"	f
 sortBy	app/Listing.php	/^        $sortBy       = $request->sortBy ?? 'date_modified';$/;"	v
 sortBy	app/MapSearch.php	/^        $sortBy       = $request->sortBy ?? 'date_modified';$/;"	v
 sortedListings	tests/Feature/SearchListingsTest.php	/^        $sortedListings = json_decode($response->getContent())->data;$/;"	v
@@ -740,6 +750,7 @@ today	app/Jobs/ProcessListingClick.php	/^        $today = Carbon::now()->toDateS
 today	app/Jobs/ProcessListingImpression.php	/^        $today = Carbon::now()->toDateString();$/;"	v
 today	app/Jobs/ProcessSearch.php	/^        $today       = Carbon::now()->toDateString();$/;"	v
 transforms	public/js/app.js	/^var transforms;$/;"	v
+troubleshoot	app/Updaters/ListingsUpdater.php	/^    public function troubleshoot($class, $mlsNumber)$/;"	f
 typeArray	tests/utilities/functions.php	/^    $typeArray = [$/;"	v
 up	database/migrations/2014_10_12_000000_create_users_table.php	/^    public function up()$/;"	f
 up	database/migrations/2014_10_12_100000_create_password_resets_table.php	/^    public function up()$/;"	f
@@ -765,6 +776,7 @@ updateFromReturnedResult	app/OpenHouse.php	/^    public function updateFromRetur
 updateOrCreateAgent	app/Helpers/AgentsHelper.php	/^    public static function updateOrCreateAgent($association, $result)$/;"	f
 updateOrCreateBcarListing	app/Helpers/ListingsHelper.php	/^    private static function updateOrCreateBcarListing($result, $class, $listingId)$/;"	f
 updateOrCreateEcarListing	app/Helpers/ListingsHelper.php	/^    private static function updateOrCreateEcarListing($result, $class, $listingId)$/;"	f
+updateSingle	app/Updaters/ListingsUpdater.php	/^    protected function updateSingle($class, $result)$/;"	f
 uri	server.php	/^$uri = urldecode($/;"	v
 username	app/ApiCall.php	/^        $this->username    = $this->association == 'bcar' ? $this->bcarUserName() : $this->ecarUserName();$/;"	v
 utilities	app/Helpers/ListingsHelper.php	/^            $utilities            = $result['GF20131203185458688530000000'];$/;"	v

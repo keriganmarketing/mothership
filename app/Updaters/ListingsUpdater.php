@@ -7,6 +7,8 @@ use App\Listing;
 use App\Updaters\Updater;
 use App\Updaters\MakesUpdates;
 use App\Helpers\ListingsHelper;
+use App\Helpers\BcarOptions;
+use App\Helpers\EcarOptions;
 
 class ListingsUpdater extends Updater implements MakesUpdates
 {
@@ -31,9 +33,57 @@ class ListingsUpdater extends Updater implements MakesUpdates
         Photo::sync();
     }
 
+    public function troubleshoot($class, $mlsNumber)
+    {
+        dd($this->rets->Search(
+            'Property',
+            $class,
+            '(LIST_3='. $mlsNumber .')',
+            $this->options[$class]
+        ));
+    }
+
+    public function force($class)
+    {
+        $offset         = 0;
+        $maxRowsReached = false;
+
+        while (! $maxRowsReached) {
+            $newOptions = $this->association == 'bcar' ?
+                BcarOptions::idList($offset) : EcarOptions::idList($offset);
+
+            $results = $this->rets->Search('Property', $class, '*', $newOptions[$class]);
+
+            foreach ($results as $result) {
+                $this->updateSingle($class, $result);
+            }
+
+            $offset += $results->getReturnedResultsCount();
+
+            if ($offset >= $results->getTotalResultsCount()) {
+                $maxRowsReached = true;
+            }
+        }
+    }
+
+    protected function updateSingle($class, $result)
+    {
+        $mlsNumber = $result['LIST_3'];
+        $listing = Listing::byMlsNumber($mlsNumber);
+        if ($listing == null) {
+            $results = $this->rets->Search('Property', $class, '(LIST_3='. $mlsNumber .')', (EcarOptions::singleListing())[$class]);
+            foreach ($results as $result) {
+                $listing = ListingsHelper::saveListing($this->association, $result, $class);
+                $photos  = $this->getPhotosForListing($mlsNumber);
+                Photo::savePhotos($listing, $photos);
+                echo '#'.$mlsNumber . PHP_EOL;
+            }
+        }
+    }
+
     protected function getNewProperties($class, $dateLastModified)
     {
-       return $this->rets->Search(
+        return $this->rets->Search(
             'Property',
             $class,
             '(LIST_87=' . $dateLastModified . '+)|(LIST_134=' . $dateLastModified . '+)',
