@@ -9,6 +9,7 @@ use App\Updaters\MakesUpdates;
 use App\Helpers\ListingsHelper;
 use App\Helpers\BcarOptions;
 use App\Helpers\EcarOptions;
+use Illuminate\Support\Facades\DB;
 
 class ListingsUpdater extends Updater implements MakesUpdates
 {
@@ -45,25 +46,36 @@ class ListingsUpdater extends Updater implements MakesUpdates
 
     public function force($class)
     {
-        $offset         = 0;
-        $maxRowsReached = false;
+        $offset           = 0;
+        // $localMlsNumbers  = DB::table('listings')->pluck('mls_account')->toArray();
+        $localMlsNumbers  = ['test_value'];
+        $remoteMlsNumbers = [];
+        $maxRowsReached   = false;
 
         while (! $maxRowsReached) {
             $newOptions = $this->association == 'bcar' ?
                 BcarOptions::idList($offset) : EcarOptions::idList($offset);
 
             $results = $this->rets->Search('Property', $class, '*', $newOptions[$class]);
-
             foreach ($results as $result) {
-                $this->updateSingle($class, $result);
+                $remoteMlsNumbers[] = $result["LIST_3"];
             }
+            dd(array_diff($localMlsNumbers, $remoteMlsNumbers));
 
-            $offset += $results->getReturnedResultsCount();
+            // foreach ($results as $result) {
+            //     $this->updateSingle($class, $result);
+            // }
 
-            if ($offset >= $results->getTotalResultsCount()) {
-                $maxRowsReached = true;
-            }
+            // $offset += $results->getReturnedResultsCount();
+
+            // if ($offset >= $results->getTotalResultsCount()) {
+            //     $maxRowsReached = true;
+            // }
         }
+
+        // Photo::sync();
+
+        // echo 'Success';
     }
 
     protected function updateSingle($class, $result)

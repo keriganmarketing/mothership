@@ -509,6 +509,8 @@ listings_can_be_searched_by_waterfront	tests/Feature/SearchListingsTest.php	/^  
 listings_can_be_sorted_by_date_modified	tests/Feature/SearchListingsTest.php	/^    public function listings_can_be_sorted_by_date_modified()$/;"	f
 listings_can_be_sorted_by_price	tests/Feature/SearchListingsTest.php	/^    public function listings_can_be_sorted_by_price()$/;"	f
 loader	public/index.php	/^| Composer provides a convenient, automatically generated class loader for$/;"	c
+localMlsNumbers	app/Updaters/ListingsUpdater.php	/^        $localMlsNumbers  = ['test_value'];$/;"	v
+localMlsNumbers	app/Updaters/ListingsUpdater.php	/^        \/\/ $localMlsNumbers  = DB::table('listings')->pluck('mls_account')->toArray();$/;"	v
 login	app/ApiCall.php	/^    public function login()$/;"	f
 loginUrl	app/ApiCall.php	/^        $this->loginUrl    = $this->association == 'bcar' ? $this->bcarLoginUrl() : $this->ecarLoginUrl();$/;"	v
 longitude	app/Helpers/ListingsHelper.php	/^        $longitude            = is_numeric($result['LIST_47']) ? $result['LIST_47'] : 0;$/;"	v
@@ -525,8 +527,8 @@ maxPrice	app/Listing.php	/^        $maxPrice     = $request->maxPrice ?? '';$/;"
 maxPrice	app/MapSearch.php	/^        $maxPrice     = $request->maxPrice ?? '';$/;"	v
 maxRowsReached	app/Helpers/Builder.php	/^                $maxRowsReached = true;$/;"	v
 maxRowsReached	app/Helpers/Builder.php	/^        $maxRowsReached = false;$/;"	v
-maxRowsReached	app/Updaters/ListingsUpdater.php	/^                $maxRowsReached = true;$/;"	v
-maxRowsReached	app/Updaters/ListingsUpdater.php	/^        $maxRowsReached = false;$/;"	v
+maxRowsReached	app/Updaters/ListingsUpdater.php	/^            \/\/     $maxRowsReached = true;$/;"	v
+maxRowsReached	app/Updaters/ListingsUpdater.php	/^        $maxRowsReached   = false;$/;"	v
 middleware	app/Http/Kernel.php	/^    protected $middleware = [$/;"	v
 middlewareGroups	app/Http/Kernel.php	/^    protected $middlewareGroups = [$/;"	v
 minPrice	app/Listing.php	/^        $minPrice     = $request->minPrice ?? '';$/;"	v
@@ -555,7 +557,7 @@ offset	app/Cleaners/EcarCleaner.php	/^            $offset = 0;$/;"	v
 offset	app/Helpers/Builder.php	/^        $offset         = 0;$/;"	v
 offset	app/Helpers/Builder.php	/^        $offset = 0;$/;"	v
 offset	app/Listing.php	/^            $offset = 0;$/;"	v
-offset	app/Updaters/ListingsUpdater.php	/^        $offset         = 0;$/;"	v
+offset	app/Updaters/ListingsUpdater.php	/^        $offset           = 0;$/;"	v
 oldPhotos	app/Updaters/ListingsUpdater.php	/^            $oldPhotos  = $listing->photos;$/;"	v
 omniBar	app/Http/Controllers/OmnibarController.php	/^        $omniBar = Omnibar::build($searchTerm);$/;"	v
 onRE	public/js/app.js	/^var onRE = \/^@|^v-on:\/;$/;"	v
@@ -638,6 +640,7 @@ redirectTo	app/Http/Controllers/Auth/RegisterController.php	/^    protected $red
 redirectTo	app/Http/Controllers/Auth/ResetPasswordController.php	/^    protected $redirectTo = '\/home';$/;"	v
 register	app/Providers/AppServiceProvider.php	/^    public function register()$/;"	f
 registerImmediate	public/js/app.js	/^        registerImmediate = function(handle) {$/;"	f
+remoteMlsNumbers	app/Updaters/ListingsUpdater.php	/^        $remoteMlsNumbers = [];$/;"	v
 render	app/Exceptions/Handler.php	/^    public function render($request, Exception $exception)$/;"	f
 report	app/Exceptions/Handler.php	/^    public function report(Exception $exception)$/;"	f
 request	app/Jobs/ProcessSearch.php	/^        $this->request = $request;$/;"	v
