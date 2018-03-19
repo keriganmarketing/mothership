@@ -47,8 +47,8 @@ class ListingsUpdater extends Updater implements MakesUpdates
     public function force($class)
     {
         $offset           = 0;
-        // $localMlsNumbers  = DB::table('listings')->pluck('mls_account')->toArray();
-        $localMlsNumbers  = ['test_value'];
+        $localMlsNumbers  = DB::table('listings')->pluck('mls_account')->toArray();
+        // $localMlsNumbers  = ['test_value'];
         $remoteMlsNumbers = [];
         $maxRowsReached   = false;
 
@@ -60,7 +60,7 @@ class ListingsUpdater extends Updater implements MakesUpdates
             foreach ($results as $result) {
                 $remoteMlsNumbers[] = $result["LIST_3"];
             }
-            dd(array_diff($localMlsNumbers, $remoteMlsNumbers));
+            dd(count(array_diff($localMlsNumbers, $remoteMlsNumbers)));
 
             // foreach ($results as $result) {
             //     $this->updateSingle($class, $result);
