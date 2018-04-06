@@ -509,8 +509,7 @@ listings_can_be_searched_by_waterfront	tests/Feature/SearchListingsTest.php	/^  
 listings_can_be_sorted_by_date_modified	tests/Feature/SearchListingsTest.php	/^    public function listings_can_be_sorted_by_date_modified()$/;"	f
 listings_can_be_sorted_by_price	tests/Feature/SearchListingsTest.php	/^    public function listings_can_be_sorted_by_price()$/;"	f
 loader	public/index.php	/^| Composer provides a convenient, automatically generated class loader for$/;"	c
-localMlsNumbers	app/Updaters/ListingsUpdater.php	/^        $localMlsNumbers  = ['test_value'];$/;"	v
-localMlsNumbers	app/Updaters/ListingsUpdater.php	/^        \/\/ $localMlsNumbers  = DB::table('listings')->pluck('mls_account')->toArray();$/;"	v
+localMlsNumbers	app/Updaters/ListingsUpdater.php	/^        $localMlsNumbers  = DB::table('listings')->pluck('mls_account')->toArray();$/;"	v
 login	app/ApiCall.php	/^    public function login()$/;"	f
 loginUrl	app/ApiCall.php	/^        $this->loginUrl    = $this->association == 'bcar' ? $this->bcarLoginUrl() : $this->ecarLoginUrl();$/;"	v
 longitude	app/Helpers/ListingsHelper.php	/^        $longitude            = is_numeric($result['LIST_47']) ? $result['LIST_47'] : 0;$/;"	v
@@ -527,7 +526,7 @@ maxPrice	app/Listing.php	/^        $maxPrice     = $request->maxPrice ?? '';$/;"
 maxPrice	app/MapSearch.php	/^        $maxPrice     = $request->maxPrice ?? '';$/;"	v
 maxRowsReached	app/Helpers/Builder.php	/^                $maxRowsReached = true;$/;"	v
 maxRowsReached	app/Helpers/Builder.php	/^        $maxRowsReached = false;$/;"	v
-maxRowsReached	app/Updaters/ListingsUpdater.php	/^            \/\/     $maxRowsReached = true;$/;"	v
+maxRowsReached	app/Updaters/ListingsUpdater.php	/^                $maxRowsReached = true;$/;"	v
 maxRowsReached	app/Updaters/ListingsUpdater.php	/^        $maxRowsReached   = false;$/;"	v
 middleware	app/Http/Kernel.php	/^    protected $middleware = [$/;"	v
 middlewareGroups	app/Http/Kernel.php	/^    protected $middlewareGroups = [$/;"	v
