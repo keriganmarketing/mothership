@@ -29,7 +29,7 @@ class Builder
 
     public function rebuild()
     {
-        $this->freshListings();
+        // $this->freshListings();
         $this->freshPhotos();
         $this->freshAgents();
         $this->freshAgentPhotos();
@@ -39,6 +39,9 @@ class Builder
     public function freshListings()
     {
         foreach ($this->classArray as $class) {
+            echo '---------------------------------------------------------' . PHP_EOL;
+            echo 'Downloading Listings for Class ' . $class . ': '. PHP_EOL;
+            echo '---------------------------------------------------------' . PHP_EOL;
             $this->fetchListings($class);
         }
     }
@@ -46,11 +49,12 @@ class Builder
     public function freshPhotos()
     {
         foreach ($this->classArray as $class) {
-            $listings = Listing::where('class', $class)->where('association', $this->association)->get();
-            foreach ($listings as $listing) {
-                $photos = $this->fetchPhotos($listing);
-                Photo::savePhotos($listing, $photos);
-            }
+            $listings = DB::table('listings')->where('class', $class)->where('association', $this->association)->orderBy('id', 'asc')->chunk(500, function ($listings) {
+                foreach ($listings as $listing) {
+                    $photos = $this->fetchPhotos($listing);
+                    Photo::savePhotos($listing, $photos);
+                }
+            });
         }
 
         Photo::sync();
@@ -131,20 +135,28 @@ class Builder
     public function fetchListings($class)
     {
         $offset         = 0;
-        $options        = $this->association == 'bcar' ?
-            BcarOptions::all($offset) : EcarOptions::all($offset);
         $maxRowsReached = false;
 
         while (! $maxRowsReached) {
+            $options        = $this->association == 'bcar' ?
+                BcarOptions::all($offset) : EcarOptions::all($offset);
             $results = $this->rets->Search('Property', $class, '*', $options[$class]);
+
+            echo '---------------------------------------------------------' . PHP_EOL;
+            echo 'Returned Results: '. $results->getReturnedResultsCount() . PHP_EOL;
+            echo 'Total Results: '. $results->getTotalResultsCount() . PHP_EOL;
+            echo 'Offset before this batch: '. $offset . PHP_EOL;
 
             foreach ($results as $result) {
                 ListingsHelper::saveListing($this->association, $result, $class);
             }
 
             $offset += $results->getReturnedResultsCount();
+            echo 'Offset after this batch: '. $offset . PHP_EOL;
 
             if ($offset >= $results->getTotalResultsCount()) {
+
+                echo 'Final Offset: '. $offset . PHP_EOL;
                 $maxRowsReached = true;
             }
         }
