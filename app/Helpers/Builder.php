@@ -27,6 +27,15 @@ class Builder
             ['A', 'C', 'E', 'F', 'G', 'J'] : ['A', 'B', 'C', 'E', 'F', 'G', 'H', 'I'];
     }
 
+    public function rebuild()
+    {
+        $this->freshListings();
+        $this->freshPhotos();
+        $this->freshAgents();
+        $this->freshAgentPhotos();
+        $this->openHouses();
+    }
+
     public function freshListings()
     {
         foreach ($this->classArray as $class) {

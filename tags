@@ -18,6 +18,7 @@ AgentsTest	tests/Unit/AgentsTest.php	/^class AgentsTest extends TestCase$/;"	c
 AgentsUpdater	app/Updaters/AgentsUpdater.php	/^class AgentsUpdater extends Updater implements MakesUpdates$/;"	c
 ApiCall	app/ApiCall.php	/^class ApiCall extends Model$/;"	c
 AppServiceProvider	app/Providers/AppServiceProvider.php	/^class AppServiceProvider extends ServiceProvider$/;"	c
+Associations	app/Helpers/Associations.php	/^class Associations {$/;"	c
 AuthServiceProvider	app/Providers/AuthServiceProvider.php	/^class AuthServiceProvider extends ServiceProvider$/;"	c
 BcarCleaner	app/Cleaners/BcarCleaner.php	/^class BcarCleaner extends Cleaner$/;"	c
 BcarOptions	app/Helpers/BcarOptions.php	/^class BcarOptions$/;"	c
@@ -29,6 +30,7 @@ CleanOpenHouses	app/Jobs/CleanOpenHouses.php	/^class CleanOpenHouses implements 
 Cleaner	app/Cleaners/Cleaner.php	/^abstract class Cleaner$/;"	c
 CleansDatabase	app/Cleaners/CleansDatabase.php	/^interface CleansDatabase$/;"	i
 Click	app/Click.php	/^class Click extends Model$/;"	c
+ColumnNormalizer	app/Helpers/ColumnNormalizer.php	/^class ColumnNormalizer$/;"	c
 Controller	app/Http/Controllers/Controller.php	/^class Controller extends BaseController$/;"	c
 CreateAgentPhotosTable	database/migrations/2017_10_27_153518_create_agent_photos_table.php	/^class CreateAgentPhotosTable extends Migration$/;"	c
 CreateAgentsTable	database/migrations/2017_10_27_140524_create_agents_table.php	/^class CreateAgentsTable extends Migration$/;"	c
@@ -100,6 +102,7 @@ __construct	app/Cleaners/BcarCleaner.php	/^    public function __construct()$/;"
 __construct	app/Cleaners/Cleaner.php	/^    public function __construct()$/;"	f
 __construct	app/Cleaners/EcarCleaner.php	/^    public function __construct()$/;"	f
 __construct	app/Helpers/Builder.php	/^    public function __construct($association)$/;"	f
+__construct	app/Helpers/ColumnNormalizer.php	/^    public function __construct($association)$/;"	f
 __construct	app/Http/Controllers/Auth/ForgotPasswordController.php	/^    public function __construct()$/;"	f
 __construct	app/Http/Controllers/Auth/LoginController.php	/^    public function __construct()$/;"	f
 __construct	app/Http/Controllers/Auth/RegisterController.php	/^    public function __construct()$/;"	f
@@ -141,6 +144,8 @@ a_listing_is_searchable_by_subdivision	tests/Feature/SearchListingsTest.php	/^  
 a_listing_is_searchable_by_zip	tests/Feature/SearchListingsTest.php	/^    public function a_listing_is_searchable_by_zip()$/;"	f
 a_listing_will_not_build_an_invalid_address	tests/Unit/ListingTest.php	/^    \/\/ public function a_listing_will_not_build_an_invalid_address()$/;"	f
 a_photo_belongs_to_a_listing	tests/Unit/PhotoTest.php	/^    public function a_photo_belongs_to_a_listing()$/;"	f
+acreage	app/Helpers/ColumnNormalizer.php	/^        $this->acreage           = $result['LIST_57'] > 0 ? $result['LIST_57']: 0;$/;"	v
+acreage	app/Helpers/ColumnNormalizer.php	/^    public $acreage;$/;"	v
 acreage	app/Helpers/ListingsHelper.php	/^        $acreage              = $result['LIST_57'] > 0 ? $result['LIST_57'] : 0;$/;"	v
 acreage	app/Listing.php	/^        $acreage      = $request->acreage ?? '';$/;"	v
 acreage	app/MapSearch.php	/^        $acreage      = $request->acreage ?? '';$/;"	v
@@ -159,12 +164,16 @@ agent	app/Updaters/AgentsUpdater.php	/^        $agent = Agent::byMlsId($mlsId);$
 agent	tests/Feature/SearchAgentsTest.php	/^        $agent = create('App\\Agent',$/;"	v
 agent	tests/Unit/AgentsTest.php	/^        $agent = create('App\\Agent');$/;"	v
 agentShortId	app/Http/Controllers/AgentListingsController.php	/^        $agentShortId = isset($request->agentId) && $request->agentId != '' ? $request->agentId : 'xxxx';$/;"	v
+agent_id	app/Helpers/ColumnNormalizer.php	/^        $this->agent_id          = $result['LIST_5'];$/;"	v
+agent_id	app/Helpers/ColumnNormalizer.php	/^    public $agent_id;$/;"	v
 agents	app/Agent.php	/^        $agents = Agent::when($shortId, function ($query) use ($shortId) {$/;"	v
 agents	app/Http/Controllers/AgentSearchController.php	/^        $agents = Agent::searchResults($request);$/;"	v
 agents	tests/Feature/SearchAgentsTest.php	/^        $agents = factory('App\\Agent', 2)->create();$/;"	v
 aliases	config/app.php	/^    | This array of class aliases will be registered when this application$/;"	c
 all	app/Helpers/BcarOptions.php	/^    public static function all($offset = 1)$/;"	f
 all	app/Helpers/EcarOptions.php	/^    public static function all($offset = 1)$/;"	f
+amenities	app/Helpers/ColumnNormalizer.php	/^        $this->amenities                = $result['GF20150204172056869833000000'];$/;"	v
+amenities	app/Helpers/ColumnNormalizer.php	/^    public $amenities;$/;"	v
 an_agent_has_photos	tests/Unit/AgentsTest.php	/^    public function an_agent_has_photos()$/;"	f
 an_agent_is_searchable_by_association	tests/Feature/SearchAgentsTest.php	/^    public function an_agent_is_searchable_by_association()$/;"	f
 an_agent_is_searchable_by_full_name	tests/Feature/SearchAgentsTest.php	/^    public function an_agent_is_searchable_by_full_name()$/;"	f
@@ -172,13 +181,19 @@ an_agent_is_searchable_by_full_name_even_if_the_full_name_is_not_in_the_database
 an_agent_is_searchable_by_last_name	tests/Feature/SearchAgentsTest.php	/^    public function an_agent_is_searchable_by_last_name()$/;"	f
 an_agent_is_searchable_by_office_short_id	tests/Feature/SearchAgentsTest.php	/^    public function an_agent_is_searchable_by_office_short_id()$/;"	f
 an_agent_is_searchable_by_short_id	tests/Feature/SearchAgentsTest.php	/^    public function an_agent_is_searchable_by_short_id()$/;"	f
+apn	app/Helpers/ColumnNormalizer.php	/^        $this->apn               = $result['LIST_80'];$/;"	v
+apn	app/Helpers/ColumnNormalizer.php	/^    public $apn;$/;"	v
 app	bootstrap/app.php	/^$app = new Illuminate\\Foundation\\Application($/;"	v
 app	public/index.php	/^$app = require_once __DIR__.'\/..\/bootstrap\/app.php';$/;"	v
 app	tests/CreatesApplication.php	/^        $app = require __DIR__.'\/..\/bootstrap\/app.php';$/;"	v
+appliances	app/Helpers/ColumnNormalizer.php	/^        $this->appliances               = $result['GF20150204172056907082000000'];$/;"	v
+appliances	app/Helpers/ColumnNormalizer.php	/^    public $appliances;$/;"	v
 appliances	app/Helpers/ListingsHelper.php	/^            $appliances           = $result['GF20131203203523234694000000'];$/;"	v
 appliances	app/Helpers/ListingsHelper.php	/^            $appliances           = $result['GF20131230164912692795000000'];$/;"	v
 appliances	app/Helpers/ListingsHelper.php	/^            $appliances           = $result['GF20131230211343236208000000'];$/;"	v
 appliances	app/Helpers/ListingsHelper.php	/^        $appliances           = null;$/;"	v
+area	app/Helpers/ColumnNormalizer.php	/^        $this->area              = preg_replace('\/^[0-9]* ?- ?\/', '', $result['LIST_29']);$/;"	v
+area	app/Helpers/ColumnNormalizer.php	/^    public $area;$/;"	v
 areas	app/Omnibar.php	/^        $areas        = Listing::getColumn($searchTerm, 'area');$/;"	v
 argRE	public/js/app.js	/^var argRE = \/:(.*)$\/;$/;"	v
 as	config/mail.php	/^    | Laravel supports both SMTP and PHP's "mail" function as drivers for the$/;"	f
@@ -191,6 +206,8 @@ association	app/Cleaners/EcarCleaner.php	/^        $this->association = 'ecar';$
 association	app/Cleaners/EcarCleaner.php	/^    protected $association;$/;"	v
 association	app/Helpers/Builder.php	/^        $this->association = $association;$/;"	v
 association	app/Helpers/Builder.php	/^    protected $association;$/;"	v
+association	app/Helpers/ColumnNormalizer.php	/^        $this->association = $association;$/;"	v
+association	app/Helpers/ColumnNormalizer.php	/^    public $association;$/;"	v
 association	app/Updaters/AgentsUpdater.php	/^        $this->association = $association;$/;"	v
 association	app/Updaters/AgentsUpdater.php	/^    protected $association;$/;"	v
 association	app/Updaters/ListingsUpdater.php	/^        $this->association = $association;$/;"	v
@@ -203,8 +220,9 @@ attrs.name	public/js/app.js	/^        name: args[1],$/;"	p
 attrs.name	public/js/app.js	/^        name: el.attrsList[i].name,$/;"	p
 baseUri	tests/TestCase.php	/^        $this->baseUri = '\/api\/v1';$/;"	v
 baseUri	tests/TestCase.php	/^    protected $baseUri;$/;"	v
+bathrooms	app/Helpers/ColumnNormalizer.php	/^        $this->bathrooms         = isset($result['LIST_67']) ? $result['LIST_67']: 0;$/;"	v
+bathrooms	app/Helpers/ColumnNormalizer.php	/^    public $bathrooms;$/;"	v
 bathrooms	app/Helpers/ListingsHelper.php	/^        $bathrooms            = isset($result['LIST_67']) && is_numeric($result['LIST_67']) ? $result['LIST_67'] : 0;$/;"	v
-bathrooms	app/Helpers/ListingsHelper.php	/^        $bathrooms            = isset($result['LIST_67']) ? $result['LIST_67'] : 0;$/;"	v
 baths	app/Listing.php	/^        $baths        = $request->bathrooms ?? '';$/;"	v
 baths	app/MapSearch.php	/^        $baths        = $request->bathrooms ?? '';$/;"	v
 bcar	tests/Feature/SearchAgentsTest.php	/^        $bcar = create('App\\Agent', ['association' => 'bcar']);$/;"	v
@@ -212,8 +230,9 @@ bcarLoginUrl	app/ApiCall.php	/^    private function bcarLoginUrl()$/;"	f
 bcarOptions	app/Helpers/BcarOptions.php	/^        $bcarOptions = [$/;"	v
 bcarPassword	app/ApiCall.php	/^    private function bcarPassword()$/;"	f
 bcarUserName	app/ApiCall.php	/^    private function bcarUserName()$/;"	f
+bedrooms	app/Helpers/ColumnNormalizer.php	/^        $this->bedrooms          = isset($result['LIST_66']) ? $result['LIST_66']: 0;$/;"	v
+bedrooms	app/Helpers/ColumnNormalizer.php	/^    public $bedrooms;$/;"	v
 bedrooms	app/Helpers/ListingsHelper.php	/^        $bedrooms             = isset($result['LIST_66']) && is_numeric($result['LIST_66']) ? $result['LIST_66'] : 0;$/;"	v
-bedrooms	app/Helpers/ListingsHelper.php	/^        $bedrooms             = isset($result['LIST_66']) ? $result['LIST_66'] : 0;$/;"	v
 beds	app/Listing.php	/^        $beds         = $request->bedrooms ?? '';$/;"	v
 beds	app/MapSearch.php	/^        $beds         = $request->bedrooms ?? '';$/;"	v
 bindRE	public/js/app.js	/^var bindRE = \/^:|^v-bind:\/;$/;"	v
@@ -231,9 +250,13 @@ byMlsNumber	app/Listing.php	/^    public static function byMlsNumber($mlsNumber)
 channel.port1.onmessage	public/js/app.js	/^        channel.port1.onmessage = function(event) {$/;"	f
 checkInFor	public/js/app.js	/^function checkInFor (el) {$/;"	f
 cities	app/Omnibar.php	/^        $cities       = Listing::getColumn($searchTerm, 'city');$/;"	v
+city	app/Helpers/ColumnNormalizer.php	/^        $this->city              = $result['LIST_39'];$/;"	v
+city	app/Helpers/ColumnNormalizer.php	/^    public $city;$/;"	v
 city	app/Listing.php	/^        $city         = $request->city ?? '';$/;"	v
 city	app/Listing.php	/^        $city         = $this->city;$/;"	v
 city	app/MapSearch.php	/^        $city         = $request->city ?? '';$/;"	v
+class	app/Helpers/ColumnNormalizer.php	/^        $this->class             = $result['LIST_8'];$/;"	v
+class	app/Helpers/ColumnNormalizer.php	/^    public $class;$/;"	v
 classArray	app/Cleaners/Cleaner.php	/^        $this->classArray  = $this->association == 'bcar' ?$/;"	v
 classArray	app/Cleaners/Cleaner.php	/^    protected $classArray;$/;"	v
 classArray	app/Helpers/Builder.php	/^        $this->classArray  = $this->association == 'bcar' ?$/;"	v
@@ -246,11 +269,20 @@ clean	app/Cleaners/EcarCleaner.php	/^    public function clean()$/;"	f
 clean	app/Cleaners/OpenHouseCleaner.php	/^    public function clean()$/;"	f
 click	app/Jobs/ProcessListingClick.php	/^        $click = Click::where('listing_id', $this->listing->id)$/;"	v
 clicks	app/Listing.php	/^    public function clicks()$/;"	f
+colist_agent_id	app/Helpers/ColumnNormalizer.php	/^        $this->colist_agent_id   = $result['LIST_6'];$/;"	v
+colist_agent_id	app/Helpers/ColumnNormalizer.php	/^    public $colist_agent_id;$/;"	v
+colist_office_id	app/Helpers/ColumnNormalizer.php	/^        $this->colist_office_id  = $result['LIST_165'];$/;"	v
+colist_office_id	app/Helpers/ColumnNormalizer.php	/^    public $colist_office_id;$/;"	v
+colisting_member_shortid	app/Helpers/ColumnNormalizer.php	/^        $this->colisting_member_shortid = $result['colisting_member_shortid'];$/;"	v
+colisting_member_shortid	app/Helpers/ColumnNormalizer.php	/^    public $colisting_member_shortid;$/;"	v
+columns	app/Helpers/ListingsHelper.php	/^        $columns            = new ColumnNormalizer(Associations::BCAR);$/;"	v
 commands	app/Console/Kernel.php	/^    protected $commands = [$/;"	v
 commands	app/Console/Kernel.php	/^    protected function commands()$/;"	f
 comment	public/js/app.js	/^var comment = \/^<!--\/;$/;"	v
 conditionalComment	public/js/app.js	/^var conditionalComment = \/^<!\\[\/;$/;"	v
 config	app/ApiCall.php	/^        $config = new Configuration();$/;"	v
+construction	app/Helpers/ColumnNormalizer.php	/^        $this->construction             = $result['GF20150204172056790876000000'];$/;"	v
+construction	app/Helpers/ColumnNormalizer.php	/^    public $construction;$/;"	v
 construction	app/Helpers/ListingsHelper.php	/^            $construction         = $result['GF20131203203446527084000000'];$/;"	v
 construction	app/Helpers/ListingsHelper.php	/^            $construction         = $result['GF20131230164913256545000000'];$/;"	v
 construction	app/Helpers/ListingsHelper.php	/^            $construction         = $result['GF20131231201806058732000000'];$/;"	v
@@ -266,6 +298,8 @@ createApplication	tests/CreatesApplication.php	/^    public function createAppli
 data	app/Omnibar.php	/^        $data         = [];$/;"	v
 dateLastModified	app/Updaters/AgentsUpdater.php	/^        $dateLastModified = $this->getLastModifiedDate('agents');$/;"	v
 dateLastModified	app/Updaters/ListingsUpdater.php	/^        $dateLastModified = $this->getLastModifiedDate('listings');$/;"	v
+date_modified	app/Helpers/ColumnNormalizer.php	/^        $this->date_modified     = $result['LIST_87'];$/;"	v
+date_modified	app/Helpers/ColumnNormalizer.php	/^    public $date_modified;$/;"	v
 decodeAttr	public/js/app.js	/^function decodeAttr (value, shouldDecodeNewlines) {$/;"	f
 decodeHTMLCached	public/js/app.js	/^var decodeHTMLCached = cached(he.decode);$/;"	v
 decodingMap.&#10;	public/js/app.js	/^  '&#10;': '\\n'$/;"	p
@@ -277,8 +311,12 @@ delete	app/Updaters/ListingsUpdater.php	/^    protected function delete($photos)
 deletedListings	app/Cleaners/EcarCleaner.php	/^        $deletedListings = array_diff($listings->toArray(), $listingsArray);$/;"	v
 delimiters	public/js/app.js	/^var delimiters;$/;"	v
 derivedFullName	app/Agent.php	/^        $derivedFullName = $fullName != null ? explode(' ', $fullName) : ''; \/\/ Array(['First', 'Last'])$/;"	v
+description	app/Helpers/ColumnNormalizer.php	/^        $this->description       = $result['LIST_78'];$/;"	v
+description	app/Helpers/ColumnNormalizer.php	/^    public $description;$/;"	v
 destroy	app/Http/Controllers/AgentController.php	/^    public function destroy(Agent $agent)$/;"	f
 dirRE	public/js/app.js	/^var dirRE = \/^v-|^@|^:\/;$/;"	v
+directions	app/Helpers/ColumnNormalizer.php	/^        $this->directions        = $result['LIST_82'];$/;"	v
+directions	app/Helpers/ColumnNormalizer.php	/^    public $directions;$/;"	v
 doctype	public/js/app.js	/^var doctype = \/^<!DOCTYPE [^>]+>\/i;$/;"	v
 dontFlash	app/Exceptions/Handler.php	/^    protected $dontFlash = [$/;"	v
 dontReport	app/Exceptions/Handler.php	/^    protected $dontReport = [$/;"	v
@@ -304,16 +342,22 @@ ecarOptions	app/Helpers/EcarOptions.php	/^        $ecarOptions = [$/;"	v
 ecarPassword	app/ApiCall.php	/^    private function ecarPassword()$/;"	f
 ecarUserName	app/ApiCall.php	/^    private function ecarUserName()$/;"	f
 edit	app/Http/Controllers/AgentController.php	/^    public function edit(Agent $agent)$/;"	f
+elementary_school	app/Helpers/ColumnNormalizer.php	/^        $this->elementary_school = $result['LIST_88'];$/;"	v
+elementary_school	app/Helpers/ColumnNormalizer.php	/^    public $elementary_school;$/;"	v
 encodedAttr	public/js/app.js	/^var encodedAttr = \/&(?:lt|gt|quot|amp);\/g;$/;"	v
 encodedAttrWithNewLines	public/js/app.js	/^var encodedAttrWithNewLines = \/&(?:lt|gt|quot|amp|#10);\/g;$/;"	v
 energyFeatures	app/Helpers/ListingsHelper.php	/^            $energyFeatures       = $result['GF20131203185526796706000000'];$/;"	v
 energyFeatures	app/Helpers/ListingsHelper.php	/^            $energyFeatures       = $result['GF20131230164913550188000000'];$/;"	v
 energyFeatures	app/Helpers/ListingsHelper.php	/^        $energyFeatures       = null;$/;"	v
+energy_features	app/Helpers/ColumnNormalizer.php	/^        $this->energy_features          = $result['GF20150204172056617468000000'];$/;"	v
+energy_features	app/Helpers/ColumnNormalizer.php	/^    public $energy_features;$/;"	v
 eventId	app/Updaters/OpenHousesUpdater.php	/^        $eventId   = $result['EVENT0'];$/;"	v
 except	app/Http/Middleware/EncryptCookies.php	/^    protected $except = [$/;"	v
 except	app/Http/Middleware/TrimStrings.php	/^    protected $except = [$/;"	v
 except	app/Http/Middleware/VerifyCsrfToken.php	/^    protected $except = [$/;"	v
 expiredOpenHouses	app/Cleaners/OpenHouseCleaner.php	/^        $expiredOpenHouses = OpenHouse::where('event_end', '<=', $now)->get();$/;"	v
+exterior	app/Helpers/ColumnNormalizer.php	/^        $this->exterior                 = $result['GF20150204172056829043000000'];$/;"	v
+exterior	app/Helpers/ColumnNormalizer.php	/^    public $exterior;$/;"	v
 exterior	app/Helpers/ListingsHelper.php	/^            $exterior             = $result['GF20131203203501805928000000'];$/;"	v
 exterior	app/Helpers/ListingsHelper.php	/^            $exterior             = $result['GF20131230164914069211000000'];$/;"	v
 exterior	app/Helpers/ListingsHelper.php	/^        $exterior             = null;$/;"	v
@@ -342,6 +386,9 @@ fullListing	app/Cleaners/BcarCleaner.php	/^                $fullListing = Listin
 fullListing	app/Cleaners/EcarCleaner.php	/^            $fullListing = Listing::where('mls_account', $listing)->first();$/;"	v
 fullName	app/Agent.php	/^        $fullName        = $request->fullName ?? '';$/;"	v
 fullName	database/factories/AgentFactory.php	/^    $fullName     = $firstName . ' ' . $lastName;$/;"	v
+full_address	app/Helpers/ColumnNormalizer.php	/^    public $full_address;$/;"	v
+full_baths	app/Helpers/ColumnNormalizer.php	/^        $this->full_baths        = isset($result['LIST_68']) ? $result['LIST_68']: 0;$/;"	v
+full_baths	app/Helpers/ColumnNormalizer.php	/^    public $full_baths;$/;"	v
 getAllListings	app/MapSearch.php	/^    public static function getAllListings($request)$/;"	f
 getColumn	app/Listing.php	/^    public static function getColumn($searchTerm, $columnName)$/;"	f
 getLastModifiedDate	app/Updaters/Updater.php	/^    protected function getLastModifiedDate($table)$/;"	f
@@ -364,6 +411,8 @@ guarded	app/OpenHouse.php	/^    protected $guarded = [];$/;"	v
 guarded	app/Photo.php	/^    protected $guarded = [];$/;"	v
 guarded	app/SearchQuery.php	/^    protected $guarded = [];$/;"	v
 halfBaths	app/Helpers/ListingsHelper.php	/^        $halfBaths            = $result['LIST_69'] > 0 ? $result['LIST_69'] : 0;$/;"	v
+half_baths	app/Helpers/ColumnNormalizer.php	/^        $this->half_baths        = $result['LIST_69'] > 0 ? $result['LIST_69']: 0;$/;"	v
+half_baths	app/Helpers/ColumnNormalizer.php	/^    public $half_baths;$/;"	v
 handle	app/Http/Middleware/RedirectIfAuthenticated.php	/^    public function handle($request, Closure $next, $guard = null)$/;"	f
 handle	app/Jobs/CleanBcar.php	/^    public function handle()$/;"	f
 handle	app/Jobs/CleanEcar.php	/^    public function handle()$/;"	f
@@ -380,6 +429,8 @@ handleResult	app/Updaters/ListingsUpdater.php	/^    protected function handleRes
 handleResult	app/Updaters/OpenHousesUpdater.php	/^    protected function handleResult($result)$/;"	f
 headers	app/Http/Middleware/TrustProxies.php	/^    protected $headers = [$/;"	v
 hidden	app/User.php	/^    protected $hidden = [$/;"	v
+high_school	app/Helpers/ColumnNormalizer.php	/^        $this->high_school       = $result['LIST_90'];$/;"	v
+high_school	app/Helpers/ColumnNormalizer.php	/^    public $high_school;$/;"	v
 highestToLowest	tests/Feature/SearchListingsTest.php	/^        $highestToLowest = \\App\\Listing::orderBy('date_modified', 'DESC')->pluck('id');$/;"	v
 highestToLowest	tests/Feature/SearchListingsTest.php	/^        $highestToLowest = \\App\\Listing::orderBy('price', 'DESC')->pluck('id');$/;"	v
 idList	app/Helpers/EcarOptions.php	/^    public static function idList($offset = 1)$/;"	f
@@ -400,11 +451,12 @@ installPostMessageImplementation	public/js/app.js	/^    function installPostMess
 installPostMessageImplementation.onGlobalMessage	public/js/app.js	/^        var onGlobalMessage = function(event) {$/;"	f
 installReadyStateChangeImplementation	public/js/app.js	/^    function installReadyStateChangeImplementation() {$/;"	f
 installSetTimeoutImplementation	public/js/app.js	/^    function installSetTimeoutImplementation() {$/;"	f
+interior	app/Helpers/ColumnNormalizer.php	/^            $this->interior              = $result['GF20150204172056617468000000'];$/;"	v
+interior	app/Helpers/ColumnNormalizer.php	/^            $this->interior              = $result['GF20150204172058417689000000'];$/;"	v
+interior	app/Helpers/ColumnNormalizer.php	/^    public $interior;$/;"	v
 interior	app/Helpers/ListingsHelper.php	/^            $interior             = $result['GF20131203203513863218000000'];$/;"	v
 interior	app/Helpers/ListingsHelper.php	/^            $interior             = $result['GF20131230164914843719000000'];$/;"	v
 interior	app/Helpers/ListingsHelper.php	/^            $interior             = $result['GF20131230211344214865000000'];$/;"	v
-interior	app/Helpers/ListingsHelper.php	/^            $interior             = $result['GF20150204172056617468000000'];$/;"	v
-interior	app/Helpers/ListingsHelper.php	/^            $interior             = $result['GF20150204172058417689000000'];$/;"	v
 interior	app/Helpers/ListingsHelper.php	/^        $interior             = null;$/;"	v
 isIgnoreNewlineTag	public/js/app.js	/^var isIgnoreNewlineTag = makeMap('pre,textarea', true);$/;"	v
 isPlainTextElement	public/js/app.js	/^var isPlainTextElement = makeMap('script,style,textarea', true);$/;"	v
@@ -440,15 +492,20 @@ isTextTag.preTransformNode	public/js/app.js	/^function preTransformNode (el, opt
 isTextTag.text	public/js/app.js	/^function text (el, dir) {$/;"	f
 k	app/Jobs/ProcessSearch.php	/^        foreach ($this->request as $k => $v) {$/;"	v
 kernel	public/index.php	/^$kernel = $app->make(Illuminate\\Contracts\\Http\\Kernel::class);$/;"	v
+key	app/Helpers/ListingsHelper.php	/^        foreach ($columns as $key => $value) {$/;"	v
 key	tests/Feature/SearchListingsTest.php	/^        foreach ($queries as $key => $value) {$/;"	v
 lastModified	app/Updaters/OpenHousesUpdater.php	/^        $lastModified = $this->getLastModifiedDate('open_houses');$/;"	v
 lastModified	app/Updaters/Updater.php	/^        $lastModified = Carbon::parse($/;"	v
 lastName	app/Agent.php	/^        $lastName        = $request->lastName ?? '';$/;"	v
 lastName	database/factories/AgentFactory.php	/^    $lastName     = $faker->lastName;$/;"	v
 lastTaxYear	app/Helpers/ListingsHelper.php	/^        $lastTaxYear          = $result['LIST_76'] > 0 && is_numeric($result['LIST_76']) && $result['LIST_76'] < 9999 ? $result['LIST_76'] : 0;$/;"	v
-lastTaxYear	app/Helpers/ListingsHelper.php	/^        $lastTaxYear          = $result['LIST_76'] > 0 ? $result['LIST_76'] : 0;$/;"	v
 lastTaxes	app/Helpers/ListingsHelper.php	/^        $lastTaxes            = $result['LIST_75'] > 0 && is_numeric($result['LIST_75']) ? $result['LIST_75'] : 0;$/;"	v
-lastTaxes	app/Helpers/ListingsHelper.php	/^        $lastTaxes            = $result['LIST_75'] > 0 ? $result['LIST_75'] : 0;$/;"	v
+last_tax_year	app/Helpers/ColumnNormalizer.php	/^        $this->last_tax_year     = $result['LIST_76'] > 0 ? $result['LIST_76']: 0;$/;"	v
+last_tax_year	app/Helpers/ColumnNormalizer.php	/^    public $last_tax_year;$/;"	v
+last_taxes	app/Helpers/ColumnNormalizer.php	/^        $this->last_taxes        = $result['LIST_75'] > 0 ? $result['LIST_75']: 0;$/;"	v
+last_taxes	app/Helpers/ColumnNormalizer.php	/^    public $last_taxes;$/;"	v
+latitude	app/Helpers/ColumnNormalizer.php	/^        $this->latitude          = is_numeric($result['LIST_46']) ? $result['LIST_46']: 0;$/;"	v
+latitude	app/Helpers/ColumnNormalizer.php	/^    public $latitude;$/;"	v
 latitude	app/Helpers/ListingsHelper.php	/^        $latitude             = is_numeric($result['LIST_46']) ? $result['LIST_46'] : 0;$/;"	v
 listen	app/Providers/EventServiceProvider.php	/^    protected $listen = [$/;"	v
 listing	app/Click.php	/^    public function listing()$/;"	f
@@ -470,6 +527,7 @@ listing	app/Updaters/ListingsUpdater.php	/^        $listing = Listing::byMlsNumb
 listing	database/factories/PhotoFactory.php	/^    $listing = factory('App\\Listing')->create();$/;"	v
 listing	tests/Unit/ListingTest.php	/^        $listing = create('App\\Listing');$/;"	v
 listing	tests/Unit/ListingTest.php	/^    \/\/     $listing = create('App\\Listing', [$/;"	v
+listingColumnArray	app/Helpers/ListingsHelper.php	/^        $listingColumnArray = [];$/;"	v
 listingCounter	app/Cleaners/BcarCleaner.php	/^                $listingCounter = $listingCounter + 1;$/;"	v
 listingCounter	app/Cleaners/BcarCleaner.php	/^        $listingCounter = 0;$/;"	v
 listingCounter	app/Cleaners/EcarCleaner.php	/^            $listingCounter = $listingCounter + 1;$/;"	v
@@ -477,6 +535,8 @@ listingCounter	app/Cleaners/EcarCleaner.php	/^        $listingCounter = 0;$/;"	v
 listingId	app/Cleaners/EcarCleaner.php	/^            $listingId = $fullListing->id;$/;"	v
 listingId	app/Helpers/ListingsHelper.php	/^    public static function saveListing($association, $result, $class, $listingId = -1)$/;"	v
 listingIds	app/Cleaners/BcarCleaner.php	/^        $listingIds     = Listing::where('association', $this->association)->pluck('mls_account');$/;"	v
+listing_member_shortid	app/Helpers/ColumnNormalizer.php	/^        $this->listing_member_shortid   = $result['listing_member_shortid'];$/;"	v
+listing_member_shortid	app/Helpers/ColumnNormalizer.php	/^    public $listing_member_shortid;$/;"	v
 listings	app/Cleaners/EcarCleaner.php	/^        $listings = Listing::where('association', 'ecar')->pluck('mls_account');$/;"	v
 listings	app/Helpers/Builder.php	/^            $listings = Listing::where('class', $class)->where('association', $this->association)->get();$/;"	v
 listings	app/Http/Controllers/AgentListingsController.php	/^        $listings = Listing::forAgent($agentShortId);$/;"	v
@@ -512,9 +572,13 @@ loader	public/index.php	/^| Composer provides a convenient, automatically genera
 localMlsNumbers	app/Updaters/ListingsUpdater.php	/^        $localMlsNumbers  = DB::table('listings')->pluck('mls_account')->toArray();$/;"	v
 login	app/ApiCall.php	/^    public function login()$/;"	f
 loginUrl	app/ApiCall.php	/^        $this->loginUrl    = $this->association == 'bcar' ? $this->bcarLoginUrl() : $this->ecarLoginUrl();$/;"	v
+longitude	app/Helpers/ColumnNormalizer.php	/^        $this->longitude         = is_numeric($result['LIST_47']) ? $result['LIST_47']: 0;$/;"	v
+longitude	app/Helpers/ColumnNormalizer.php	/^    public $longitude;$/;"	v
 longitude	app/Helpers/ListingsHelper.php	/^        $longitude            = is_numeric($result['LIST_47']) ? $result['LIST_47'] : 0;$/;"	v
 loop	storage/framework/views/f4fa2ecd83b38afeefbb3ae148cd46e820b1c147.php	/^                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>$/;"	v
 loop	storage/framework/views/f4fa2ecd83b38afeefbb3ae148cd46e820b1c147.php	/^        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>$/;"	v
+lot_dimensions	app/Helpers/ColumnNormalizer.php	/^        $this->lot_dimensions    = $result['LIST_56'];$/;"	v
+lot_dimensions	app/Helpers/ColumnNormalizer.php	/^    public $lot_dimensions;$/;"	v
 lowestToHighest	tests/Feature/SearchListingsTest.php	/^        $lowestToHighest = \\App\\Listing::orderBy('date_modified', 'ASC')->pluck('id');$/;"	v
 lowestToHighest	tests/Feature/SearchListingsTest.php	/^        $lowestToHighest = \\App\\Listing::orderBy('price', 'ASC')->pluck('id');$/;"	v
 make	tests/utilities/functions.php	/^function make($class, $attributes = [])$/;"	f
@@ -528,6 +592,8 @@ maxRowsReached	app/Helpers/Builder.php	/^                $maxRowsReached = true;
 maxRowsReached	app/Helpers/Builder.php	/^        $maxRowsReached = false;$/;"	v
 maxRowsReached	app/Updaters/ListingsUpdater.php	/^                $maxRowsReached = true;$/;"	v
 maxRowsReached	app/Updaters/ListingsUpdater.php	/^        $maxRowsReached   = false;$/;"	v
+middle_school	app/Helpers/ColumnNormalizer.php	/^        $this->middle_school     = $result['LIST_89'];$/;"	v
+middle_school	app/Helpers/ColumnNormalizer.php	/^    public $middle_school;$/;"	v
 middleware	app/Http/Kernel.php	/^    protected $middleware = [$/;"	v
 middlewareGroups	app/Http/Kernel.php	/^    protected $middlewareGroups = [$/;"	v
 minPrice	app/Listing.php	/^        $minPrice     = $request->minPrice ?? '';$/;"	v
@@ -542,6 +608,8 @@ mlsArray	app/Listing.php	/^        $mlsArray = explode('|', $mlsNumbers);$/;"	v
 mlsId	app/Updaters/AgentsUpdater.php	/^        $mlsId = $result['MEMBER_0'];$/;"	v
 mlsNumber	app/Updaters/ListingsUpdater.php	/^        $mlsNumber = $result['LIST_3'];$/;"	v
 mlsNumbers	app/Omnibar.php	/^        $mlsNumbers   = Listing::getColumn($searchTerm, 'mls_account');$/;"	v
+mls_account	app/Helpers/ColumnNormalizer.php	/^        $this->mls_account       = $result['LIST_3'];$/;"	v
+mls_account	app/Helpers/ColumnNormalizer.php	/^    public $mls_account;$/;"	v
 modifierRE	public/js/app.js	/^var modifierRE = \/\\.[^.]+\/g;$/;"	v
 module.exports.colors	tailwind.js	/^  colors: colors,$/;"	p
 module.exports.screens	tailwind.js	/^  screens: {$/;"	p
@@ -552,6 +620,8 @@ newPhotos	app/Updaters/ListingsUpdater.php	/^            $newPhotos  = $this->ge
 now	app/Cleaners/OpenHouseCleaner.php	/^        $now = Carbon::now();$/;"	v
 now	app/Helpers/Builder.php	/^        $now = Carbon::now()->toAtomString();$/;"	v
 officeShortId	app/Agent.php	/^        $officeShortId   = $request->officeShortId ?? '';$/;"	v
+office_id	app/Helpers/ColumnNormalizer.php	/^        $this->office_id         = $result['LIST_106'];$/;"	v
+office_id	app/Helpers/ColumnNormalizer.php	/^    public $office_id;$/;"	v
 offset	app/Cleaners/EcarCleaner.php	/^            $offset = 0;$/;"	v
 offset	app/Helpers/Builder.php	/^        $offset         = 0;$/;"	v
 offset	app/Helpers/Builder.php	/^        $offset = 0;$/;"	v
@@ -613,6 +683,8 @@ pool	app/MapSearch.php	/^        $pool         = $request->pool ?? '';$/;"	v
 postTransforms	public/js/app.js	/^var postTransforms;$/;"	v
 preTransforms	public/js/app.js	/^var preTransforms;$/;"	v
 preferredPhotoUrl	app/Photo.php	/^    protected static function preferredPhotoUrl($listingId)$/;"	f
+price	app/Helpers/ColumnNormalizer.php	/^        $this->price             = is_numeric($result['LIST_22']) ? $result['LIST_22']: 0;$/;"	v
+price	app/Helpers/ColumnNormalizer.php	/^    public $price;$/;"	v
 price	app/Helpers/ListingsHelper.php	/^        $price                = is_numeric($result['LIST_22']) ? $result['LIST_22'] : 0;$/;"	v
 processAttrs	public/js/app.js	/^function processAttrs (el) {$/;"	f
 processComponent	public/js/app.js	/^function processComponent (el) {$/;"	f
@@ -632,8 +704,11 @@ propertyType	app/Listing.php	/^        $propertyType = $request->propertyType ??
 propertyType	app/MapSearch.php	/^            $propertyType = explode('|', $propertyType);$/;"	v
 propertyType	app/MapSearch.php	/^        $propertyType = $request->propertyType ?? '';$/;"	v
 propertyType	tests/Feature/SearchListingsTest.php	/^        $propertyType = implode('|', getPropertyTypes('Single Family Home'));$/;"	v
+property_type	app/Helpers/ColumnNormalizer.php	/^        $this->property_type     = $result['LIST_9'];$/;"	v
+property_type	app/Helpers/ColumnNormalizer.php	/^    public $property_type;$/;"	v
 proxies	app/Http/Middleware/TrustProxies.php	/^    protected $proxies;$/;"	v
 qnameCapture	public/js/app.js	/^var qnameCapture = "((?:" + ncname + "\\\\:)?" + ncname + ")";$/;"	v
+rebuild	app/Helpers/Builder.php	/^    public function rebuild()$/;"	f
 redirectTo	app/Http/Controllers/Auth/LoginController.php	/^    protected $redirectTo = '\/home';$/;"	v
 redirectTo	app/Http/Controllers/Auth/RegisterController.php	/^    protected $redirectTo = '\/home';$/;"	v
 redirectTo	app/Http/Controllers/Auth/ResetPasswordController.php	/^    protected $redirectTo = '\/home';$/;"	v
@@ -700,7 +775,7 @@ run	database/seeds/DatabaseSeeder.php	/^    public function run()$/;"	f
 saveListing	app/Helpers/ListingsHelper.php	/^    public static function saveListing($association, $result, $class, $listingId = -1)$/;"	f
 savePhotos	app/AgentPhoto.php	/^    public static function savePhotos($agent, $photos)$/;"	f
 savePhotos	app/Photo.php	/^    public static function savePhotos($listing, $photos)$/;"	f
-savedListing	app/Helpers/ListingsHelper.php	/^        $savedListing = $association == 'bcar' ?$/;"	v
+savedListing	app/Helpers/ListingsHelper.php	/^        $savedListing = $association == Associations::BCAR ?$/;"	v
 schedule	app/Console/Kernel.php	/^    protected function schedule(Schedule $schedule)$/;"	f
 script.onreadystatechange	public/js/app.js	/^            script.onreadystatechange = function () {$/;"	f
 searchFor	tests/Feature/SearchListingsTest.php	/^    public function searchFor($queries)$/;"	f
@@ -711,6 +786,9 @@ searchResults	app/Agent.php	/^    public static function searchResults($request)
 searchResults	app/Listing.php	/^    public static function searchResults($request)$/;"	f
 searchTerm	app/Http/Controllers/OmnibarController.php	/^        $searchTerm = urldecode(str_replace('%^%', '', $request->search));$/;"	v
 secondListing	tests/Feature/SearchListingsTest.php	/^        $this->secondListing = create($/;"	v
+setBcarColumns	app/Helpers/ColumnNormalizer.php	/^    public function setBcarColumns($result)$/;"	f
+setColumns	app/Helpers/ColumnNormalizer.php	/^    public function setColumns($result)$/;"	f
+setStaticColumns	app/Helpers/ColumnNormalizer.php	/^    public function setStaticColumns($result)$/;"	f
 setUp	tests/Feature/SearchAgentsTest.php	/^    public function setUp()$/;"	f
 setUp	tests/Feature/SearchListingsTest.php	/^    protected function setUp()$/;"	f
 setUp	tests/TestCase.php	/^    protected function setUp()$/;"	f
@@ -725,21 +803,40 @@ sortBy	app/Listing.php	/^        $sortBy       = $request->sortBy ?? 'date_modif
 sortBy	app/MapSearch.php	/^        $sortBy       = $request->sortBy ?? 'date_modified';$/;"	v
 sortedListings	tests/Feature/SearchListingsTest.php	/^        $sortedListings = json_decode($response->getContent())->data;$/;"	v
 specified_values_in_listing_columns_can_be_returned_on_command	tests/Unit/ListingTest.php	/^    public function specified_values_in_listing_columns_can_be_returned_on_command()$/;"	f
+sq_ft	app/Helpers/ColumnNormalizer.php	/^        $this->sq_ft             = isset($result['LIST_48']) ? $result['LIST_48']: 0;$/;"	v
+sq_ft	app/Helpers/ColumnNormalizer.php	/^    public $sq_ft;$/;"	v
 sqft	app/Helpers/ListingsHelper.php	/^        $sqft                 = isset($result['LIST_48']) && is_numeric($result['LIST_48']) ? $result['LIST_48'] : 0;$/;"	v
-sqft	app/Helpers/ListingsHelper.php	/^        $sqft                 = isset($result['LIST_48']) ? $result['LIST_48'] : 0;$/;"	v
 sqft	app/Listing.php	/^        $sqft         = $request->sq_ft ?? '';$/;"	v
 sqft	app/MapSearch.php	/^        $sqft         = $request->sq_ft ?? '';$/;"	v
+sqft_source	app/Helpers/ColumnNormalizer.php	/^        $this->sqft_source       = $result['LIST_146'];$/;"	v
+sqft_source	app/Helpers/ColumnNormalizer.php	/^    public $sqft_source;$/;"	v
 startTagClose	public/js/app.js	/^var startTagClose = \/^\\s*(\\\/?)>\/;$/;"	v
+state	app/Helpers/ColumnNormalizer.php	/^        $this->state             = $result['LIST_40'];$/;"	v
+state	app/Helpers/ColumnNormalizer.php	/^    public $state;$/;"	v
+status	app/Helpers/ColumnNormalizer.php	/^        $this->status            = $result['LIST_15'];$/;"	v
+status	app/Helpers/ColumnNormalizer.php	/^    public $status;$/;"	v
 status	app/Listing.php	/^            $status = explode('|', $status);$/;"	v
 status	app/Listing.php	/^        $status       = $request->status ?? 'Active';$/;"	v
 status	app/MapSearch.php	/^            $status = explode('|', $status);$/;"	v
 status	app/MapSearch.php	/^        $status       = $request->status ?? '';$/;"	v
+stories	app/Helpers/ColumnNormalizer.php	/^            $this->stories               = is_numeric($result['LIST_64']) ? $result['LIST_64']: 0;$/;"	v
+stories	app/Helpers/ColumnNormalizer.php	/^        $this->stories           = isset($result['LIST_64']) && is_numeric($result['LIST_64']) ? $result['LIST_64']: 0;$/;"	v
+stories	app/Helpers/ColumnNormalizer.php	/^    public $stories;$/;"	v
 stories	app/Helpers/ListingsHelper.php	/^            $stories              = is_numeric($result['LIST_64']) ? $result['LIST_64'] : 0;$/;"	v
-stories	app/Helpers/ListingsHelper.php	/^        $stories              = isset($result['LIST_64']) && is_numeric($result['LIST_64']) ? $result['LIST_64'] : 0;$/;"	v
 stories	app/Helpers/ListingsHelper.php	/^        $stories              = isset($result['LIST_64']) && is_numeric($result['LIST_64']) ? $result['LIST_64'] : 1;$/;"	v
 streetName	app/Listing.php	/^        $streetName   = ucwords(strtolower($this->street_name));$/;"	v
 streetNumber	app/Listing.php	/^        $streetNumber = $this->street_number;$/;"	v
 streetSuffix	app/Listing.php	/^        $streetSuffix = $this->street_suffix != null ? ucwords(strtolower($this->street_suffix)) : '';$/;"	v
+street_name	app/Helpers/ColumnNormalizer.php	/^        $this->street_name       = ucwords(strtolower($result['LIST_34']));$/;"	v
+street_name	app/Helpers/ColumnNormalizer.php	/^    public $street_name;$/;"	v
+street_number	app/Helpers/ColumnNormalizer.php	/^        $this->street_number     = $result['LIST_31'];$/;"	v
+street_number	app/Helpers/ColumnNormalizer.php	/^    public $street_number;$/;"	v
+street_suffix	app/Helpers/ColumnNormalizer.php	/^        $this->street_suffix     = $result['LIST_37'];$/;"	v
+street_suffix	app/Helpers/ColumnNormalizer.php	/^    public $street_suffix;$/;"	v
+sub_area	app/Helpers/ColumnNormalizer.php	/^        $this->sub_area          = preg_replace('\/^[0-9]* ?- ?\/', '', $result['LIST_94']);$/;"	v
+sub_area	app/Helpers/ColumnNormalizer.php	/^    public $sub_area;$/;"	v
+subdivision	app/Helpers/ColumnNormalizer.php	/^        $this->subdivision       = $result['LIST_77'];$/;"	v
+subdivision	app/Helpers/ColumnNormalizer.php	/^    public $subdivision;$/;"	v
 subdivisions	app/Omnibar.php	/^        $subdivisions = Listing::getColumn($searchTerm, 'subdivision');$/;"	v
 sync	app/Photo.php	/^    public static function sync()$/;"	f
 syncWithListings	app/OpenHouse.php	/^    public static function syncWithListings()$/;"	f
@@ -754,6 +851,8 @@ today	app/Jobs/ProcessSearch.php	/^        $today       = Carbon::now()->toDateS
 transforms	public/js/app.js	/^var transforms;$/;"	v
 troubleshoot	app/Updaters/ListingsUpdater.php	/^    public function troubleshoot($class, $mlsNumber)$/;"	f
 typeArray	tests/utilities/functions.php	/^    $typeArray = [$/;"	v
+unit_number	app/Helpers/ColumnNormalizer.php	/^        $this->unit_number       = $result['LIST_35'];$/;"	v
+unit_number	app/Helpers/ColumnNormalizer.php	/^    public $unit_number;$/;"	v
 up	database/migrations/2014_10_12_000000_create_users_table.php	/^    public function up()$/;"	f
 up	database/migrations/2014_10_12_100000_create_password_resets_table.php	/^    public function up()$/;"	f
 up	database/migrations/2017_10_18_204605_create_listings_table.php	/^    public function up()$/;"	f
@@ -781,20 +880,23 @@ updateOrCreateEcarListing	app/Helpers/ListingsHelper.php	/^    private static fu
 updateSingle	app/Updaters/ListingsUpdater.php	/^    protected function updateSingle($class, $result)$/;"	f
 uri	server.php	/^$uri = urldecode($/;"	v
 username	app/ApiCall.php	/^        $this->username    = $this->association == 'bcar' ? $this->bcarUserName() : $this->ecarUserName();$/;"	v
+utilities	app/Helpers/ColumnNormalizer.php	/^            $this->utilities             = $result['GF20150204172056580165000000'];$/;"	v
+utilities	app/Helpers/ColumnNormalizer.php	/^            $this->utilities             = $result['GF20150428144746131692000000'];$/;"	v
+utilities	app/Helpers/ColumnNormalizer.php	/^            $this->utilities             = $result['GF20150428170540841152000000'];$/;"	v
+utilities	app/Helpers/ColumnNormalizer.php	/^            $this->utilities             = $result['GF20150430163732973981000000'];$/;"	v
+utilities	app/Helpers/ColumnNormalizer.php	/^            $this->utilities             = $result['GF20150506150244143322000000'];$/;"	v
+utilities	app/Helpers/ColumnNormalizer.php	/^    public $utilities;$/;"	v
 utilities	app/Helpers/ListingsHelper.php	/^            $utilities            = $result['GF20131203185458688530000000'];$/;"	v
 utilities	app/Helpers/ListingsHelper.php	/^            $utilities            = $result['GF20131230164915907956000000'];$/;"	v
 utilities	app/Helpers/ListingsHelper.php	/^            $utilities            = $result['GF20131231131427101593000000'];$/;"	v
-utilities	app/Helpers/ListingsHelper.php	/^            $utilities            = $result['GF20150204172056580165000000'];$/;"	v
-utilities	app/Helpers/ListingsHelper.php	/^            $utilities            = $result['GF20150428144746131692000000'];$/;"	v
-utilities	app/Helpers/ListingsHelper.php	/^            $utilities            = $result['GF20150428170540841152000000'];$/;"	v
-utilities	app/Helpers/ListingsHelper.php	/^            $utilities            = $result['GF20150430163732973981000000'];$/;"	v
-utilities	app/Helpers/ListingsHelper.php	/^            $utilities            = $result['GF20150506150244143322000000'];$/;"	v
 utilities	app/Helpers/ListingsHelper.php	/^        $utilities            = null;$/;"	v
 validator	app/Http/Controllers/Auth/RegisterController.php	/^    protected function validator(array $data)$/;"	f
 value	tests/Unit/ListingTest.php	/^        $value = $listing->getColumn($listing->city, 'city');$/;"	v
 values	app/Listing.php	/^        $values  = DB::table('listings')$/;"	v
 warn$2	public/js/app.js	/^var warn$2;$/;"	v
 waterfront	app/Helpers/BcarOptions.php	/^        $waterfront = 'LIST_192';$/;"	v
+waterfront	app/Helpers/ColumnNormalizer.php	/^        $this->waterfront        = $result['LIST_192'];$/;"	v
+waterfront	app/Helpers/ColumnNormalizer.php	/^    public $waterfront;$/;"	v
 waterfront	app/Helpers/EcarOptions.php	/^        $waterfront = 'GF20131203222329624962000000'; \/\/mother of god$/;"	v
 waterfront	app/Listing.php	/^        $waterfront   = $request->waterfront ?? '';$/;"	v
 waterfront	app/MapSearch.php	/^        $waterfront   = $request->waterfront ?? '';$/;"	v
@@ -805,23 +907,28 @@ waterviewDescription	app/Helpers/ListingsHelper.php	/^            $waterviewDesc
 waterviewDescription	app/Helpers/ListingsHelper.php	/^            $waterviewDescription = $result['GF20140103161837200256000000'];$/;"	v
 waterviewDescription	app/Helpers/ListingsHelper.php	/^            $waterviewDescription = $result['GF20140106175333111396000000'];$/;"	v
 waterviewDescription	app/Helpers/ListingsHelper.php	/^            $waterviewDescription = $result['GF20140122222400891202000000'];$/;"	v
-waterviewDescription	app/Helpers/ListingsHelper.php	/^            $waterviewDescription = $result['GF20150204172057026304000000'];$/;"	v
-waterviewDescription	app/Helpers/ListingsHelper.php	/^            $waterviewDescription = $result['GF20150204172057327961000000'];$/;"	v
-waterviewDescription	app/Helpers/ListingsHelper.php	/^            $waterviewDescription = $result['GF20150204172058691139000000'];$/;"	v
-waterviewDescription	app/Helpers/ListingsHelper.php	/^            $waterviewDescription = $result['GF20150430163750842533000000'];$/;"	v
-waterviewDescription	app/Helpers/ListingsHelper.php	/^            $waterviewDescription = $result['GF20150506150258346595000000'];$/;"	v
 waterviewDescription	app/Helpers/ListingsHelper.php	/^        $waterviewDescription = null;$/;"	v
+waterview_description	app/Helpers/ColumnNormalizer.php	/^            $this->waterview_description = $result['GF20150204172057026304000000'];$/;"	v
+waterview_description	app/Helpers/ColumnNormalizer.php	/^            $this->waterview_description = $result['GF20150204172057327961000000'];$/;"	v
+waterview_description	app/Helpers/ColumnNormalizer.php	/^            $this->waterview_description = $result['GF20150204172058691139000000'];$/;"	v
+waterview_description	app/Helpers/ColumnNormalizer.php	/^            $this->waterview_description = $result['GF20150430163750842533000000'];$/;"	v
+waterview_description	app/Helpers/ColumnNormalizer.php	/^            $this->waterview_description = $result['GF20150506150258346595000000'];$/;"	v
+waterview_description	app/Helpers/ColumnNormalizer.php	/^    public $waterview_description;$/;"	v
 yearBuilt	app/Helpers/ListingsHelper.php	/^        $yearBuilt            = isset($result['LIST_53']) && is_numeric($result['LIST_53']) ? $result['LIST_53'] : 0;$/;"	v
-yearBuilt	app/Helpers/ListingsHelper.php	/^        $yearBuilt            = isset($result['LIST_53']) ? $result['LIST_53'] : 0;$/;"	v
+year_built	app/Helpers/ColumnNormalizer.php	/^        $this->year_built        = isset($result['LIST_53']) ? $result['LIST_53']: 0;$/;"	v
+year_built	app/Helpers/ColumnNormalizer.php	/^    public $year_built;$/;"	v
+zip	app/Helpers/ColumnNormalizer.php	/^        $this->zip               = $result['LIST_43'];$/;"	v
+zip	app/Helpers/ColumnNormalizer.php	/^    public $zip;$/;"	v
 zips	app/Omnibar.php	/^        $zips         = Listing::getColumn($searchTerm, 'zip');$/;"	v
+zoning	app/Helpers/ColumnNormalizer.php	/^            $this->zoning                = $result['GF20150204172056948623000000'];$/;"	v
+zoning	app/Helpers/ColumnNormalizer.php	/^            $this->zoning                = $result['GF20150204172058725166000000'];$/;"	v
+zoning	app/Helpers/ColumnNormalizer.php	/^            $this->zoning                = $result['GF20150428162423317708000000'];$/;"	v
+zoning	app/Helpers/ColumnNormalizer.php	/^            $this->zoning                = $result['GF20150430163608793806000000'];$/;"	v
+zoning	app/Helpers/ColumnNormalizer.php	/^            $this->zoning                = $result['GF20150506150120689916000000'];$/;"	v
+zoning	app/Helpers/ColumnNormalizer.php	/^    public $zoning;$/;"	v
 zoning	app/Helpers/ListingsHelper.php	/^            $zoning               = $result['GF20131203222306734642000000'];$/;"	v
 zoning	app/Helpers/ListingsHelper.php	/^            $zoning               = $result['GF20131230164916157466000000'];$/;"	v
 zoning	app/Helpers/ListingsHelper.php	/^            $zoning               = $result['GF20131230211345452659000000'];$/;"	v
 zoning	app/Helpers/ListingsHelper.php	/^            $zoning               = $result['GF20131231131427333528000000'];$/;"	v
-zoning	app/Helpers/ListingsHelper.php	/^            $zoning               = $result['GF20150204172056948623000000'];$/;"	v
-zoning	app/Helpers/ListingsHelper.php	/^            $zoning               = $result['GF20150204172058725166000000'];$/;"	v
-zoning	app/Helpers/ListingsHelper.php	/^            $zoning               = $result['GF20150428162423317708000000'];$/;"	v
-zoning	app/Helpers/ListingsHelper.php	/^            $zoning               = $result['GF20150430163608793806000000'];$/;"	v
-zoning	app/Helpers/ListingsHelper.php	/^            $zoning               = $result['GF20150506150120689916000000'];$/;"	v
 zoning	app/Helpers/ListingsHelper.php	/^            $zoning               = $result['LIST_74'];$/;"	v
 zoning	app/Helpers/ListingsHelper.php	/^        $zoning               = null;$/;"	v

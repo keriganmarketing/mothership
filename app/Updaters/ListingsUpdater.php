@@ -5,10 +5,10 @@ namespace App\Updaters;
 use App\Photo;
 use App\Listing;
 use App\Updaters\Updater;
-use App\Updaters\MakesUpdates;
-use App\Helpers\ListingsHelper;
 use App\Helpers\BcarOptions;
 use App\Helpers\EcarOptions;
+use App\Updaters\MakesUpdates;
+use App\Helpers\ListingsHelper;
 use Illuminate\Support\Facades\DB;
 
 class ListingsUpdater extends Updater implements MakesUpdates
