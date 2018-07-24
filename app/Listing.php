@@ -74,7 +74,8 @@ class Listing extends Model
     {
         $city         = $request->city ?? '';
         $status       = $request->status ?? 'Active';
-        $propertyType = $request->propertyType ?? '';
+        $propertyType = isset($request->propertyType) && $request->propertyType !== 'Rental' ? $request->propertyType : '';
+        $rental       = $request->propertyType === 'Rental';
         $openHouses   = $request->openHouses ?? '';
         $minPrice     = $request->minPrice ?? '';
         $maxPrice     = $request->maxPrice ?? '';
@@ -107,6 +108,9 @@ class Listing extends Model
         })
         ->when($propertyType, function ($query) use ($propertyType) {
             return $query->whereIn('property_type', $propertyType);
+        })
+        ->when($rental, function ($query) use ($rental) {
+            return $query->where('class', '=', 'G');
         })
         ->when($status, function ($query) use ($status) {
             return $query->whereIn('status', $status);

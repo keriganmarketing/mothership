@@ -700,7 +700,7 @@ processRef	public/js/app.js	/^function processRef (el) {$/;"	f
 processSlot	public/js/app.js	/^function processSlot (el) {$/;"	f
 propertyType	app/Helpers/ListingsHelper.php	/^        $propertyType         = $result['LIST_9'] ?? 'Commercial';$/;"	v
 propertyType	app/Listing.php	/^            $propertyType = explode('|', $propertyType);$/;"	v
-propertyType	app/Listing.php	/^        $propertyType = $request->propertyType ?? '';$/;"	v
+propertyType	app/Listing.php	/^        $propertyType = isset($request->propertyType) && $request->propertyType !== 'Rental' ? $request->propertyType : '';$/;"	v
 propertyType	app/MapSearch.php	/^            $propertyType = explode('|', $propertyType);$/;"	v
 propertyType	app/MapSearch.php	/^        $propertyType = $request->propertyType ?? '';$/;"	v
 propertyType	tests/Feature/SearchListingsTest.php	/^        $propertyType = implode('|', getPropertyTypes('Single Family Home'));$/;"	v
@@ -716,6 +716,7 @@ register	app/Providers/AppServiceProvider.php	/^    public function register()$/
 registerImmediate	public/js/app.js	/^        registerImmediate = function(handle) {$/;"	f
 remoteMlsNumbers	app/Updaters/ListingsUpdater.php	/^        $remoteMlsNumbers = [];$/;"	v
 render	app/Exceptions/Handler.php	/^    public function render($request, Exception $exception)$/;"	f
+rental	app/Listing.php	/^        $rental       = $request->propertyType === 'Rental';$/;"	v
 report	app/Exceptions/Handler.php	/^    public function report(Exception $exception)$/;"	f
 request	app/Jobs/ProcessSearch.php	/^        $this->request = $request;$/;"	v
 request	app/Jobs/ProcessSearch.php	/^    protected $request;$/;"	v
