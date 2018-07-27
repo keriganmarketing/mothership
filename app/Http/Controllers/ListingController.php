@@ -16,7 +16,7 @@ class ListingController extends Controller
      */
     public function index(Request $request)
     {
-        $listings = Listing::findByMlsNumbers(urldecode($request->mlsNumbers));
+        $listings = Listing::findByMlsNumbers($request->mlsNumbers);
 
         return response()->json($listings);
     }
