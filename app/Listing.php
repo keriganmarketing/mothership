@@ -276,7 +276,7 @@ class Listing extends Model
      */
     public static function findByMlsNumbers($mlsNumbers)
     {
-        $mlsArray = explode('|', $mlsNumbers);
+        $mlsArray = explode('|', urldecode($mlsNumbers));
 
         $listings = Listing::whereIn('mls_account', $mlsArray)->get();
 
