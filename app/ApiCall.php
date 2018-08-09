@@ -42,7 +42,7 @@ class ApiCall extends Model
      */
     private function ecarLoginUrl()
     {
-        return 'http://retsgw.flexmls.com/rets2_2/Login';
+        return 'http://retsgw.flexmls.com/rets2_3/Login';
     }
 
     /**
