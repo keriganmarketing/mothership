@@ -716,7 +716,6 @@ register	app/Providers/AppServiceProvider.php	/^    public function register()$/
 registerImmediate	public/js/app.js	/^        registerImmediate = function(handle) {$/;"	f
 remoteMlsNumbers	app/Updaters/ListingsUpdater.php	/^        $remoteMlsNumbers = [];$/;"	v
 render	app/Exceptions/Handler.php	/^    public function render($request, Exception $exception)$/;"	f
-rental	app/Listing.php	/^        $rental       = $request->propertyType === 'Rental';$/;"	v
 report	app/Exceptions/Handler.php	/^    public function report(Exception $exception)$/;"	f
 request	app/Jobs/ProcessSearch.php	/^        $this->request = $request;$/;"	v
 request	app/Jobs/ProcessSearch.php	/^    protected $request;$/;"	v
