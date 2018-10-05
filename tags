@@ -81,6 +81,7 @@ ProcessListingImpression	app/Jobs/ProcessListingImpression.php	/^class ProcessLi
 ProcessSearch	app/Jobs/ProcessSearch.php	/^class ProcessSearch implements ShouldQueue$/;"	c
 RedirectIfAuthenticated	app/Http/Middleware/RedirectIfAuthenticated.php	/^class RedirectIfAuthenticated$/;"	c
 RegisterController	app/Http/Controllers/Auth/RegisterController.php	/^class RegisterController extends Controller$/;"	c
+RepairDB	app/Jobs/RepairDB.php	/^class RepairDB implements ShouldQueue$/;"	c
 ResetPasswordController	app/Http/Controllers/Auth/ResetPasswordController.php	/^class ResetPasswordController extends Controller$/;"	c
 RouteServiceProvider	app/Providers/RouteServiceProvider.php	/^class RouteServiceProvider extends ServiceProvider$/;"	c
 SearchAgentsTest	tests/Feature/SearchAgentsTest.php	/^class SearchAgentsTest extends TestCase$/;"	c
@@ -116,6 +117,7 @@ __construct	app/Jobs/CleanOpenHouses.php	/^    public function __construct()$/;"
 __construct	app/Jobs/ProcessListingClick.php	/^    public function __construct(Listing $listing)$/;"	f
 __construct	app/Jobs/ProcessListingImpression.php	/^    public function __construct($listings)$/;"	f
 __construct	app/Jobs/ProcessSearch.php	/^    public function __construct($request)$/;"	f
+__construct	app/Jobs/RepairDB.php	/^    public function __construct()$/;"	f
 __construct	app/Jobs/UpdateAgents.php	/^    public function __construct()$/;"	f
 __construct	app/Jobs/UpdateBcar.php	/^    public function __construct()$/;"	f
 __construct	app/Jobs/UpdateEcar.php	/^    public function __construct()$/;"	f
@@ -422,6 +424,7 @@ handle	app/Jobs/CleanOpenHouses.php	/^    public function handle()$/;"	f
 handle	app/Jobs/ProcessListingClick.php	/^    public function handle()$/;"	f
 handle	app/Jobs/ProcessListingImpression.php	/^    public function handle()$/;"	f
 handle	app/Jobs/ProcessSearch.php	/^    public function handle()$/;"	f
+handle	app/Jobs/RepairDB.php	/^    public function handle()$/;"	f
 handle	app/Jobs/UpdateAgents.php	/^    public function handle()$/;"	f
 handle	app/Jobs/UpdateBcar.php	/^    public function handle()$/;"	f
 handle	app/Jobs/UpdateEcar.php	/^    public function handle()$/;"	f
