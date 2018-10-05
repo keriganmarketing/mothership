@@ -13,6 +13,8 @@ use App\Helpers\AgentsHelper;
 use App\Helpers\ListingsHelper;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
+use App\Cleaners\BcarCleaner;
+use App\Cleaners\EcarCleaner;
 
 class Builder
 {
@@ -46,11 +48,18 @@ class Builder
     public function freshPhotos()
     {
         foreach ($this->classArray as $class) {
-            $listings = Listing::where('class', $class)->where('association', $this->association)->get();
-            foreach ($listings as $listing) {
-                $photos = $this->fetchPhotos($listing);
-                Photo::savePhotos($listing, $photos);
-            }
+            Listing::where('class', $class)->where('association', $this->association)->chunk(500, function ($listings) {
+                foreach ($listings as $listing) {
+                    $photos = $this->fetchPhotos($listing);
+                    Photo::savePhotos($listing, $photos);
+                    echo '.';
+                }
+            });
+            // $listings = Listing::where('class', $class)->where('association', $this->association)->get();
+            // foreach ($listings as $listing) {
+            //     $photos = $this->fetchPhotos($listing);
+            //     Photo::savePhotos($listing, $photos);
+            // }
         }
 
         Photo::sync();
@@ -131,11 +140,11 @@ class Builder
     public function fetchListings($class)
     {
         $offset         = 0;
-        $options        = $this->association == 'bcar' ?
-            BcarOptions::all($offset) : EcarOptions::all($offset);
         $maxRowsReached = false;
 
         while (! $maxRowsReached) {
+            $options = $this->association == 'bcar' ?
+                BcarOptions::all($offset) : EcarOptions::all($offset);
             $results = $this->rets->Search('Property', $class, '*', $options[$class]);
 
             foreach ($results as $result) {
@@ -176,5 +185,11 @@ class Builder
             (new OpenHouse())->addEvent($result);
         }
         OpenHouse::syncWithListings();
+    }
+
+    public function masterRepair()
+    {
+        (new EcarCleaner())->repair();
+        (new BcarCleaner())->repair();
     }
 }

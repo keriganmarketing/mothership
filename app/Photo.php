@@ -24,7 +24,7 @@ class Photo extends Model
     /**
      * Persist the photos to the database
      *
-     * @param string   $listing     The listing for the photos
+     * @param mixed   $listing     The listing for the photos
      * @param array    $photos      The photos for the listing
      *
      * @return void
@@ -32,16 +32,22 @@ class Photo extends Model
     public static function savePhotos($listing, $photos)
     {
         foreach ($photos as $photo) {
-            Photo::create(
-                [
-                    'mls_account'       => $listing->mls_account,
-                    'url'               => $photo->getLocation(),
-                    'preferred'         => $photo->isPreferred(),
-                    'listing_id'        => $listing->id,
-                    'photo_description' => $photo->getContentDescription()
-                ]
-            );
-            echo '+';
+            $hasUrl = $photo->getLocation() !== null && $photo->getLocation() !== '' ? $photo->getLocation() : false;
+            if ($hasUrl) {
+                Photo::updateOrCreate(
+                    [
+                        'mls_account' => $listing->mls_account
+                    ],
+                    [
+                        'mls_account'       => $listing->mls_account,
+                        'url'               => $photo->getLocation(),
+                        'preferred'         => $photo->isPreferred(),
+                        'listing_id'        => $listing->id,
+                        'photo_description' => $photo->getContentDescription()
+                    ]
+                );
+                echo '+';
+            }
         }
     }
 

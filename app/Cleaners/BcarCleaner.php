@@ -44,6 +44,38 @@ class BcarCleaner extends Cleaner
             }
         }
     }
+
+    public function repair()
+    {
+        foreach ($this->classArray as $class) {
+            $offset         = 0;
+            $maxRowsReached = false;
+            $oneYearAgo = Carbon::now()->copy()->subYear()->format('Y-m-d') . '+';
+
+            while (! $maxRowsReached) {
+                $options = $this->association == 'bcar' ?
+                    BcarOptions::all($offset) : EcarOptions::all($offset);
+                $results = $this->rets->Search('Property', $class, '(LIST_87='. $oneYearAgo . ')', $options[$class]);
+
+                foreach ($results as $result) {
+                    $listing = ListingsHelper::saveListing($this->association, $result, $class);
+                    $photos = Photo::where('listing_id', $listing->id)->get();
+                    if ($photos->isEmpty()) {
+                        $photos = $this->rets->GetObject('Property', 'HiRes', $listing->mls_account, '*', 1);
+                        Photo::savePhotos($listing, $photos);
+                    }
+                }
+
+                $offset += $results->getReturnedResultsCount();
+
+                if ($offset >= $results->getTotalResultsCount()) {
+                    $maxRowsReached = true;
+                }
+            }
+        }
+        Photo::sync();
+    }
+
     protected function getListingMlsIds($class)
     {
         return $this->rets->Search
