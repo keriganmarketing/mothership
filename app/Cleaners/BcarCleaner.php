@@ -3,7 +3,10 @@ namespace App\Cleaners;
 
 use App\Photo;
 use App\Listing;
+use Carbon\Carbon;
 use App\Cleaners\Cleaner;
+use App\Helpers\BcarOptions;
+use App\Helpers\ListingsHelper;
 
 class BcarCleaner extends Cleaner
 {
@@ -49,21 +52,27 @@ class BcarCleaner extends Cleaner
     {
         foreach ($this->classArray as $class) {
             $offset         = 0;
+            $counter        = 0;
             $maxRowsReached = false;
-            $oneYearAgo = Carbon::now()->copy()->subYear()->format('Y-m-d') . '+';
+            $oneDayAgo = Carbon::now()->copy()->subDay()->format('Y-m-d') . '+';
 
             while (! $maxRowsReached) {
                 $options = $this->association == 'bcar' ?
                     BcarOptions::all($offset) : EcarOptions::all($offset);
-                $results = $this->rets->Search('Property', $class, '(LIST_87='. $oneYearAgo . ')', $options[$class]);
+                $results = $this->rets->Search('Property', $class, '(LIST_87='. $oneDayAgo . ')', $options[$class]);
+                $totalResultsCount = $results->getReturnedResultsCount();
+                echo 'Checking ' . $totalResultsCount . ' results';
 
                 foreach ($results as $result) {
+                    echo 'Updating listing ' . ($counter + 1) . ' of ' . $totalResultsCount . ': ';
                     $listing = ListingsHelper::saveListing($this->association, $result, $class);
                     $photos = Photo::where('listing_id', $listing->id)->get();
                     if ($photos->isEmpty()) {
                         $photos = $this->rets->GetObject('Property', 'HiRes', $listing->mls_account, '*', 1);
                         Photo::savePhotos($listing, $photos);
                     }
+                    echo PHP_EOL;
+                    $counter ++;
                 }
 
                 $offset += $results->getReturnedResultsCount();

@@ -290,6 +290,8 @@ construction	app/Helpers/ListingsHelper.php	/^            $construction         
 construction	app/Helpers/ListingsHelper.php	/^            $construction         = $result['GF20131230164913256545000000'];$/;"	v
 construction	app/Helpers/ListingsHelper.php	/^            $construction         = $result['GF20131231201806058732000000'];$/;"	v
 construction	app/Helpers/ListingsHelper.php	/^        $construction         = null;$/;"	v
+counter	app/Cleaners/BcarCleaner.php	/^            $counter        = 0;$/;"	v
+counter	app/Cleaners/EcarCleaner.php	/^            $counter        = 0;$/;"	v
 counter	app/Omnibar.php	/^            $counter = $counter +1;$/;"	v
 counter	app/Omnibar.php	/^        $counter      = 0;$/;"	v
 counter	tests/Feature/SearchListingsTest.php	/^        $counter     = 0;$/;"	v
@@ -645,8 +647,8 @@ offset	app/Updaters/ListingsUpdater.php	/^        $offset           = 0;$/;"	v
 oldPhotos	app/Updaters/ListingsUpdater.php	/^            $oldPhotos  = $listing->photos;$/;"	v
 omniBar	app/Http/Controllers/OmnibarController.php	/^        $omniBar = Omnibar::build($searchTerm);$/;"	v
 onRE	public/js/app.js	/^var onRE = \/^@|^v-on:\/;$/;"	v
-oneYearAgo	app/Cleaners/BcarCleaner.php	/^            $oneYearAgo = Carbon::now()->copy()->subYear()->format('Y-m-d') . '+';$/;"	v
-oneYearAgo	app/Cleaners/EcarCleaner.php	/^            $oneYearAgo = Carbon::now()->copy()->subYear()->format('Y-m-d') . '+';$/;"	v
+oneDayAgo	app/Cleaners/BcarCleaner.php	/^            $oneDayAgo = Carbon::now()->copy()->subDay()->format('Y-m-d') . '+';$/;"	v
+oneDayAgo	app/Cleaners/EcarCleaner.php	/^            $oneDayAgo = Carbon::now()->copy()->subDay()->format('Y-m-d') . '+';$/;"	v
 openHouse	app/Updaters/OpenHousesUpdater.php	/^        $openHouse = OpenHouse::byEventId($eventId);$/;"	v
 openHouses	app/Helpers/Builder.php	/^    public function openHouses()$/;"	f
 openHouses	app/Listing.php	/^        $openHouses   = $request->openHouses ?? '';$/;"	v
@@ -775,10 +777,10 @@ response	tests/Feature/SearchListingsTest.php	/^        $response = $this->searc
 response	tests/Feature/SearchListingsTest.php	/^        $response = $this->searchFor(['status' => 'Active']);$/;"	v
 response	tests/Feature/SearchListingsTest.php	/^        $response = $this->searchFor(['status' => 'Pending']);$/;"	v
 response	tests/Feature/SearchListingsTest.php	/^        $response = $this->searchFor(['waterfront' => 1]);$/;"	v
-results	app/Cleaners/BcarCleaner.php	/^                $results = $this->rets->Search('Property', $class, '(LIST_87='. $oneYearAgo . ')', $options[$class]);$/;"	v
+results	app/Cleaners/BcarCleaner.php	/^                $results = $this->rets->Search('Property', $class, '(LIST_87='. $oneDayAgo . ')', $options[$class]);$/;"	v
 results	app/Cleaners/BcarCleaner.php	/^            $results = $this->getListingMlsIds($class);$/;"	v
 results	app/Cleaners/EcarCleaner.php	/^                $results = $this->getListingMlsIds($class, $offset);$/;"	v
-results	app/Cleaners/EcarCleaner.php	/^                $results = $this->rets->Search('Property', $class, '(LIST_87='. $oneYearAgo . ')', $options[$class]);$/;"	v
+results	app/Cleaners/EcarCleaner.php	/^                $results = $this->rets->Search('Property', $class, '(LIST_87='. $oneDayAgo . ')', $options[$class]);$/;"	v
 results	app/Helpers/Builder.php	/^            $results = $this->rets->Search($/;"	v
 results	app/Helpers/Builder.php	/^            $results = $this->rets->Search('Property', $class, '*', $options[$class]);$/;"	v
 results	app/Helpers/Builder.php	/^        $results = $this->rets->Search('OpenHouse', 'OpenHouse', '(EVENT200='. $now .'+)');$/;"	v
@@ -876,6 +878,8 @@ today	app/Http/Controllers/UpdatedListingsController.php	/^        $today = Carb
 today	app/Jobs/ProcessListingClick.php	/^        $today = Carbon::now()->toDateString();$/;"	v
 today	app/Jobs/ProcessListingImpression.php	/^        $today = Carbon::now()->toDateString();$/;"	v
 today	app/Jobs/ProcessSearch.php	/^        $today       = Carbon::now()->toDateString();$/;"	v
+totalResultsCount	app/Cleaners/BcarCleaner.php	/^                $totalResultsCount = $results->getReturnedResultsCount();$/;"	v
+totalResultsCount	app/Cleaners/EcarCleaner.php	/^                $totalResultsCount = $results->getReturnedResultsCount();$/;"	v
 transforms	public/js/app.js	/^var transforms;$/;"	v
 troubleshoot	app/Updaters/ListingsUpdater.php	/^    public function troubleshoot($class, $mlsNumber)$/;"	f
 typeArray	tests/utilities/functions.php	/^    $typeArray = [$/;"	v
