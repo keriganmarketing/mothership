@@ -54,7 +54,6 @@ class ListingsUpdater extends Updater implements MakesUpdates
         while (! $maxRowsReached) {
             $newOptions = $this->association == 'bcar' ?
                 BcarOptions::idList($offset) : EcarOptions::idList($offset);
-                dd($newOptions);
 
             $results = $this->rets->Search('Property', $class, '*', $newOptions[$class]);
             foreach ($results as $result) {
