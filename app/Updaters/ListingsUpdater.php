@@ -46,7 +46,6 @@ class ListingsUpdater extends Updater implements MakesUpdates
 
     public function force($class)
     {
-        dd($this->association);
         $offset           = 0;
         $localMlsNumbers  = DB::table('listings')->pluck('mls_account')->toArray();
         $remoteMlsNumbers = [];
@@ -55,6 +54,7 @@ class ListingsUpdater extends Updater implements MakesUpdates
         while (! $maxRowsReached) {
             $newOptions = $this->association == 'bcar' ?
                 BcarOptions::idList($offset) : EcarOptions::idList($offset);
+                dd($newOptions);
 
             $results = $this->rets->Search('Property', $class, '*', $newOptions[$class]);
             foreach ($results as $result) {
