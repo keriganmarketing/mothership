@@ -79,10 +79,11 @@ class ListingsUpdater extends Updater implements MakesUpdates
 
     protected function updateSingle($class, $result)
     {
+        $options = $this->association == 'bcar' ? BcarOptions::class : EcarOptions::class;
         $mlsNumber = $result['LIST_3'];
         $listing = Listing::byMlsNumber($mlsNumber);
         if ($listing == null) {
-            $results = $this->rets->Search('Property', $class, '(LIST_3='. $mlsNumber .')', (EcarOptions::singleListing())[$class]);
+            $results = $this->rets->Search('Property', $class, '(LIST_3='. $mlsNumber .')', ($options::singleListing())[$class]);
             foreach ($results as $result) {
                 $listing = ListingsHelper::saveListing($this->association, $result, $class);
                 $photos  = $this->getPhotosForListing($mlsNumber);
