@@ -118,7 +118,7 @@ class BcarOptions
      *
      * @return array $bcarOptions An array of options for each class
      */
-    public static function updateSingle($offset = 1)
+    public static function singleListing($offset = 0)
     {
         $waterfront = 'LIST_192';
 
