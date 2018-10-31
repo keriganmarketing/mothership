@@ -58,4 +58,58 @@ class BcarOptions
 
         return $bcarOptions;
     }
+
+    /**
+     * Return an array of all ECAR options needed for query
+     *
+     * @param int $offset The offset for a paginated query
+     *
+     * @return array $ecarOptions An array of options for each class
+     */
+    public static function idList($offset = 1)
+    {
+        $waterfront = 'LIST_192';
+
+        $bcarOptions = [
+            'A' => [
+                'Offset' => $offset,
+                'Limit'  => 1000,
+                'Select' =>
+                    'LIST_3',
+            ],
+            'B' => [
+                'Select' =>
+                    'LIST_3',
+            ],
+            'C' => [
+                'Select' =>
+                    'LIST_3',
+            ],
+            'E' => [
+                'Select' =>
+                    'LIST_3',
+            ],
+            'F' => [
+                'Select' =>
+                    'LIST_3',
+            ],
+            'G' => [
+                'Offset' => $offset,
+                'Limit'  => 1000,
+                'Select' =>
+                    'LIST_3',
+            ],
+            'H' => [
+                'Select' =>
+                    'LIST_3',
+
+            ],
+            'I' => [
+                'Select' =>
+                    'LIST_3',
+            ],
+        ];
+
+        return $bcarOptions;
+    }
 }
