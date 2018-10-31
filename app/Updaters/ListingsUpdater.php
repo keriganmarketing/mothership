@@ -46,6 +46,7 @@ class ListingsUpdater extends Updater implements MakesUpdates
 
     public function force($class)
     {
+        dd($this->association);
         $offset           = 0;
         $localMlsNumbers  = DB::table('listings')->pluck('mls_account')->toArray();
         $remoteMlsNumbers = [];
