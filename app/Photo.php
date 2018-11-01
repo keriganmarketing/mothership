@@ -31,7 +31,6 @@ class Photo extends Model
      */
     public static function savePhotos($listing, $photos)
     {
-        dd($photos);
         foreach ($photos as $photo) {
             $hasUrl = $photo->getLocation() !== null && $photo->getLocation() !== '' ? $photo->getLocation() : false;
             if ($hasUrl) {
