@@ -126,6 +126,16 @@ class ListingsUpdater extends Updater implements MakesUpdates
         return $this->rets->GetObject('Property', 'HiRes', $mlsNumber, '*', 1);
     }
 
+    public function redownloadPhotos($mlsNumber)
+    {
+        $listing = Listing::where('mls_account', $mlsNumber)->first();
+        $photos  = $this->getPhotosForListing($mlsNumber);
+
+        Photo::savePhotos($listing, $photos);
+
+        echo 'Done';
+    }
+
     protected function delete($photos)
     {
         foreach ($photos as $photo) {
