@@ -121,7 +121,7 @@ class ListingsUpdater extends Updater implements MakesUpdates
         }
     }
 
-    protected function getPhotosForListing($mlsNumber)
+    public function getPhotosForListing($mlsNumber)
     {
         return $this->rets->GetObject('Property', 'HiRes', $mlsNumber, '*', 1);
     }
