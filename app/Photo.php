@@ -36,7 +36,8 @@ class Photo extends Model
             if ($hasUrl) {
                 Photo::updateOrCreate(
                     [
-                        'mls_account' => $listing->mls_account
+                        'mls_account' => $listing->mls_account,
+                        'url'         => $photo->getLocation()
                     ],
                     [
                         'mls_account'       => $listing->mls_account,
