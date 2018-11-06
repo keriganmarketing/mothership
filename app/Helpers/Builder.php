@@ -48,21 +48,20 @@ class Builder
     public function freshPhotos()
     {
         foreach ($this->classArray as $class) {
+            echo 'Starting ' . $this->association . ' photos for class ' . $class . PHP_EOL;
             Listing::where('class', $class)->where('association', $this->association)->chunk(500, function ($listings) {
                 foreach ($listings as $listing) {
                     $photos = $this->fetchPhotos($listing);
                     Photo::savePhotos($listing, $photos);
-                    echo '.';
+                    echo '|';
                 }
             });
-            // $listings = Listing::where('class', $class)->where('association', $this->association)->get();
-            // foreach ($listings as $listing) {
-            //     $photos = $this->fetchPhotos($listing);
-            //     Photo::savePhotos($listing, $photos);
-            // }
+            echo PHP_EOL;
         }
 
+        echo 'Syncing Photos...';
         Photo::sync();
+        echo 'done.' . PHP_EOL;
     }
 
     public function freshAgents()
@@ -141,6 +140,7 @@ class Builder
     {
         $offset         = 0;
         $maxRowsReached = false;
+        echo 'Starting ' . $this->association . ', class ' . $class . PHP_EOL;
 
         while (! $maxRowsReached) {
             $options = $this->association == 'bcar' ?
@@ -149,12 +149,16 @@ class Builder
 
             foreach ($results as $result) {
                 ListingsHelper::saveListing($this->association, $result, $class);
+                echo '|';
             }
+            echo PHP_EOL;
 
             $offset += $results->getReturnedResultsCount();
+            echo 'current offset: ' . $offset . PHP_EOL;
 
             if ($offset >= $results->getTotalResultsCount()) {
                 $maxRowsReached = true;
+                echo 'done' . PHP_EOL;
             }
         }
     }
