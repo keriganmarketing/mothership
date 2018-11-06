@@ -59,7 +59,7 @@ class Builder
             echo PHP_EOL;
         }
 
-        echo 'Syncing Photos...';
+        echo 'Syncing photos...';
         Photo::sync();
         echo 'done.' . PHP_EOL;
     }
@@ -68,6 +68,8 @@ class Builder
     {
         $maxRowsReached = false;
         $offset = 0;
+
+        echo 'Adding agents...' . PHP_EOL;
 
         while (! $maxRowsReached) {
             $results = $this->rets->Search(
@@ -83,12 +85,14 @@ class Builder
 
             foreach ($results as $result) {
                 AgentsHelper::updateOrCreateAgent($this->association, $result);
+                echo '|';
             }
 
             $offset += $results->getReturnedResultsCount();
 
             if ($offset >= $results->getTotalResultsCount()) {
                 $maxRowsReached = true;
+                echo PHP_EOL . 'done' . PHP_EOL;
             }
         }
     }
@@ -100,12 +104,14 @@ class Builder
      */
     public function freshAgentPhotos()
     {
+        echo 'Adding agent photos...' . PHP_EOL;
         DB::table('agents')->where('association', $this->association)->orderBy('id')->chunk(100, function ($agents) {
             foreach ($agents as $agent) {
-                echo '.';
+                echo '|';
                 $this->downloadPhotosForAgent($agent);
             }
         });
+        echo PHP_EOL . 'done' . PHP_EOL;
     }
 
     /**
@@ -118,9 +124,10 @@ class Builder
     {
         $photos = $this->rets->GetObject('ActiveAgent', 'Photo', $agent->agent_id, '*', 1);
 
+        echo 'Adding agent photos for ' . $agent->agent_id . '...' . PHP_EOL;
         foreach ($photos as $photo) {
             if (! $photo->isError()) {
-                echo '*';
+                echo '|';
                 AgentPhoto::create([
                     'agent_id'    => $agent->id,
                     'url'         => $photo->getLocation(),
@@ -128,6 +135,7 @@ class Builder
                 ]);
             }
         }
+        echo PHP_EOL . 'done' . PHP_EOL;
     }
 
     /**
@@ -158,7 +166,7 @@ class Builder
 
             if ($offset >= $results->getTotalResultsCount()) {
                 $maxRowsReached = true;
-                echo 'done' . PHP_EOL;
+                echo PHP_EOL . 'done' . PHP_EOL;
             }
         }
     }
@@ -171,6 +179,7 @@ class Builder
      */
     public function fetchPhotos($listing)
     {
+        echo 'Fetching photos for ' . $listing->mls_account . PHP_EOL;
         $photos = $this->rets->GetObject('Property', 'HiRes', $listing->mls_account, '*', 1);
 
         return $photos;
@@ -183,12 +192,17 @@ class Builder
      */
     public function openHouses()
     {
+        echo 'Syncing open houses... ' . PHP_EOL;
         $now = Carbon::now()->toAtomString();
         $results = $this->rets->Search('OpenHouse', 'OpenHouse', '(EVENT200='. $now .'+)');
         foreach ($results as $result) {
             (new OpenHouse())->addEvent($result);
+            echo '|';
         }
         OpenHouse::syncWithListings();
+
+        echo PHP_EOL . 'done' . PHP_EOL;
+
     }
 
     public function masterRepair()
@@ -196,4 +210,41 @@ class Builder
         (new EcarCleaner())->repair();
         (new BcarCleaner())->repair();
     }
+
+    public function removeDuplicates()
+    {        
+        $duplicateRecords = Listing::selectRaw('mls_account, COUNT(mls_account) as occurences')
+          ->groupBy('mls_account')
+          ->having('occurences', '>', 1)
+          ->get();
+
+        if($duplicateRecords->count() > 0){ 
+
+            foreach ($duplicateRecords as $record) {
+                Listing::where('mls_account',$record->mls_account)->delete();
+                echo '|';
+            }
+
+            echo PHP_EOL . 'done... deleted ' . $duplicateRecords->count() . ' records.' . PHP_EOL; 
+        }
+    }
+
+    public function patchMissingPhotos($class)
+    {
+        Listing::where('class', $class)->where('association', $this->association)->chunk(500, function ($listings) {
+            foreach ($listings as $listing) {
+                echo '-- ' . $listing->mls_account . ' ---------';
+                if(! Photo::where('mls_account', '=', $listing->mls_account)->exists()) {
+                    echo ' nope --' . PHP_EOL;
+                    $photos = $this->fetchPhotos($listing);
+                    Photo::savePhotos($listing, $photos);
+                }else{
+                    echo ' ok ----' . PHP_EOL;
+                }
+            }
+        });
+    }
+
+
+
 }

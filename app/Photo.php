@@ -32,22 +32,24 @@ class Photo extends Model
     public static function savePhotos($listing, $photos)
     {
         foreach ($photos as $photo) {
-            $hasUrl = $photo->getLocation() !== null && $photo->getLocation() !== '' ? $photo->getLocation() : false;
+            $photoLocation = $photo->getLocation();
+            $hasUrl = $photoLocation !== null && $photoLocation !== '' ? $photoLocation : false;
             if ($hasUrl) {
                 Photo::updateOrCreate(
                     [
                         'mls_account' => $listing->mls_account,
-                        'url'         => $photo->getLocation()
+                        'url'         => $photoLocation
                     ],
                     [
                         'mls_account'       => $listing->mls_account,
-                        'url'               => $photo->getLocation(),
+                        'url'               => $photoLocation,
                         'preferred'         => $photo->isPreferred(),
                         'listing_id'        => $listing->id,
                         'photo_description' => $photo->getContentDescription()
                     ]
                 );
             }
+            unset($photoLocation);
         }
     }
 
