@@ -179,9 +179,8 @@ class Builder
      */
     public function fetchPhotos($listing)
     {
-        echo 'Fetching photos for ' . $listing->mls_account . PHP_EOL;
         $photos = $this->rets->GetObject('Property', 'HiRes', $listing->mls_account, '*', 1);
-
+        echo '.';
         return $photos;
     }
 
