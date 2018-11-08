@@ -12,7 +12,7 @@ All endpoints for the public facing API share the same prefix of
    * /search
 	   * The main endpoint for performing real estate searches
        * Returns an (https://laravel.com/docs/5.7/collections)[Eloquent Collection] of search results
-	   * *GET Variables* (all variables are optional)
+	   * **GET Variables** (all variables are optional)
 		   * *city* - (String)
 		   * *status* - (String)
 		   * *propertyType* - (String)
@@ -79,10 +79,10 @@ ECAR_PASSWORD={your_ecar_password}
 Inside this folder is where a lot of the "normalization" of the separate data feeds happen.
 
 * *BcarOptions/EcarOptions Classes*
-    These classes specifiy the specific columns requested from their respective associations. The columns listed are what the master `listings` table needs to be complete.
+    * These classes specifiy the specific columns requested from their respective associations. The columns listed are what the master `listings` table needs to be complete.
 
 * *App\Builder.php*
-    This class contains all of the functions needed to build a fresh set of data for the association. To run the builder, simply use the following command from inside the `php artisan tinker` console:
+    * This class contains all of the functions needed to build a fresh set of data for the association. To run the builder, simply use the following command from inside the `php artisan tinker` console:
 
     * BCAR example
         ```php
