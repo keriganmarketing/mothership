@@ -37,6 +37,7 @@ All endpoints for the public facing API share the same prefix of
             * **GET Variables**
                 * *mlsNumbers* - (String)
                     * A strongbar delimited list of MLS numbers for which you wish to see results
+		    
                     Example:
                         `https://mothership.kerigan.com/api/v1/listings?mlsNumbers=12345|12346|12347`
         * omnibar/
