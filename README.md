@@ -80,7 +80,7 @@ Inside this folder is where a lot of the "normalization" of the separate data fe
 * *BcarOptions/EcarOptions Classes*
     * These classes specifiy the specific columns requested from their respective associations. The columns listed are what the master `listings` table needs to be complete.
 
-* *App\Builder.php*
+* *Builder.php*
     * This class contains all of the functions needed to build a fresh set of data for the association. To run the builder, simply use the following command from inside the `php artisan tinker` console:
 
     * BCAR example
