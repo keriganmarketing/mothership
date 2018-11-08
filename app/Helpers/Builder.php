@@ -189,6 +189,7 @@ class Builder
     public function fetchAllPhotos($listings)
     {
 
+        // Required for backward lookup of listing_id in savePhoto()
         $mlsNumbers = [];
         foreach ($listings as $listing) { 
             $mlsNumbers[$listing->id] = $listing->mls_account;

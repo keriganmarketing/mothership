@@ -33,7 +33,7 @@ class Photo extends Model
     {
         $updated = 0;
         $skipped = 0;
-        
+
         foreach ($photos as $photo) {
             $hasUrl = $photo->getLocation() !== null && $photo->getLocation() !== '' ? $photo->getLocation() : false;
             if ($hasUrl) {
@@ -95,45 +95,29 @@ class Photo extends Model
      */
     public static function sync()
     {
-        $mlsNumbers = [];
-
-        // Get the listings that still don't have photos 11/6: chunked output to save memory.
-        $listingsWithNoPhotos = Listing::where('preferred_image', null)->orWhere('preferred_image', '')->orderBy('id', 'ASC')->get();
         $goodPhotos = 0;
         $missingPhotos = 0;
 
-        foreach ($listingsWithNoPhotos as $listing) { 
+        // Get the listings that still don't have photos 11/6: chunked output to save memory.
+        Listing::where('preferred_image', null)->orWhere('preferred_image', '')->orderBy('id', 'DESC')->chunk(1500, function($listingsWithNoPhotos)
+            use (&$goodPhotos, &$missingPhotos) {
 
-            // Try to find photos in the database. If none exist, try to get them from MLS API.
-            // If neither of those work, safe to say the the photos haven't been uploaded yet.
-            if (Photo::where('listing_id', $listing->id)->exists()) {
-                $listing->preferred_image = self::preferredPhotoUrl($listing->id);
-                $listing->save();
-                $goodPhotos++;
-            } else {
-                $mlsNumbers[$listing->id] = $listing->mls_account;
-                $missingPhotos++;
+            foreach ($listingsWithNoPhotos as $listing) { 
+                // Try to find photos in the database. If none exist, try to get them from MLS API.
+                // If neither of those work, safe to say the the photos haven't been uploaded yet.
+                if (Photo::where('listing_id', $listing->id)->exists()) {
+                    $listing->preferred_image = self::preferredPhotoUrl($listing->id);
+                    $listing->save();
+                    $goodPhotos++;
+                } else {
+                    $missingPhotos++;
+                }
             }
-        }
+        });
 
         echo 'Listings with photos but no preferred photo: ' . $goodPhotos . PHP_EOL;
         echo 'Listings without photos at all: ' . $missingPhotos . PHP_EOL;
         echo '---------------------' . PHP_EOL;
-
-        // Contact RETS to grab all the photos that need updates for all listings at once.
-        echo 'Contacting RETS gateway for missing photos' . PHP_EOL;
-        $pass = 1;
-
-        foreach(array_chunk($mlsNumbers, 200) as $photoChunk){
-            $newPhotos = (new Builder($listing->association))->fetchAllPhotos($photoChunk);
-            echo $newPhotos->count() . ' photos received in pass ' . $pass++ . '. Updating...';
-
-            foreach($newPhotos as $photo){
-                //if($photo->getContent()){
-                    Photo::savePhoto($mlsNumbers, $photo);
-                //}
-            }
-        }
 
     }
 
