@@ -111,5 +111,5 @@ Inside this folder is where a lot of the "normalization" of the separate data fe
 
     * Additionally, add `php artisan horizon:terminate` to the end of your deploy script like so:
 
-    ![deploy script](https://github.com/keriganmarketing/mothership/blob/master/forge_dashboard.png)
+    ![deploy script](https://github.com/keriganmarketing/mothership/blob/master/deploy_script.png)
 
