@@ -29,28 +29,63 @@ class Photo extends Model
      *
      * @return void
      */
-    public static function savePhotos($listing, $photos)
+    public static function savePhotos($listingId, $photos)
     {
+        $updated = 0;
+        $skipped = 0;
+        
         foreach ($photos as $photo) {
-            $photoLocation = $photo->getLocation();
-            $hasUrl = $photoLocation !== null && $photoLocation !== '' ? $photoLocation : false;
+            $hasUrl = $photo->getLocation() !== null && $photo->getLocation() !== '' ? $photo->getLocation() : false;
             if ($hasUrl) {
                 Photo::updateOrCreate(
                     [
-                        'mls_account' => $listing->mls_account,
-                        'url'         => $photoLocation
+                        'mls_account' => $photo->getContentID(),
+                        'url'         => $photo->getLocation()
                     ],
                     [
-                        'mls_account'       => $listing->mls_account,
-                        'url'               => $photoLocation,
+                        'mls_account'       => $photo->getContentID(),
+                        'url'               => $photo->getLocation(),
                         'preferred'         => $photo->isPreferred(),
-                        'listing_id'        => $listing->id,
+                        'listing_id'        => $listingId,
                         'photo_description' => $photo->getContentDescription()
                     ]
                 );
+                $updated++;
+            }else{
+                $skipped++;
             }
-            unset($photoLocation);
         }
+
+        echo $updated . ' updated, ' . $skipped . ' no content or not an image.' . PHP_EOL;
+    }
+
+    /**
+     * Persist a single photo to the database
+     *
+     * @param mixed   $listing     The listing for the photo
+     * @param array    $photo      The photo for the listing
+     *
+     * @return void
+     */
+    public static function savePhoto($listingIds, $photo)
+    {
+        $hasUrl = $photo->getLocation() !== null && $photo->getLocation() !== '' ? $photo->getLocation() : false;
+        if ($hasUrl) {
+            Photo::updateOrCreate(
+                [
+                    'mls_account' => $photo->getContentID(),
+                    'url'         => $photo->getLocation()
+                ],
+                [
+                    'mls_account'       => $photo->getContentID(),
+                    'url'               => $photo->getLocation(),
+                    'preferred'         => $photo->isPreferred(),
+                    'listing_id'        => array_search($photo->getContentID(), $listingIds),
+                    'photo_description' => $photo->getContentDescription()
+                ]
+            );
+        }
+
     }
 
     /**
@@ -60,26 +95,46 @@ class Photo extends Model
      */
     public static function sync()
     {
-        // Get the listings that still don't have photos 11/6: chunked output to save memory.
-        Listing::where('preferred_image', null)->orWhere('preferred_image', '')->chunk(500, function ($listingsWithNoPhotos) {
-            foreach ($listingsWithNoPhotos as $listing) { 
+        $mlsNumbers = [];
 
-                // Try to find photos in the database. If none exist, try to get them from MLS API.
-                // If neither of those work, safe to say the the photos haven't been uploaded yet.
-                if (Photo::where('listing_id', $listing->id)->exists()) {
-                    echo $listing->mls_account . ' ---- ok --' . PHP_EOL;
-                    $listing->preferred_image = self::preferredPhotoUrl($listing->id);
-                    $listing->save();
-                    
-                } else {
-                    echo $listing->mls_account . ' -- nope -- ';
-                    $photos = (new Builder($listing->association))->fetchPhotos($listing);
-                    echo '.';
-                    (new Photo)->savePhotos($listing, $photos);
-                    echo '.' . PHP_EOL;
-                }
+        // Get the listings that still don't have photos 11/6: chunked output to save memory.
+        $listingsWithNoPhotos = Listing::where('preferred_image', null)->orWhere('preferred_image', '')->orderBy('id', 'ASC')->get();
+        $goodPhotos = 0;
+        $missingPhotos = 0;
+
+        foreach ($listingsWithNoPhotos as $listing) { 
+
+            // Try to find photos in the database. If none exist, try to get them from MLS API.
+            // If neither of those work, safe to say the the photos haven't been uploaded yet.
+            if (Photo::where('listing_id', $listing->id)->exists()) {
+                $listing->preferred_image = self::preferredPhotoUrl($listing->id);
+                $listing->save();
+                $goodPhotos++;
+            } else {
+                $mlsNumbers[$listing->id] = $listing->mls_account;
+                $missingPhotos++;
             }
-        });
+        }
+
+        echo 'Listings with photos but no preferred photo: ' . $goodPhotos . PHP_EOL;
+        echo 'Listings without photos at all: ' . $missingPhotos . PHP_EOL;
+        echo '---------------------' . PHP_EOL;
+
+        // Contact RETS to grab all the photos that need updates for all listings at once.
+        echo 'Contacting RETS gateway for missing photos' . PHP_EOL;
+        $pass = 1;
+
+        foreach(array_chunk($mlsNumbers, 200) as $photoChunk){
+            $newPhotos = (new Builder($listing->association))->fetchAllPhotos($photoChunk);
+            echo $newPhotos->count() . ' photos received in pass ' . $pass++ . '. Updating...';
+
+            foreach($newPhotos as $photo){
+                //if($photo->getContent()){
+                    Photo::savePhoto($mlsNumbers, $photo);
+                //}
+            }
+        }
+
     }
 
     protected static function preferredPhotoUrl($listingId)

@@ -26,15 +26,17 @@ class ListingsUpdater extends Updater implements MakesUpdates
         $dateLastModified = $this->getLastModifiedDate('listings');
 
         foreach ($this->classArray as $class) {
-            echo 'Starting updates for class ' . $class . PHP_EOL;
+            echo '---------------------' . PHP_EOL . 'Starting updates for class ' . $class . PHP_EOL;
+            $numUpdates = 0;
             $results = $this->getNewProperties($class, $dateLastModified);
             foreach ($results as $result) {
-                echo '|';
                 $this->handleResult($class, $result);
+                $numUpdates++;
             }
-            echo PHP_EOL . 'done.' . PHP_EOL;
+            echo $numUpdates . ' listings updated.' . PHP_EOL;
         }
 
+        echo '---------------------' . PHP_EOL;
         echo 'Syncing photos.' . PHP_EOL;
         Photo::sync();
         echo 'done.' . PHP_EOL;
@@ -113,6 +115,7 @@ class ListingsUpdater extends Updater implements MakesUpdates
     {
         $mlsNumber = $result['LIST_3'];
         $listing = Listing::byMlsNumber($mlsNumber);
+
         if ($listing == null) {
             $listing = ListingsHelper::saveListing($this->association, $result, $class);
             $photos  = $this->getPhotosForListing($mlsNumber);
@@ -146,7 +149,6 @@ class ListingsUpdater extends Updater implements MakesUpdates
     {
         foreach ($photos as $photo) {
             $photo->delete();
-            echo '-';
         }
     }
 }

@@ -48,13 +48,11 @@ class Builder
     public function freshPhotos()
     {
         foreach ($this->classArray as $class) {
+
+            echo '---------------------' . PHP_EOL;
             echo 'Starting ' . $this->association . ' photos for class ' . $class . PHP_EOL;
-            Listing::where('class', $class)->where('association', $this->association)->chunk(500, function ($listings) {
-                foreach ($listings as $listing) {
-                    $photos = $this->fetchPhotos($listing);
-                    Photo::savePhotos($listing, $photos);
-                    echo '|';
-                }
+            Listing::where('class', $class)->where('association', $this->association)->chunk(25000, function ($listings) {
+                $this->fetchAllPhotos($listings);
             });
             echo PHP_EOL;
         }
@@ -179,9 +177,36 @@ class Builder
      */
     public function fetchPhotos($listing)
     {
-        $photos = $this->rets->GetObject('Property', 'HiRes', $listing->mls_account, '*', 1);
-        echo '.';
-        return $photos;
+        return $this->rets->GetObject('Property', 'HiRes', $listing->mls_account, '*', 1);
+    }
+
+    /**
+     * Fetch new photos for all listings in provided array 
+     *
+     * @param Array of mls numbers
+     * @return \Illuminate\Support\Collection
+     */
+    public function fetchAllPhotos($listings)
+    {
+
+        $mlsNumbers = [];
+        foreach ($listings as $listing) { 
+            $mlsNumbers[$listing->id] = $listing->mls_account;
+        }
+
+        // Contact RETS to grab all the photos that need updates for all listings at once.
+        $pass = 1;
+
+        foreach(array_chunk($mlsNumbers, 200) as $photoChunk){
+            $newPhotos = $this->rets->GetObject('Property', 'HiRes', implode(',',$photoChunk), '*', 1);
+            echo $newPhotos->count() . ' photos received in pass ' . $pass++ . '. Updating...';
+
+            foreach($newPhotos as $photo){
+                Photo::savePhoto($mlsNumbers, $photo);
+            }
+            echo 'done.' . PHP_EOL;
+        }
+
     }
 
     /**
@@ -228,20 +253,33 @@ class Builder
         }
     }
 
-    public function patchMissingPhotos($class)
+    public function patchMissingPhotos()
     {
-        Listing::where('class', $class)->where('association', $this->association)->chunk(500, function ($listings) {
-            foreach ($listings as $listing) {
-                echo '-- ' . $listing->mls_account . ' ---------';
-                if(! Photo::where('mls_account', '=', $listing->mls_account)->exists()) {
-                    echo ' nope --' . PHP_EOL;
-                    $photos = $this->fetchPhotos($listing);
-                    Photo::savePhotos($listing, $photos);
-                }else{
-                    echo ' ok ----' . PHP_EOL;
+        foreach ($this->classArray as $class) {
+
+            $numGood = 0;
+            $numBad = 0;
+            $listingsToUpdate = [];
+
+            echo 'Patching photos in class ' . $class . PHP_EOL;
+            Listing::where('class', $class)->where('association', $this->association)->chunk(2500, function ($listings)
+                use (&$numGood, &$numBad, &$listingsToUpdate) {
+                foreach ($listings as $listing) {
+                    if(! Photo::where('mls_account', '=', $listing->mls_account)->exists()) {
+                        $listingsToUpdate[] = $listing;
+                        $numBad++;
+                    }else{
+                        $numGood++;
+                    }
                 }
-            }
-        });
+                
+            });
+
+            echo 'Good listings: ' . $numGood . PHP_EOL;
+            echo 'Missing Photos: ' . $numBad . PHP_EOL; 
+            $this->fetchAllPhotos($listingsToUpdate);
+            echo '---------------------' . PHP_EOL;
+        }
     }
 
 
