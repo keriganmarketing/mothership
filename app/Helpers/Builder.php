@@ -43,12 +43,15 @@ class Builder
         foreach ($this->classArray as $class) {
             $this->fetchListings($class);
         }
+
+        echo 'Removing duplicates if any...';
+        $this->removeDuplicates();
+        echo 'done' . PHP_EOL;
     }
 
     public function freshPhotos()
     {
         foreach ($this->classArray as $class) {
-
             echo '---------------------' . PHP_EOL;
             echo 'Starting ' . $this->association . ' photos for class ' . $class . PHP_EOL;
             Listing::where('class', $class)->where('association', $this->association)->chunk(25000, function ($listings) {
@@ -56,8 +59,10 @@ class Builder
             });
             echo PHP_EOL;
         }
-
-        echo 'Syncing photos...';
+    
+        echo 'Checking for missing photos' . PHP_EOL;
+        $this->patchMissingPhotos();
+        echo 'Syncing preferred photos...';
         Photo::sync();
         echo 'done.' . PHP_EOL;
     }
