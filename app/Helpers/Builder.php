@@ -207,7 +207,7 @@ class Builder
             $newPhotos = $this->rets->GetObject('Property', 'HiRes', implode(',',$photoChunk), '*', 1);
             echo $newPhotos->count() . ' photos received in pass ' . $pass++ . '. Updating...';
 
-            foreach(array_chunk($newPhotos, 50) as $photo){
+            foreach($newPhotos as $photo){
                 Photo::savePhoto($mlsNumbers, $photo);
             }
             echo 'done.' . PHP_EOL;
@@ -271,7 +271,7 @@ class Builder
             Listing::where('class', $class)->where('association', $this->association)->chunk(2500, function ($listings)
                 use (&$numGood, &$numBad, &$listingsToUpdate) {
                 foreach ($listings as $listing) {
-                    if(! Photo::where('listing_id', '=', $listing->id)->exists()) {
+                    if(! Photo::where('mls_account', '=', $listing->mls_account)->exists()) {
                         $listingsToUpdate[] = $listing;
                         $numBad++;
                     }else{
