@@ -84,6 +84,9 @@ class Photo extends Model
                     'photo_description' => $photo->getContentDescription()
                 ]
             );
+            //echo '|';
+        }else{
+            //echo 'X';
         }
 
     }

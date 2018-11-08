@@ -161,6 +161,7 @@ class Builder
 
             foreach ($results as $result) {
                 ListingsHelper::saveListing($this->association, $result, $class);
+                dd($result);
                 $numListings++;
             }
 
@@ -205,12 +206,11 @@ class Builder
 
         foreach(array_chunk($mlsNumbers, 200) as $photoChunk){
             $newPhotos = $this->rets->GetObject('Property', 'HiRes', implode(',',$photoChunk), '*', 1);
-            echo $newPhotos->count() . ' photos received in pass ' . $pass++ . '. Updating...';
+            echo $newPhotos->count() . ' photos received in pass ' . $pass++ . '.' . PHP_EOL;
 
             foreach($newPhotos as $photo){
                 Photo::savePhoto($mlsNumbers, $photo);
             }
-            echo 'done.' . PHP_EOL;
         }
 
     }
@@ -250,12 +250,23 @@ class Builder
 
         if($duplicateRecords->count() > 0){ 
 
-            foreach ($duplicateRecords as $record) {
-                Listing::where('mls_account',$record->mls_account)->delete();
-                echo '|';
-            }
+            
 
-            echo PHP_EOL . 'done... deleted ' . $duplicateRecords->count() . ' records.' . PHP_EOL; 
+            // Remove all duplicates but most recent
+            //$duplicateRecords->forget($duplicateRecords->count());
+
+            $toDelete = [];
+            foreach ($duplicateRecords as $record) {
+                $listings = Listing::where('mls_account',$record->mls_account)->get();
+                $listings->forget($listings->count() - 1);
+
+                foreach($listings as $toDelete){
+                    Listing::where('id', $toDelete->id)->delete(); 
+                    Photo::where('listing_id', $toDelete->id)->delete(); 
+                }
+            }          
+
+            echo PHP_EOL . 'done... deleted ' . $listings->count() . ' records.' . PHP_EOL; 
         }
     }
 
@@ -277,11 +288,12 @@ class Builder
                     }else{
                         $numGood++;
                     }
+                    echo '|';
                 }
                 
             });
 
-            echo 'Good listings: ' . $numGood . PHP_EOL;
+            echo PHP_EOL .'Good listings: ' . $numGood . PHP_EOL;
             echo 'Missing Photos: ' . $numBad . PHP_EOL; 
             $this->fetchAllPhotos($listingsToUpdate);
             echo '---------------------' . PHP_EOL;

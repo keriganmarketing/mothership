@@ -52,6 +52,35 @@ class ListingsHelper
      */
     private static function updateOrCreateEcarListing($result, $class, $listingId)
     {
+        $columns            = new ColumnNormalizer(Associations::ECAR);
+        $listingColumnArray = [];
+
+        $columns->setColumns($result);
+
+        foreach ($columns as $key => $value) {
+            $listingColumnArray[$key] = $value;
+        }
+
+        $listing = Listing::updateOrCreate(
+            ['id' => $listingId],
+            $listingColumnArray
+        );
+        $listing->full_address = $listing->buildFullAddress();
+        $listing->save();
+
+        return $listing;
+    }
+
+    /**
+     * Persist the ECAR listing in storage
+     *
+     * @param object $result The PHRETS listing object
+     * @param string $class  The class for the listing
+     *
+     * @return object $listing The Listing Object
+     */
+    private static function updateOrCreateEcarListingOld($result, $class, $listingId)
+    {
         $acreage              = $result['LIST_57'] > 0 ? $result['LIST_57'] : 0;
         $fullBaths            = isset($result['LIST_68']) ? $result['LIST_68'] : 0;
         $propertyType         = $result['LIST_9'] ?? 'Commercial';
