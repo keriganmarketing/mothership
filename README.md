@@ -11,7 +11,7 @@ All endpoints for the public facing API share the same prefix of
 `https://mothership.kerigan.com/api/v1/`
    * /search
 	   * The main endpoint for performing real estate searches
-       * Returns an (https://laravel.com/docs/5.7/collections)[Eloquent Collection] of search results
+       * Returns an [Eloquent Collection](https://laravel.com/docs/5.7/collections) of search results
 	   * **GET Variables** (all variables are optional)
 		   * *city* - (String)
 		   * *status* - (String)
@@ -101,7 +101,7 @@ Inside this folder is where a lot of the "normalization" of the separate data fe
         $updater->update();
         ```
 * **Queues and Jobs**
-    * The application updates continuously to ensure fresh data is always available. This is handled through (https://laravel.com/docs/5.5/queues) [Queues], (https://laravel.com/docs/5.5/queues#generating-job-classes) [Jobs], and (https://laravel.com/docs/5.5/scheduling) [Tasks].
-    * The main queue engine uses REDIS to manage the queues and a dashboard to monitor these jobs is located at (https://mothership.kerigan.com/horizon) [https://mothership.kerigan.com/horizon]
+    * The application updates continuously to ensure fresh data is always available. This is handled through [Queues](https://laravel.com/docs/5.5/queues), [Jobs](https://laravel.com/docs/5.5/queues#generating-job-classes), and [Tasks](https://laravel.com/docs/5.5/scheduling).
+    * The main queue engine uses REDIS to manage the queues and a dashboard to monitor these jobs is located at [https://mothership.kerigan.com/horizon](https://mothership.kerigan.com/horizon)
 * **Server Configuration**
     * Care was taken to make the server setup process as painless as possible, but there are a few custom configurations that we'll have to include.
