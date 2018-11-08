@@ -93,4 +93,4 @@ Inside this folder is where a lot of the "normalization" of the separate data fe
         (new Builder('ecar'))->rebuild();
         ```
 
-    This method will run all the necessary functions to build a fresh set of data.
+    The `rebuild()` method will run all the necessary functions to build a fresh set of data in the database.
