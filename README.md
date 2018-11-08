@@ -30,34 +30,32 @@ All endpoints for the public facing API share the same prefix of
                 * Column in the listings table used to sort returned results
            * *orderBy* - (String)
                 * `ASC` or `DESC`
-    * listing/{mlsNumber}/
-        * Returns a single listing with all of its relationships.
-    * listings/
-        * Returns a collection of listings matching the given MLS numbers
-        * *GET Variables*
-            * *mlsNumbers* - (String)
-                * A strongbar delimited list of MLS numbers for which you wish to see results
-                Example:
-                ```
-                    https://mothership.kerigan.com/api/v1/listings?mlsNumbers=12345|12346|12347
-                ```
-    * omnibar/
-        * Receives user input from client and searches database for columns matching input
-        * *GET Variables*
-            * *searchTerm* - (String)
-    * allMapListings/
-        * Return an unpaginated collection of listing matching the given search criteria
-        * *GET Variables*
-            * see search variables
-    * agents/
-        * Returns agent details based on search criteria
-        * *GET Variables*
-            * *shortId* - (String)
-            * *fullName* - (String)
-            * *lastName* - (String)
-            * *firstName* - (String)
-            * *association* - (String)
-            * *officeShortId* - (String)
+        * listing/{mlsNumber}/
+            * Returns a single listing with all of its relationships.
+        * listings/
+            * Returns a collection of listings matching the given MLS numbers
+            * **GET Variables**
+                * *mlsNumbers* - (String)
+                    * A strongbar delimited list of MLS numbers for which you wish to see results
+                    Example:
+                        `https://mothership.kerigan.com/api/v1/listings?mlsNumbers=12345|12346|12347`
+        * omnibar/
+            * Receives user input from client and searches database for columns matching input
+            * **GET Variables**
+                * *searchTerm* - (String)
+        * allMapListings/
+            * Return an unpaginated collection of listing matching the given search criteria
+            * **GET Variables**
+                * see search variables
+        * agents/
+            * Returns agent details based on search criteria
+            * **GET Variables**
+                * *shortId* - (String)
+                * *fullName* - (String)
+                * *lastName* - (String)
+                * *firstName* - (String)
+                * *association* - (String)
+                * *officeShortId* - (String)
 
 ## Maintaining the Application
 
