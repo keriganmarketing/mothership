@@ -106,4 +106,4 @@ Inside this folder is where a lot of the "normalization" of the separate data fe
 * **Server Configuration**
     * Care was taken to make the server setup process as painless as possible, but there are a few custom configurations that we'll have to include.
     * While editing the site in the Forge dashboard, you'll need to set up a queue as follows
-    !(https://github.com/keriganmarketing/mothership/blob/master/forge_dashboard.png)
+    ![forge dashboard](https://github.com/keriganmarketing/mothership/blob/master/forge_dashboard.png)
