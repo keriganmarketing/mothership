@@ -150,9 +150,10 @@ class Builder
     public function fetchListings($class)
     {
         $offset         = 0;
+        $numListings    = 0;
         $maxRowsReached = false;
         echo 'Starting ' . $this->association . ', class ' . $class . PHP_EOL;
-
+        echo 'current offset: ';
         while (! $maxRowsReached) {
             $options = $this->association == 'bcar' ?
                 BcarOptions::all($offset) : EcarOptions::all($offset);
@@ -160,16 +161,15 @@ class Builder
 
             foreach ($results as $result) {
                 ListingsHelper::saveListing($this->association, $result, $class);
-                echo '|';
+                $numListings++;
             }
-            echo PHP_EOL;
 
             $offset += $results->getReturnedResultsCount();
-            echo 'current offset: ' . $offset . PHP_EOL;
+            echo $offset . ' ';
 
             if ($offset >= $results->getTotalResultsCount()) {
                 $maxRowsReached = true;
-                echo PHP_EOL . 'done' . PHP_EOL;
+                echo PHP_EOL . $numListings . ' total added.' . PHP_EOL;
             }
         }
     }
@@ -207,7 +207,7 @@ class Builder
             $newPhotos = $this->rets->GetObject('Property', 'HiRes', implode(',',$photoChunk), '*', 1);
             echo $newPhotos->count() . ' photos received in pass ' . $pass++ . '. Updating...';
 
-            foreach($newPhotos as $photo){
+            foreach(array_chunk($newPhotos, 50) as $photo){
                 Photo::savePhoto($mlsNumbers, $photo);
             }
             echo 'done.' . PHP_EOL;
@@ -271,7 +271,7 @@ class Builder
             Listing::where('class', $class)->where('association', $this->association)->chunk(2500, function ($listings)
                 use (&$numGood, &$numBad, &$listingsToUpdate) {
                 foreach ($listings as $listing) {
-                    if(! Photo::where('mls_account', '=', $listing->mls_account)->exists()) {
+                    if(! Photo::where('listing_id', '=', $listing->id)->exists()) {
                         $listingsToUpdate[] = $listing;
                         $numBad++;
                     }else{
