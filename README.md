@@ -105,5 +105,11 @@ Inside this folder is where a lot of the "normalization" of the separate data fe
     * The main queue engine uses REDIS to manage the queues and a dashboard to monitor these jobs is located at [https://mothership.kerigan.com/horizon](https://mothership.kerigan.com/horizon)
 * **Server Configuration**
     * Care was taken to make the server setup process as painless as possible, but there are a few custom configurations that we'll have to include.
-    * While editing the site in the Forge dashboard, you'll need to set up a queue as follows
+    * While editing the site in the Forge dashboard, you'll need to set up a queue as follows:
+
     ![forge dashboard](https://github.com/keriganmarketing/mothership/blob/master/forge_dashboard.png)
+
+    * Additionally, add `php artisan horizon:terminate` to the end of your deploy script like so:
+
+    ![deploy script](https://github.com/keriganmarketing/mothership/blob/master/forge_dashboard.png)
+
