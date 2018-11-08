@@ -26,12 +26,18 @@ class ListingsUpdater extends Updater implements MakesUpdates
         $dateLastModified = $this->getLastModifiedDate('listings');
 
         foreach ($this->classArray as $class) {
+            echo 'Starting updates for class ' . $class . PHP_EOL;
             $results = $this->getNewProperties($class, $dateLastModified);
             foreach ($results as $result) {
+                echo '|';
                 $this->handleResult($class, $result);
             }
+            echo PHP_EOL . 'done.' . PHP_EOL;
         }
+
+        echo 'Syncing photos.' . PHP_EOL;
         Photo::sync();
+        echo 'done.' . PHP_EOL;
     }
 
     public function troubleshoot($class, $mlsNumber)

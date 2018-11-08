@@ -60,22 +60,26 @@ class Photo extends Model
      */
     public static function sync()
     {
-        // Get the listings that still don't have photos
-        $listingsWithNoPhotos = Listing::where('preferred_image', null)->orWhere('preferred_image', '')->get();
+        // Get the listings that still don't have photos 11/6: chunked output to save memory.
+        Listing::where('preferred_image', null)->orWhere('preferred_image', '')->chunk(500, function ($listingsWithNoPhotos) {
+            foreach ($listingsWithNoPhotos as $listing) { 
 
-        // Try to find photos in the database. If none exist, try to get them from MLS API.
-        // If neither of those work, safe to say the the photos haven't been uploaded yet.
-        foreach ($listingsWithNoPhotos as $listing) {
-            if (Photo::where('listing_id', $listing->id)->exists()) {
-                $listing->preferred_image = self::preferredPhotoUrl($listing->id);
-                $listing->save();
-                echo 'x';
-            } else {
-                $photos = (new Builder($listing->association))->fetchPhotos($listing);
-                (new Photo)->savePhotos($listing, $photos);
-                echo '+';
+                // Try to find photos in the database. If none exist, try to get them from MLS API.
+                // If neither of those work, safe to say the the photos haven't been uploaded yet.
+                if (Photo::where('listing_id', $listing->id)->exists()) {
+                    echo $listing->mls_account . ' ---- ok --' . PHP_EOL;
+                    $listing->preferred_image = self::preferredPhotoUrl($listing->id);
+                    $listing->save();
+                    
+                } else {
+                    echo $listing->mls_account . ' -- nope -- ';
+                    $photos = (new Builder($listing->association))->fetchPhotos($listing);
+                    echo '.';
+                    (new Photo)->savePhotos($listing, $photos);
+                    echo '.' . PHP_EOL;
+                }
             }
-        }
+        });
     }
 
     protected static function preferredPhotoUrl($listingId)

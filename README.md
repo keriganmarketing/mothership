@@ -76,10 +76,10 @@ ECAR_PASSWORD={your_ecar_password}
 ### App\Helpers Folder
 Inside this folder is where a lot of the "normalization" of the separate data feeds happen.
 
-* **BcarOptions/EcarOptions Classes**
+* *BcarOptions/EcarOptions Classes*
     * These classes specifiy the specific columns requested from their respective associations. The columns listed are what the master `listings` table needs to be complete.
 
-* **App\Helpers\Builder.php**
+* *Builder.php*
     * This class contains all of the functions needed to build a fresh set of data for the association. To run the builder, simply use the following command from inside the `php artisan tinker` console:
 
     * BCAR example
@@ -91,8 +91,7 @@ Inside this folder is where a lot of the "normalization" of the separate data fe
         ```php
         (new Builder('ecar'))->rebuild();
         ```
-
-    This method will run all the necessary functions to build a fresh set of data.
+    The `rebuild()` method will run all the necessary functions to build a fresh set of data in the database.
 * **App\Updaters Folder**
     * The classes in this folder are responsible for running the updaters on listings, agents, openhouses, etc.
     * There are also helper methods included to force updates for a certain class, update a single listing, get photos for a specific listing, and more.
@@ -106,4 +105,3 @@ Inside this folder is where a lot of the "normalization" of the separate data fe
     * The main queue engine uses REDIS to manage the queues and a dashboard to monitor these jobs is located at (https://mothership.kerigan.com/horizon)[https://mothership.kerigan.com/horizon]
 * **Server Configuration**
     * Care was taken to make the server setup process as painless as possible, but there are a few custom configurations that we'll have to include.
-    * **
