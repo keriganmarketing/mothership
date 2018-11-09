@@ -107,13 +107,31 @@ class Builder
      */
     public function freshAgentPhotos()
     {
+        $pass = 1;
+        echo '---------------------' . PHP_EOL;
         echo 'Adding agent photos...' . PHP_EOL;
-        DB::table('agents')->where('association', $this->association)->orderBy('id')->chunk(100, function ($agents) {
-            foreach ($agents as $agent) {
-                echo '|';
-                $this->downloadPhotosForAgent($agent);
+        
+        DB::table('agents')->where('association', $this->association)->orderBy('id')->chunk(75, function ($agents)
+            use (&$pass) {
+            $agentIds = [];
+            foreach ($agents as $agent) { 
+                $agentIds[] = $agent->agent_id;
+            }
+
+            $photos = $this->rets->GetObject('ActiveAgent', 'Photo', $agentIds, '*', 1);
+            echo $photos->count() . ' photos requested in pass ' . $pass++ . '.' . PHP_EOL;
+
+            foreach ($photos as $photo) {
+                if (! $photo->isError()) {
+                    AgentPhoto::create([
+                        'agent_id'    => $agent->id,
+                        'url'         => $photo->getLocation(),
+                        'description' => $photo->getContentDescription() ?? 'No Photo description provided'
+                    ]);
+                }
             }
         });
+
         echo PHP_EOL . 'done' . PHP_EOL;
     }
 
@@ -161,7 +179,6 @@ class Builder
 
             foreach ($results as $result) {
                 ListingsHelper::saveListing($this->association, $result, $class);
-                dd($result);
                 $numListings++;
             }
 

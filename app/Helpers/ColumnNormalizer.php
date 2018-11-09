@@ -81,6 +81,7 @@ class ColumnNormalizer
     {
         $this->acreage           = $result['LIST_57'] > 0 ? $result['LIST_57']: 0;
         $this->agent_id          = $result['LIST_5'];
+        $this->amenities                = $result['GF20150204172056869833000000'];
         $this->apn               = $result['LIST_80'];
         $this->area              = preg_replace('/^[0-9]* ?- ?/', '', $result['LIST_29']);
         $this->bathrooms         = isset($result['LIST_67']) ? $result['LIST_67']: 0;
@@ -89,6 +90,7 @@ class ColumnNormalizer
         $this->class             = $result['LIST_8'];
         $this->colist_agent_id   = $result['LIST_6'];
         $this->colist_office_id  = $result['LIST_165'];
+        $this->colisting_member_shortid = $result['colisting_member_shortid'];
         $this->date_modified     = $result['LIST_87'];
         $this->description       = $result['LIST_78'];
         $this->directions        = $result['LIST_82'];
@@ -99,12 +101,13 @@ class ColumnNormalizer
         $this->last_taxes        = $result['LIST_75'] > 0 ? $result['LIST_75']: 0;
         $this->last_tax_year     = $result['LIST_76'] > 0 ? $result['LIST_76']: 0;
         $this->latitude          = is_numeric($result['LIST_46']) ? $result['LIST_46']: 0;
+        $this->list_date         = $result['LIST_10'];
+        $this->listing_member_shortid   = $result['listing_member_shortid'];
         $this->longitude         = is_numeric($result['LIST_47']) ? $result['LIST_47']: 0;
         $this->lot_dimensions    = $result['LIST_56'];
         $this->middle_school     = $result['LIST_89'];
         $this->mls_account       = $result['LIST_3'];
         $this->office_id         = $result['LIST_106'];
-        $this->list_date         = $result['LIST_10'];
         $this->sold_date         = $result['LIST_12'];
         $this->sold_price        = is_numeric($result['LIST_23']) ? $result['LIST_23']: 0;
         $this->price             = is_numeric($result['LIST_22']) ? $result['LIST_22']: 0;
@@ -123,17 +126,16 @@ class ColumnNormalizer
         $this->waterfront        = $result['LIST_192'];
         $this->year_built        = isset($result['LIST_53']) ? $result['LIST_53']: 0;
         $this->zip               = $result['LIST_43'];
+        
+        
     }
 
     public function setBcarColumns($result)
     {
         $this->energy_features          = $result['GF20150204172056617468000000'];
         $this->exterior                 = $result['GF20150204172056829043000000'];
-        $this->amenities                = $result['GF20150204172056869833000000'];
         $this->appliances               = $result['GF20150204172056907082000000'];
-        $this->colisting_member_shortid = $result['colisting_member_shortid'];
         $this->construction             = $result['GF20150204172056790876000000'];
-        $this->listing_member_shortid   = $result['listing_member_shortid'];
 
         if ($this->class == 'A') {
             $this->utilities             = $result['GF20150204172056580165000000'];
@@ -171,6 +173,7 @@ class ColumnNormalizer
 
     public function setEcarColumns($result)
     {
+
         if ($this->class == 'A') {
             $this->appliances           = $result['GF20131203203523234694000000'];
             $this->utilities            = $result['GF20131203185458688530000000'];
