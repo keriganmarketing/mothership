@@ -203,6 +203,14 @@ class Builder
         return $this->rets->GetObject('Property', 'HiRes', $listing->mls_account, '*', 1);
     }
 
+    public function fetchPhotoByMls($mls_account)
+    {
+        $photos = $this->rets->GetObject('Property', 'HiRes', $mls_account, '*', 1);
+        foreach($photos as $photo){
+            Photo::savePhotos($mls_account, $photo);
+        }
+    }
+
     /**
      * Fetch new photos for all listings in provided array 
      *
