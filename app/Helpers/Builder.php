@@ -44,6 +44,12 @@ class Builder
             $this->fetchListings($class);
         }
 
+        echo 'Cleaning...';
+        ($this->association == 'bcar' ?
+            (new BcarCleaner())->clean() :
+            (new EcarCleaner())->clean()
+        );
+
         echo 'Removing duplicates if any...';
         $this->removeDuplicates();
         echo 'done' . PHP_EOL;
@@ -175,7 +181,7 @@ class Builder
         while (! $maxRowsReached) {
             $options = $this->association == 'bcar' ?
                 BcarOptions::all($offset) : EcarOptions::all($offset);
-            $results = $this->rets->Search('Property', $class, '*', $options[$class]);
+            $results = $this->rets->Search('Property', $class, '(LIST_104=Y)', $options[$class]);
 
             foreach ($results as $result) {
                 ListingsHelper::saveListing($this->association, $result, $class);
@@ -272,16 +278,9 @@ class Builder
           ->get();
 
         if($duplicateRecords->count() > 0){ 
-
-            
-
-            // Remove all duplicates but most recent
-            //$duplicateRecords->forget($duplicateRecords->count());
-
-            $toDelete = [];
             foreach ($duplicateRecords as $record) {
                 $listings = Listing::where('mls_account',$record->mls_account)->get();
-                $listings->forget($listings->count() - 1);
+                $listings->forget(0);
 
                 foreach($listings as $toDelete){
                     Listing::where('id', $toDelete->id)->delete(); 
