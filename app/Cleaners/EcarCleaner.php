@@ -98,7 +98,7 @@ class EcarCleaner extends Cleaner
             (
                 'Property',
                 $class,
-                '*',
+                '(LIST_104=Y)',
                 [
                 'Limit' => 'None',
                 'Offset' => $offset,

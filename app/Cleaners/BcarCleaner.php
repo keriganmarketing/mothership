@@ -85,13 +85,13 @@ class BcarCleaner extends Cleaner
         Photo::sync();
     }
 
-    protected function getListingMlsIds($class)
+    public function getListingMlsIds($class)
     {
         return $this->rets->Search
             (
                 'Property',
                 $class,
-                '*',
+                '(LIST_104=Y)',
                 [
                 'Limit' => '99999',
                 'Offset' => 0,
