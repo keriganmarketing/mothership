@@ -113,6 +113,9 @@ class ListingsUpdater extends Updater implements MakesUpdates
                 Photo::savePhotos($listing, $photos);
                 echo '#'.$mlsNumber . PHP_EOL;
             }
+        }else{
+            $photos = $this->getPhotosForListing($mlsNumber);
+            Photo::savePhotos($listing, $photos);
         }
     }
 
