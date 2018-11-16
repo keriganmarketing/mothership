@@ -304,7 +304,7 @@ class Builder
             Listing::where('class', $class)->where('association', $this->association)->chunk(2500, function ($listings)
                 use (&$numGood, &$numBad, &$listingsToUpdate) {
                 foreach ($listings as $listing) {
-                    if(! Photo::where('mls_account', '=', $listing->mls_account)->exists()) {
+                    if(! Photo::where('listing_id', '=', $listing->id)->exists()) {
                         $listingsToUpdate[] = $listing;
                         $numBad++;
                     }else{

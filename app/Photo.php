@@ -137,4 +137,23 @@ class Photo extends Model
     {
         return Photo::where('listing_id', $listingId)->get();
     }
+
+    public static function fixListingIds()
+    {
+        echo 'starting photo fix';
+        $photos = Photo::where('listing_id', '=', 0)->get();
+        foreach($photos as $photo){
+            $listing = Listing::where('mls_account', $photo->mls_account)->first();
+            echo $listing->id;
+            Photo::updateOrCreate(
+                [
+                    'mls_account' => $photo->mls_account,
+                    'url'         => $photo->url
+                ],
+                [
+                    'listing_id'  => $listing->id
+                ]
+            );
+        }
+    }
 }
