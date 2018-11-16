@@ -152,3 +152,4 @@ class ListingsUpdater extends Updater implements MakesUpdates
         }
     }
 }
+
