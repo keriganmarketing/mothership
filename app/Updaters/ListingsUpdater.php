@@ -95,7 +95,7 @@ class ListingsUpdater extends Updater implements MakesUpdates
             foreach ($results as $result) {
                 $listing = ListingsHelper::saveListing($this->association, $result, $class);
                 $photos  = $this->getPhotosForListing($mlsNumber);
-                Photo::savePhotos($listing, $photos);
+                Photo::savePhotos($listing->id, $photos);
                 echo '#'.$mlsNumber . PHP_EOL;
             }
         }
@@ -110,12 +110,12 @@ class ListingsUpdater extends Updater implements MakesUpdates
             foreach ($results as $result) {
                 $listing = ListingsHelper::saveListing($this->association, $result, $class);
                 $photos  = $this->getPhotosForListing($mlsNumber);
-                Photo::savePhotos($listing, $photos);
+                Photo::savePhotos($listing->id, $photos);
                 echo '#'.$mlsNumber . PHP_EOL;
             }
         }else{
             $photos = $this->getPhotosForListing($mlsNumber);
-            Photo::savePhotos($listing, $photos);
+            Photo::savePhotos($listing->id, $photos);
         }
     }
 
@@ -137,14 +137,14 @@ class ListingsUpdater extends Updater implements MakesUpdates
         if ($listing == null) {
             $listing = ListingsHelper::saveListing($this->association, $result, $class);
             $photos  = $this->getPhotosForListing($mlsNumber);
-            Photo::savePhotos($listing, $photos);
+            Photo::savePhotos($listing->id, $photos);
         } else {
             $listing = Listing::byMlsNumber($mlsNumber);
             ListingsHelper::saveListing($this->association, $result, $class, $listing->id);
             $oldPhotos  = $listing->photos;
             $this->delete($oldPhotos);
             $newPhotos  = $this->getPhotosForListing($mlsNumber);
-            Photo::savePhotos($listing, $newPhotos);
+            Photo::savePhotos($listing->id, $newPhotos);
         }
     }
 
@@ -158,7 +158,7 @@ class ListingsUpdater extends Updater implements MakesUpdates
         $listing = Listing::where('mls_account', $mlsNumber)->first();
         $photos  = $this->getPhotosForListing($mlsNumber);
 
-        Photo::savePhotos($listing, $photos);
+        Photo::savePhotos($listing->id, $photos);
 
         echo 'Done';
     }

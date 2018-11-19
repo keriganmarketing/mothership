@@ -29,7 +29,7 @@ class Photo extends Model
      *
      * @return void
      */
-    public static function savePhotos($listing, $photos)
+    public static function savePhotos($listingId, $photos)
     {
         $updated = 0;
         $skipped = 0;
@@ -46,7 +46,7 @@ class Photo extends Model
                         'mls_account'       => $photo->getContentID(),
                         'url'               => $photo->getLocation(),
                         'preferred'         => $photo->isPreferred(),
-                        'listing_id'        => $listing->id,
+                        'listing_id'        => $listingId,
                         'photo_description' => $photo->getContentDescription()
                     ]
                 );
