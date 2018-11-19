@@ -114,8 +114,10 @@ class ListingsUpdater extends Updater implements MakesUpdates
                 echo '#'.$mlsNumber . PHP_EOL;
             }
         }else{
+            echo 'Listing #'.$mlsNumber . ' already exists. Updating photos.' . PHP_EOL;
             $photos = $this->getPhotosForListing($mlsNumber);
             Photo::savePhotos($listing->id, $photos);
+            echo 'done' . PHP_EOL;
         }
     }
 
