@@ -91,7 +91,6 @@ class BcarCleaner extends Cleaner
             (
                 'Property',
                 $class,
-                '(LIST_104=Y)',
                 [
                 'Limit' => '99999',
                 'Offset' => 0,
