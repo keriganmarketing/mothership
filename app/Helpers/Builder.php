@@ -202,7 +202,7 @@ class Builder
     {
         echo 'fetching ' . $mlsNumber . PHP_EOL;
         $options = $this->association == 'bcar' ?
-                BcarOptions::all($offset) : EcarOptions::all($offset);
+                BcarOptions::all(0) : EcarOptions::all(0);
         $results = $this->rets->Search('Property', $class, '(LIST_3='.$mlsNumber.'),(LIST_104=Y)', $options[$class]);
         foreach ($results as $result) {
             ListingsHelper::saveListing($this->association, $result, $class);
