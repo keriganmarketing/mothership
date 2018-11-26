@@ -223,7 +223,7 @@ class Builder
 
     public function fetchPhotoByMls($mls_account)
     {
-        $listing = Listing::where('mls_account',$mls_account)->get();
+        $listing = Listing::where('mls_account',$mls_account)->first();
         $photos = $this->rets->GetObject('Property', 'HiRes', $mls_account, '*', 1);
         Photo::savePhotos($listing->id, $photos);
     }
