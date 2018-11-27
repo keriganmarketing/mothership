@@ -22,8 +22,6 @@ class MapSearchController extends Controller
             ]
         );
 
-        // $response->assertJsonCount($listings->count(), $key = null);
-
         return $response;
     }
 }
