@@ -14,8 +14,6 @@ class MapSearchController extends Controller
      */
     public function index(Request $request)
     {
-
-        dd($request);
         $listings = MapSearch::getAllListings($request);
 
         $response = response()->json($listings)->withHeaders(
@@ -25,7 +23,6 @@ class MapSearchController extends Controller
         );
 
         $response->assertJsonCount($listings->count(), $key = null);
-        $response->header('Content-Length',strlen($response->content()));
 
         return $response;
     }
