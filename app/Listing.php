@@ -101,7 +101,7 @@ class Listing extends Model
                     ->orWhereRaw("sub_area = '{$city}'")
                     ->orWhereRaw("area = '{$city}'")
                     ->orWhereRaw("subdivision LIKE '%{$city}%'")
-                    ->orWhereRaw("full_address LIKE '%{$city}%'")
+                    ->orWhereRaw("full_address LIKE '{$city}%'")
                     ->orWhereRaw("mls_account = '{$city}'");
             });
         })
