@@ -14,6 +14,8 @@ class MapSearchController extends Controller
      */
     public function index(Request $request)
     {
+
+        dd($request);
         $listings = MapSearch::getAllListings($request);
 
         $response = response()->json($listings)->withHeaders(
