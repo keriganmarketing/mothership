@@ -23,6 +23,7 @@ class MapSearchController extends Controller
         );
 
         $response->assertJsonCount($listings->count(), $key = null);
+        $response->header('Content-Length',strlen($response->content()));
 
         return $response;
     }
