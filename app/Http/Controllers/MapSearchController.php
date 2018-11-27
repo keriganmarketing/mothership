@@ -16,12 +16,14 @@ class MapSearchController extends Controller
     {
         $listings = MapSearch::getAllListings($request);
 
-        $response = response()->json($listings, 200,
+        $response = response()->json($listings)->withHeaders(
             [
                 'Access-Control-Allow-Origin' => '*'
             ]
         );
             
+        $response->assertHeader('Content-Length',strlen($response->content()));
+
         return $response;
     }
 }
