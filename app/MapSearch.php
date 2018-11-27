@@ -15,7 +15,7 @@ class MapSearch extends Model
     public static function getAllListings($request)
     {
         $city         = $request->city ?? '';
-        $status       = (isset($request->status) && $request->status != '' ? $request->status : 'Active');
+        $status       = $request->status ?? '';
         $propertyType = $request->propertyType ?? '';
         $minPrice     = $request->minPrice ?? '';
         $maxPrice     = $request->maxPrice ?? '';

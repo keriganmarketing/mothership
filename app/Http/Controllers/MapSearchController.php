@@ -21,6 +21,8 @@ class MapSearchController extends Controller
                 'Access-Control-Allow-Origin' => '*'
             ]
         );
+            
+        $response->assertHeader('Content-Length',strlen($response->content()));
 
         return $response;
     }
