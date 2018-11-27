@@ -51,7 +51,7 @@ class MapSearch extends Model
                 return $query->whereIn('property_type', $propertyType);
             })
             ->when($status, function ($query) use ($status) {
-                return $query->whereIn('status', 'Active');
+                return $query->whereIn('status', $status);
             })
             ->when($minPrice, function ($query) use ($minPrice) {
                 return $query->where('price', '>=', $minPrice);
