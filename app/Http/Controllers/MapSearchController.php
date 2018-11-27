@@ -22,8 +22,6 @@ class MapSearchController extends Controller
             ]
         );
             
-        $response->assertHeader('Content-Length',strlen($response->content()));
-
         return $response;
     }
 }
