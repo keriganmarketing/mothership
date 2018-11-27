@@ -27,4 +27,3 @@ class MapSearchController extends Controller
         return $response;
     }
 }
-
