@@ -14,7 +14,8 @@ class MapSearchController extends Controller
      */
     public function index(Request $request)
     {
-        $listings = MapSearch::getAllListings($request);
+        //$listings = MapSearch::getAllListings($request);
+        $listings = Listings::where('status=Active')->get();
 
         $response = response()->json($listings, 200,
             [
