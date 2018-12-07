@@ -287,7 +287,7 @@ class Builder
     {
         DB::table('agents')->where('association', $this->association)->where('url','LIKE','%'.$url.'%')->orderBy('id')->chunk(100, function($agents){
             foreach($agents as $agent){
-                $this->patchByOfficeId($agent->office_short_id);
+                $this->patchByOfficeId($agent->office_id);
             }
         });
     }
@@ -302,19 +302,17 @@ class Builder
             $results = $this->rets->Search('Property', $class, '(LIST_106='.$officeId.')', $options[$class]);
 
             $numListings = 0;
-            $listingsToUpdate = [];
+            $mlsNumbers = [];
             foreach ($results as $result) {
                 ListingsHelper::saveListing($this->association, $result, $class);
                 $numListings++;
-                $listingsToUpdate = $result['LIST_3'];
+                $mlsNumbers[] = $result['LIST_3'];
             }
             echo 'Listings: ' . $numListings . PHP_EOL;
-            
-            $listings = [];
-            foreach($listingsToUpdate as $record){
-                $listings[] = Listing::where('mls_account',$record->mls_account)->get();
-            }
-            $this->fetchAllPhotos($listingsToUpdate);
+
+            $listings = Listing::whereIn('mls_account',$mlsNumbers)->get();
+
+            $this->fetchAllPhotos($listings);
 
             echo '------------------' . PHP_EOL;
         }
