@@ -285,7 +285,10 @@ class Builder
 
     public function patchByCompanyUrl($url)
     {
-        DB::table('agents')->where('association', $this->association)->where('url','LIKE','%'.$url.'%')->orderBy('id')->chunk(100, function($agents){
+        $count = 0;
+        DB::table('agents')->distinct()->select('office_id')->where('association', $this->association)
+            ->where('url','LIKE','%'.$url.'%')->orderBy('id')->chunk(100, function($agents)use($count){
+                echo $agents->count() . ' found' . PHP_EOL;
             foreach($agents as $agent){
                 $this->patchByOfficeId($agent->office_id);
             }
