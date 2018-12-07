@@ -28,21 +28,23 @@ class BcarCleaner extends Cleaner
         foreach ($this->classArray as $class) {
             $results = $this->getListingMlsIds($class);
             foreach ($results as $result) {
-                array_push($listingsArray, $result['LIST_3']);
+               $listingsArray[] = $result['LIST_3'];
             }
         }
         foreach ($listingIds as $listingId) {
             if (! in_array($listingId, $listingsArray)) {
                 $fullListing = Listing::where('mls_account', $listingId)->first();
-                $fullListing->delete();
-                $listingCounter = $listingCounter + 1;
-                echo '.';
+                if($fullListing){
+                    $fullListing->delete();
+                    $listingCounter = $listingCounter + 1;
+                    echo '.';
 
-                $photos = Photo::fromListingId($fullListing->id);
-                foreach ($photos as $photo) {
-                    $photo->delete();
-                    $photoCounter = $photoCounter +1;
-                    echo '*';
+                    $photos = Photo::fromListingId($fullListing->id);
+                    foreach ($photos as $photo) {
+                        $photo->delete();
+                        $photoCounter = $photoCounter +1;
+                        echo '*';
+                    }
                 }
             }
         }
@@ -87,10 +89,10 @@ class BcarCleaner extends Cleaner
 
     public function getListingMlsIds($class)
     {
-        return $this->rets->Search
-            (
+        return $this->rets->Search(
                 'Property',
                 $class,
+                '*',
                 [
                 'Limit' => '99999',
                 'Offset' => 0,
