@@ -283,6 +283,43 @@ class Builder
         (new BcarCleaner())->repair();
     }
 
+    public function patchByCompanyUrl($url)
+    {
+        DB::table('agents')->where('association', $this->association)->where('url','LIKE','%'.$url.'%')->orderBy('id')->chunk(100, function($agents){
+            foreach($agents as $agent){
+                $this->patchByOfficeId($agent->office_short_id);
+            }
+        });
+    }
+
+    public function patchByOfficeId($officeId)
+    {
+        echo 'Fetching listings by office ' . $officeId . PHP_EOL;
+        foreach ($this->classArray as $class) {
+            echo 'CLASS ' . $class . PHP_EOL;
+            $options = $this->association == 'bcar' ?
+                    BcarOptions::all(0) : EcarOptions::all(0);
+            $results = $this->rets->Search('Property', $class, '(LIST_106='.$officeId.')', $options[$class]);
+
+            $numListings = 0;
+            $listingsToUpdate = [];
+            foreach ($results as $result) {
+                ListingsHelper::saveListing($this->association, $result, $class);
+                $numListings++;
+                $listingsToUpdate = $result['LIST_3'];
+            }
+            echo 'Listings: ' . $numListings . PHP_EOL;
+            
+            $listings = [];
+            foreach($listingsToUpdate as $record){
+                $listings[] = Listing::where('mls_account',$record->mls_account)->get();
+            }
+            $this->fetchAllPhotos($listingsToUpdate);
+
+            echo '------------------' . PHP_EOL;
+        }
+    }
+
     public function removeDuplicates()
     {        
         $duplicateRecords = Listing::selectRaw('mls_account, COUNT(mls_account) as occurences')
