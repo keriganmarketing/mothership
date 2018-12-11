@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'use' => 'default',
+    'use' => 'dev',
 
     /*
     |--------------------------------------------------------------------------
@@ -40,7 +40,7 @@ return [
     */
 
     'waits' => [
-        'redis:default' => 60,
+        'redis:dev' => 60,
     ],
 
     'trim' => [
@@ -63,7 +63,7 @@ return [
         'production' => [
             'supervisor-1' => [
                 'connection' => 'redis',
-                'queue' => ['default'],
+                'queue' => ['dev'],
                 'balance' => 'auto',
                 'processes' => 1,
                 'tries' => 1,
@@ -73,12 +73,11 @@ return [
         'local' => [
             'supervisor-1' => [
                 'connection' => 'redis',
-                'queue' => ['default'],
+                'queue' => ['dev'],
                 'balance' => 'simple',
                 'processes' => 1,
                 'tries' => 1,
             ],
         ],
     ],
-
 ];
