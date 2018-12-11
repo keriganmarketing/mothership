@@ -387,7 +387,7 @@ class Builder
             if($results->count() > 0){
                 foreach($results as $result){
                     ListingsHelper::saveListing($this->association, $result, $class);
-                    echo 'Class: ' . $class . ' Photos: ';
+                    echo 'Class: ' . $class . '; Photos: ';
                     $this->fetchPhotoByMls($mls);
                 }
             }
