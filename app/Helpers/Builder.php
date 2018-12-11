@@ -393,8 +393,7 @@ class Builder
             }
         }
 
+        Photo::sync();
         echo '------------------' . PHP_EOL;
     }
-
-
 }
