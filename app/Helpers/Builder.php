@@ -293,6 +293,8 @@ class Builder
                 $this->patchByOfficeId($agent->office_id);
             }
         });
+
+        Photo::sync();
     }
 
     public function patchByOfficeId($officeId)
@@ -373,6 +375,26 @@ class Builder
         }
     }
 
+    public function forceByMLS($mls)
+    {
+        echo 'Forcing ' . $mls . PHP_EOL;
+        $listings = [];
+
+        foreach ($this->classArray as $class) {
+            $options = $this->association == 'bcar' ?
+                    BcarOptions::all(0) : EcarOptions::all(0);
+            $results = $this->rets->Search('Property', $class, '(LIST_3='.$mls.')', $options[$class]);
+            if($results->count() > 0){
+                foreach($results as $result){
+                    ListingsHelper::saveListing($this->association, $result, $class);
+                    echo 'Class: ' . $class . ' Photos: ';
+                    $this->fetchPhotoByMls($mls);
+                }
+            }
+        }
+
+        echo '------------------' . PHP_EOL;
+    }
 
 
 }
