@@ -69,7 +69,7 @@ return [
                 'tries' => 3,
             ],
             'updater-supervisor' => [
-                'connection' => 'redis',
+                'connection' => 'updaters',
                 'queue' => ['updaters'],
                 'balance' => 'auto',
                 'processes' => 3,
@@ -77,7 +77,7 @@ return [
                 'timeout' => 600
             ],
             'cleaner-supervisor' => [
-                'connection' => 'redis',
+                'connection' => 'cleaners',
                 'queue' => ['cleaners'],
                 'balance' => 'auto',
                 'processes' => 3,
