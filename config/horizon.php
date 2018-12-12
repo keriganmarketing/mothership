@@ -65,24 +65,8 @@ return [
                 'connection' => 'redis',
                 'queue' => ['default'],
                 'balance' => 'auto',
-                'processes' => 3,
-                'tries' => 3,
-            ],
-            'updater-supervisor' => [
-                'connection' => 'updaters',
-                'queue' => ['updaters'],
-                'balance' => 'auto',
-                'processes' => 3,
-                'tries' => 3,
-                'timeout' => 600
-            ],
-            'cleaner-supervisor' => [
-                'connection' => 'cleaners',
-                'queue' => ['cleaners'],
-                'balance' => 'auto',
-                'processes' => 3,
+                'processes' => 10,
                 'tries' => 1,
-                'timeout' => 1200
             ],
         ],
 
@@ -92,23 +76,7 @@ return [
                 'queue' => ['default'],
                 'balance' => 'auto',
                 'processes' => 3,
-                'tries' => 3,
-            ],
-            'updater-supervisor' => [
-                'connection' => 'updaters',
-                'queue' => ['updaters'],
-                'balance' => 'auto',
-                'processes' => 3,
-                'tries' => 3,
-                'timeout' => 600
-            ],
-            'cleaner-supervisor' => [
-                'connection' => 'cleaners',
-                'queue' => ['cleaners'],
-                'balance' => 'auto',
-                'processes' => 3,
                 'tries' => 1,
-                'timeout' => 1200
             ],
         ],
     ],
