@@ -7,6 +7,7 @@ use App\Jobs\CleanEcar;
 use App\Jobs\UpdateBcar;
 use App\Jobs\UpdateEcar;
 use App\Jobs\UpdateAgents;
+use App\Jobs\Heartbeat;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 use App\Updaters\OpenHousesUpdater;
@@ -41,6 +42,11 @@ class Kernel extends ConsoleKernel
         $schedule->job(new UpdateEcar, 'updaters')->hourlyAt(15)->withOutOverlapping();
         $schedule->job(new UpdateOpenHouses, 'updaters')->hourly(20)->withoutOverlapping();
         //$schedule->job(new RepairDB, 'cleaners')->daily()->withoutOverlapping();
+
+        //dev 
+        $schedule->job(new Heartbeat, 'updaters')->everyMinute();
+        $schedule->job(new Heartbeat, 'cleaners')->everyMinute();
+        
         $schedule->command('horizon:snapshot')->everyFiveMinutes();
     }
 
