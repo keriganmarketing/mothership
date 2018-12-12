@@ -66,14 +66,14 @@ return [
 
         'updaters' => [
             'driver' => 'redis',
-            'connection' => 'default',
+            'connection' => 'updaters',
             'queue' => 'updaters',
             'retry_after' => 600,
         ],
 
         'cleaners' => [
             'driver' => 'redis',
-            'connection' => 'default',
+            'connection' => 'cleaners',
             'queue' => 'cleaners',
             'retry_after' => 1200,
         ],
