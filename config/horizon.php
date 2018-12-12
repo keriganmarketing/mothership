@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'use' => 'default',
+    'use' => 'dev',
 
     /*
     |--------------------------------------------------------------------------
@@ -40,7 +40,7 @@ return [
     */
 
     'waits' => [
-        'redis:default' => 60,
+        'redis:dev' => 60,
     ],
 
     'trim' => [
@@ -61,24 +61,55 @@ return [
 
     'environments' => [
         'production' => [
-            'supervisor-1' => [
+            'main-supervisor' => [
                 'connection' => 'redis',
                 'queue' => ['default'],
                 'balance' => 'auto',
-                'processes' => 10,
+                'processes' => 3,
                 'tries' => 3,
+            ],
+            'updater-supervisor' => [
+                'connection' => 'redis',
+                'queue' => ['updaters'],
+                'balance' => 'auto',
+                'processes' => 3,
+                'tries' => 3,
+                'timeout' => 600
+            ],
+            'cleaner-supervisor' => [
+                'connection' => 'redis',
+                'queue' => ['cleaners'],
+                'balance' => 'auto',
+                'processes' => 3,
+                'tries' => 1,
+                'timeout' => 1200
             ],
         ],
 
         'local' => [
-            'supervisor-1' => [
+            'main-supervisor' => [
                 'connection' => 'redis',
                 'queue' => ['default'],
-                'balance' => 'simple',
-                'processes' => 10,
+                'balance' => 'auto',
+                'processes' => 3,
                 'tries' => 3,
+            ],
+            'updater-supervisor' => [
+                'connection' => 'redis',
+                'queue' => ['updaters'],
+                'balance' => 'auto',
+                'processes' => 3,
+                'tries' => 3,
+                'timeout' => 600
+            ],
+            'cleaner-supervisor' => [
+                'connection' => 'redis',
+                'queue' => ['cleaners'],
+                'balance' => 'auto',
+                'processes' => 3,
+                'tries' => 1,
+                'timeout' => 1200
             ],
         ],
     ],
-
 ];
