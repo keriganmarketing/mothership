@@ -33,14 +33,14 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->job(new CleanBcar)->daily()->withOutOverlapping();
-        $schedule->job(new CleanEcar)->daily()->withOutOverlapping();
-        $schedule->job(new CleanOpenHouses)->hourly()->withoutOverlapping();
-        $schedule->job(new UpdateAgents)->hourlyAt(5)->withOutOverlapping();
-        $schedule->job(new UpdateBcar)->hourlyAt(10)->withOutOverlapping();
-        $schedule->job(new UpdateEcar)->hourlyAt(15)->withOutOverlapping();
-        $schedule->job(new UpdateOpenHouses)->hourly(20)->withoutOverlapping();
-        $schedule->job(new RepairDB)->daily()->withoutOverlapping();
+        $schedule->job(new CleanBcar, 'cleaners')->daily()->withOutOverlapping();
+        $schedule->job(new CleanEcar, 'cleaners')->daily()->withOutOverlapping();
+        $schedule->job(new CleanOpenHouses, 'cleaners')->hourly()->withoutOverlapping();
+        $schedule->job(new UpdateAgents, 'updaters')->hourlyAt(5)->withOutOverlapping();
+        $schedule->job(new UpdateBcar, 'updaters')->hourlyAt(10)->withOutOverlapping();
+        $schedule->job(new UpdateEcar, 'updaters')->hourlyAt(15)->withOutOverlapping();
+        $schedule->job(new UpdateOpenHouses, 'updaters')->hourly(20)->withoutOverlapping();
+        //$schedule->job(new RepairDB, 'cleaners')->daily()->withoutOverlapping();
         $schedule->command('horizon:snapshot')->everyFiveMinutes();
     }
 

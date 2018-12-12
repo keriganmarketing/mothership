@@ -61,7 +61,21 @@ return [
             'driver' => 'redis',
             'connection' => 'default',
             'queue' => 'default',
-            'retry_after' => 300,
+            'retry_after' => 60,
+        ],
+
+        'updaters' => [
+            'driver' => 'redis',
+            'connection' => 'default',
+            'queue' => 'updaters',
+            'retry_after' => 600,
+        ],
+
+        'cleaners' => [
+            'driver' => 'redis',
+            'connection' => 'default',
+            'queue' => 'cleaners',
+            'retry_after' => 1200,
         ],
     ],
 
