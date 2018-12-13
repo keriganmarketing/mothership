@@ -44,8 +44,8 @@ class Kernel extends ConsoleKernel
         //$schedule->job(new RepairDB, 'cleaners')->daily()->withoutOverlapping();
 
         //dev 
-        $schedule->job(new Heartbeat, 'updaters')->everyMinute();
-        $schedule->job(new Heartbeat, 'cleaners')->everyMinute();
+        // $schedule->job(new Heartbeat, 'updaters')->everyMinute();
+        // $schedule->job(new Heartbeat, 'cleaners')->everyMinute();
         
         $schedule->command('horizon:snapshot')->everyFiveMinutes();
     }
