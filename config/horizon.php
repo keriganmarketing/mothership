@@ -63,9 +63,10 @@ return [
         'production' => [
             'main-supervisor' => [
                 'connection' => 'redis',
-                'queue' => ['default'],
+                'queue' => ['default', 'updaters', 'cleaners'],
                 'balance' => 'auto',
                 'processes' => 10,
+                'timeout' => 600,
                 'tries' => 1,
             ],
         ],
