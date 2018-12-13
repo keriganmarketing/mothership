@@ -57,11 +57,25 @@ return [
             'region' => 'us-east-1',
         ],
 
-        'redis' => [
+        'main' => [
+            'driver' => 'redis',
+            'connection' => 'main',
+            'queue' => 'main',
+            'retry_after' => 90,
+        ],
+
+        'updaters' => [
+            'driver' => 'redis',
+            'connection' => 'updaters',
+            'queue' => 'updaters',
+            'retry_after' => 800,
+        ],
+
+        'cleaners' => [
             'driver' => 'redis',
             'connection' => 'default',
-            'queue' => ['default','updaters','cleaners'],
-            'retry_after' => 90,
+            'queue' => 'cleaners',
+            'retry_after' => 1200,
         ],
     ],
 

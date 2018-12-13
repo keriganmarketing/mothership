@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'use' => 'default',
+    'use' => 'main',
 
     /*
     |--------------------------------------------------------------------------
@@ -62,11 +62,27 @@ return [
     'environments' => [
         'production' => [
             'main-supervisor' => [
-                'connection' => 'redis',
-                'queue' => ['default', 'updaters', 'cleaners'],
+                'connection' => 'main',
+                'queue' => ['main'],
                 'balance' => 'auto',
-                'processes' => 10,
+                'processes' => 6,
+                'timeout' => 100,
+                'tries' => 1,
+            ],
+            'updater-supervisor' => [
+                'connection' => 'updaters',
+                'queue' => ['updaters'],
+                'balance' => 'auto',
+                'processes' => 2,
                 'timeout' => 600,
+                'tries' => 1,
+            ],
+            'cleaner-supervisor' => [
+                'connection' => 'cleaners',
+                'queue' => ['cleaners'],
+                'balance' => 'auto',
+                'processes' => 2,
+                'timeout' => 1200,
                 'tries' => 1,
             ],
         ],
