@@ -62,8 +62,8 @@ return [
     'environments' => [
         'production' => [
             'main-supervisor' => [
-                'connection' => 'main',
-                'queue' => ['main'],
+                'connection' => 'redis',
+                'queue' => ['default'],
                 'balance' => 'auto',
                 'processes' => 6,
                 'timeout' => 100,

@@ -57,16 +57,16 @@ return [
             'region' => 'us-east-1',
         ],
 
-        'main' => [
+        'redis' => [
             'driver' => 'redis',
-            'connection' => 'main',
-            'queue' => 'main',
+            'connection' => 'default',
+            'queue' => 'default',
             'retry_after' => 90,
         ],
 
         'updaters' => [
             'driver' => 'redis',
-            'connection' => 'updaters',
+            'connection' => 'default',
             'queue' => 'updaters',
             'retry_after' => 800,
         ],
