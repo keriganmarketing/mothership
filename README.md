@@ -3,7 +3,7 @@
 ## An API for our BCAR and ECAR real estate sites
 
 ## Build Status
-[![Build Status](https://travis-ci.org/Doomtickle/mothership.svg?branch=master)](https://travis-ci.org/Doomtickle/mothership)
+[![Build Status](https://travis-ci.org/keriganmarketing/mothership.svg?branch=master)](https://travis-ci.org/keriganmarketing/mothership)
 
 CPAR / ECAR Mothership API
 ## Endpoints
