@@ -180,19 +180,19 @@ class Listing extends Model
         } else {
             $ids = [$agentShortId];
         }
-        // $listings = Listing::whereIn('listing_member_shortid', $ids)
-        //     ->orWhereIn('colisting_member_shortid', $ids)
-        //     ->groupBy('full_address')
-        //     ->latest()
-        //     ->get();
-
-        $listings = Listing::where(function($query) use ($ids){
-            $query->whereIn('listing_member_shortid', $ids);
-            $query->orWhereIn('colisting_member_shortid', $ids);
-        })->where('status','!=','Sold')
+        $listings = Listing::whereIn('listing_member_shortid', $ids)
+            ->orWhereIn('colisting_member_shortid', $ids)
             ->groupBy('full_address')
             ->latest()
             ->get();
+
+        // $listings = Listing::where(function($query) use ($ids){
+        //     $query->whereIn('listing_member_shortid', $ids);
+        //     $query->orWhereIn('colisting_member_shortid', $ids);
+        // })->where('status','!=','Sold')
+        //     ->groupBy('full_address')
+        //     ->latest()
+        //     ->get();
 
         // $listings = Listing::where('status','!=','Sold')
         //     ->orWhereIn('listing_member_shortid', $ids)
