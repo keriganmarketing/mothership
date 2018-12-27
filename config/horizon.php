@@ -44,8 +44,8 @@ return [
     ],
 
     'trim' => [
-        'recent' => 5040,
-        'failed' => 10080,
+        'recent' => 1440,
+        'failed' => 1440,
     ],
 
     /*
@@ -65,7 +65,7 @@ return [
                 'connection' => 'redis',
                 'queue' => ['default'],
                 'balance' => 'auto',
-                'processes' => 6,
+                'processes' => 1,
                 'timeout' => 100,
                 'tries' => 1,
             ],
@@ -73,7 +73,7 @@ return [
                 'connection' => 'updaters',
                 'queue' => ['updaters'],
                 'balance' => 'auto',
-                'processes' => 2,
+                'processes' => 1,
                 'timeout' => 600,
                 'tries' => 1,
             ],
@@ -81,7 +81,7 @@ return [
                 'connection' => 'cleaners',
                 'queue' => ['cleaners'],
                 'balance' => 'auto',
-                'processes' => 2,
+                'processes' => 1,
                 'timeout' => 1200,
                 'tries' => 1,
             ],

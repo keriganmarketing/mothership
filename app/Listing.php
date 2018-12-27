@@ -195,22 +195,7 @@ class Listing extends Model
             ->latest()
             ->get();
 
-        // $listings = Listing::where(function($query) use ($ids){
-        //     $query->whereIn('listing_member_shortid', $ids);
-        //     $query->orWhereIn('colisting_member_shortid', $ids);
-        // })->where('status','!=','Sold')
-        //     ->groupBy('full_address')
-        //     ->latest()
-        //     ->get();
-
-        // $listings = Listing::where('status','!=','Sold')
-        //     ->orWhereIn('listing_member_shortid', $ids)
-        //     ->orWhereIn('colisting_member_shortid', $ids)
-        //     ->groupBy('full_address')
-        //     ->latest()
-        //     ->get();
-
-        ProcessListingImpression::dispatch($listings);
+        //ProcessListingImpression::dispatch($listings);
 
         return $listings;
     }
