@@ -13,3 +13,4 @@ yarn-error.log
 .env
 /cronlog.txt
 .vs_code/
+package-lock.json

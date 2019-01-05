@@ -22,14 +22,14 @@ class Photo extends Model
     }
 
     /**
-     * Persist the photos to the database
+     * Persist the photos to the database for a single listing
      *
-     * @param mixed   $listing     The listing for the photos
-     * @param array    $photos      The photos for the listing
-     *
+     * @param Mxed    $listing The listing for the photos
+     * @param Array   $photos  The photos for the listing
+     * @param Boolean $output  Toggle CLI output
      * @return void
      */
-    public static function savePhotos($listingId, $photos)
+    public static function savePhotos($listingId, $photos, $output = false)
     {
         $updated = 0;
         $skipped = 0;
@@ -51,23 +51,23 @@ class Photo extends Model
                     ]
                 );
                 $updated++;
+                echo ($output ? '|' : null);
             }else{
                 $skipped++;
+                echo ($output ? 'X' : null);
             }
         }
-
-        echo $updated . ' updated, ' . $skipped . ' no content or not an image.' . PHP_EOL;
     }
 
     /**
      * Persist a single photo to the database
      *
-     * @param mixed   $listing     The listing for the photo
-     * @param array    $photo      The photo for the listing
-     *
+     * @param Array   $listingIds Array[listing->id] => listing->mls_account
+     * @param Array   $photo   The photo for the listing
+     * @param Boolean $output  Toggle CLI output
      * @return void
      */
-    public static function savePhoto($listingIds, $photo)
+    public static function savePhoto($listingIds, $photo, $output = false)
     {
         $hasUrl = $photo->getLocation() !== null && $photo->getLocation() !== '' ? $photo->getLocation() : false;
         if ($hasUrl) {
@@ -84,22 +84,24 @@ class Photo extends Model
                     'photo_description' => $photo->getContentDescription()
                 ]
             );
-            //echo '|';
+            echo ($output ? '|' : null);
         }else{
-            //echo 'X';
+            echo ($output ? 'X' : null);
         }
-
     }
 
     /**
      * Sync preferred photos in the listings table
-     *
+     * 
+     * @param Boolean $output Toggle CLI output
      * @return void
      */
-    public static function sync()
+    public static function sync( $output = false )
     {
         $goodPhotos = 0;
         $missingPhotos = 0;
+
+        echo ($output ? '- Syncing Photos -----------' . PHP_EOL : null);
 
         // Get the listings that still don't have photos 11/6: chunked output to save memory.
         Listing::where('preferred_image', null)->orWhere('preferred_image', '')->orderBy('id', 'DESC')->chunk(1500, function($listingsWithNoPhotos)
@@ -118,12 +120,17 @@ class Photo extends Model
             }
         });
 
-        echo 'Listings with photos but no preferred photo: ' . $goodPhotos . PHP_EOL;
-        echo 'Listings without photos at all: ' . $missingPhotos . PHP_EOL;
-        echo '---------------------' . PHP_EOL;
-
+        echo ($output ? 'Listings with photos but no preferred photo: ' . $goodPhotos . PHP_EOL : null);
+        echo ($output ? 'Listings without photos at all: ' . $missingPhotos . PHP_EOL : null);
+        echo ($output ? '----------------------------' . PHP_EOL : null);
     }
 
+    /**
+     * Get URL of Preferred Photo by Listing ID
+     *
+     * @param Mixed $listingId
+     * @return \App\Photo 
+     */
     protected static function preferredPhotoUrl($listingId)
     {
         if (Photo::where('listing_id', $listingId)->where('preferred', 1)->exists()) {
@@ -133,18 +140,30 @@ class Photo extends Model
         }
     }
 
+    /**
+     * Get Photos using Listing ID
+     *
+     * @param Mixed $listingId
+     * @return \App\Photo 
+     */
     public static function fromListingId($listingId)
     {
         return Photo::where('listing_id', $listingId)->get();
     }
 
-    public static function fixListingIds()
+    /**
+     * Fix Photos that don't have a Listing associated
+     *
+     * @param Boolean $output Toggle CLI output
+     * @return void
+     */
+    public static function fixListingIds( $output = false )
     {
-        echo 'starting photo fix';
+        echo ($output ? 'starting photo fix' : null);
         $photos = Photo::where('listing_id', '=', 0)->get();
         foreach($photos as $photo){
             $listing = Listing::where('mls_account', $photo->mls_account)->first();
-            echo $listing->id;
+            echo ($output ? $listing->id . PHP_EOL : null);
             Photo::updateOrCreate(
                 [
                     'mls_account' => $photo->mls_account,

@@ -43,16 +43,6 @@ class Builder
         foreach ($this->classArray as $class) {
             $this->fetchListings($class);
         }
-
-        echo 'Cleaning...';
-        ($this->association == 'bcar' ?
-            (new BcarCleaner())->clean() :
-            (new EcarCleaner())->clean()
-        );
-
-        echo 'Removing duplicates if any...';
-        $this->removeDuplicates();
-        echo 'done' . PHP_EOL;
     }
 
     public function freshPhotos()
@@ -66,7 +56,7 @@ class Builder
             echo PHP_EOL;
         }
     
-        echo 'Checking for missing photos' . PHP_EOL;
+        echo 'Checking for missing photos...' . PHP_EOL;
         $this->patchMissingPhotos();
         echo 'Syncing preferred photos...';
         Photo::sync();
@@ -181,7 +171,7 @@ class Builder
         while (! $maxRowsReached) {
             $options = $this->association == 'bcar' ?
                 BcarOptions::all($offset) : EcarOptions::all($offset);
-            $results = $this->rets->Search('Property', $class, '(LIST_104=Y)', $options[$class]);
+            $results = $this->rets->Search('Property', $class, '*', $options[$class]);
 
             foreach ($results as $result) {
                 ListingsHelper::saveListing($this->association, $result, $class);
@@ -203,7 +193,7 @@ class Builder
         echo 'fetching ' . $mlsNumber . PHP_EOL;
         $options = $this->association == 'bcar' ?
                 BcarOptions::all(0) : EcarOptions::all(0);
-        $results = $this->rets->Search('Property', $class, '(LIST_3='.$mlsNumber.'),(LIST_104=Y)', $options[$class]);
+        $results = $this->rets->Search('Property', $class, '(LIST_3='.$mlsNumber.')', $options[$class]);
         foreach ($results as $result) {
             ListingsHelper::saveListing($this->association, $result, $class);
         }
@@ -277,12 +267,6 @@ class Builder
 
     }
 
-    public function masterRepair()
-    {
-        (new EcarCleaner())->repair();
-        (new BcarCleaner())->repair();
-    }
-
     public function patchByCompanyUrl($url)
     {
         $count = 0;
@@ -320,58 +304,6 @@ class Builder
             $this->fetchAllPhotos($listings);
 
             echo '------------------' . PHP_EOL;
-        }
-    }
-
-    public function removeDuplicates()
-    {        
-        $duplicateRecords = Listing::selectRaw('mls_account, COUNT(mls_account) as occurences')
-          ->groupBy('mls_account')
-          ->having('occurences', '>', 1)
-          ->get();
-
-        if($duplicateRecords->count() > 0){ 
-            foreach ($duplicateRecords as $record) {
-                $listings = Listing::where('mls_account',$record->mls_account)->get();
-                $listings->forget(0);
-
-                foreach($listings as $toDelete){
-                    Listing::where('id', $toDelete->id)->delete(); 
-                    Photo::where('listing_id', $toDelete->id)->delete(); 
-                }
-            }          
-
-            echo PHP_EOL . 'done... deleted ' . $listings->count() . ' records.' . PHP_EOL; 
-        }
-    }
-
-    public function patchMissingPhotos()
-    {
-        foreach ($this->classArray as $class) {
-
-            $numGood = 0;
-            $numBad = 0;
-            $listingsToUpdate = [];
-
-            echo 'Patching photos in class ' . $class . PHP_EOL;
-            Listing::where('class', $class)->where('association', $this->association)->chunk(2500, function ($listings)
-                use (&$numGood, &$numBad, &$listingsToUpdate) {
-                foreach ($listings as $listing) {
-                    if(! Photo::where('listing_id', '=', $listing->id)->exists()) {
-                        $listingsToUpdate[] = $listing;
-                        $numBad++;
-                    }else{
-                        $numGood++;
-                    }
-                    echo '|';
-                }
-                
-            });
-
-            echo PHP_EOL .'Good listings: ' . $numGood . PHP_EOL;
-            echo 'Missing Photos: ' . $numBad . PHP_EOL; 
-            $this->fetchAllPhotos($listingsToUpdate);
-            echo '---------------------' . PHP_EOL;
         }
     }
 
