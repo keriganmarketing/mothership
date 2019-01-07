@@ -114,7 +114,7 @@ abstract class Cleaner
                 $photo->delete();
             }
         }
-        echo 'Removed: ' . count($deletedListings) . PHP_EOL;
+        echo ($output ? 'Removed: ' . count($deletedListings) . PHP_EOL : null);
     }
 
     /*
