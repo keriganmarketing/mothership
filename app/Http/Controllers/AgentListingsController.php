@@ -32,4 +32,23 @@ class AgentListingsController extends Controller
             ]
         );
     }
+
+    /**
+     * Display sold listings of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function sold(Request $request)
+    {
+        $agentShortId = isset($request->agentId) && $request->agentId != '' ? $request->agentId : 'xxxx';
+
+        $listings = Listing::soldByAgent($agentShortId);
+
+        return response()->json($listings)->withHeaders(
+            [
+                'Access-Control-Allow-Origin' => '*'
+            ]
+        );
+    }
+
 }

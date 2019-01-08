@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Listing;
+use App\Agent;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -14,7 +16,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        // $this->middleware('auth');
     }
 
     /**
@@ -24,6 +26,10 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
-        return view('home');
+        $numListings = Listing::select('id')->get()->count();
+        $numAgents = Agent::select('id')->get()->count();
+        $now = Carbon::now();
+
+        return view('home', compact('now','numListings','numAgents'));
     }
 }

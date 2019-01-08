@@ -10,6 +10,7 @@ Route::prefix('api/v1')->group(function () {
     Route::any('omnibar', 'OmnibarController@create');
     Route::get('allMapListings', 'MapSearchController@index');
     Route::get('agentlistings', 'AgentListingsController@index');
+    Route::get('agentsold', 'AgentListingsController@sold');
     Route::get('agents', 'AgentSearchController@index');
     Route::get('agentdata', 'AgentSearchController@show');
     Route::get('updatedListings', 'UpdatedListingsController@index');
