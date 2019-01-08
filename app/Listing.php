@@ -180,17 +180,43 @@ class Listing extends Model
         } else {
             $ids = [$agentShortId];
         }
-        // $listings = Listing::whereIn('listing_member_shortid', $ids)
-        //     ->orWhereIn('colisting_member_shortid', $ids)
-        //     ->groupBy('full_address')
-        //     ->latest()
-        //     ->get();
 
         $listings = Listing::where(function ($query) use ($ids) {
             $query->whereIn('listing_member_shortid', $ids)
                 ->orWhereIn('colisting_member_shortid', $ids);
             })
             ->where('status','!=','Sold')
+            ->groupBy('full_address')
+            ->latest()
+            ->get();
+
+        //ProcessListingImpression::dispatch($listings);
+
+        return $listings;
+    }
+
+    /**
+     * Retrieve Sold listings for the specified agent
+     *
+     * @param string  $agentShortId
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public static function soldByAgent($agentShortId)
+    {
+        if (preg_match('/|/', $agentShortId)) {
+            $ids = explode('|', $agentShortId);
+        } else {
+            $ids = [$agentShortId];
+        }
+
+        $sixmonthsago = (Carbon::now())->modify('-6 months');
+
+        $listings = Listing::where(function ($query) use ($ids) {
+            $query->whereIn('listing_member_shortid', $ids)
+                ->orWhereIn('colisting_member_shortid', $ids);
+            })
+            ->where('status','Sold')
+            ->where('sold_date','>',$sixmonthsago)
             ->groupBy('full_address')
             ->latest()
             ->get();
