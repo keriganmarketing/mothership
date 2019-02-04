@@ -15,7 +15,6 @@ before_script:
   - composer install --no-interaction
   - cp .env.example .env
   - php artisan key:generate
-  - pear install pear/PHP_CodeSniffer
   - phpenv rehash
   - nvm install 7.7.1
   - npm install npm@latest -g

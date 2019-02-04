@@ -71,6 +71,7 @@ abstract class Cleaner
      */
     public function cleanClass( $class, $output = false )
     {
+        
         echo ($output ? '- Class: ' . $class . ' -------------' . PHP_EOL : null);
         echo ($output ? 'Limit: ' .$this->options[$class]['Limit'] . PHP_EOL : null);
         $listings = Listing::where('association', $this->association)->where('class', $class)->pluck('mls_account');
