@@ -36,10 +36,11 @@ abstract class Cleaner
      */
     public function getListingMlsIds($class, $offset)
     {
+        $sixMonthsAgo = Carbon::now()->copy()->subDays(180)->format('Y-m-d');
         return $this->rets->Search(
             'Property',
             $class,
-            '*',
+            '(LIST_87='.$sixMonthsAgo.'+)',
             [
             'Limit' => (isset($this->options[$class]['Limit']) ? $this->options[$class]['Limit'] : 'None'),
             'Offset' => $offset,
