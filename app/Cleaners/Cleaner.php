@@ -130,6 +130,7 @@ abstract class Cleaner
         foreach ($this->classArray as $class) {
            $this->repairClass($class, true, $output);
         }
+        Photo::sync();
     }
 
     /*
@@ -157,6 +158,7 @@ abstract class Cleaner
     {
         echo ($output ? '- Class: '.$class.' -------------' . PHP_EOL : null);
 
+        $sixMonthsAgo = Carbon::now()->copy()->subDays(180)->format('Y-m-d');
         $maxRowsReached = false;
         $offset = 0;
 
@@ -164,7 +166,12 @@ abstract class Cleaner
             $options = $this->association == 'bcar' ?
                 BcarOptions::all($offset) : EcarOptions::all($offset);
 
-            $results = $this->rets->Search('Property', $class, '*', $options[$class]);
+            $results = $this->rets->Search(
+                'Property', 
+                $class, 
+                '(LIST_87='.$sixMonthsAgo.'+)', 
+                $options[$class]
+            );
 
             foreach ($results as $result) {
                 echo ($output ? '|' : null);
