@@ -186,7 +186,6 @@ class Listing extends Model
                 ->orWhereIn('colisting_member_shortid', $ids);
             })
             ->where('status','!=','Sold')
-            ->groupBy('full_address')
             ->latest()
             ->get();
 
