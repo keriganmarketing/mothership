@@ -27,11 +27,13 @@ class ListingController extends Controller
      * @param  \App\Listing  $listing
      * @return \Illuminate\Http\Response
      */
-    public function show($mlsNumber)
+    public function show(Request $request, $mlsNumber)
     {
         $listing = Listing::where('mls_account', $mlsNumber)->with(['photos', 'openHouses', 'agent'])->first();
 
-        ProcessListingClick::dispatch($listing);
+        if(!preg_match_all( "/\b(bot|crawler|spider)\b/i", $request->header('User-Agent'), $matches )){
+            ProcessListingClick::dispatch($listing);
+        }
 
         return response()->json($listing);
     }

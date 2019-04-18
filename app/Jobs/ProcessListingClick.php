@@ -39,7 +39,7 @@ class ProcessListingClick implements ShouldQueue
         $click = Click::where('listing_id', $this->listing->id)
             ->where('date', $today)->first();
 
-        if (count($click) > 0) {
+        if (isset($click) && count($click) > 0) {
             $click->increment('counter');
         } else {
             Click::create([
