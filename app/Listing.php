@@ -175,7 +175,7 @@ class Listing extends Model
      * @param string  $agentShortId
      * @return \Illuminate\Database\Eloquent\Collection
      */
-    public static function forAgent($agentShortId)
+    public static function forAgent($agentShortId, $request)
     {
         if (preg_match('/|/', $agentShortId)) {
             $ids = explode('|', $agentShortId);

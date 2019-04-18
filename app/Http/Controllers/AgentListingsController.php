@@ -18,7 +18,7 @@ class AgentListingsController extends Controller
     {
         $agentShortId = isset($request->agentId) && $request->agentId != '' ? $request->agentId : 'xxxx';
 
-        $listings = Listing::forAgent($agentShortId);
+        $listings = Listing::forAgent($agentShortId, $request);
         if ($request->analytics) {
             foreach ($listings as $listing) {
                 $listing->impressions = Impression::where('listing_id', $listing->id)->pluck('counter')->sum();
