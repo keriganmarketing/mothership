@@ -39,7 +39,10 @@ abstract class Cleaner
         return $this->rets->Search(
             'Property',
             $class,
-            '(LIST_15=|'.$this->options[$class]['Active'].','.$this->options[$class]['Contingent'].')',
+            '(LIST_15=|'. $this->options[$class]['Active']
+                        . (isset($this->options[$class]['Contingent']) ? ',' . $this->options[$class]['Contingent'] : '')
+                        . (isset($this->options[$class]['Pending']) ? ',' . $this->options[$class]['Pending'] : '') 
+                        . ')',
             [
             'Limit' => (isset($this->options[$class]['Limit']) ? $this->options[$class]['Limit'] : 'None'),
             'Offset' => $offset,
