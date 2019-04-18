@@ -71,9 +71,51 @@ abstract class Cleaner
     }
 
     /*
+     * Gets Active & Contingent Listings from RETS
+     * 
+     * @param String  $class RETS Class
+     * @param Boolean $output Toggle CLI Output
+     * @return Array
+     */
+    public function getActiveListings($class, $offset)
+    {
+        return $this->rets->Search(
+            'Property',
+            $class,
+            '(LIST_15=|'.$this->options[$class]['Active'].','.$this->options[$class]['Contingent'].')',
+            [
+            'Limit' => (isset($this->options[$class]['Limit']) ? $this->options[$class]['Limit'] : 'None'),
+            'Offset' => $offset
+            ]
+        );
+    }
+
+    /*
+     * Gets Sold Listings from RETS
+     * 
+     * @param String  $class RETS Class
+     * @param Boolean $output Toggle CLI Output
+     * @return Array
+     */
+    public function getSoldListings($class, $offset)
+    {
+        $sixMonthsAgo = Carbon::now()->copy()->subDays(180)->format('Y-m-d');
+        return $this->rets->Search(
+            'Property',
+            $class,
+            '(LIST_12='.$sixMonthsAgo.'+),(LIST_15=|'.$this->options[$class]['Sold'].')',
+            [
+            'Limit' => (isset($this->options[$class]['Limit']) ? $this->options[$class]['Limit'] : 'None'),
+            'Offset' => $offset
+            ]
+        );
+    }
+
+    /*
      * Cleans listings silently removed by RETS
      * 
      * @param Boolean $output Toggle CLI Output
+     * @param Boolean $dryrun Toggle DB Operations; true = off
      * @return void
      */
     public function clean( $output = false, $dryrun = false )
@@ -124,27 +166,27 @@ abstract class Cleaner
         }
 
         /// SOLD 
-        // $maxRowsReached2 = false;
-        // $offset2 = 0;
+        $maxRowsReached2 = false;
+        $offset2 = 0;
 
-        // while (!$maxRowsReached2) {
-        //     $options = $this->association == 'bcar' ?
-        //         BcarOptions::all($offset2) : EcarOptions::all($offset2);
+        while (!$maxRowsReached2) {
+            $options = $this->association == 'bcar' ?
+                BcarOptions::all($offset2) : EcarOptions::all($offset2);
 
-        //     $results = $this->getSoldMlsIds($class, $offset2);
-        //     if($results->getReturnedResultsCount() == 0){
-        //         echo ($output ? '!! Cancelling job. No results found !!' . PHP_EOL : null);
-        //         return null;
-        //     }            
+            $results = $this->getSoldMlsIds($class, $offset2);
+            if($results->getReturnedResultsCount() == 0){
+                echo ($output ? '!! Cancelling job. No results found !!' . PHP_EOL : null);
+                return null;
+            }            
 
-        //     foreach ($results as $result) {
-        //         array_push($listingsArray, (string) $result['LIST_3']);
-        //         $safe++;
-        //     }
+            foreach ($results as $result) {
+                array_push($listingsArray, (string) $result['LIST_3']);
+                $safe++;
+            }
             
-        //     $offset2 += $results->getReturnedResultsCount();
-        //     $maxRowsReached2 = ($this->options[$class]['Limit'] > $results->getReturnedResultsCount());
-        // }
+            $offset2 += $results->getReturnedResultsCount();
+            $maxRowsReached2 = ($this->options[$class]['Limit'] > $results->getReturnedResultsCount());
+        }
 
         echo ($output ? 'Remote: ' . $safe . PHP_EOL : null);
         $listings = array_map('strval', $listings->toArray());
@@ -156,12 +198,11 @@ abstract class Cleaner
             $listingId = $fullListing->id;
             $listingCounter++;
 
+            echo ($output && count($deletedListings) > 50 ? '|' : null); // show output for large result set.
+
             if(!$dryrun){
                 $fullListing->delete();
-                $photos = Photo::where('listing_id', $listingId)->get();
-                foreach ($photos as $photo) {
-                    $photo->delete();
-                }
+                $photos = Photo::where('listing_id', $listingId)->delete();
             }
         }
         echo ($output ? 'Removed: ' . count($deletedListings) . ($dryrun ? ' DRY RUN' : null) . PHP_EOL : null);
@@ -206,20 +247,19 @@ abstract class Cleaner
     {
         echo ($output ? '- Class: '.$class.' -------------' . PHP_EOL : null);
 
-        $sixMonthsAgo = Carbon::now()->copy()->subDays(180)->format('Y-m-d');
         $maxRowsReached = false;
         $offset = 0;
+        $page = 1;
+
+        echo ($output ? 'Getting active listings... '. PHP_EOL : null);
 
         while (!$maxRowsReached) {
             $options = $this->association == 'bcar' ?
                 BcarOptions::all($offset) : EcarOptions::all($offset);
 
-            $results = $this->rets->Search(
-                'Property', 
-                $class, 
-                '(LIST_87='.$sixMonthsAgo.'+)', 
-                $options[$class]
-            );
+            $results = $this->getActiveListings($class, $offset);
+
+            echo ($output ? 'Page: ' . $page . ', Offset: ' . $offset . PHP_EOL : null);
 
             foreach ($results as $result) {
                 echo ($output ? '|' : null);
@@ -236,11 +276,51 @@ abstract class Cleaner
                 }
 
             }
+            $page++;
 
             $offset += $results->getReturnedResultsCount();
             $maxRowsReached = ($this->options[$class]['Limit'] > $results->getReturnedResultsCount());
-            echo ($output ? ' ' . $offset . ' ' : null);
         }
+
+        echo ($output ? PHP_EOL . 'Listings Repaired: ' . $offset . PHP_EOL : null);
+
+        $maxRowsReached = false;
+        $offset = 0;
+        $page = 1;
+
+        echo ($output ? PHP_EOL : null);
+        echo ($output ? 'Getting 6 months of sold listings... '. PHP_EOL : null);
+        echo ($output ? 'Page: ' . $page . ', Offset: ' . $offset . PHP_EOL : null);
+
+        while (!$maxRowsReached) {
+            $options = $this->association == 'bcar' ?
+                BcarOptions::all($offset) : EcarOptions::all($offset);
+
+            $results = $this->getSoldListings($class, $offset);
+
+            foreach ($results as $result) {
+                echo ($output ? '|' : null);
+                $listingExists = Listing::where('mls_account', $result['LIST_3'])->pluck('id');
+                $listingId     = ($listingExists->isEmpty() ? -1 : $listingExists[0]);
+                $listing       = ListingsHelper::saveListing($this->association, $result, $class, $listingId);
+
+                if($photoFixer) {
+                    $photos = Photo::where('listing_id', $listingId)->get();
+                    if ($photos->isEmpty()) {
+                        $photos = $this->rets->GetObject('Property', 'HiRes', $listing->mls_account, '*', 1);
+                        Photo::savePhotos($listingId, $photos, $output);
+                    }
+                }
+
+            }
+            $page++;
+
+            $offset += $results->getReturnedResultsCount();
+            $maxRowsReached = ($this->options[$class]['Limit'] > $results->getReturnedResultsCount());
+        }
+
+        echo ($output ? PHP_EOL . 'Listings Repaired: ' . $offset . PHP_EOL : null);
+        echo ($output ? PHP_EOL : null);
     }
 
     /*

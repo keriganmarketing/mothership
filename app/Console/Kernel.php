@@ -41,7 +41,7 @@ class Kernel extends ConsoleKernel
         $schedule->job(new UpdateOpenHouses, 'updaters')->hourly(20)->withoutOverlapping();
         // $schedule->job(new CleanBcar, 'cleaners')->hourly(21)->withOutOverlapping();
         // $schedule->job(new CleanEcar, 'cleaners')->hourly(22)->withOutOverlapping();
-        //$schedule->job(new RepairDB, 'cleaners')->daily()->withoutOverlapping();
+        // $schedule->job(new RepairDB, 'cleaners')->daily()->withoutOverlapping();
 
         //dev 
         // $schedule->job(new Heartbeat, 'updaters')->everyMinute();
