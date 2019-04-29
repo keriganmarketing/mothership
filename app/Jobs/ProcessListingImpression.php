@@ -59,6 +59,6 @@ class ProcessListingImpression implements ShouldQueue
      */
     public function tags()
     {
-        return ['impression', $this->$listing->mls_account, $this->userAgent];
+        return ['impression', $this->userAgent];
     }
 }
