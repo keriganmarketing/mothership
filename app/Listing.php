@@ -142,7 +142,7 @@ class Listing extends Model
         ->orderBy($sortBy, $orderBy)
         ->paginate(36);
 
-        if(!preg_match_all( "/\b(bot|crawler|spider)\b/i", $request->header('User-Agent'), $matches )){
+        if(!preg_match_all( "/\b(bot|crawler|spider|rogerBot)\b/i", $request->header('User-Agent'), $matches )){
             ProcessListingImpression::dispatch($listings);
         }
 
@@ -191,7 +191,7 @@ class Listing extends Model
             ->latest()
             ->get();
 
-        if(!preg_match_all( "/\b(bot|crawler|spider)\b/i", $request->header('User-Agent'), $matches )){
+        if(!preg_match_all( "/\b(bot|crawler|spider|rogerBot)\b/i", $request->header('User-Agent'), $matches )){
             ProcessListingImpression::dispatch($listings);
         }
 
