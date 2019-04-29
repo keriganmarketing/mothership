@@ -8,6 +8,7 @@ use App\ApiCall;
 use App\Listing;
 use Carbon\Carbon;
 use App\OpenHouse;
+use App\Helpers\StatsHelper;
 use App\Helpers\BcarOptions;
 use App\Helpers\EcarOptions;
 use App\Helpers\ListingsHelper;
@@ -142,7 +143,7 @@ class Listing extends Model
         ->orderBy($sortBy, $orderBy)
         ->paginate(36);
 
-        if(!preg_match_all( "/\B(bot|crawler|spider)|\b(curl)\b/i", $request->header('User-Agent'), $matches )){
+        if((new StatsHelper())->isNotBot($request)){
             ProcessListingImpression::dispatch($listings, $request->header('User-Agent'));
         }
 
@@ -191,7 +192,7 @@ class Listing extends Model
             ->latest()
             ->get();
 
-        if(!preg_match_all( "/\B(bot|crawler|spider)|\b(curl)\b/i", $request->header('User-Agent'), $matches )){
+        if((new StatsHelper())->isNotBot($request)){
             ProcessListingImpression::dispatch($listings, $request->header('User-Agent'));
         }
 

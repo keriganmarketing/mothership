@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Photo;
 use App\Listing;
+use App\Helpers\StatsHelper;
 use App\Jobs\ProcessListingClick;
 use Illuminate\Http\Request;
 
@@ -31,7 +32,7 @@ class ListingController extends Controller
     {
         $listing = Listing::where('mls_account', $mlsNumber)->with(['photos', 'openHouses', 'agent'])->first();
 
-        if(!preg_match_all( "/\B(bot|crawler|spider)|\b(curl)\b/i", $request->header('User-Agent'), $matches )){
+        if((new StatsHelper())->isNotBot($request)){
             ProcessListingClick::dispatch($listing, $request->header('User-Agent'));
         }
 

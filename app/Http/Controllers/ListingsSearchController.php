@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Listing;
 use App\Jobs\ProcessSearch;
+use App\Helpers\StatsHelper;
 use Illuminate\Http\Request;
 use App\Jobs\ProcessImpression;
 
@@ -18,7 +19,7 @@ class ListingsSearchController extends Controller
     {
         $listings = Listing::searchResults($request);
 
-        if(!preg_match_all( "/\B(bot|crawler|spider)|\b(curl)\b/i", $request->header('User-Agent'), $matches )){
+        if((new StatsHelper())->isNotBot($request)){
             ProcessSearch::dispatch($request->all());
         }
 
