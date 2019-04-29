@@ -142,8 +142,8 @@ class Listing extends Model
         ->orderBy($sortBy, $orderBy)
         ->paginate(36);
 
-        if(!preg_match_all( "/\B(bot|crawler|spider|curl)\b/i", $request->header('User-Agent'), $matches )){
-            ProcessListingImpression::dispatch($listings);
+        if(!preg_match_all( "/\b(bot)|(crawler)|(spider)|(curl)\b/i", $request->header('User-Agent'), $matches )){
+            ProcessListingImpression::dispatch($listings, $request->header('User-Agent'));
         }
 
         // returns paginated links (with GET variables intact!)
@@ -191,8 +191,8 @@ class Listing extends Model
             ->latest()
             ->get();
 
-        if(!preg_match_all( "/\B(bot|crawler|spider|curl)\b/i", $request->header('User-Agent'), $matches )){
-            ProcessListingImpression::dispatch($listings);
+        if(!preg_match_all( "/\b(bot)|(crawler)|(spider)|(curl)\b/i", $request->header('User-Agent'), $matches )){
+            ProcessListingImpression::dispatch($listings, $request->header('User-Agent'));
         }
 
         return $listings;

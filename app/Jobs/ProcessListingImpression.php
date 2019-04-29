@@ -21,9 +21,10 @@ class ProcessListingImpression implements ShouldQueue
      *
      * @return void
      */
-    public function __construct($listings)
+    public function __construct($listings, $userAgent = 'na')
     {
         $this->listings = $listings;
+        $this->userAgent = $userAgent;
     }
 
     /**
@@ -49,5 +50,15 @@ class ProcessListingImpression implements ShouldQueue
                 ]);
             }
         }
+    }
+
+    /**
+     * Get the tags that should be assigned to the job.
+     *
+     * @return array
+     */
+    public function tags()
+    {
+        return ['impression', $this->$listing->mls_account, $this->userAgent];
     }
 }
