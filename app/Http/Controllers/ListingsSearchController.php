@@ -18,7 +18,7 @@ class ListingsSearchController extends Controller
     {
         $listings = Listing::searchResults($request);
 
-        if(!preg_match_all( "/\B(bot|crawler|spider|curl)\b/i", $request->header('User-Agent'), $matches )){
+        if(!preg_match_all( "/\b(bot)|(crawler)|(spider)|(curl)\b/i", $request->header('User-Agent'), $matches )){
             ProcessSearch::dispatch($request->all());
         }
 
