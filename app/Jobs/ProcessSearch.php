@@ -42,7 +42,7 @@ class ProcessSearch implements ShouldQueue
                     ->where('query_type', $k)
                     ->whereDate('date', $today)->first();
 
-                if (count($searchQuery) > 0) {
+                if (is_array($searchQuery) && count($searchQuery) > 0) {
                     $searchQuery->update([
                         'counter' => $searchQuery->counter + 1
                     ]);

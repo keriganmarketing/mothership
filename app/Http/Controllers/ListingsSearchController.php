@@ -3,10 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Listing;
-use App\Jobs\ProcessSearch;
 use App\Helpers\StatsHelper;
 use Illuminate\Http\Request;
-use App\Jobs\ProcessImpression;
 
 class ListingsSearchController extends Controller
 {
@@ -19,9 +17,7 @@ class ListingsSearchController extends Controller
     {
         $listings = Listing::searchResults($request);
 
-        if((new StatsHelper())->isNotBot($request)){
-            ProcessSearch::dispatch($request->all());
-        }
+        (new StatsHelper())->logSearch($request);
 
         return response()->json($listings);
     }

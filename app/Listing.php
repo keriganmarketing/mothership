@@ -143,9 +143,7 @@ class Listing extends Model
         ->orderBy($sortBy, $orderBy)
         ->paginate(36);
 
-        if((new StatsHelper())->isNotBot($request)){
-            ProcessListingImpression::dispatch($listings, $request->header('User-Agent'));
-        }
+        (new StatsHelper())->logImpression($listings, $request);
 
         // returns paginated links (with GET variables intact!)
         $listings->appends($request->all())->links();
@@ -192,9 +190,7 @@ class Listing extends Model
             ->latest()
             ->get();
 
-        if((new StatsHelper())->isNotBot($request)){
-            ProcessListingImpression::dispatch($listings, $request->header('User-Agent'));
-        }
+        (new StatsHelper())->logImpression($listings, $request);
 
         return $listings;
     }
