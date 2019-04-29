@@ -17,12 +17,12 @@ class StatsHelper {
 
     protected function isBot()
     {
-        if(!preg_match( "/(MSIE|Trident|(?!Gecko.+)Firefox|(?!AppleWebKit.+Chrome.+)Safari(?!.+Edge)|(?!AppleWebKit.+)Chrome(?!.+Edge)|(?!AppleWebKit.+Chrome.+Safari.+)Edge|AppleWebKit(?!.+Chrome|.+Safari)|Gecko(?!.+Firefox))(?: |\/)([\d\.apre]+)/i", $this->request->header('User-Agent'), $matches )){
+        if(!preg_match( "/(MSIE|Trident|(?!Gecko.+)Firefox|(?!AppleWebKit.+Chrome.+)Safari(?!.+Edge)|(?!AppleWebKit.+)Chrome(?!.+Edge)|(?!AppleWebKit.+Chrome.+Safari.+)Edge|AppleWebKit(?!.+Chrome|.+Safari)|Gecko(?!.+Firefox))(?: |\/)([\d\.apre]+)|(Symfony)/i", $this->request->header('User-Agent'), $matches )){
             //dd($this->request->header('User-Agent'));
             return true;
         }
 
-        // dd($this->request->header('User-Agent'));
+        //dd($this->request->header('User-Agent'));
         return false;
     }
 
