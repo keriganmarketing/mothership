@@ -32,7 +32,7 @@ class ListingController extends Controller
         $listing = Listing::where('mls_account', $mlsNumber)->with(['photos', 'openHouses', 'agent'])->first();
 
         if(!preg_match_all( "/\B(bot|crawler|spider)\b/i", $request->header('User-Agent'), $matches )){
-            ProcessListingClick::dispatch($listing);
+            ProcessListingClick::dispatch($listing, $request->header('User-Agent'));
         }
 
         return response()->json($listing);

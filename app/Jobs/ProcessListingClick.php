@@ -16,15 +16,17 @@ class ProcessListingClick implements ShouldQueue
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     protected $listing;
+    protected $userAgent;
 
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct(Listing $listing)
+    public function __construct(Listing $listing, $userAgent = 'na')
     {
         $this->listing = $listing;
+        $this->userAgent = $userAgent;
     }
 
     /**
@@ -48,5 +50,15 @@ class ProcessListingClick implements ShouldQueue
                 'counter'    => 1
             ]);
         }
+    }
+
+    /**
+     * Get the tags that should be assigned to the job.
+     *
+     * @return array
+     */
+    public function tags()
+    {
+        return ['impression', 'stats', $this->userAgent];
     }
 }
