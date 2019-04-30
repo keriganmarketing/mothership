@@ -125,6 +125,34 @@ class Photo extends Model
         echo ($output ? '----------------------------' . PHP_EOL : null);
     }
 
+    public static function reSync( $output = false )
+    {
+        $goodPhotos = 0;
+        $missingPhotos = 0;
+        echo ($output ? '- reSyncing Photos -----------' . PHP_EOL : null);
+
+        Listing::where('status','Active')->chunk(1000, function($listings)
+            use (&$goodPhotos, &$missingPhotos, &$output) {
+
+            foreach ($listings as $listing) { 
+                if (Photo::where('listing_id', $listing->id)->exists()) {
+                    $listing->preferred_image = self::preferredPhotoUrl($listing->id);
+                    $listing->save();
+                    $goodPhotos++;
+                    echo ($output ? '|' : null);
+                } else {
+                    $missingPhotos++;
+                    echo ($output ? 'X' : null);
+                }
+            }
+        });
+
+        echo ($output ? PHP_EOL . 'Listings with photos but no preferred photo: ' . $goodPhotos . PHP_EOL : null);
+        echo ($output ? 'Listings without photos at all: ' . $missingPhotos . PHP_EOL : null);
+        echo ($output ? '----------------------------' . PHP_EOL : null);
+
+    }
+
     /**
      * Get URL of Preferred Photo by Listing ID
      *
