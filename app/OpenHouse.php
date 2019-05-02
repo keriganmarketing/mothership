@@ -120,4 +120,31 @@ class OpenHouse extends Model
             }
         }
     }
+
+    public static function cleanOpenHouses( $output = false )
+    {
+        echo ($output ? '--- unSyncing Open Houses ----------' . PHP_EOL : null);
+        $numGood = 0;
+        $numBad = 0;
+
+        Listing::where('has_open_houses', 1)->chunk(2000, function ($listings)
+            use (&$numGood, &$numBad, &$output) {
+            foreach ($listings as $listing) {
+                echo ($output ? '|' : null);
+                $openHouse = OpenHouse::where('mls_id', $listing->mls_account)->first();
+                if(!$openHouse){
+                    $listing->update([
+                        'has_open_houses' => 0
+                    ]);
+                    $numBad++;
+                }else{
+                    $numGood++;
+                }
+            }
+        });
+
+        echo ($output ? PHP_EOL . 'Cleaned: ' . $numBad . PHP_EOL : null);
+        echo ($output ? 'Is Good: ' . $numGood . PHP_EOL : null);
+        echo ($output ? '--- done ---------------------------' . PHP_EOL : null);
+    }
 }
