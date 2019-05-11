@@ -221,8 +221,6 @@ class Listing extends Model
             ->latest()
             ->get();
 
-        //ProcessListingImpression::dispatch($listings);
-
         return $listings;
     }
 
