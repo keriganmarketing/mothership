@@ -20,7 +20,7 @@ class SearchQuery extends Model
                     ->where('query_type', $k)
                     ->whereDate('date', $today)->first();
 
-                if ($searchQuery->count() > 0) {
+                if ($searchQuery) {
                     $searchQuery->update([
                         'counter' => $searchQuery->counter + 1
                     ]);
