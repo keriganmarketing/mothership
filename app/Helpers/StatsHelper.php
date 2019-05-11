@@ -28,11 +28,11 @@ class StatsHelper {
             "/(MSIE|Trident|(?!Gecko.+)Firefox|(?!AppleWebKit.+Chrome.+)Safari(?!.+Edge)|(?!AppleWebKit.+)Chrome(?!.+Edge)|(?!AppleWebKit.+Chrome.+Safari.+)Edge|AppleWebKit(?!.+Chrome|.+Safari)|Gecko(?!.+Firefox))(?: |\/)([\d\.apre]+)|(Symfony)/i", 
             $this->request->header('User-Agent'), 
             $matches )){
-            dd($this->request->header());
+            // dd($this->request->header());
             return true;
         }
 
-        dd($this->request->header());
+        // dd($this->request->header());
         return false;
     }
 
