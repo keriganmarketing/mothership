@@ -52,7 +52,7 @@ class StatsHelper {
         }
 
         // (new Impression)->logMultiple($listings);
-        ProcessListingImpression::dispatch($listings, $this->request->header('User-Agent'))->onQueue('default');
+        ProcessListingImpression::dispatch($listings, $this->request->header('User-Agent'))->onQueue('stats');
     }
 
     public function logView(Listing $listing)
@@ -62,7 +62,7 @@ class StatsHelper {
         }
 
         // (new View)->logNew($listing->id);
-        ProcessListingView::dispatch($listing, $this->request->header('User-Agent'))->onQueue('default');
+        ProcessListingView::dispatch($listing, $this->request->header('User-Agent'))->onQueue('stats');
     }
 
     public function logClick(Listing $listing)
@@ -72,7 +72,7 @@ class StatsHelper {
         }
 
         // (new Click)->logNew($listing->id);
-        ProcessListingClick::dispatch($listing, $this->request->header('User-Agent'))->onQueue('default');
+        ProcessListingClick::dispatch($listing, $this->request->header('User-Agent'))->onQueue('stats');
     }
 
     public function logSearch()
@@ -82,7 +82,7 @@ class StatsHelper {
         }
 
         // (new SearchQuery)->logNew($this->request->all());
-        ProcessSearch::dispatch($this->request->all())->onQueue('default');
+        ProcessSearch::dispatch($this->request->all())->onQueue('stats');
     }
         
 }
