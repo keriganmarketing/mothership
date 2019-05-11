@@ -57,9 +57,9 @@ class StatsHelper {
 
     public function logView(Listing $listing)
     {
-        // if($this->isBot()){
-        //     return false;
-        // }
+        if($this->isBot()){
+            return false;
+        }
 
         // (new View)->logNew($listing->id);
         ProcessListingView::dispatch($listing, $this->request->header('Referrer'))->onQueue('stats');
@@ -67,9 +67,9 @@ class StatsHelper {
 
     public function logClick(Listing $listing)
     {
-        if($this->isBot()){
-            return false;
-        }
+        // if($this->isBot()){
+        //     return false;
+        // }
 
         // (new Click)->logNew($listing->id);
         ProcessListingClick::dispatch($listing, $this->request->header('User-Agent'))->onQueue('stats');
