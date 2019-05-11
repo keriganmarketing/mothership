@@ -31,9 +31,9 @@ class ListingController extends Controller
     {
         $listing = Listing::where('mls_account', $mlsNumber)->with(['photos', 'openHouses', 'agent'])->first();
 
-        // if(!(new StatsHelper($request))->isBot()){
-            ProcessListingView::dispatch($listing, $this->request->header('User-Agent'))->onQueue('default');
-        // }        
+        if(!(new StatsHelper($request))->isBot()){
+            ProcessListingView::dispatch($listing, $request->header('User-Agent'))->onQueue('default');
+        }        
 
         return response()->json($listing);
     }
