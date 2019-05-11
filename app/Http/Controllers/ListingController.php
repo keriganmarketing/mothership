@@ -40,7 +40,7 @@ class ListingController extends Controller
         $listing = Listing::where('mls_account', $mlsNumber)->first();
         (new StatsHelper($request))->logClick($listing);
 
-        // return response()->json($request);
+        return response()->json($request);
     }
 
     public function impression(Request $request, $mlsNumber)
