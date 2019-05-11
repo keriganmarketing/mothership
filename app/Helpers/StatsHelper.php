@@ -22,7 +22,7 @@ class StatsHelper {
         $this->request = $request;
     }
 
-    protected function isBot()
+    public function isBot()
     {
         if(!preg_match( 
             "/(MSIE|Trident|(?!Gecko.+)Firefox|(?!AppleWebKit.+Chrome.+)Safari(?!.+Edge)|(?!AppleWebKit.+)Chrome(?!.+Edge)|(?!AppleWebKit.+Chrome.+Safari.+)Edge|AppleWebKit(?!.+Chrome|.+Safari)|Gecko(?!.+Firefox))(?: |\/)([\d\.apre]+)|(Symfony)/i", 
