@@ -16,8 +16,9 @@ class ListingsSearchController extends Controller
     public function index(Request $request)
     {
         $listings = Listing::searchResults($request);
-
-        (new StatsHelper())->logSearch($request);
+        
+        // This doesn't work
+        // (new StatsHelper($request))->logSearch();
 
         return response()->json($listings);
     }

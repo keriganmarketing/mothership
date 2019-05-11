@@ -1,6 +1,7 @@
 <?php
 namespace App\Helpers;
 
+use App\View;
 use App\Click;
 use App\Search;
 use App\Listing;
@@ -15,9 +16,17 @@ class StatsHelper {
 
     protected $request;
 
+    public function __construct($request)
+    {
+        $this->request = $request;
+    }
+
     protected function isBot()
     {
-        if(!preg_match( "/(MSIE|Trident|(?!Gecko.+)Firefox|(?!AppleWebKit.+Chrome.+)Safari(?!.+Edge)|(?!AppleWebKit.+)Chrome(?!.+Edge)|(?!AppleWebKit.+Chrome.+Safari.+)Edge|AppleWebKit(?!.+Chrome|.+Safari)|Gecko(?!.+Firefox))(?: |\/)([\d\.apre]+)|(Symfony)/i", $this->request->header('User-Agent'), $matches )){
+        if(!preg_match( 
+            "/(MSIE|Trident|(?!Gecko.+)Firefox|(?!AppleWebKit.+Chrome.+)Safari(?!.+Edge)|(?!AppleWebKit.+)Chrome(?!.+Edge)|(?!AppleWebKit.+Chrome.+Safari.+)Edge|AppleWebKit(?!.+Chrome|.+Safari)|Gecko(?!.+Firefox))(?: |\/)([\d\.apre]+)|(Symfony)/i", 
+            $this->request->header('User-Agent'), 
+            $matches )){
             //dd($this->request->header('User-Agent'));
             return true;
         }
@@ -26,37 +35,52 @@ class StatsHelper {
         return false;
     }
 
-    public function logImpression($listings, $request)
+    public function logImpression($listing)
     {
-        $this->request = $request;
-
         if($this->isBot()){
             return false;
         }
 
-        ProcessListingImpression::dispatch($listings, $this->request->header('User-Agent'));
+        (new Impression)->logSingle($listing->id);
     }
 
-    public function logClick($listing, $request)
+    public function logImpressions($listings)
     {
-        $this->request = $request;
-
         if($this->isBot()){
             return false;
         }
 
-        ProcessListingClick::dispatch($listing, $this->request->header('User-Agent'));
+        // (new Impression)->logMultiple($listings);
+        ProcessListingImpression::dispatch($listings, $this->request->header('User-Agent'))->onQueue('default');
     }
 
-    public function logSearch($request)
+    public function logView(Listing $listing)
     {
-        $this->request = $request;
-
         if($this->isBot()){
             return false;
         }
 
-        ProcessSearch::dispatch($this->request->all());
+        // (new View)->logNew($listing->id);
+        ProcessListingView::dispatch($listing, $this->request->header('User-Agent'))->onQueue('default');
+    }
+
+    public function logClick(Listing $listing)
+    {
+        if($this->isBot()){
+            return false;
+        }
+
+        // (new Click)->logNew($listing->id);
+        ProcessListingClick::dispatch($listing, $this->request->header('User-Agent'))->onQueue('default');
+    }
+
+    public function logSearch()
+    {
+        if($this->isBot()){
+            return false;
+        }
+
+        // ProcessSearch::dispatch($this->request->all())->onQueue('default');
     }
         
 }

@@ -143,7 +143,7 @@ class Listing extends Model
         ->orderBy($sortBy, $orderBy)
         ->paginate(36);
 
-        (new StatsHelper())->logImpression($listings, $request);
+        (new StatsHelper($request))->logImpressions($listings);
 
         // returns paginated links (with GET variables intact!)
         $listings->appends($request->all())->links();
@@ -190,7 +190,7 @@ class Listing extends Model
             ->latest()
             ->get();
 
-        (new StatsHelper())->logImpression($listings, $request);
+        (new StatsHelper($request))->logImpressions($listings);
 
         return $listings;
     }
