@@ -26,7 +26,7 @@ class StatsHelper {
     {
         if(!preg_match( 
             "/(MSIE|Trident|(?!Gecko.+)Firefox|(?!AppleWebKit.+Chrome.+)Safari(?!.+Edge)|(?!AppleWebKit.+)Chrome(?!.+Edge)|(?!AppleWebKit.+Chrome.+Safari.+)Edge|AppleWebKit(?!.+Chrome|.+Safari)|Gecko(?!.+Firefox))(?: |\/)([\d\.apre]+)|(Symfony)/i", 
-            $this->request->header('User-Agent'), 
+            $this->request->header('Referrer'), 
             $matches )){
             // dd($this->request->header());
             return true;
@@ -62,7 +62,7 @@ class StatsHelper {
         // }
 
         // (new View)->logNew($listing->id);
-        ProcessListingView::dispatch($listing, $this->request->header('User-Agent'))->onQueue('stats');
+        ProcessListingView::dispatch($listing, $this->request->header('Referrer'))->onQueue('stats');
     }
 
     public function logClick(Listing $listing)
