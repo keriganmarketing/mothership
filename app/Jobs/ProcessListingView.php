@@ -46,6 +46,6 @@ class ProcessListingView implements ShouldQueue
      */
     public function tags()
     {
-        return ['view', $listing->mls_account, $this->userAgent];
+        return ['view', $this->listing->mls_account, $this->userAgent];
     }
 }
