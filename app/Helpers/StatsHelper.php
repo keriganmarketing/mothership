@@ -80,7 +80,8 @@ class StatsHelper {
             return false;
         }
 
-        // ProcessSearch::dispatch($this->request->all())->onQueue('default');
+        // (new SearchQuery)->logNew($this->request->all());
+        ProcessSearch::dispatch($this->request->all())->onQueue('default');
     }
         
 }
