@@ -10,6 +10,7 @@ use App\Impression;
 use App\SearchQuery;
 use App\Jobs\ProcessSearch;
 use App\Jobs\ProcessListingClick;
+use App\Jobs\ProcessListingView;
 use App\Jobs\ProcessListingImpression;
 
 class StatsHelper {
