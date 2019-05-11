@@ -28,11 +28,11 @@ class StatsHelper {
             "/(MSIE|Trident|(?!Gecko.+)Firefox|(?!AppleWebKit.+Chrome.+)Safari(?!.+Edge)|(?!AppleWebKit.+)Chrome(?!.+Edge)|(?!AppleWebKit.+Chrome.+Safari.+)Edge|AppleWebKit(?!.+Chrome|.+Safari)|Gecko(?!.+Firefox))(?: |\/)([\d\.apre]+)|(Symfony)/i", 
             $this->request->header('User-Agent'), 
             $matches )){
-            //dd($this->request->header('User-Agent'));
+            dd($this->request->header());
             return true;
         }
 
-        //dd($this->request->header('User-Agent'));
+        dd($this->request->header());
         return false;
     }
 
@@ -67,9 +67,9 @@ class StatsHelper {
 
     public function logClick(Listing $listing)
     {
-        // if($this->isBot()){
-        //     return false;
-        // }
+        if($this->isBot()){
+            return false;
+        }
 
         // (new Click)->logNew($listing->id);
         ProcessListingClick::dispatch($listing, $this->request->header('User-Agent'))->onQueue('stats');
