@@ -39,6 +39,8 @@ class ListingController extends Controller
     {
         $listing = Listing::where('mls_account', $mlsNumber)->first();
         (new StatsHelper($request))->logClick($listing);
+
+        return ($listing ? 'success' : 'failure');
     }
 
     public function impression(Request $request, $mlsNumber)
