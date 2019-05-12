@@ -38,9 +38,7 @@ class ListingController extends Controller
     public function click(Request $request, $mlsNumber)
     {
         $listing = Listing::where('mls_account', $mlsNumber)->first();
-        // (new StatsHelper($request))->logClick($listing);
-
-        return response()->json($request->header());
+        (new StatsHelper($request))->logClick($listing);
     }
 
     public function impression(Request $request, $mlsNumber)
