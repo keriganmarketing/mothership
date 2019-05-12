@@ -46,6 +46,6 @@ class ProcessListingClick implements ShouldQueue
      */
     public function tags()
     {
-        return ['click', $listing->mls_account, $this->userAgent];
+        return ['click', $this->listing->mls_account, $this->userAgent];
     }
 }
