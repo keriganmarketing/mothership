@@ -30,9 +30,20 @@ class ListingController extends Controller
     public function show(Request $request, $mlsNumber)
     {
         $listing = Listing::where('mls_account', $mlsNumber)->with(['photos', 'openHouses', 'agent'])->first();
-
-        (new StatsHelper())->logClick($listing, $request);
+        (new StatsHelper($request))->logView($listing);
 
         return response()->json($listing);
+    }
+
+    public function click(Request $request, $mlsNumber)
+    {
+        $listing = Listing::where('mls_account', $mlsNumber)->first();
+        (new StatsHelper($request))->logClick($listing);
+    }
+
+    public function impression(Request $request, $mlsNumber)
+    {
+        $listing = Listing::where('mls_account', $mlsNumber)->first();
+        (new StatsHelper($request))->logImpression($listing);
     }
 }

@@ -62,11 +62,11 @@ return [
     'environments' => [
         'production' => [
             'main-supervisor' => [
-                'connection' => 'redis',
-                'queue' => ['default'],
+                'connection' => 'stats',
+                'queue' => ['stats'],
                 'balance' => 'auto',
                 'processes' => 1,
-                'timeout' => 100,
+                'timeout' => 300,
                 'tries' => 1,
             ],
             'updater-supervisor' => [

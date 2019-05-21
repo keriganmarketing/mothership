@@ -36,20 +36,7 @@ class ProcessListingClick implements ShouldQueue
      */
     public function handle()
     {
-        $today = Carbon::now()->toDateString();
-
-        $click = Click::where('listing_id', $this->listing->id)
-            ->where('date', $today)->first();
-
-        if ($click) {
-            $click->increment('counter');
-        } else {
-            Click::create([
-                'listing_id' => $this->listing->id,
-                'date'       => $today,
-                'counter'    => 1
-            ]);
-        }
+        (new Click)->logNew($this->listing->id);
     }
 
     /**
@@ -59,6 +46,6 @@ class ProcessListingClick implements ShouldQueue
      */
     public function tags()
     {
-        return ['click', $this->userAgent];
+        return ['click', $this->listing->mls_account, $this->userAgent];
     }
 }

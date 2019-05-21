@@ -1,6 +1,7 @@
 <?php
 namespace App\Cleaners;
 
+use App\Listing;
 use Carbon\Carbon;
 use App\OpenHouse;
 use App\Cleaners\CleansDatabase;

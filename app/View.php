@@ -2,10 +2,10 @@
 
 namespace App;
 
-use Carbon\Carbon;
+use carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
-class Click extends Model
+class View extends Model
 {
     protected $guarded = [];
 
@@ -18,13 +18,13 @@ class Click extends Model
     {
         $today = Carbon::now()->toDateString();
 
-        $click = Click::where('listing_id', $listing_id)
+        $view = View::where('listing_id', $listing_id)
             ->where('date', $today)->first();
 
-        if ($click) {
-            $click->increment('counter');
+        if ($view) {
+            $view->increment('counter');
         } else {
-            Click::create([
+            View::create([
                 'listing_id' => $listing_id,
                 'date'       => $today,
                 'counter'    => 1

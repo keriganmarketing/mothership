@@ -2,28 +2,30 @@
 
 namespace App\Jobs;
 
+use App\View;
+use App\Listing;
 use Carbon\Carbon;
-use App\Impression;
 use Illuminate\Bus\Queueable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 
-class ProcessListingImpression implements ShouldQueue
+class ProcessListingView implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    protected $listings;
+    protected $listing;
+    protected $userAgent;
 
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct($listings, $userAgent = 'na')
+    public function __construct(Listing $listing, $userAgent = 'na')
     {
-        $this->listings = $listings;
+        $this->listing = $listing;
         $this->userAgent = $userAgent;
     }
 
@@ -34,7 +36,7 @@ class ProcessListingImpression implements ShouldQueue
      */
     public function handle()
     {
-        (new Impression)->logMultiple($this->listings);
+        (new View)->logNew($this->listing->id);
     }
 
     /**
@@ -44,6 +46,6 @@ class ProcessListingImpression implements ShouldQueue
      */
     public function tags()
     {
-        return ['impression'];
+        return ['view', $this->listing->mls_account, $this->userAgent];
     }
 }
