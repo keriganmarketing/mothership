@@ -24,8 +24,8 @@ class StatsHelper {
 
     public function isBot()
     {
-        if(!preg_match( 
-            "/(MSIE|Trident|(?!Gecko.+)Firefox|(?!AppleWebKit.+Chrome.+)Safari(?!.+Edge)|(?!AppleWebKit.+)Chrome(?!.+Edge)|(?!AppleWebKit.+Chrome.+Safari.+)Edge|AppleWebKit(?!.+Chrome|.+Safari)|Gecko(?!.+Firefox))(?: |\/)([\d\.apre]+)|(Symfony)/i", 
+        if(preg_match( 
+            "/bot|crawl|slurp|spider|mediapartners/i", 
             $this->request->header('Referrer'), 
             $matches )){
             // dd($this->request->header());

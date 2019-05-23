@@ -18,6 +18,6 @@ class ExampleTest extends TestCase
         $response = $this->get('/');
 
         // $response->assertRedirect('/login');
-        $response->assertStatus(200);
+        $response->assertStatus(404);
     }
 }
