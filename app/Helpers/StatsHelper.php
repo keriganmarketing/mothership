@@ -52,7 +52,7 @@ class StatsHelper {
         }
 
         // (new Impression)->logMultiple($listings);
-        ProcessListingImpression::dispatch($listings, $this->request::header('SITE_KEY'))->onQueue('stats');
+        ProcessListingImpression::dispatch($listings, $this->request->header('SITE_KEY'))->onQueue('stats');
     }
 
     public function logView(Listing $listing)
