@@ -26,11 +26,13 @@ class AgentListingsController extends Controller
             }
         }
 
-        return response()->json($listings)->withHeaders(
-            [
-                'Access-Control-Allow-Origin' => '*'
-            ]
-        );
+        return response()->json($listings);
+
+        // return response()->json($listings)->withHeaders(
+        //     [
+        //         'Access-Control-Allow-Origin' => '*'
+        //     ]
+        // );
     }
 
     /**
@@ -44,11 +46,13 @@ class AgentListingsController extends Controller
 
         $listings = Listing::soldByAgent($agentShortId);
 
-        return response()->json($listings)->withHeaders(
-            [
-                'Access-Control-Allow-Origin' => '*'
-            ]
-        );
+        return response()->json($listings);
+
+        // return response()->json($listings)->withHeaders(
+        //     [
+        //         'Access-Control-Allow-Origin' => '*'
+        //     ]
+        // );
     }
 
 }
