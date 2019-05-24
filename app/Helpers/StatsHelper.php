@@ -20,13 +20,15 @@ class StatsHelper {
     public function __construct($request)
     {
         $this->request = $request;
+
+        // dd($this->request->header());
     }
 
     public function isBot()
     {
         if(preg_match( 
             "/bot|crawl|slurp|spider|mediapartners/i", 
-            $this->request->header('Referrer'), 
+            $this->request->header('user-agent'), 
             $matches )){
             // dd($this->request->header());
             return true;
@@ -52,7 +54,7 @@ class StatsHelper {
         }
 
         // (new Impression)->logMultiple($listings);
-        ProcessListingImpression::dispatch($listings, $this->request->header('SITE_KEY'))->onQueue('stats');
+        ProcessListingImpression::dispatch($listings, $this->request->header('host'))->onQueue('stats');
     }
 
     public function logView(Listing $listing)
@@ -62,7 +64,7 @@ class StatsHelper {
         }
 
         // (new View)->logNew($listing->id);
-        ProcessListingView::dispatch($listing, $this->request->header('SITE_KEY'))->onQueue('stats');
+        ProcessListingView::dispatch($listing, $this->request->header('host'))->onQueue('stats');
     }
 
     public function logClick(Listing $listing)
@@ -72,7 +74,7 @@ class StatsHelper {
         }
 
         // (new Click)->logNew($listing->id);
-        ProcessListingClick::dispatch($listing, $this->request->header('SITE_KEY'))->onQueue('stats');
+        ProcessListingClick::dispatch($listing, $this->request->header('host'))->onQueue('stats');
     }
 
     public function logSearch()
