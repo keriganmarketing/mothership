@@ -99,8 +99,8 @@ class Listing extends Model
             $query->where(function ($query) use ($city) {
                 $query->whereRaw("city = '{$city}'")
                     ->orWhereRaw("zip = '{$city}'")
-                    ->orWhereRaw("sub_area = '{$city}'")
-                    ->orWhereRaw("area = '{$city}'")
+                    ->orWhereRaw("sub_area = '{$city}%'")
+                    ->orWhereRaw("area = '{$city}%'")
                     ->orWhereRaw("subdivision LIKE '%{$city}%'")
                     ->orWhereRaw("full_address LIKE '{$city}%'")
                     ->orWhereRaw("mls_account = '{$city}'");
