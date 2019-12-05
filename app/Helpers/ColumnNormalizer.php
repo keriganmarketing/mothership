@@ -116,7 +116,7 @@ class ColumnNormalizer
         $this->sqft_source       = $result['LIST_146'];
         $this->state             = $result['LIST_40'];
         $this->status            = $result['LIST_15'];
-        $this->stories           = isset($result['LIST_64']) && is_numeric($result['LIST_64']) ? $result['LIST_64']: 0;
+        $this->stories           = isset($result['LIST_199']) && is_numeric($result['LIST_199']) ? $result['LIST_199']: 0;
         $this->street_name       = ucwords(strtolower($result['LIST_34']));
         $this->street_number     = $result['LIST_31'];
         $this->street_suffix     = $result['LIST_37'];
@@ -147,25 +147,25 @@ class ColumnNormalizer
             $this->waterview_description = $result['GF20150506150258346595000000'];
             $this->utilities             = $result['GF20150506150244143322000000'];
             $this->zoning                = $result['GF20150506150120689916000000'];
-            $this->stories               = is_numeric($result['LIST_64']) ? $result['LIST_64']: 0;
+            $this->stories               = is_numeric($result['LIST_199']) ? $result['LIST_199']: 0;
         }
         if ($this->class == 'F') {
             $this->waterview_description = $result['GF20150430163750842533000000'];
             $this->utilities             = $result['GF20150430163732973981000000'];
             $this->zoning                = $result['GF20150430163608793806000000'];
-            $this->stories               = is_numeric($result['LIST_64']) ? $result['LIST_64']: 0;
+            $this->stories               = is_numeric($result['LIST_199']) ? $result['LIST_199']: 0;
         }
         if ($this->class == 'G') {
             $this->interior              = $result['GF20150204172058417689000000'];
             $this->utilities             = $result['GF20150428144746131692000000'];
             $this->zoning                = $result['GF20150204172058725166000000'];
-            $this->stories               = is_numeric($result['LIST_64']) ? $result['LIST_64']: 0;
+            $this->stories               = is_numeric($result['LIST_199']) ? $result['LIST_199']: 0;
             $this->waterview_description = $result['GF20150204172058691139000000'];
         }
         if ($this->class == 'J') {
             $this->utilities             = $result['GF20150428170540841152000000'];
             $this->zoning                = $result['GF20150428162423317708000000'];
-            $this->stories               = is_numeric($result['LIST_64']) ? $result['LIST_64']: 0;
+            $this->stories               = is_numeric($result['LIST_199']) ? $result['LIST_199']: 0;
             $this->waterview_description = $result['GF20150204172057327961000000'];
         }
 
@@ -214,11 +214,11 @@ class ColumnNormalizer
             $this->appliances           = $result['GF20131230211343236208000000'];
             $this->interior             = $result['GF20131230211344214865000000'];
             $this->zoning               = $result['GF20131230211345452659000000'];
-            $this->stories              = is_numeric($result['LIST_64']) ? $result['LIST_64'] : 0;
+            $this->stories              = is_numeric($result['LIST_199']) ? $result['LIST_199'] : 0;
             $this->waterview_description = $result['GF20131230211345387488000000'];
         }
         if ($this->class == 'H') {
-            $this->stories              = is_numeric($result['LIST_64']) ? $result['LIST_64'] : 0;
+            $this->stories              = is_numeric($result['LIST_199']) ? $result['LIST_199'] : 0;
             $this->waterview_description = $result['GF20140122222400891202000000'];
         }
     }
