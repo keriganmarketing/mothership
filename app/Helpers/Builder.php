@@ -13,6 +13,7 @@ use App\Helpers\AgentsHelper;
 use App\Helpers\ListingsHelper;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
+use App\Cleaners\Cleaner;
 use App\Cleaners\BcarCleaner;
 use App\Cleaners\EcarCleaner;
 
@@ -57,7 +58,7 @@ class Builder
         }
     
         echo 'Checking for missing photos...' . PHP_EOL;
-        $this->patchMissingPhotos();
+        (new Cleaner)->patchMissingPhotos();
         echo 'Syncing preferred photos...';
         Photo::sync();
         echo 'done.' . PHP_EOL;
@@ -195,6 +196,7 @@ class Builder
                 BcarOptions::all(0) : EcarOptions::all(0);
         $results = $this->rets->Search('Property', $class, '(LIST_3='.$mlsNumber.')', $options[$class]);
         foreach ($results as $result) {
+            echo strlen($result['LIST_78']);
             ListingsHelper::saveListing($this->association, $result, $class);
         }
         echo 'done.' . PHP_EOL;

@@ -5,7 +5,6 @@ namespace App;
 use App\Click;
 use App\Photo;
 use App\ApiCall;
-use App\Listing;
 use Carbon\Carbon;
 use App\OpenHouse;
 use App\Helpers\StatsHelper;

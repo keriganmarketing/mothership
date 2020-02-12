@@ -125,9 +125,7 @@ class ColumnNormalizer
         $this->unit_number       = $result['LIST_35'];
         $this->waterfront        = $result['LIST_192'];
         $this->year_built        = isset($result['LIST_53']) ? $result['LIST_53']: 0;
-        $this->zip               = $result['LIST_43'];
-        
-        
+        $this->zip               = $result['LIST_43'];     
     }
 
     public function setBcarColumns($result)
@@ -142,12 +140,20 @@ class ColumnNormalizer
             $this->waterview_description = $result['GF20150204172057026304000000'];
             $this->zoning                = $result['GF20150204172056948623000000'];
             $this->interior              = $result['GF20150204172056617468000000'];
+            $this->hoa_amount            = $result['LIST_26'];
+            $this->hoa_frequency         = $result['LIST_95'];
+        }
+        if ($this->class == 'C') {
+            $this->hoa_amount            = $result['LIST_26'];
+            $this->hoa_frequency         = $result['LIST_95'];
         }
         if ($this->class == 'E') {
             $this->waterview_description = $result['GF20150506150258346595000000'];
             $this->utilities             = $result['GF20150506150244143322000000'];
             $this->zoning                = $result['GF20150506150120689916000000'];
             $this->stories               = is_numeric($result['LIST_199']) ? $result['LIST_199']: 0;
+            $this->hoa_amount            = $result['LIST_26'];
+            $this->hoa_frequency         = $result['LIST_95'];
         }
         if ($this->class == 'F') {
             $this->waterview_description = $result['GF20150430163750842533000000'];
@@ -167,6 +173,8 @@ class ColumnNormalizer
             $this->zoning                = $result['GF20150428162423317708000000'];
             $this->stories               = is_numeric($result['LIST_199']) ? $result['LIST_199']: 0;
             $this->waterview_description = $result['GF20150204172057327961000000'];
+            $this->hoa_amount            = $result['LIST_26'];
+            $this->hoa_frequency         = $result['LIST_95'];
         }
 
     }
@@ -175,50 +183,56 @@ class ColumnNormalizer
     {
 
         if ($this->class == 'A') {
-            $this->appliances           = $result['GF20131203203523234694000000'];
-            $this->utilities            = $result['GF20131203185458688530000000'];
+            $this->appliances            = $result['GF20131203203523234694000000'];
+            $this->utilities             = $result['GF20131203185458688530000000'];
             $this->waterview_description = $result['GF20131203222538613490000000'];
-            $this->zoning               = $result['GF20131203222306734642000000'];
-            $this->interior             = $result['GF20131203203513863218000000'];
-            $this->pool                 = ($result['LIST_147'] == 'Yes') ? 1 : 0;
-            $this->exterior             = $result['GF20131203203501805928000000'];
+            $this->zoning                = $result['GF20131203222306734642000000'];
+            $this->interior              = $result['GF20131203203513863218000000'];
+            $this->pool                  = ($result['LIST_147'] == 'Yes') ? 1 : 0;
+            $this->exterior              = $result['GF20131203203501805928000000'];
             $this->energy_features       = $result['GF20131203185526796706000000'];
-            $this->construction         = $result['GF20131203203446527084000000'];
+            $this->construction          = $result['GF20131203203446527084000000'];
+            $this->hoa_amount            = $result['LIST_26'];
+            $this->hoa_frequency         = $result['LIST_95'];
         }
         if ($this->class == 'B') {
-            $this->appliances           = $result['GF20131230164912692795000000'];
-            $this->utilities            = $result['GF20131230164915907956000000'];
+            $this->appliances            = $result['GF20131230164912692795000000'];
+            $this->utilities             = $result['GF20131230164915907956000000'];
             $this->waterview_description = $result['GF20131230164916093183000000'];
-            $this->zoning               = $result['GF20131230164916157466000000'];
-            $this->interior             = $result['GF20131230164914843719000000'];
-            $this->pool                 = ($result['LIST_147'] == 'Yes') ? 1 : 0;
-            $this->exterior             = $result['GF20131230164914069211000000'];
+            $this->zoning                = $result['GF20131230164916157466000000'];
+            $this->interior              = $result['GF20131230164914843719000000'];
+            $this->pool                  = ($result['LIST_147'] == 'Yes') ? 1 : 0;
+            $this->exterior              = $result['GF20131230164914069211000000'];
             $this->energy_features       = $result['GF20131230164913550188000000'];
-            $this->construction         = $result['GF20131230164913256545000000'];
+            $this->construction          = $result['GF20131230164913256545000000'];
+            $this->hoa_amount            = $result['LIST_26'];
+            $this->hoa_frequency         = $result['LIST_95'];
         }
         if ($this->class == 'C') {
-            $this->utilities            = $result['GF20131231131427101593000000'];
+            $this->utilities             = $result['GF20131231131427101593000000'];
             $this->waterview_description = $result['GF20131231131427184540000000'];
-            $this->zoning               = $result['GF20131231131427333528000000'];
-            $this->construction         = $result['GF20131231201806058732000000'];
+            $this->zoning                = $result['GF20131231131427333528000000'];
+            $this->construction          = $result['GF20131231201806058732000000'];
+            $this->hoa_amount            = $result['LIST_26'];
+            $this->hoa_frequency         = $result['LIST_95'];
         }
         if ($this->class == 'E') {
             $this->waterview_description = $result['GF20140103161837200256000000'];
-            $this->zoning               = $result['LIST_74'];
+            $this->zoning                = $result['LIST_74'];
         }
         if ($this->class == 'F') {
             $this->waterview_description = $result['GF20140106175333111396000000'];
-            $this->zoning               = $result['LIST_74'];
+            $this->zoning                = $result['LIST_74'];
         }
         if ($this->class == 'G') {
-            $this->appliances           = $result['GF20131230211343236208000000'];
-            $this->interior             = $result['GF20131230211344214865000000'];
-            $this->zoning               = $result['GF20131230211345452659000000'];
-            $this->stories              = is_numeric($result['LIST_199']) ? $result['LIST_199'] : 0;
+            $this->appliances            = $result['GF20131230211343236208000000'];
+            $this->interior              = $result['GF20131230211344214865000000'];
+            $this->zoning                = $result['GF20131230211345452659000000'];
+            $this->stories               = is_numeric($result['LIST_199']) ? $result['LIST_199'] : 0;
             $this->waterview_description = $result['GF20131230211345387488000000'];
         }
         if ($this->class == 'H') {
-            $this->stories              = is_numeric($result['LIST_199']) ? $result['LIST_199'] : 0;
+            $this->stories               = is_numeric($result['LIST_199']) ? $result['LIST_199'] : 0;
             $this->waterview_description = $result['GF20140122222400891202000000'];
         }
     }
