@@ -85,7 +85,7 @@ class ListingsUpdater extends Updater implements MakesUpdates
         echo 'Success';
     }
 
-    protected function updateSingle($class, $result)
+    public function updateSingle($class, $result)
     {
         $options = $this->association == 'bcar' ? BcarOptions::class : EcarOptions::class;
         $mlsNumber = $result['LIST_3'];
