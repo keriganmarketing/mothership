@@ -81,7 +81,7 @@ class ColumnNormalizer
     {
         $this->acreage           = $result['LIST_57'] > 0 ? $result['LIST_57']: 0;
         $this->agent_id          = $result['LIST_5'];
-        $this->amenities                = $result['GF20150204172056869833000000'];
+        $this->amenities         = $result['GF20150204172056869833000000'];
         $this->apn               = $result['LIST_80'];
         $this->area              = preg_replace('/^[0-9]* ?- ?/', '', $result['LIST_29']);
         $this->bathrooms         = isset($result['LIST_67']) ? $result['LIST_67']: 0;
@@ -125,7 +125,8 @@ class ColumnNormalizer
         $this->unit_number       = $result['LIST_35'];
         $this->waterfront        = $result['LIST_192'];
         $this->year_built        = isset($result['LIST_53']) ? $result['LIST_53']: 0;
-        $this->zip               = $result['LIST_43'];     
+        $this->zip               = $result['LIST_43'];    
+        $this->annual_hoa_amount = $result['LIST_121']; 
     }
 
     public function setBcarColumns($result)
