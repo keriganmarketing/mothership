@@ -15,7 +15,7 @@ class BcarOptions
         $bcarOptions = [
             'A' => [
                 'Offset' => $offset,
-                'Limit'  => 10000,
+                'Limit'  => 2000,
                 'Active' => '1AL02DCSMHGA',
                 'Sold'   => '1AL02DCSMKOK',
                 'Contingent' => 'PWC_1AL02DCSI53S',
@@ -35,7 +35,7 @@ class BcarOptions
             // ],
             'C' => [
                 'Offset' => $offset,
-                'Limit'  => 10000,
+                'Limit'  => 2000,
                 'Active' => '1AL02DCZGMC3',
                 'Sold'   => '1AL02DCZH5AM',
                 'Contingent' => 'PWC_1AM4FUKPKDRX',
@@ -44,7 +44,7 @@ class BcarOptions
             ],
             'E' => [
                 'Offset' => $offset,
-                'Limit'  => 10000,
+                'Limit'  => 2000,
                 'Active' => '1AMY7USONV0G',
                 'Sold'   => '1AMY7USONXV4',
                 'Contingent' => 'PWC_1AMY7URID3UE',
@@ -54,7 +54,7 @@ class BcarOptions
             ],
             'F' => [
                 'Offset' => $offset,
-                'Limit'  => 10000,
+                'Limit'  => 2000,
                 'Active' => '1AMY85IONHFJ',
                 'Sold'   => '1AMY85IONKFQ',
                 'Contingent' => 'PWC_1AMY85I5VEVF',
@@ -64,7 +64,7 @@ class BcarOptions
             ],
             'G' => [
                 'Offset' => $offset,
-                'Limit'  => 10000,
+                'Limit'  => 2000,
                 'Active' => '1AL02DE2AFC9',
                 'Sold'   => '1AM3QB6V6U7E',
                 'Contingent' => 'PWC_1AM4FUKPKNL5',
@@ -74,7 +74,7 @@ class BcarOptions
             ],
             'J' => [
                 'Offset' => $offset,
-                'Limit'  => 10000,
+                'Limit'  => 2000,
                 'Active' => '1AL02DECQ0EX',
                 'Sold'   => '1AM3QB6V6XWY',
                 'Contingent' => 'PWC_1AM4FUKPKX59',
