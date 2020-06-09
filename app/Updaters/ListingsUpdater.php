@@ -121,6 +121,18 @@ class ListingsUpdater extends Updater implements MakesUpdates
         }
     }
 
+    public function forceSingleByMls($class, $mlsNumber)
+    {
+        $options = $this->association == 'bcar' ? BcarOptions::class : EcarOptions::class;
+        $results = $this->rets->Search('Property', $class, '(LIST_3='. $mlsNumber .')', ($options::singleListing())[$class]);
+        foreach ($results as $result) {
+            $listing = ListingsHelper::saveListing($this->association, $result, $class);
+            $photos  = $this->getPhotosForListing($mlsNumber);
+            Photo::savePhotos($listing->id, $photos);
+            echo '#'.$mlsNumber . PHP_EOL;
+        }
+    }
+
     protected function getNewProperties($class, $dateLastModified)
     {
         return $this->rets->Search(
