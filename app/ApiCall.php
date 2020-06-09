@@ -26,7 +26,7 @@ class ApiCall extends Model
             ->setPassword($this->password)
             ->setRetsVersion('1.7.2')
             ->setOption("compression_enabled", true)
-            ->setOption("connect_timeout", 1800)
+            ->setOption("connect_timeout", 3400)
             ->setOption("offset_support", true);
 
         $rets = new Session($config);
