@@ -125,12 +125,34 @@ class ListingsUpdater extends Updater implements MakesUpdates
     {
         $options = $this->association == 'bcar' ? BcarOptions::class : EcarOptions::class;
         $results = $this->rets->Search('Property', $class, '(LIST_3='. $mlsNumber .')', ($options::singleListing())[$class]);
-        foreach ($results as $result) {
-            $listing = ListingsHelper::saveListing($this->association, $result, $class);
-            $photos  = $this->getPhotosForListing($mlsNumber);
-            Photo::savePhotos($listing->id, $photos);
-            echo '#'.$mlsNumber . PHP_EOL;
+
+        // die if not found in MLS
+        if(count($results) < 1){
+            echo "Property not found" . PHP_EOL;
+            return null;
         }
+
+        $listing = Listing::byMlsNumber($mlsNumber);
+
+        // Listing exists but isn't in our database
+        if ($listing == null) {
+            foreach ($results as $result) {
+                echo 'Adding #'.$mlsNumber . '... ';
+                $listing = ListingsHelper::saveListing($this->association, $result, $class);
+            }
+
+        // Listing exists and can be updated
+        }else{
+            foreach ($results as $result) {
+                echo 'Listing #'.$mlsNumber . ' already exists. Updating... ';
+                $listing = ListingsHelper::saveListing($this->association, $result, $class, $listing->id);
+            }
+        }
+
+        echo 'Adding Photos... ';
+        $photos = $this->getPhotosForListing($mlsNumber);
+        Photo::savePhotos($listing->id, $photos);
+        echo 'done' . PHP_EOL;
     }
 
     protected function getNewProperties($class, $dateLastModified)
