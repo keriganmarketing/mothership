@@ -202,6 +202,19 @@ class Builder
         echo 'done.' . PHP_EOL;
     }
 
+    public function troubleshootSingleListing($class, $mlsNumber)
+    {
+        echo 'fetching ' . $mlsNumber . PHP_EOL;
+        $options = $this->association == 'bcar' ?
+                BcarOptions::all(0) : EcarOptions::all(0);
+        $results = $this->rets->Search('Property', $class, '(LIST_3='.$mlsNumber.')', $options[$class]);
+
+        foreach ($results as $result) {
+            dd($result);
+        }
+        echo 'done.' . PHP_EOL;
+    }
+
     /**
      * Fetch new photos for the specified listing
      *

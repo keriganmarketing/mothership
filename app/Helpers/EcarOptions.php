@@ -12,7 +12,7 @@ class EcarOptions
      */
     public static function all($offset = 1)
     {
-        $waterfront = 'GF20131203222329624962000000'; //mother of god
+        $waterfront = 'GF20131203222329624962000000'; 
 
         $ecarOptions = [
             'A' => [

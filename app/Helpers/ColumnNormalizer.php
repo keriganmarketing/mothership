@@ -143,6 +143,7 @@ class ColumnNormalizer
             $this->interior              = $result['GF20150204172056617468000000'];
             $this->hoa_amount            = $result['LIST_26'];
             $this->hoa_frequency         = $result['LIST_95'];
+            $this->pool                  = ($result['GF20150527180745947772000000'] != '' ? 1 : 0);
         }
         if ($this->class == 'C') {
             $this->hoa_amount            = $result['LIST_26'];
@@ -195,6 +196,7 @@ class ColumnNormalizer
             $this->construction          = $result['GF20131203203446527084000000'];
             $this->hoa_amount            = $result['LIST_26'];
             $this->hoa_frequency         = $result['LIST_95'];
+            $this->waterfront            = $result['GF20131203222329624962000000'];
         }
         if ($this->class == 'B') {
             $this->appliances            = $result['GF20131230164912692795000000'];

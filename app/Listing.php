@@ -67,7 +67,7 @@ class Listing extends Model
     /**
      * Retrieve the requested listings from the database
      *
-     * @param array $request
+     * @param Object $request
      * @return \Illuminate\Database\Eloquent\Collection
      */
     public static function searchResults($request)
