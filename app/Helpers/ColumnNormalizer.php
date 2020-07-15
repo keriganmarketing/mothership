@@ -92,7 +92,6 @@ class ColumnNormalizer
         $this->colist_office_id  = $result['LIST_165'];
         $this->colisting_member_shortid = $result['colisting_member_shortid'];
         $this->date_modified     = $result['LIST_87'];
-        $this->description       = $result['LIST_78'];
         $this->directions        = $result['LIST_82'];
         $this->elementary_school = $result['LIST_88'];
         $this->full_baths        = isset($result['LIST_68']) ? $result['LIST_68']: 0;
@@ -135,6 +134,7 @@ class ColumnNormalizer
         $this->exterior                 = $result['GF20150204172056829043000000'];
         $this->appliances               = $result['GF20150204172056907082000000'];
         $this->construction             = $result['GF20150204172056790876000000'];
+        $this->description              = $result['LIST_78'];
 
         if ($this->class == 'A') {
             $this->utilities             = $result['GF20150204172056580165000000'];
@@ -183,6 +183,8 @@ class ColumnNormalizer
 
     public function setEcarColumns($result)
     {
+
+        $this->description               = $result['LIST_230'];
 
         if ($this->class == 'A') {
             $this->appliances            = $result['GF20131203203523234694000000'];
