@@ -14,6 +14,7 @@ class MapSearch extends Model
      */
     public static function getAllListings($request)
     {
+        $association  = $request->assoc ?? 'ecar|bcar';
         $city         = $request->city ?? '';
         $status       = $request->status ?? '';
         $propertyType = $request->propertyType ?? '';
@@ -34,6 +35,9 @@ class MapSearch extends Model
         if ($status != '') {
             $status = explode('|', $status);
         }
+        if ($association != '') {
+            $association = explode('|', $association);
+        }
         $listings = DB::table('listings')
             ->select('mls_account', 'latitude', 'longitude', 'status', 'class')
             ->when($city, function ($query) use ($city) {
@@ -49,6 +53,9 @@ class MapSearch extends Model
             })
             ->when($propertyType, function ($query) use ($propertyType) {
                 return $query->whereIn('property_type', $propertyType);
+            })
+            ->when($association, function ($query) use ($association) {
+                return $query->whereIn('association', $association);
             })
             ->when($status, function ($query) use ($status) {
                 return $query->whereIn('status', $status);

@@ -72,6 +72,7 @@ class Listing extends Model
      */
     public static function searchResults($request)
     {
+        $association  = $request->assoc ?? 'ecar|bcar';
         $city         = $request->city ?? '';
         $status       = $request->status ?? 'Active';
         $propertyType = isset($request->propertyType) && $request->propertyType !== 'Rental' ? $request->propertyType : '';
@@ -93,6 +94,9 @@ class Listing extends Model
         if ($status != '') {
             $status = explode('|', $status);
         }
+        if ($association != '') {
+            $association = explode('|', $association);
+        }
 
         $listings = Listing::when($city, function ($query) use ($city) {
             $query->where(function ($query) use ($city) {
@@ -107,6 +111,9 @@ class Listing extends Model
         })
         ->when($propertyType, function ($query) use ($propertyType) {
             return $query->whereIn('property_type', $propertyType);
+        })
+        ->when($association, function ($query) use ($association) {
+            return $query->whereIn('association', $association);
         })
         ->when($status, function ($query) use ($status) {
             return $query->whereIn('status', $status);
