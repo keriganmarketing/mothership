@@ -126,6 +126,7 @@ class ColumnNormalizer
         $this->year_built        = isset($result['LIST_53']) ? $result['LIST_53']: 0;
         $this->zip               = $result['LIST_43'];    
         $this->annual_hoa_amount = $result['LIST_121']; 
+        $this->construction_status = $result['LIST_93'];
     }
 
     public function setBcarColumns($result)
