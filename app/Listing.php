@@ -72,12 +72,8 @@ class Listing extends Model
      */
     public static function searchResults($request)
     {
-        if(isset($request->sort)){
-            $sort    = explode($request->sort, '|');
-            $sortBy  = $sort[0];
-            $orderBy = $sort[1];
-        }
         
+
         $association  = $request->assoc ?? 'ecar|bcar';
         $city         = $request->city ?? '';
         $status       = $request->status ?? 'Active';
@@ -94,6 +90,12 @@ class Listing extends Model
         $construction = $request->construction ?? '';
         $sortBy       = $request->sortBy ?? 'date_modified';
         $orderBy      = $request->orderBy ?? 'DESC';
+
+        if(isset($request->sort)){
+            $sort    = explode($request->sort, '|');
+            $sortBy  = $sort[0];
+            $orderBy = $sort[1];
+        }
 
         if ($propertyType != '') {
             $propertyType = explode('|', $propertyType);
