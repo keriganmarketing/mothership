@@ -92,7 +92,7 @@ class Listing extends Model
         $orderBy      = $request->orderBy ?? 'DESC';
 
         if(isset($request->sort)){
-            $sort    = explode($request->sort, '|');
+            $sort    = explode('|', $request->sort);
             $sortBy  = $sort[0];
             $orderBy = $sort[1];
         }
