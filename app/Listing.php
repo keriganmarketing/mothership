@@ -85,11 +85,15 @@ class Listing extends Model
         $acreage      = $request->acreage ?? '';
         $waterfront   = $request->waterfront ?? '';
         $pool         = $request->pool ?? '';
+        $construction = $request->construction ?? '';
         $sortBy       = $request->sortBy ?? 'date_modified';
         $orderBy      = $request->orderBy ?? 'DESC';
 
         if ($propertyType != '') {
             $propertyType = explode('|', $propertyType);
+        }
+        if ($construction != '') {
+            $construction = explode('|', $construction);
         }
         if ($status != '') {
             $status = explode('|', $status);
@@ -111,6 +115,9 @@ class Listing extends Model
         })
         ->when($propertyType, function ($query) use ($propertyType) {
             return $query->whereIn('property_type', $propertyType);
+        })
+        ->when($construction, function ($query) use ($construction) {
+            return $query->whereIn('construction_status', $construction);
         })
         ->when($association, function ($query) use ($association) {
             return $query->whereIn('association', $association);

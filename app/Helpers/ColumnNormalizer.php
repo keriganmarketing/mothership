@@ -136,6 +136,7 @@ class ColumnNormalizer
         $this->appliances               = $result['GF20150204172056907082000000'];
         $this->construction             = $result['GF20150204172056790876000000'];
         $this->description              = $result['LIST_78'];
+        $this->list_date                = $result['LIST_132'];
 
         if ($this->class == 'A') {
             $this->utilities             = $result['GF20150204172056580165000000'];
