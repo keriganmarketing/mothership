@@ -72,6 +72,12 @@ class Listing extends Model
      */
     public static function searchResults($request)
     {
+        if(isset($request->sort)){
+            $sort    = explode($request->sort, '|');
+            $sortBy  = $sort[0];
+            $orderBy = $sort[1];
+        }
+        
         $association  = $request->assoc ?? 'ecar|bcar';
         $city         = $request->city ?? '';
         $status       = $request->status ?? 'Active';
