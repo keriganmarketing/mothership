@@ -100,7 +100,7 @@ class ColumnNormalizer
         $this->last_taxes        = $result['LIST_75'] > 0 ? $result['LIST_75']: 0;
         $this->last_tax_year     = $result['LIST_76'] > 0 ? $result['LIST_76']: 0;
         $this->latitude          = is_numeric($result['LIST_46']) ? $result['LIST_46']: 0;
-        $this->list_date         = $result['LIST_10'];
+        $this->list_date         = $result['LIST_132'];
         $this->listing_member_shortid   = $result['listing_member_shortid'];
         $this->longitude         = is_numeric($result['LIST_47']) ? $result['LIST_47']: 0;
         $this->lot_dimensions    = $result['LIST_56'];
@@ -136,7 +136,6 @@ class ColumnNormalizer
         $this->appliances               = $result['GF20150204172056907082000000'];
         $this->construction             = $result['GF20150204172056790876000000'];
         $this->description              = $result['LIST_78'];
-        $this->list_date                = $result['LIST_132'];
 
         if ($this->class == 'A') {
             $this->utilities             = $result['GF20150204172056580165000000'];
