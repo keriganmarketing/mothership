@@ -152,8 +152,14 @@ class Listing extends Model
             return $query->where('acreage', '>=', $acreage);
         })
         ->when($waterfront, function ($query) use ($waterfront) {
-            return $query->where('waterfront', '!=', '');
+            return $query->where([
+                ['waterfront', '!=', ''],
+                ['waterfront', '!=', 'No']
+            ]);
         })
+        // ->when($waterfront, function ($query) use ($waterfront) {
+        //     return $query->where('waterfront', '!=', '');
+        // })
         ->when($pool, function ($query) use ($pool) {
             return $query->where('pool', true);
         })
