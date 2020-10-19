@@ -72,8 +72,6 @@ class Listing extends Model
      */
     public static function searchResults($request)
     {
-        
-
         $association  = $request->assoc ?? 'ecar|bcar';
         $city         = $request->city ?? '';
         $status       = $request->status ?? 'Active';
@@ -157,9 +155,6 @@ class Listing extends Model
                 ['waterfront', '!=', 'No']
             ]);
         })
-        // ->when($waterfront, function ($query) use ($waterfront) {
-        //     return $query->where('waterfront', '!=', '');
-        // })
         ->when($pool, function ($query) use ($pool) {
             return $query->where('pool', true);
         })
@@ -167,6 +162,7 @@ class Listing extends Model
             return $query->where('has_open_houses', true);
         })
         ->where('class', '!=', 'G')
+        ->groupBy('full_address')
         ->orderBy($sortBy, $orderBy)
         ->paginate(36);
 
@@ -214,6 +210,7 @@ class Listing extends Model
                 ->orWhereIn('colisting_member_shortid', $ids);
             })
             ->where('status','!=','Sold')
+            ->groupBy('full_address')
             ->latest()
             ->get();
 
@@ -252,6 +249,29 @@ class Listing extends Model
     }
 
     /**
+     * Retrieve listings for the specified office
+     *
+     * @param string  $officeShortId
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public static function forOffice($officeShortId, $request)
+    {
+        if (preg_match('/|/', $officeShortId)) {
+            $ids = explode('|', $officeShortId);
+        } else {
+            $ids = [$officeShortId];
+        }
+
+        $listings = Listing::where('office_id', '==', $ids)
+            ->where('status','!=','Sold')
+            ->groupBy('full_address')
+            ->latest()
+            ->get();
+
+        return $listings;
+    }
+
+    /**
      * Build full address from the columns in the database
      *
      * @param \Listing $listing
@@ -263,8 +283,9 @@ class Listing extends Model
         $streetNumber = $this->street_number;
         $streetName   = ucwords(strtolower($this->street_name));
         $streetSuffix = $this->street_suffix != null ? ucwords(strtolower($this->street_suffix)) : '';
+        $unitNumber   = $this->unit_number != null ? ucwords(strtolower($this->unit_number)) : '';
         $city         = $this->city;
-        $fullAddress  = $streetNumber . ' ' . $streetName . ' '  . $streetSuffix . ' ' . $city;
+        $fullAddress  = $streetNumber . ' ' . $streetName . ' '  . $streetSuffix . ' '  . $unitNumber . ' ' . $city;
 
         return $fullAddress;
     }
