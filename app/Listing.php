@@ -262,7 +262,7 @@ class Listing extends Model
             $ids = [$officeShortId];
         }
 
-        $listings = Listing::where('office_id', '==', $ids)
+        $listings = Listing::whereIn('office_id', '==', $ids)
             ->where('status','!=','Sold')
             ->groupBy('full_address')
             ->latest()
