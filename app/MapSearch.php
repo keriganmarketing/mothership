@@ -198,7 +198,7 @@ class MapSearch extends Model
                 "properties" => [
                     "title"  => $listing->full_address,
                     "mls"    => $listing->mls_account,
-                    "price"  => $listing->price,
+                    "price"  => '$' . number_format($listing->price),
                     "class"  => $listing->class,
                     "status" => $listing->status
                 ]
