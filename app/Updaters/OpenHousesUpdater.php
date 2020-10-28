@@ -19,7 +19,7 @@ class OpenHousesUpdater extends Updater implements MakesUpdates
     public function update($output = false)
     {
         $lastModified = $this->getLastModifiedDate('open_houses');
-        $results = $this->getNewOpenHouses($lastModified);
+        $results = $this->getNewOpenHouses($lastModified, $output);
         foreach ($results as $result) {
             echo ($output ? '|' : null);
             $this->handleResult($result);
@@ -27,8 +27,9 @@ class OpenHousesUpdater extends Updater implements MakesUpdates
         OpenHouse::syncWithListings();
     }
 
-    protected function getNewOpenHouses($lastModified)
+    protected function getNewOpenHouses($lastModified, $output = false)
     {
+        echo ($output ? '-- Searching for Open Houses -----' : null);
         return $this->rets->Search('OpenHouse', 'OpenHouse', '(EVENT6='. $lastModified .'+)');
     }
 

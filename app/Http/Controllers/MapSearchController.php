@@ -22,4 +22,14 @@ class MapSearchController extends Controller
             ]
         );
     }
+
+    public function show(Request $request)
+    {
+        $listings = MapSearch::geoJson($request);
+        return response()->json($listings)->withHeaders(
+            [
+                'Access-Control-Allow-Origin' => '*'
+            ]
+        );
+    }
 }

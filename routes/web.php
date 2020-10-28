@@ -17,4 +17,5 @@ Route::prefix('api/v1')->group(function () {
     Route::get('agents', 'AgentSearchController@index');
     Route::get('agentdata', 'AgentSearchController@show');
     Route::get('updatedListings', 'UpdatedListingsController@index');
+    Route::get('geojson', 'MapSearchController@show');
 });
