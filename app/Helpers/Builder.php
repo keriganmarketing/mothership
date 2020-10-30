@@ -39,9 +39,21 @@ class Builder
         $this->openHouses();
     }
 
-    public function getTableMeta($property, $class)
+    public function getTableMeta($property, $class, $debug = false)
     {
-        dd($this->rets->GetTableMetadata($property, $class));
+        $meta = $this->rets->GetTableMetadata($property, $class);
+        if($debug){
+            foreach($meta as $col){
+                echo '-----------------------------------------' . PHP_EOL;
+                echo 'System Name: ' . $col['SystemName'] . PHP_EOL;
+                echo 'Short Name: ' . $col['ShortName'] . PHP_EOL;
+                echo 'Long Name: ' . $col['LongName'] . PHP_EOL;
+                echo 'Data Type: ' . $col['DataType'] . PHP_EOL;
+                echo 'Max Length: ' . $col['MaximumLength'] . PHP_EOL;
+            }
+        }else{
+            return $meta;
+        }        
     }
 
     public function freshListings()
