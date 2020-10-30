@@ -164,7 +164,7 @@ class ColumnNormalizer
             $this->zoning                = $result['GF20150430163608793806000000'];
             $this->stories               = is_numeric($result['LIST_199']) ? $result['LIST_199']: 0;
             $this->rental_term           = $result['LIST_145'];
-            $this->price                 = is_numeric($result['LIST_116']) ? $result['LIST_116']: 0; // such garbage...
+            $this->price                 = is_numeric($result['LIST_121']) ? $result['LIST_121']: 0; // such garbage...
         }
         if ($this->class == 'G') {
             $this->interior              = $result['GF20150204172058417689000000'];
