@@ -232,6 +232,8 @@ class ColumnNormalizer
         if ($this->class == 'F') {
             $this->waterview_description = $result['GF20140106175333111396000000'];
             $this->zoning                = $result['LIST_74'];
+            $this->rental_term           = $result['LIST_60'];
+            $this->price                 = is_numeric($result['LIST_122']) ? $result['LIST_122']: 0; // such garbage...
         }
         if ($this->class == 'G') {
             $this->appliances            = $result['GF20131230211343236208000000'];
@@ -239,6 +241,7 @@ class ColumnNormalizer
             $this->zoning                = $result['GF20131230211345452659000000'];
             $this->stories               = is_numeric($result['LIST_199']) ? $result['LIST_199'] : 0;
             $this->waterview_description = $result['GF20131230211345387488000000'];
+            $this->rental_term           = $result['LIST_146'];
         }
         if ($this->class == 'H') {
             $this->stories               = is_numeric($result['LIST_199']) ? $result['LIST_199'] : 0;
