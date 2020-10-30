@@ -39,6 +39,11 @@ class Builder
         $this->openHouses();
     }
 
+    public function getTableMeta($property, $class)
+    {
+        dd($this->rets->GetTableMetadata($property, $class));
+    }
+
     public function freshListings()
     {
         foreach ($this->classArray as $class) {
