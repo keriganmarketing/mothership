@@ -161,9 +161,11 @@ class Listing extends Model
         ->when($openHouses, function ($query) use ($openHouses) {
             return $query->where('has_open_houses', true);
         })
-        ->where('class', '!=', 'F') // Commercial Lease
-        ->where('class', '!=', 'G') // Rental
-        ->where('class', '!=', 'H') // Auction (ECAR only)
+        ->where([
+            ['class', '!=', 'F'], // Commercial Lease
+            ['class', '!=', 'G'], // Rental
+            ['class', '!=', 'H']  // Auction (ECAR only)
+        ]) 
         ->groupBy('full_address')
         ->orderBy($sortBy, $orderBy)
         ->paginate(36);

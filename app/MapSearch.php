@@ -92,9 +92,11 @@ class MapSearch extends Model
             ->when($pool, function ($query) use ($pool) {
                 return $query->where('pool', true);
             })
-            ->where('class', '!=', 'F') // Commercial Lease
-            ->where('class', '!=', 'G') // Rental
-            ->where('class', '!=', 'H') // Auction (ECAR only)
+            ->where([
+                ['class', '!=', 'F'], // Commercial Lease
+                ['class', '!=', 'G'], // Rental
+                ['class', '!=', 'H']  // Auction (ECAR only)
+            ]) 
             ->get();
 
             return $listings;
