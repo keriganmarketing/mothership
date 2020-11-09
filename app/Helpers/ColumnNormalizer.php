@@ -242,8 +242,11 @@ class ColumnNormalizer
             $this->rental_term           = $result['LIST_146'];
         }
         if ($this->class == 'H') {
-            $this->stories               = is_numeric($result['LIST_199']) ? $result['LIST_199'] : 0;
+            $this->stories               = is_numeric($result['LIST_64']) ? $result['LIST_64'] : 0;
+            $this->waterfront            = $result['GF20140106165354039268000000'];
             $this->waterview_description = $result['GF20140122222400891202000000'];
+            $this->auction_date          = $result['LIST_129'];
+            $this->auction_minbid        = is_numeric($result['LIST_123']) ? $result['LIST_123']: 0;
         }
     }
 
