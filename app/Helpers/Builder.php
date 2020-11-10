@@ -26,8 +26,21 @@ class Builder
         $this->association = $association;
         $this->mls         = new ApiCall($this->association);
         $this->rets        = $this->mls->login();
+        // $this->classArray  = $this->association == 'bcar' ?
+        //     ['A', 'C', 'E', 'F', 'G', 'J'] : ['A', 'B', 'C', 'E', 'F', 'G', 'H', 'I'];
         $this->classArray  = $this->association == 'bcar' ?
-            ['A', 'C', 'E', 'F', 'G', 'J'] : ['A', 'B', 'C', 'E', 'F', 'G', 'H', 'I'];
+            [
+                'A', // residential
+                'C', // land
+                'E', // commericla sale
+                'J'  // commercial land
+            ] : [
+                'A', // residential
+                'B', // fractional ownership
+                'C', // land
+                'E', // commericla sale
+                'I'  // boat slips/docks
+            ];
     }
 
     public function rebuild()
@@ -37,6 +50,37 @@ class Builder
         $this->freshAgents();
         $this->freshAgentPhotos();
         $this->openHouses();
+    }
+
+    public function getResources($debug = false)
+    {
+        $system = $this->rets->GetSystemMetadata();
+        $resources = $system->getResources();
+
+        if($debug){
+            foreach($resources as $resource){
+                echo '= ' . $resource['StandardName'] . ' =========================' . PHP_EOL;
+
+                foreach($resource->getClasses() as $class){
+                    echo '-----------------' . PHP_EOL;
+                    echo 'ClassName: ' . $class['ClassName'] . PHP_EOL;
+                    echo 'VisibleName: ' . $class['VisibleName'] . PHP_EOL;
+                    echo 'StandardName: ' . $class['StandardName'] . PHP_EOL;
+                    echo 'Description: ' . $class['Description'] . PHP_EOL;
+                    echo 'TableVersion: ' . $class['TableVersion'] . PHP_EOL;
+                    echo 'TableDate: ' . $class['TableDate'] . PHP_EOL;
+                    echo 'UpdateVersion: ' . $class['UpdateVersion'] . PHP_EOL;
+                    echo 'UpdateDate: ' . $class['UpdateDate'] . PHP_EOL;
+                    echo 'ClassTimeStamp: ' . $class['ClassTimeStamp'] . PHP_EOL;
+                    echo 'DeletedFlagField: ' . $class['DeletedFlagField'] . PHP_EOL;
+                    echo 'DeletedFlagValue: ' . $class['DeletedFlagValue'] . PHP_EOL;
+                    echo 'HasKeyIndex: ' . $class['HasKeyIndex'] . PHP_EOL;
+                }
+
+            }
+        }else{
+            return $resources;
+        }
     }
 
     public function getTableMeta($property, $class, $debug = false)

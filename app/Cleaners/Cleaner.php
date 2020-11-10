@@ -22,7 +22,18 @@ abstract class Cleaner
         $this->mls         = new ApiCall($this->association);
         $this->rets        = $this->mls->login();
         $this->classArray  = $this->association == 'bcar' ?
-            ['A', 'C', 'E', 'F', 'G', 'J'] : ['A', 'B', 'C', 'E', 'F', 'G', 'H', 'I'];
+            [
+                'A', // residential
+                'C', // land
+                'E', // commericla sale
+                'J'  // commercial land
+            ] : [
+                'A', // residential
+                'B', // condos???
+                'C', // land
+                'E', // commericla sale
+                'I'  // boat slips/docks
+            ];
         $this->options = $this->association == 'bcar' ?
                             BcarOptions::all() : EcarOptions::all();
     }
