@@ -133,7 +133,7 @@ class Listing extends Model
             return $query->whereIn('association', $association);
         })
         ->when($office, function ($query) use ($office) {
-            return $query->whereIn('office_shortid', $office);
+            return $query->whereIn('office_id', $office);
         })
         ->when($status, function ($query) use ($status) {
             return $query->whereIn('status', $status);
