@@ -88,6 +88,7 @@ class Listing extends Model
         $construction = $request->construction ?? '';
         $sortBy       = $request->sortBy ?? 'date_modified';
         $orderBy      = $request->orderBy ?? 'DESC';
+        $office       = $request->office ?? '';
 
         if(isset($request->sort)){
             $sort    = explode('|', $request->sort);
@@ -106,6 +107,9 @@ class Listing extends Model
         }
         if ($association != '') {
             $association = explode('|', $association);
+        }
+        if ($office != '') {
+            $office = explode('|', $office);
         }
 
         $listings = Listing::when($city, function ($query) use ($city) {
@@ -127,6 +131,9 @@ class Listing extends Model
         })
         ->when($association, function ($query) use ($association) {
             return $query->whereIn('association', $association);
+        })
+        ->when($office, function ($query) use ($office) {
+            return $query->whereIn('office_shortid', $office);
         })
         ->when($status, function ($query) use ($status) {
             return $query->whereIn('status', $status);

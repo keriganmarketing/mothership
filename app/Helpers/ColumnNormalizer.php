@@ -106,7 +106,7 @@ class ColumnNormalizer
         $this->lot_dimensions    = $result['LIST_56'];
         $this->middle_school     = $result['LIST_89'];
         $this->mls_account       = $result['LIST_3'];
-        $this->office_id         = $result['LIST_106'];
+        $this->office_id         = $result['listing_office_shortid'];
         $this->sold_date         = $result['LIST_12'];
         $this->sold_price        = is_numeric($result['LIST_23']) ? $result['LIST_23']: 0;
         $this->price             = is_numeric($result['LIST_22']) ? $result['LIST_22']: 0;
