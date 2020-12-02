@@ -6,6 +6,7 @@ use App\Listing;
 use Illuminate\Http\Request;
 use App\Impression;
 use App\Click;
+use App\View;
 
 class AgentListingsController extends Controller
 {
@@ -23,6 +24,7 @@ class AgentListingsController extends Controller
             foreach ($listings as $listing) {
                 $listing->impressions = Impression::where('listing_id', $listing->id)->pluck('counter')->sum();
                 $listing->clicks = Click::where('listing_id', $listing->id)->pluck('counter')->sum();
+                $listing->views = View::where('listing_id', $listing->id)->pluck('counter')->sum();
             }
         }
 
