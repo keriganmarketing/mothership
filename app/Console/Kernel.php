@@ -45,11 +45,14 @@ class Kernel extends ConsoleKernel
         $schedule->job(new CleanOpenHouses, 'cleaners')->hourly()->withoutOverlapping();
         $schedule->job(new UpdateOpenHouses, 'updaters')->hourlyat(1)->withoutOverlapping();
 
-        $schedule->job(new UpdateAgents, 'updaters')->twiceDaily(2, 14)->withOutOverlapping();
-        $schedule->job(new UpdateBcar, 'updaters')->twiceDaily(2, 14)->withOutOverlapping();
-        $schedule->job(new UpdateEcar, 'updaters')->twiceDaily(2, 14)->withOutOverlapping();
-        
+        // $schedule->job(new UpdateAgents, 'updaters')->twiceDaily(2, 14)->withOutOverlapping();
+        // $schedule->job(new UpdateBcar, 'updaters')->twiceDaily(2, 14)->withOutOverlapping();
+        // $schedule->job(new UpdateEcar, 'updaters')->twiceDaily(2, 14)->withOutOverlapping();
 
+        $schedule->job(new UpdateAgents, 'updaters')->everyThreeHours()->withOutOverlapping();
+        $schedule->job(new UpdateBcar, 'updaters')->everyThreeHours()->withOutOverlapping();
+        $schedule->job(new UpdateEcar, 'updaters')->everyThreeHours()->withOutOverlapping();
+        
         $schedule->job(new CleanBcar, 'cleaners')->dailyAt('2:00')->withOutOverlapping();
         $schedule->job(new CleanEcar, 'cleaners')->dailyAt('3:00')->withOutOverlapping();
 
