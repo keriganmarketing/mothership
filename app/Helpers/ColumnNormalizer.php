@@ -127,6 +127,7 @@ class ColumnNormalizer
         $this->zip               = $result['LIST_43'];    
         $this->annual_hoa_amount = $result['LIST_121']; 
         $this->construction_status = $result['LIST_93'];
+        $this->virtual_tour      = $result['UNBRANDEDIDXVIRTUALTOUR'];
     }
 
     public function setBcarColumns($result)
