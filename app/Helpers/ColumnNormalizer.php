@@ -102,6 +102,7 @@ class ColumnNormalizer
         $this->latitude          = is_numeric($result['LIST_46']) ? $result['LIST_46']: 0;
         $this->list_date         = $result['LIST_132'];
         $this->listing_member_shortid   = $result['listing_member_shortid'];
+        $this->listing_office_name = $result['listing_office_name'];
         $this->longitude         = is_numeric($result['LIST_47']) ? $result['LIST_47']: 0;
         $this->lot_dimensions    = $result['LIST_56'];
         $this->middle_school     = $result['LIST_89'];
